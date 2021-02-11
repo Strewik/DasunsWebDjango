@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+# from getenv import env
+import os
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xz0kcu_*ku8+91$h8i%7*!4voeo6&s_9xls8+znd$yo#y%fg-2'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,6 +82,23 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+
+
+    # Connection to Local Database : PostgresQL
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': os.getenv('DB_NAME'),
+        # 'HOST': os.getenv('DB_HOST_NAME'),
+        # 'PORT': os.getenv('DB_APP_PORT'),
+        # 'USER': os.getenv('DB_USERNAME'),
+        # 'PASSWORD': os.getenv('DB_PASSWORD'),   
+
+    # Connection to Remote / cloud Database : PostgresQL
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': os.getenv('AWS_PGDB_INITIAL_DATABASE_NAME'),
+        # 'HOST': os.getenv('AWS_PGDB_ENDPOINT'),
+        # 'PORT': os.getenv('AWS_PGDB_PORT'),
+        # 'USER': os.getenv('AWS_PGDB_MASTERUSERNAME'),
+        # 'PASSWORD': os.getenv('AWS_PGDB_MASTERPASSWORD'),
     }
 }
 
