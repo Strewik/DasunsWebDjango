@@ -1,3 +1,31 @@
 body {
-    background-color:aliceblue;
+  background-color: aliceblue;
 }
+
+.container1 {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.whoweare{
+    background-color:#e8e8e8;
+}
+
+.green-service{
+    background-color:#35d187;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.white-service{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
