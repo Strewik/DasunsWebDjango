@@ -21,9 +21,9 @@
     <div>{% include 'profiles/navbar.html' %}</div>
     <h1>Dashboard</h1>
 
-    <form id="msform">
+    <form class="msform">
       <!-- progressbar -->
-      <ul id="progressbar">
+      <ul class="progressbar">
         <li class="active">Account Setup</li>
         <li>Social Profiles</li>
         <li>Personal Details</li>
@@ -32,42 +32,128 @@
       <fieldset>
         <h2 class="fs-title">Create your account</h2>
         <h3 class="fs-subtitle">This is step 1</h3>
-        <input type="text" name="email" placeholder="Email" />
-        <input type="password" name="pass" placeholder="Password" />
-        <input type="password" name="cpass" placeholder="Confirm Password" />
-        <input
-          type="button"
-          name="next"
-          class="next action-button"
-          value="Next"
-        />
+
+        <div class="row mb-3">
+          <div class="col-md-8 offset-md-2">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Full Name"
+              required
+            />
+          </div>
+        </div>
+        
+        <div class="row mb-3">
+          <div class="col-md-8 offset-md-2">
+            <input
+              type="text"
+              class="form-control"
+              id="phone"
+              placeholder="Phone Number"
+              required
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-8 offset-md-2">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-8 offset-md-2">
+            <input
+              type="text"
+              class="form-control"
+              id="nin"
+              placeholder="NIN"
+              required
+            />
+          </div>
+        </div>
+      
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-8 offset-md-2">
+            <input
+              type="date"
+              class="form-control"
+              id="dob"
+              placeholder="DOB" 
+              required
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-8 offset-md-2">
+             <select class="form-select" aria-label="Default select example" required >
+            <option selected>Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-8 offset-md-2">
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              placeholder="Physical address"
+              required
+            />
+          </div>
+          <div>
+          <input type="button" name="next" class="next action-button" value="Next" />
+        </div>
+
       </fieldset>
       <fieldset>
         <h2 class="fs-title">Social Profiles</h2>
         <h3 class="fs-subtitle">Your presence on the social network</h3>
-        <input type="text" name="twitter" placeholder="Twitter" />
-        <input type="text" name="facebook" placeholder="Facebook" />
-        <input type="text" name="gplus" placeholder="Google Plus" />
-        <input
-          type="button"
-          name="previous"
-          class="previous action-button"
-          value="Previous"
-        />
-        <input
-          type="button"
-          name="next"
-          class="next action-button"
-          value="Next"
-        />
+        
       </fieldset>
       <fieldset>
-        <h2 class="fs-title">Personal Details</h2>
-        <h3 class="fs-subtitle">We will never sell it</h3>
-        <input type="text" name="fname" placeholder="First Name" />
-        <input type="text" name="lname" placeholder="Last Name" />
-        <input type="text" name="phone" placeholder="Phone" />
-        <textarea name="address" placeholder="Address"></textarea>
+        <h2 class="fs-title">Eligibility</h2>
+         As a Dasuns professional service provider, Make sure you meet the criteria <br /><br />
+         by selecting the options which apply to you below.
+        
+         <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Default checkbox
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Default checkbox
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Default checkbox
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Default checkbox
+            </label>
+          </div>
+          <div>
+              You are only allowed to proceed to the other steps by checking all fields. If you do
+              not meet the above eligibility requirements you cannot proceedto the other steps.
+              You can always sign up later when you meet all the above eligibility requirements.
+          </div>
+         
         <input
           type="button"
           name="previous"
@@ -81,6 +167,12 @@
           value="Submit"
         />
       </fieldset>
+      <fieldset>
+          <h2>Evidence of Expertise</h2>
+          Please provide your technical training or your qualifications.
+            
+        </fieldset>
+      <fieldset></fieldset>
     </form>
 
     <script src="{% static 'js/jscript.js' %}"></script>
