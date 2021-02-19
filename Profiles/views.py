@@ -16,7 +16,7 @@ def spreg(request):
     return render(request, 'profiles/spreg.html')
 def dashboard(request):
     return render(request, 'profiles/dashboard.html')
-def dashboard(request):
-    return render(request, 'profiles/dashboard.html')
-def dashboard(request):
-    return render(request, 'profiles/dashboard.html')
+# def dashboard(request):
+#     return render(request, 'profiles/dashboard.html')
+# def dashboard(request):
+#     return render(request, 'profiles/dashboard.html')
