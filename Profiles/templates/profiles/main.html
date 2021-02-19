@@ -8,20 +8,397 @@
     <link
       rel="stylesheet"
       type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
       href="{% static '/css/styles.css' %}"
     />
   </head>
   <body>
-    <div>
-      {% include 'profiles/banner.html' %} 
-      {% block banner %}
-       
-      {%endblock banner%}
-    </div>
-    <h1>NavBar</h1>
-    <hr />
+    <div>{% include 'profiles/navbar.html' %}</div>
 
-    <hr />
-    <h4>Footer</h4>
+    <div>
+      <div class="container1">
+        <img
+          src="{% static 'images/banner.jpg' %}"
+          alt="Snow"
+          style="width: 100%"
+        />
+
+        <div class="top-right">Top Right</div>
+      </div>
+    </div>
+    <div class="green-service">
+      <div>
+        <div class="row">
+          <div class="col-md">
+            <div>
+              <img
+                src="{% static 'images/physical.png' %}"
+                alt="logo"
+                style="height: 50px"
+              />
+            </div>
+            <div>All services</div>
+          </div>
+          <div class="col-md">
+            <div>
+              <img
+                src="{% static 'images/physical.png' %}"
+                alt="logo"
+                style="height: 50px"
+              />
+            </div>
+            <div>Personal Support Assistance</div>
+          </div>
+          <div class="col-md">
+            <div>
+              <img
+                src="{% static 'images/physical.png' %}"
+                alt="logo"
+                style="height: 50px"
+              />
+            </div>
+            <div>Ugandan sign language interval</div>
+          </div>
+          <div class="col-md">
+            <div>
+              <img
+                src="{% static 'images/physical.png' %}"
+                alt="logo"
+                style="height: 50px"
+              />
+            </div>
+            <div>International sign language interval</div>
+          </div>
+          <div class="col-md">
+            <div>
+              <img
+                src="{% static 'images/physical.png' %}"
+                alt="logo"
+                style="height: 50px"
+              />
+            </div>
+            <div>Mobility Guide</div>
+          </div>
+          <div class="col-md">
+            <div>
+              <img
+                src="{% static 'images/physical.png' %}"
+                alt="logo"
+                style="height: 50px"
+              />
+            </div>
+            <div>Captioning</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="white-service">
+      <h2>All Services</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'images/physical.png' %}"
+                  alt="..."
+                  style="padding: 10px"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Personal Support Assistance</h5>
+                  <p class="card-text">view service providers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'images/physical.png' %}"
+                  alt="..."
+                  style="padding: 10px"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Ugandan Sign language interpreter</h5>
+                  <p class="card-text">view service providers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  src="{% static 'images/physical.png' %}"
+                  alt="..."
+                  style="padding: 10px"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    International sign language interpreter
+                  </h5>
+                  <p class="card-text">view service providers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  style="padding: 10px"
+                  src="{% static 'images/physical.png' %}"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Mobility Guide</h5>
+                  <p class="card-text">view service providers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  style="padding: 10px"
+                  src="{% static 'images/physical.png' %}"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Captioning</h5>
+                  <p class="card-text">view service providers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="whoweare">
+      <h2>Who We Are</h2>
+      <br />
+      <div>
+        The Digital Ability Support System (Dasuns) is a social enterprise
+        company registered <br />
+        in Uganda to promote social and inclusive development through
+        facilitating access to <br />
+        professional assistive support services and technologies to advance
+        rights, choices <br /> and opportunities
+        for persons with diasabilities
+      </div>
+    </div>
+    <div>
+      <div>
+        <div class="howitworks">
+          <h2>How It Works</h2>
+          <br />
+          <br />
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card" style="border-width: 0px;">
+                <div class="row">
+                  <div class="col-md">
+                    <img
+                      src="{% static 'images/order.png' %}"
+                      alt="..."
+                      style="padding: 10px; height: 100px; width: 100px"
+                    />
+                  </div>
+                  <div
+                    class="col-md"
+                    style="align-content: right; padding-top: 40px"
+                  >
+                    <svg
+                      width="em"
+                      height="2em"
+                      viewBox="0 0 16 16"
+                      className="bi bi-arrow-right"
+                      fill="#707070"
+                      xmlns="http://www.w3.org/2000/svg"
+                      float="right"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Resquest service</h5>
+                  <p class="card-text">
+                    Browse through our services, submit request details and pay
+                    deposit.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card" style="border-width: 0px;">
+                <div class="row">
+                  <div class="col-md">
+                    <img
+                      src="{% static 'images/getsp.png' %}"
+                      alt="..."
+                      style="padding: 10px; height: 100px; width: 100px"
+                    />
+                  </div>
+                  <div
+                    class="col-md"
+                    style="align-content: right; padding-top: 40px"
+                  >
+                    <svg
+                      width="em"
+                      height="2em"
+                      viewBox="0 0 16 16"
+                      className="bi bi-arrow-right"
+                      fill="#707070"
+                      xmlns="http://www.w3.org/2000/svg"
+                      float="right"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Choose a professional</h5>
+                  <p class="card-text">
+                    In the list choose a service provider that you want to get
+                    service from
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card" style="border-width: 0px;">
+                <div class="row">
+                  <div class="col-md">
+                    <img
+                      src="{% static 'images/book.png' %}"
+                      alt="..."
+                      style="padding: 10px; height: 100px; width: 100px"
+                    />
+                  </div>
+                  <div
+                    class="col-md"
+                    style="align-content: right; padding-top: 40px"
+                  >
+                    <svg
+                      width="em"
+                      height="2em"
+                      viewBox="0 0 16 16"
+                      className="bi bi-arrow-right"
+                      fill="#707070"
+                      xmlns="http://www.w3.org/2000/svg"
+                      float="right"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Make Appointment</h5>
+                  <p class="card-text">
+                    Make an appointment according to the providers availability
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card" style="border-width: 0px;">
+                <div class="row">
+                  <div class="col-md">
+                    <img
+                      src="{% static 'images/relax.png' %}"
+                      alt="..."
+                      style="padding: 10px; height: 100px; width: 100px"
+                    />
+                  </div>
+                  <div
+                    class="col-md"
+                    style="align-content: right; padding-top: 40px"
+                  >
+                    <svg
+                      width="em"
+                      height="2em"
+                      viewBox="0 0 16 16"
+                      className="bi bi-arrow-right"
+                      fill="#707070"
+                      xmlns="http://www.w3.org/2000/svg"
+                      float="right"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Receive service</h5>
+                  <p class="card-text">After booking sit back and relax</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <img
+                src="{% static 'images/Logo.png' %}"
+                alt="logo"
+                style="height: 50px"
+              />
+            </div>
+            <div class="col-md">About Us</div>
+            <div class="col-md">FAQ</div>
+            <div class="col-md">Contact us</div>
+            <div class="col-md">
+              <div> Follow us</div>
+            <div>
+
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'bootstrap/js/bootsrap.js' %}"></script>
   </body>
 </html>
