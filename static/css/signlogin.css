@@ -23,7 +23,7 @@
 }
 
 .nav-pills:hover .nav-link:hover{
-    color: #000;
+    color: rgb(7, 107, 7);
 }
 
 .nav-item {
@@ -82,8 +82,9 @@
 }
 
 .nav-pills .nav-link.active{
-    color: #000;
+    color:rgb(7, 107, 7);
     background-color:#fff;
-    border-bottom: 1px solid rgb(199, 193, 193)
+    border-bottom: 2px solid rgb(7, 107, 7);
+    font-weight: bold;
+    font-size: 20px;
 }
-
