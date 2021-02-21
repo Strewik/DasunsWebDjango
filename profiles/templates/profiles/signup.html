@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles2.css' %}"
+    />
+  </head>
+  <body>
+  <div class="container">
+      <div class="signup-form">
+      <form class="" action="#" method="post">
+        <h1>Sign Up</h>
+         <input
+            class="txtb"
+            type="text"
+            name="username"
+            placeholder="User Name"
+         />
+          <input
+            class="txtb"
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            class="txtb"
+            type="password"
+            name="password"
+            placeholder="Create Password"
+          />
+          <input
+            class="txtb"
+            type="password"
+            name="password2"
+            placeholder="Confirm Password"
+          />
+        <div class="custom-control custom-checkbox">
+          <label>
+            <input type="checkbox" class="checkbox" name="terms" required="" />
+            <span>I agree to the terms & conditions set by Dasuns</span>
+          </label>
+       </div>
+        <input type="submit" value="SIGNUP" class="signup-btn"/>
+      </form>
+    </div>
+     </div>
+  </body>
+</html>

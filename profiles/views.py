@@ -14,3 +14,12 @@ def serviceprovider(request):
 
 def dashboard(request):
     return render(request, 'profiles/dashboard.html')
+
+def serviceuserdash(request):
+    return render(request, 'profiles/serviceuserdash.html')
+
+def signup(request):
+    return render(request, 'profiles/signup.html')
+
+def login(request):
+    return render(request, 'profiles/login.html')

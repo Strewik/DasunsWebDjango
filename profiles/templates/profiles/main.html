@@ -1,0 +1,56 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dasuns</title>
+     <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+  </head>
+  <body>
+    {% comment %} <div>
+      {% include 'profiles/banner.html' %} 
+      {% block banner %}
+       
+      {%endblock banner%}
+    </div> {% endcomment %}
+      
+      {% comment %} <div>
+      {% include 'profiles/SignupLogin.html' %} 
+      {% block SignupLogin %}
+      
+      {%endblock SignupLogin%}
+      </div> 
+       {% endcomment %}
+
+     <div>
+      {% include 'profiles/jointsinlogin.html' %} 
+      {% block jointsinlogin %}
+      
+      {%endblock jointsinlogin%}
+      </div>
+
+    {% comment %} 
+    </div>
+        <div>
+      {% include 'profiles/signup.html' %} 
+      {% block signup %}
+      
+      {%endblock signup%}
+    </div>  {% endcomment %}
+    {% comment %} <h1>NavBar</h1>
+    <hr /> {% endcomment %}
+
+    {% comment %} <hr />
+    <h4>Footer</h4> {% endcomment %}
+  </body>
+</html>

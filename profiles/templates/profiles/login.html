@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles2.css' %}"
+    />
+  </head>
+  <body>
+    <div class="signup-form">
+      <form class="" action="#" method="post">
+        <h1>Login</h>
+        <input
+            class="txtb"
+            type="text"
+            name="username"
+            placeholder="User Name"
+          />
+          <input
+            class="txtb"
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
+        <input type="submit" value="Submit" class="signup-btn"/>
+      </form>
+    
+      <p>Forgot Password? <a href="#"> Reset password</a></p>
+     
+    </div>
+  </body>
+</html>
