@@ -12,11 +12,16 @@ def client(request):
 def serviceprovider(request):
     return render(request, 'profiles/serviceprovider.html')
 
+def spreg(request):
+    return render(request, 'profiles/spreg.html')
 def dashboard(request):
     return render(request, 'profiles/dashboard.html')
 
 def serviceuserdash(request):
     return render(request, 'profiles/serviceuserdash.html')
+
+def signuplogin(request):
+    return render(request, 'profiles/jointsinlogin.html')
 
 def signup(request):
     return render(request, 'profiles/signup.html')

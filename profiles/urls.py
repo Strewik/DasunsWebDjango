@@ -7,8 +7,9 @@ urlpatterns = [
     path('serviceprovider/', views.serviceprovider),
     path('dashboard/', views.dashboard),
     path('serviceuser/', views.serviceuserdash),
+    path('spreg/', views.spreg),
+    path('signuplogin/', views.signuplogin),
     path('signup/', views.signup),
     path('login/', views.login),
-
 ]
 
