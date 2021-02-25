@@ -22,28 +22,30 @@
     <div class="row">
       <div class="col-md">
         <div class="card card-body">
-          <h5>Service Providers</h5>
+          <h5>Bookings</h5>
         </div>
         <div class="card card-body">
           <table class="table">
             <tr>
-              <th>Name</th>
-              <th>Gender</th>
+              <th>Meeting Place</th>
+              <th>Meeting Date</th>
               <th>Phone Number</th>
-              <th>Email</th>
-              <th>Location</th>
-              <th>Price</th>
-              <th>Availability</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Service User's Name</th>
+              <th>Service Provider's Name</th>
+              <th>Service offered</th>
             </tr>
-            {% for i in serviceproviders %}
+            {% for i in books %}
             <tr>
-              <td>{{i.fullname}}</td>
-              <td>{{i.gender}}</td>
+              <td>{{i.meetplace}}</td>
+              <td>{{i.meetdate}}</td>
               <td>{{i.phone}}</td>
-              <td>{{i.email}}</td>
-              <td>{{i.phyadd}}</td>
-              <td>{{i.pricevisit}}</td>
-              <td>{{i.availability.name}}</td>
+              <td>{{i.starttime}}</td>
+              <td>{{i.endtime}}</td>
+              <td>{{i.serviceuser.name}}</td>
+              <td>{{i.serviceprovider.fullname}}</td>
+              <td>{{i.serviceprovider.service}}</td>
             </tr>
             {% endfor %}
           </table>

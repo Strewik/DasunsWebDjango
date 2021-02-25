@@ -22,8 +22,9 @@ def spreg(request):
 
 
 def serviceproviders(request):
-    serviceproviders = Serviceprovider.objects.all()
-    return render(request, 'profiles/sps.html', {'serviceproviders':serviceproviders})
+    serviceproviders = Book.objects.all()
+    return render(request, 'profiles/sps.html', {'books':serviceproviders})
+
 
 def dashboard(request):
     return render(request, 'profiles/dashboard.html')
