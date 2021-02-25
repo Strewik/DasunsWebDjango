@@ -34,7 +34,68 @@
     />
   </head>
   <body>
-    {% comment %} {% if !user.is_authenticated %} {% endcomment %}
+    {% if user.is_authenticated %}
+    <container>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light nav-fill">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src="{% static 'images/Logo.png' %}"
+              alt="logo"
+              style="height: 50px"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse offset-3" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#services"
+                  >Services</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#whoweare">Who we are</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#howitworks">How It works</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Welcome, {{user.username}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><button type="button" class="btn btn-success">
+                    Request Service
+                  </button></a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><button type="button" class="btn btn-secondary">
+                    Provide Service
+                  </button></a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </container>
+    {% else %}
     <container>
       <nav class="navbar navbar-expand-lg navbar-light bg-light nav-fill">
         <div class="container-fluid">
@@ -81,7 +142,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#"
-                  ><button type="button" class="btn btn-secondary">
+                  ><button type="button" class="btn btn-success">
                     Request Service
                   </button></a
                 >
@@ -99,6 +160,8 @@
         </div>
       </nav>
     </container>
+
+    {% endif %}
     <div class="container">
       <div class="row">
         <div class="modal fade login-register-form" role="dialog">
@@ -157,7 +220,8 @@
                     aria-labelledby="pills-home-tab"
                   >
                     <div class="form px-4">
-                      <form action="#" method="post">
+                      <form name="login_form" action="" method="post">
+                        {% csrf_token %}
                         <h1 id="form-title">Login</h1>
                         <input
                           type="text"
@@ -187,8 +251,9 @@
                     aria-labelledby="pills-profile-tab"
                   >
                     <div class="form px-4">
-                      <form action="#" method="post">
-                          <h1 id="form-title">Sign Up</h1>
+                      <form name="register_form" action="/" method="post">
+                        {% csrf_token %}
+                        <h1 id="form-title">Sign Up</h1>
 
                         <input
                           type="text"
@@ -619,7 +684,26 @@
         </div>
       </div>
     </div>
-    <script src="{% static 'bootstrap/js/bootsrap.js' %}"></script>
-    <script src="{% static '/js/bootstrap/js/bootstrap.min.js'}"></script>
+    {% comment %}
+    <script src="{% static '/js/bootstrap/js/bootsrap.js' %}"></script>
+    {% endcomment %}
+    <script src="{% static '/js/bootstrap/js/bootstrap.min.js' %%}"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

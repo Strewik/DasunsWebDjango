@@ -1,3 +1,21 @@
+{% extends "main/header.html" %}
+
+{% block content %}      
+
+{% load crispy_forms_tags %}
+
+<!--Login--> 
+<div class="container py-5">
+  <h1>Login</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ login_form|crispy }}
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+  <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
+</div>
+
+{% endfor %}
 <!DOCTYPE html>
 {% load static %}
 <html>
@@ -22,6 +40,7 @@
   <div>{% include 'profiles/navbar.html' %}</div>
     <div class="signup-form">
       <form class="" action="#" method="post">
+      {% csrf_token %}
         <h1>Login</h>
         <input
             class="txtb"
