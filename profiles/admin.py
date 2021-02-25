@@ -5,5 +5,5 @@ from .models import *
 
 admin.site.register(Serviceuser)
 admin.site.register(Serviceprovider)
-admin.site.register(Book)
-admin.site.register(Daysavailable)
+admin.site.register(Booking)
+

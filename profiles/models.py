@@ -13,13 +13,6 @@ class Serviceuser(models.Model):
     def __str__(self):
         return self.name
 
-
-class Daysavailable(models.Model):
-    name = models.CharField(max_length=200, null=True)
-    
-    def __str__(self):
-        return self.name
-
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other'),)
     fullname = models.CharField(max_length=200)
@@ -47,14 +40,7 @@ class Serviceprovider(models.Model):
     ref2email = models.EmailField(max_length=200)
     ref2phone = models.CharField(max_length=200)
     service = models.CharField(max_length=200)
-    availability = models.ManyToManyField(Daysavailable)
-    # sunday = models.CharField(max_length=200, blank=True)
-    # monday = models.CharField(max_length=200, blank=True)
-    # tuesday = models.CharField(max_length=200, blank=True)
-    # wednesday = models.CharField(max_length=200, blank=True)
-    # thursday = models.CharField(max_length=200, blank=True)
-    # friday = models.CharField(max_length=200, blank=True)
-    # saturday = models.CharField(max_length=200, blank=True)
+    availability = models.CharField(max_length=200)
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
     pricevisit = models.CharField(max_length=200, blank=True)
@@ -64,9 +50,9 @@ class Serviceprovider(models.Model):
     def __str__(self):
         return self.fullname
 
-class Book(models.Model):
-    STATUS = (('Available', 'Available'), ('Booked', 'Booked'),
-              ('Not available', 'Not available'))
+class Booking(models.Model):
+    # STATUS = (('Available', 'Available'), ('Booked', 'Booked'),
+    #           ('Not available', 'Not available'))
     meetplace = models.CharField(max_length=200)
     meetdate = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
@@ -77,7 +63,7 @@ class Book(models.Model):
     serviceuser = models.ForeignKey(Serviceuser, null=True, on_delete=models.SET_NULL)
     serviceprovider = models.ForeignKey(Serviceprovider, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    status = models.CharField(max_length=200, null=True, choices=STATUS)
+    # status = models.CharField(max_length=200, null=True, choices=STATUS)
 
     def __str__(self):
         return self.meetplace
