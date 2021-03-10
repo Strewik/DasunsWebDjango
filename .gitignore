@@ -112,4 +112,8 @@ db.sqlite3
 venv/
 
 commands.txt
+/sent_emails
+jointsinlogin.html
+login.html
+signup.html
 

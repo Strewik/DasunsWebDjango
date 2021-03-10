@@ -56,7 +56,7 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse offset-3" id="navbarNavDropdown">
+          <div class="collapse navbar-collapse offset-1" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#services"
@@ -71,6 +71,11 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profiles:password_reset' %}"
+                  >Reset Password</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Welcome, {{user.username}}</a>
@@ -160,8 +165,9 @@
         </div>
       </nav>
     </container>
-
-    {% endif %}
+    {% for message in messages %}
+    <p id="messages">{{message}}</p>
+    {% endfor %} {% endif %}
     <div class="container">
       <div class="row">
         <div class="modal fade login-register-form" role="dialog">
@@ -220,7 +226,7 @@
                     aria-labelledby="pills-home-tab"
                   >
                     <div class="form px-4">
-                      <form name="login_form" action="" method="post">
+                      <form name="loginForm" action="" method="POST">
                         {% csrf_token %}
                         <h1 id="form-title">Login</h1>
                         <input
@@ -240,7 +246,8 @@
                         </button>
                       </form>
                       <small class="forgot"
-                        >Forgot Password? <a href="#"> Reset password</a></small
+                        >Forgot Password?
+                        <a href="/password_reset"> Reset password</a></small
                       >
                     </div>
                   </div>
@@ -251,34 +258,11 @@
                     aria-labelledby="pills-profile-tab"
                   >
                     <div class="form px-4">
-                      <form name="register_form" action="/" method="post">
+                      <form name="registerForm" action="" method="POST">
                         {% csrf_token %}
                         <h1 id="form-title">Sign Up</h1>
-
-                        <input
-                          type="text"
-                          name="username"
-                          class="form-control"
-                          placeholder="User Name"
-                        />
-                        <input
-                          type="email"
-                          name="email"
-                          class="form-control"
-                          placeholder="Email"
-                        />
-                        <input
-                          type="password"
-                          name="password"
-                          class="form-control"
-                          placeholder="Create Password"
-                        />
-                        <input
-                          type="password"
-                          name="password2"
-                          class="form-control"
-                          placeholder="Confirm Password"
-                        />
+                        {{signup_form.username}} {{signup_form.email}}
+                        {{signup_form.password1}} {{signup_form.password2}}
                         <div class="custom-control custom-checkbox">
                           <label>
                             <input
@@ -296,6 +280,7 @@
                         <button class="btn btn-success btn-block">
                           Signup
                         </button>
+                        {{signup_form.errors}}
                       </form>
                     </div>
                   </div>
@@ -705,5 +690,10 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script>
+      var form_fields = document.getElementsByTagName("input");
+      form_fields[1].placeholder = "User Name";
+      form_fields[2].placeholder = "Password";
+    </script>
   </body>
 </html>

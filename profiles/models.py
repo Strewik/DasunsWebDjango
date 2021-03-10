@@ -40,7 +40,7 @@ class Serviceprovider(models.Model):
     ref2email = models.EmailField(max_length=200)
     ref2phone = models.CharField(max_length=200)
     service = models.CharField(max_length=200)
-    availability = models.CharField(max_length=200)
+    availability = models.CharField(max_length=200, null=True)
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
     pricevisit = models.CharField(max_length=200, blank=True)
@@ -66,4 +66,4 @@ class Booking(models.Model):
     # status = models.CharField(max_length=200, null=True, choices=STATUS)
 
     def __str__(self):
-        return self.meetplace
+        return self.serviceprovider.fullname

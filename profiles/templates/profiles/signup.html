@@ -1,21 +1,22 @@
-{% comment %} {% extends "profiles/navbar.html" %}
+{% comment %} <h3>Register</h3>
+<form method="POST" action="">
+{% csrf_token %}
 
-{% block content %} 
+{{form.username.label}}
+{{form.username}}
 
-{% load crispy_forms_tags %}         
+{{form.email.label}}
+{{form.email}}
 
-<!--Register--> 
-<div class="container py-5">
-	<h1>Register</h1>
-	<form method="POST">
-		{% csrf_token %}
-		{{ register_form|crispy }}                    
-		<button class="btn btn-primary" type="submit">Register</button>
-	</form>
-	<p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
-</div>
+{{form.password1.label}}
+{{form.password1}}
 
-{% endblock %} {% endcomment %}
+{{form.password2.label}}
+{{form.password2}}
+
+
+<input type="submit" name="Signup"/>
+</form> {% endcomment %}
 
 
 
@@ -43,35 +44,45 @@
   <div class="container">
    <div>{% include 'profiles/navbar.html' %}</div>
       <div class="signup-form">
-      <form class="" action="#" method="post">
-        <h1>Sign Up</h>
-         <input
+      <form class="" action="" method="POST">
+         {% csrf_token %}
+        <h1>Sign Up</h> 
+        <br/>
+         {% comment %} <input
             class="txtb"
             type="text"
             name="username"
             placeholder="User Name"
-         />
-          <input
+         /> {% endcomment %}
+         {{form.username.label}}
+         {{form.username}}
+          {% comment %} <input
             class="txtb"
             type="email"
             name="email"
             placeholder="Email"
-          />
-          <input
+          /> {% endcomment %}
+          {{form.email.label}}
+          {{form.email}}
+          {% comment %} <input
             class="txtb"
             type="password"
-            name="password"
+            name="password1"
             placeholder="Create Password"
-          />
-          <input
+          /> {% endcomment %}
+          {{form.password1.label}}
+          {{form.password1}}
+          {% comment %} <input
             class="txtb"
             type="password"
             name="password2"
             placeholder="Confirm Password"
-          />
+          /> {% endcomment %}
+          {{form.password2.label}}
+          {{form.password2}}
         <div class="custom-control custom-checkbox">
           <label>
-            <input type="checkbox" class="checkbox" name="terms" required="" />
+            <input type="checkbox" class="checkbox" name="terms" />
             <span>I agree to the terms & conditions set by Dasuns</span>
           </label>
        </div>

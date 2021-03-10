@@ -106,7 +106,7 @@
                                     aria-labelledby="pills-profile-tab">
                                 
                                     <div class="form px-4">
-                                        <form name="signup-form" action="{% url 'register' %}" method="post">
+                                        <form name="signup-form" action="{% url 'register' %}" method="POST">
                                         {% csrf_token %}
                                             <h1 id="form-title">Sign Up</h>
                                             <input
