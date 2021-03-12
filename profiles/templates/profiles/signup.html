@@ -1,0 +1,94 @@
+{% comment %} <h3>Register</h3>
+<form method="POST" action="">
+{% csrf_token %}
+
+{{form.username.label}}
+{{form.username}}
+
+{{form.email.label}}
+{{form.email}}
+
+{{form.password1.label}}
+{{form.password1}}
+
+{{form.password2.label}}
+{{form.password2}}
+
+
+<input type="submit" name="Signup"/>
+</form> {% endcomment %}
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles2.css' %}"
+    />
+  </head>
+  <body>
+  <div class="container">
+   <div>{% include 'profiles/navbar.html' %}</div>
+      <div class="signup-form">
+      <form class="" action="" method="POST">
+         {% csrf_token %}
+        <h1>Sign Up</h> 
+        <br/>
+         {% comment %} <input
+            class="txtb"
+            type="text"
+            name="username"
+            placeholder="User Name"
+         /> {% endcomment %}
+         {{form.username.label}}
+         {{form.username}}
+          {% comment %} <input
+            class="txtb"
+            type="email"
+            name="email"
+            placeholder="Email"
+          /> {% endcomment %}
+          {{form.email.label}}
+          {{form.email}}
+          {% comment %} <input
+            class="txtb"
+            type="password"
+            name="password1"
+            placeholder="Create Password"
+          /> {% endcomment %}
+          {{form.password1.label}}
+          {{form.password1}}
+          {% comment %} <input
+            class="txtb"
+            type="password"
+            name="password2"
+            placeholder="Confirm Password"
+          /> {% endcomment %}
+          {{form.password2.label}}
+          {{form.password2}}
+        <div class="custom-control custom-checkbox">
+          <label>
+            <input type="checkbox" class="checkbox" name="terms" />
+            <span>I agree to the terms & conditions set by Dasuns</span>
+          </label>
+       </div>
+        <input type="submit" value="SIGNUP" class="signup-btn"/>
+      </form>
+    </div>
+     </div>
+  </body>
+</html> 

@@ -250,3 +250,23 @@ body {
   background: #C5C5F1;
   text-decoration: none;
 }
+
+/* styles for service user dasboard start */
+#navbar-service-user {
+  height: 6em;
+}
+
+#requestStatus {
+  background-color: #35d187;
+  color: #fff;
+  height: 6em;
+  padding-top: 2em;
+  padding-left: 7em;
+  padding-right: 1em;
+}
+
+.service-requsets {
+  text-align: center;
+} 
+
+/* styles for service user dasboard end */

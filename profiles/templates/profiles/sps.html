@@ -1,0 +1,85 @@
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+  </head>
+  <body>
+    <div>{% include 'profiles/navbar.html' %}</div>
+    <div class="row">
+      <div class="col-md">
+        <div class="card card-body">
+          <h5>Bookings</h5>
+        </div>
+        <div class="card card-body">
+          <table class="table">
+            <tr>
+              <th>Meeting Place</th>
+              <th>Meeting Date</th>
+              <th>Phone Number</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Service User's Name</th>
+              <th>Service Provider's Name</th>
+              <th>Service offered</th>
+            </tr>
+            {% for i in bookings %}
+            <tr>
+              <td>{{i.meetplace}}</td>
+              <td>{{i.meetdate}}</td>
+              <td>{{i.phone}}</td>
+              <td>{{i.starttime}}</td>
+              <td>{{i.endtime}}</td>
+              <td>{{i.serviceuser.name}}</td>
+              <td>{{i.serviceprovider.fullname}}</td>
+              <td>{{i.serviceprovider.service}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+
+
+      <div class="col-md">
+        <div class="card card-body">
+          <h5>Bookings</h5>
+        </div>
+        <div class="card card-body">
+          <table class="table">
+            <tr>
+              <th>Name</th>
+              <th>Phone Number</th>
+              <th>Gender</th>
+              <th>Location</th>
+              <th>Service offered</th>
+              <th>Price Per Visit</th>
+            </tr>
+            {% for i in serviceproviders %}
+            <tr>
+              <td>{{i.fullname}}</td>
+              <td>{{i.phone}}</td>
+              <td>{{i.gender}}</td>
+              <td>{{i.phyadd}}</td>
+              <td>{{i.service}}</td>
+              <td>{{i.pricevisit}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
