@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'profiles',
+    'django_filters',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,3 +150,15 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR, 'static')
 ]
+
+
+# # AWS EMAIL_BACKEND SET UP
+# EMAIL_BACKEND = 'django_ses.SESBackend'
+# AWS_ACCESS_KEY_ID = 'YOUR-ACCESS-KEY-ID'
+# AWS_SECRET_ACCESS_KEY = 'YOUR-SECRET-ACCESS-KEY'
+# AWS_SES_REGION_NAME = 'REGION-NAME' #(ex: us-east-2)
+# AWS_SES_REGION_ENDPOINT ='REGION-ENDPOINT' #(ex: email.us-east-2.amazonaws.com)
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
