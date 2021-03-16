@@ -1,0 +1,41 @@
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dasuns</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+  </head>
+  <body>
+    <div class="container delete" >
+      <div class="col-md-6 col-md-offset-3">
+        <div class="card">
+          <div class="card-body">
+            <p>Are you sure you want to delete "{{item}}"?</p>
+            <form action="{% url 'profiles:delete_serviceuser' item.id %}" method="POST">
+                {% csrf_token %}
+              <a class="btn btn-info" href="{% url 'profiles:dashboard'%}">Cancel</a>
+              <a
+                type="submit"
+                class="btn btn-danger"
+                href="{% url 'profiles:dashboard'%}" 
+                >Confirm</a
+              >
+            </form>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

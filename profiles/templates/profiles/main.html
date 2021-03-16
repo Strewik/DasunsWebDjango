@@ -5,22 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dasuns</title>
-    {% comment %}
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"
-    />
-    {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    {% comment %}
-    <link
-      rel="stylesheet"
-      href="{% static '/css/bootstrap/css/bootstrap.min.css' %}"
-    />
-    {% endcomment %} {% comment %}
-    <script src="{% static '/js/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    {% endcomment %}
     <link
       rel="stylesheet"
       type="text/css"
@@ -71,11 +56,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'profiles:password_reset' %}"
-                  >Reset Password</a
-                >
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Welcome, {{user.username}}</a>
@@ -167,7 +147,8 @@
     </container>
     {% for message in messages %}
     <p id="messages">{{message}}</p>
-    {% endfor %} {% endif %}
+    {% endfor %} 
+    {% endif %}
     <div class="container">
       <div class="row">
         <div class="modal fade login-register-form" role="dialog">
@@ -261,8 +242,8 @@
                       <form name="registerForm" action="" method="POST">
                         {% csrf_token %}
                         <h1 id="form-title">Sign Up</h1>
-                        {{signup_form.username}} {{signup_form.email}}
-                        {{signup_form.password1}} {{signup_form.password2}}
+                        {{registerform.username}} {{registerform.email}}
+                        {{registerform.password1}} {{registerform.password2}}
                         <div class="custom-control custom-checkbox">
                           <label>
                             <input
@@ -280,7 +261,7 @@
                         <button class="btn btn-success btn-block">
                           Signup
                         </button>
-                        {{signup_form.errors}}
+                        {{registerform.errors}}
                       </form>
                     </div>
                   </div>
@@ -669,9 +650,6 @@
         </div>
       </div>
     </div>
-    {% comment %}
-    <script src="{% static '/js/bootstrap/js/bootsrap.js' %}"></script>
-    {% endcomment %}
     <script src="{% static '/js/bootstrap/js/bootstrap.min.js' %%}"></script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
