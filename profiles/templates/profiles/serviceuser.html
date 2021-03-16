@@ -1,0 +1,38 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasuns</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+</head>
+<body>
+  <div>{% include 'profiles/navbar.html' %}</div>
+
+    <fieldset>
+        <h2 class="fs-title">Social Profiles</h2>
+        <h3 class="fs-subtitle">Your presence on the social network</h3>
+        <form action="" method="POST">
+
+          {% csrf_token %}
+          {{form}}
+      
+        <button 
+        type="submit" 
+        class="btn btn-success"
+        name="Submit">Submit</button>
+      </form>
+      </fieldset>
+</body>
+</html>

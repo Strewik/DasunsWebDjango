@@ -24,6 +24,12 @@ class CreateUserForm(UserCreationForm):
 		return user
 
 
+class ServiceuserForm(ModelForm):
+    class Meta:
+        model = Serviceuser
+        fields = '__all__' 
+
+
 
 # from django import forms
 
@@ -47,13 +53,6 @@ class CreateUserForm(UserCreationForm):
 #         message = cleaned_data.get('message')
 #         if not name and not email and not message:
 #             raise forms.ValidationError('You have to write something!')
-
-
-
-
-
-
-
 
 
 # from django import forms
