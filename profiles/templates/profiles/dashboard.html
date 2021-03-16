@@ -187,12 +187,11 @@
           <td>{{serviceuser.name}}</td>
           <td>{{serviceuser.phone}}</td>
           <td>{{serviceuser.email}}</td>
-
           <td>
-            <a class="btn btn-info" href="{% url 'update_serviceuser' serviceuser.id %}">Update</a>
+            <a class="btn btn-info" href="{% url 'profiles:update_serviceuser' serviceuser.id %}">Update</a>
           </td>
           <td>
-            <a class="btn btn-danger" href="{% url 'delete_serviceuser' serviceuser.id %}">Delete</a>
+            <a class="btn btn-danger" href="{% url 'profiles:delete_serviceuser' serviceuser.id %}">Delete</a>
           </td>
         </tr>
         {% endfor %}

@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles2.css' %}"
+    />
+  </head>
+  <body>
+  <div>
+   <div>{% include 'profiles/navbar.html' %}</div> 
+    <div class="main-booking">
+      <div class="card" id="booking-card">
+        <form class="" action="" method="POST" id="form">
+          {% csrf_token %} 
+          {% comment %} {% if Serviceprovider is not None %}           {% endcomment %}
+          <h4 class="heading3">
+            <small style= "color:black", "fontSize: 30px", "fontWeight:
+            bold" > Booking </small> {{Serviceprovider.username}} Mark Shanty
+          </h4>
+          <h6 class="heading3">
+            From {{Serviceprovider.phyadd}} Muyenga Kampala UG
+          </h6>
+          <h6 class="heading3">
+            <small> {{Serviceprovider.pricevisit}} 20000UGX per visit</small>
+          </h6>
+          <br />
+          {% comment %} {% endif %} {% endcomment %}
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Meeting Place:</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id=""
+                placeholder="Preffered meeting place"
+              />
+            </div>
+          </div>
+          </br>
+
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Meeting Date:</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id=""
+                placeholder="Schedule your preffered date"
+              />
+            </div>
+          </div>
+          </br>
+
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Phone No:</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id=""
+                placeholder="Enter your phone number"
+              />
+            </div>
+          </div>
+          </br>
+
+          <p class="col-sm-3 col-form-label"><b>Meeting Time:</b></p></br>
+          <div class="form-row" id="time-stamp">
+            <div class="form-group col-md-5" id="left-time">
+              <label for="starttime">Start Time:</label>
+              <input
+                type="time"
+                class="form-control"
+                name="starttime"
+                id="starttime"
+                placeholder="Enter Starting time"
+              />
+            </div>
+
+           
+            <div class="form-group col-md-2"></div>
+            
+            <div class="form-group col-md-5" id="right-time">
+              <label for="endtime" >End Time:</label>
+              <input
+                type="time"
+                class="form-control"
+                name="endtime"
+                id="endtime"
+                placeholder="Enter Ending time"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <input type="submit" value="BOOK NOW"  class="signup-btn" id="book-btn"/>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
