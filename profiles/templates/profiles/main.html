@@ -167,7 +167,8 @@
     </container>
     {% for message in messages %}
     <p id="messages">{{message}}</p>
-    {% endfor %} {% endif %}
+    {% endfor %} 
+    {% endif %}
     <div class="container">
       <div class="row">
         <div class="modal fade login-register-form" role="dialog">
@@ -265,8 +266,8 @@
                       <form name="registerform" action="" method="POST">
                         {% csrf_token %}
                         <h1 id="form-title">Sign Up</h1>
-                        {{signup_form.username}} {{signup_form.email}}
-                        {{signup_form.password1}} {{signup_form.password2}}
+                        {{registerform.username}} {{registerform.email}}
+                        {{registerform.password1}} {{registerform.password2}}
                         <div class="custom-control custom-checkbox">
                           <label>
                             <input
@@ -287,7 +288,7 @@
                         >
                           Signup
                         </button>
-                        {{signup_form.errors}}
+                        {{registerform.errors}}
                       </form>
                     </div>
                   </div>
