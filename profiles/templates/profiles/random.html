@@ -1,5 +1,5 @@
 {% load static %}
-<!DOCTYPE html> 
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -139,7 +139,7 @@
         </table>
       </div>
       <div>
-        <h3>Applications</h3>
+        <h3> Applications </h3>
         <br />
 
         <table class="table">
@@ -159,44 +159,17 @@
               <td>Mark Morty</td>
               <td>Captioning</td>
 
-              <td>02/03/2020</td>
-              <td>Pending</td>
+              <td>
+                02/03/2020
+              </td>
+              <td>
+                Pending
+              </td>
             </tr>
           </tbody>
         </table>
+
       </div>
     </div>
-    <div class="orders">
-    <table class="table">
-      <thead
-        class="thead-dark"
-        style="color: #fff; background-color: rgb(12, 83, 39)"
-      >
-        <tr>
-          <th scope="col">Client</th>
-          <th scope="col">Phone</th>
-          <th scope="col">Email</th>
-
-          <th scope="col">Update</th>
-          <th scope="col">Cancel</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for serviceuser in serviceusers %}
-        <tr>
-          <td>{{serviceuser.name}}</td>
-          <td>{{serviceuser.phone}}</td>
-          <td>{{serviceuser.email}}</td>
-          <td>
-            <a class="btn btn-info" href="{% url 'profiles:update_serviceuser' serviceuser.id %}">Update</a>
-          </td>
-          <td>
-            <a class="btn btn-danger" href="{% url 'profiles:delete_serviceuser' serviceuser.id %}">Delete</a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
   </body>
 </html>

@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from .forms import CreateUserForm
+from .models import Serviceprovider
+from .models import Booking
+from .models import Serviceuser as ServiceuserModel
+from .forms import CreateUserForm, ServiceuserForm
 from django.contrib import messages  # import messages
 # from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import AuthenticationForm  # add this
@@ -10,9 +13,7 @@ from .filters import BookingFilter
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import *
 # added imports
-from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
@@ -21,8 +22,9 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
-# Create your views here.
 
+
+# Create your views here.
 
 def main(request):
 	registerform = CreateUserForm()
@@ -37,7 +39,7 @@ def main(request):
 				registerform.save()
 				user = registerform.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
-				# return redirect('homepage')
+				return redirect('homepage')
 			else:
 				messages.error(request, "User was not created")
 			loginform = AuthenticationForm(data=request.POST)
@@ -47,13 +49,12 @@ def main(request):
 				username = loginform.cleaned_data.get('username')
 				password = loginform.cleaned_data.get('password')
 				user = authenticate(username=username, password=password)
-				messages.info(request, f"You are now logged in as {username}")
-				# if user is not None:
-				# 	login(request, user)
-				# 	# messages.info(request, f"You are now logged in as {username}")
-				# 	# return redirect('profiles:homepage')
-				# else:
-				# 	messages.error(request, "No user in the system yet")
+				if user is not None:
+					login(request, user)
+					# messages.info(request, f"You are now logged in as {username}")
+					return redirect('profiles:homepage')
+				else:
+					messages.error(request, "No user in the system yet")
 			else:
 				messages.error(request, "Invalid username or password.")
 			loginform = AuthenticationForm()
@@ -100,31 +101,95 @@ def logout_request(request):
 	return redirect("profiles:homepage")
 
 
-# @login_required
 def spreg(request):
     return render(request, 'profiles/spreg.html')
 
 
+def sps(request):
+    bookings = Booking.objects.all()
+
+    context = {'bookings':bookings}
+    return render(request, 'profiles/sps.html',context )
+
+
+def serviceprovider(request):
+    serviceproviders = ServiceProvider.objects.all()
+
+    context = {'serviceproviders':serviceproviders}
+    return render(request, 'profiles/sps.html', context)
+
+def dashboard(request):
+    bookings = Booking.objects.all()
+    serviceproviders = Serviceprovider.objects.all()
+    serviceusers = ServiceuserModel.objects.all()
+
+    context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers}
+    return render(request, 'profiles/dashboard.html', context)
+
 def booking(request):
     return render(request, template_name='profiles/bookingform.html')
 
-# def bookings(request):
-#     bookings = Booking.objects.all()
-#     return render(request, 'profiles/sps.html', {'bookings':bookings})
-
-# def serviceproviders(request):
-#     serviceproviders = serviceproviders.objects.all()
-#     return render(request, 'profiles/serviceprovider.html', {' serviceproviders': serviceproviders})
-
-def dashboard(request):
-	bookings = Booking.objects.all()
-	serviceproviders = Serviceprovider.objects.all()
-
-	context = {'bookings':bookings, 'serviceproviders':serviceproviders}
-	return render(request, 'profiles/sps.html', context)
-
 def serviceuserdash(request):
     return render(request, 'profiles/serviceuserdash.html')
+
+
+def signuplogin(request):
+    return render(request, 'profiles/jointsinlogin.html')
+
+def serviceuser(request):
+
+    serviceusers = ServiceuserModel.objects.all()
+
+    form = ServiceuserForm()
+    if request.method == 'POST':
+        # print('Printing post:', request.POST)
+        form = ServiceuserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse ('profiles:dashboard'))
+
+    context = {'form': form, serviceusers: serviceusers}
+    return render(request,'profiles/serviceuser.html', context)
+
+def updateServiceuser(request, pk):
+
+    serviceusers = ServiceuserModel.objects.get(id=pk)
+    form = ServiceuserForm(instance=serviceusers)
+
+    if request.method == 'POST':
+        form = ServiceuserForm(request.POST, instance=serviceusers)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse ('profiles:dashboard'))
+
+    context = {'form': form}
+    return render(request, 'profiles/serviceuser.html', context) 
+
+def deleteServiceuser(request, pk):
+    serviceusers = ServiceuserModel.objects.get(id=pk)
+    if request.method == "POST":
+        serviceusers.delete()
+        return redirect(reverse ('profiles:dashboard'))
+    context = {'item': serviceusers}
+    return render(request, 'profiles/deleteServiceuser.html', context) 
+
+ 
+
+# def spreg(request):
+#     return render(request, 'profiles/spreg.html')
+# def dashboard(request):
+#     # book = Book.objects.all()
+#     return render(request, 'profiles/dashboard.html',{'bookings':bookings})
+
+# def serviceproviders(request):
+#     bookings = Book.objects.all()
+#     return render(request, 'profiles/sps.html', {'bookings':bookings})
+
+
+# def dashboard(request):
+#     return render(request, 'profiles/dashboard.html')
+# def dashboard(request):
+#     return render(request, 'profiles/dashboard.html')
 
 
 # def register_request(request):
