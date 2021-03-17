@@ -31,7 +31,6 @@ def main(request):
 	loginform = AuthenticationForm()
 	context = {'registerform':registerform, 'loginform':loginform }
 
-
 	if request.method == 'POST':
 		if 'registerbtn' in request.POST:
 			registerform = CreateUserForm(request.POST)
@@ -39,7 +38,7 @@ def main(request):
 				registerform.save()
 				user = registerform.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
-				return redirect('homepage')
+				return redirect('profiles:homepage')
 			else:
 				messages.error(request, "User was not created")
 			loginform = AuthenticationForm(data=request.POST)
