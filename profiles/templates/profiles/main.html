@@ -55,25 +55,27 @@
                 <a class="nav-link" href="#howitworks">How It works</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="#">Welcome, {{user.username}}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><button type="button" class="btn btn-success">
+                <a class="nav-link" href="#">
+                  <button type="button" class="btn btn-success">
                     Request Service
                   </button></a
                 >
               </li>
-
               <li class="nav-item">
                 <a class="nav-link" href="#"
                   ><button type="button" class="btn btn-secondary">
                     Provide Service
                   </button></a
                 >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">
+                <button type="button" class="btn btn-secondary">
+                Logout
+                </button></a>
               </li>
             </ul>
           </div>
@@ -147,8 +149,7 @@
     </container>
     {% for message in messages %}
     <p id="messages">{{message}}</p>
-    {% endfor %} 
-    {% endif %}
+    {% endfor %} {% endif %}
     <div class="container">
       <div class="row">
         <div class="modal fade login-register-form" role="dialog">
@@ -222,7 +223,11 @@
                           class="form-control"
                           placeholder="Password"
                         />
-                        <button type="submit" class="btn btn-success btn-block">
+                        <button
+                          name="loginbtn"
+                          type="submit"
+                          class="btn btn-success btn-block"
+                        >
                           Login
                         </button>
                       </form>
@@ -258,7 +263,10 @@
                             >
                           </label>
                         </div>
-                        <button class="btn btn-success btn-block">
+                        <button
+                          name="registerbtn"
+                          class="btn btn-success btn-block"
+                        >
                           Signup
                         </button>
                         {{registerform.errors}}

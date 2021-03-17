@@ -31,7 +31,6 @@ def main(request):
 	loginform = AuthenticationForm()
 	context = {'registerform':registerform, 'loginform':loginform }
 
-
 	if request.method == 'POST':
 		if 'registerbtn' in request.POST:
 			registerform = CreateUserForm(request.POST)
