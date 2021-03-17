@@ -207,7 +207,7 @@
                     aria-labelledby="pills-home-tab"
                   >
                     <div class="form px-4">
-                      <form name="loginForm" action="" method="POST">
+                      <form name="loginform" action="" method="POST">
                         {% csrf_token %}
                         <h1 id="form-title">Login</h1>
                         <input
@@ -239,7 +239,7 @@
                     aria-labelledby="pills-profile-tab"
                   >
                     <div class="form px-4">
-                      <form name="registerForm" action="" method="POST">
+                      <form name="registerform" action="" method="POST">
                         {% csrf_token %}
                         <h1 id="form-title">Sign Up</h1>
                         {{registerform.username}} {{registerform.email}}
