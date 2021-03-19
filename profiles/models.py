@@ -55,9 +55,11 @@ class Serviceprovider(models.Model):
 class Booking(models.Model):
     # STATUS = (('Available', 'Available'), ('Booked', 'Booked'),
     #           ('Not available', 'Not available'))
+    # name = models.CharField(max_length=200, null=True)
+    # phone = models.CharField(max_length=200, null=True)
+    # email = models.CharField(max_length=200, null=True)
     meetplace = models.CharField(max_length=200)
     meetdate = models.CharField(max_length=200)
-    phone = models.CharField(max_length=200)
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
     # owner = models.ForeignKey(
