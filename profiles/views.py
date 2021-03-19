@@ -31,7 +31,6 @@ def main(request):
 	loginform = AuthenticationForm()
 	context = {'registerform':registerform, 'loginform':loginform }
 
-
 	if request.method == 'POST':
 		if 'registerbtn' in request.POST:
 			registerform = CreateUserForm(request.POST)
@@ -39,7 +38,7 @@ def main(request):
 				registerform.save()
 				user = registerform.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
-				return redirect('homepage')
+				return redirect('profiles:homepage')
 			else:
 				messages.error(request, "User was not created")
 			loginform = AuthenticationForm(data=request.POST)
@@ -102,9 +101,45 @@ def logout_request(request):
 
 
 def spreg(request):
-    return render(request, 'profiles/spreg.html')
-
-
+    
+    if request.method != 'POST':
+        return render(request, 'profiles/spreg.html')
+    else: 
+        fullname = request.POST.get('fullname')
+        phone =request.POST.get('phone')
+        email = request.POST.get('email')
+        nin = request.POST.get('nin')
+        dob = request.POST.get('dob')
+        gender = request.POST.get('gender')
+        phyadd = request.POST.get('phyadd')
+        yearexp = request.POST.get('yearexp')
+        notmidman = request.POST.get('notmidman')
+        skillset = request.POST.get('skillset')
+        internet = request.POST.get('internet')
+        qualification = request.POST.get('qualification')
+        portifolio = request.POST.get('portifolio')
+        profession = request.POST.get('profession')
+        ref1name = request.POST.get('ref1name')
+        ref1title = request.POST.get('ref1title')
+        ref1email = request.POST.get('ref1email')
+        ref1phone = request.POST.get('ref1phone')
+        ref2name = request.POST.get('ref2name')
+        ref2title = request.POST.get('ref2title')
+        ref2email = request.POST.get('ref2email')
+        ref2phone = request.POST.get('ref2phone')
+        category = request.POST.get('category')
+        service = request.POST.get('service')
+        availability = request.POST.get('availability')
+        starttime = request.POST.get('starttime')
+        endtime = request.POST.get('endtime')
+        pricevisit = request.POST.get('pricevisit')
+        terms = request.POST.get('terms')
+        
+        
+        ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
+        ServProv.save()
+           
+            
 def sps(request):
     bookings = Booking.objects.all()
 

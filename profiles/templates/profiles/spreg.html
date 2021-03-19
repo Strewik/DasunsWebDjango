@@ -32,11 +32,11 @@
       html {
         height: 100%;
         background: #6441a5; /* fallback for old browsers */
-        background: -webkit-linear-gradient(
+        /* background: -webkit-linear-gradient(
           to left,
           #6441a5,
-          #2a0845
-        ); /* Chrome 10-25, Safari 5.1-6 */
+          #2a0845 
+        ); Chrome 10-25, Safari 5.1-6 */
       }
 
       body {
@@ -248,7 +248,8 @@
     <!-- MultiStep Form -->
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <form id="msform" action="" method="post">
+        <form id="msform" action="{% url 'profiles:spreg'%}" method="POST">
+          {% csrf_token %}
           <!-- progressbar -->
           <ul id="progressbar">
             <li class="active">Personal Details</li>
@@ -300,6 +301,7 @@
               class="fullinput"
               class="custom-select my-1 mr-sm-2"
               id="inlineFormCustomSelectPref"
+              name="gender"
             >
               <option selected>Gender</option>
               <option value="female">Female</option>
@@ -309,7 +311,7 @@
               class="fullinput"
               class="fullinput"
               type="text"
-              name="address"
+              name="phyadd"
               value=""
               placeholder="Address"
             />
@@ -333,44 +335,58 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="I have 1+ years of experience"
+                  name="yearexp"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
-                  Default checkbox
+                  At least one year of experience in your profession.
                 </label>
+                <br />
                 <br />
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="I'm not a middleman"
+                  name="notmidman"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
-                  Default checkbox
+                  You're not a middleman.
                 </label>
+                <br />
                 <br />
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="I have the necessary skillset"
+                  name="skillset"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
-                  Default checkbox
+                  You have the skillset to give professional service.
                 </label>
+                <br />
                 <br />
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="I have a device and internet connection"
+                  name="internet"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
-                  Default checkbox
+                  You have a phone/computer with internet connection and an active phone number.
                 </label>
                 <br />
               </div>
+            </div>
+            <br />
+            <br />
+            <div>
+              You are only allowed to proceed to the next step if you check all the fields. 
+              If you do not meet the above eligibility requirements you can not proceed.
+              You can always sign up later when you meet all the above eligibility requirements.
             </div>
             <input
               type="button"
@@ -702,6 +718,12 @@
               name="previous"
               class="previous action-button-previous"
               value="Previous"
+            />
+            <input
+              type="submit"
+              name="submit"
+              class="next action-button"
+              value="submit"
             />
           </fieldset>
         </form>

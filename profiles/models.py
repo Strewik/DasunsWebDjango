@@ -16,7 +16,7 @@ class Serviceuser(models.Model):
         return self.name
 
 class Serviceprovider(models.Model):
-    GENDER = (('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other'),)
+    GENDER = (('Male', 'Male'), ('Female', 'Female'),)
     fullname = models.CharField(max_length=200)
     # owner = models.ForeignKey(
     #     User, related_name='serviceProviders', on_delete=models.CASCADE, null=True)
@@ -48,6 +48,8 @@ class Serviceprovider(models.Model):
     pricevisit = models.CharField(max_length=200, blank=True)
     terms = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    objects=models.Manager()
+    
 
     def __str__(self):
         return self.fullname
