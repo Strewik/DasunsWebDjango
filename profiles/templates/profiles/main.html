@@ -20,136 +20,13 @@
   </head>
   <body>
     {% if user.is_authenticated %}
-    <container>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light nav-fill">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img
-              src="{% static 'images/Logo.png' %}"
-              alt="logo"
-              style="height: 50px"
-            />
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse offset-1" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#services"
-                  >Services</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#whoweare">Who we are</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#howitworks">How It works</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Welcome, {{user.username}}</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <button type="button" class="btn btn-success">
-                    Request Service
-                  </button></a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><button type="button" class="btn btn-secondary">
-                    Provide Service
-                  </button></a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">
-                <button type="button" class="btn btn-secondary">
-                Logout
-                </button></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </container>
+    <div>{% include 'profiles/authNavbar.html' %}</div>
     {% else %}
-    <container>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light nav-fill">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img
-              src="{% static 'images/Logo.png' %}"
-              alt="logo"
-              style="height: 50px"
-            />
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse offset-3" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#services"
-                  >Services</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#whoweare">Who we are</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#howitworks">How It works</a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="#pills-home"
-                  data-toggle="modal"
-                  data-target=".login-register-form"
-                >
-                  LogIn/SignUp
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><button type="button" class="btn btn-success">
-                    Request Service
-                  </button></a
-                >
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="#"
-                  ><button type="button" class="btn btn-secondary">
-                    Provide Service
-                  </button></a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </container>
-    {% for message in messages %}
+    <div>{% include 'profiles/navbar.html' %}</div>
+    {% comment %} {% for message in messages %}
     <p id="messages">{{message}}</p>
-    {% endfor %} {% endif %}
+    {% endfor %}  {% endcomment %}
+    {% endif %}
     <div class="container">
       <div class="row">
         <div class="modal fade login-register-form" role="dialog">
@@ -210,7 +87,7 @@
                     <div class="form px-4">
                       <form name="loginform" action="" method="POST">
                         {% csrf_token %}
-                        <h1 id="form-title">Login</h1>
+                        <h4 id="form-title">Login</h4>
                         <input
                           type="text"
                           name="username"
@@ -246,7 +123,7 @@
                     <div class="form px-4">
                       <form name="registerform" action="" method="POST">
                         {% csrf_token %}
-                        <h1 id="form-title">Sign Up</h1>
+                        <h4 id="form-title">Sign Up</h4>
                         {{registerform.username}} {{registerform.email}}
                         {{registerform.password1}} {{registerform.password2}}
                         <div class="custom-control custom-checkbox">
@@ -280,6 +157,7 @@
         </div>
       </div>
     </div>
+    {% comment %} <div>{% include 'profiles/protected.html' %}</div> {% endcomment %}
     <div>
       <div class="container1">
         <img
@@ -292,7 +170,7 @@
       </div>
     </div>
     <div class="green-service">
-      <div>
+      {% comment %} <div> {% endcomment %}
         <div class="row">
           <div class="col-md">
             <div>
@@ -307,37 +185,37 @@
           <div class="col-md">
             <div>
               <img
-                src="{% static 'images/physical.png' %}"
+                src="{% static 'images/physical2.png' %}"
                 alt="logo"
                 style="height: 50px"
               />
             </div>
-            <div>Personal Support Assistance</div>
+            <div>Personal Assistance</div>
           </div>
           <div class="col-md">
             <div>
               <img
-                src="{% static 'images/physical.png' %}"
+                src="{% static 'images/deaf2.png' %}"
                 alt="logo"
                 style="height: 50px"
               />
             </div>
-            <div>Ugandan sign language interval</div>
+            <div>Ugandan Interpreter</div>
           </div>
           <div class="col-md">
             <div>
               <img
-                src="{% static 'images/physical.png' %}"
+                src="{% static 'images/deaf2.png' %}"
                 alt="logo"
                 style="height: 50px"
               />
             </div>
-            <div>International sign language interval</div>
+            <div>International Interpreter</div>
           </div>
           <div class="col-md">
             <div>
               <img
-                src="{% static 'images/physical.png' %}"
+                src="{% static 'images/mobility.png' %}"
                 alt="logo"
                 style="height: 50px"
               />
@@ -347,7 +225,7 @@
           <div class="col-md">
             <div>
               <img
-                src="{% static 'images/physical.png' %}"
+                src="{% static 'images/hear2.png' %}"
                 alt="logo"
                 style="height: 50px"
               />
@@ -355,12 +233,12 @@
             <div>Captioning</div>
           </div>
         </div>
-      </div>
+      {% comment %} </div> {% endcomment %}
     </div>
     <div class="white-service">
       <h2>All Services</h2>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" onclick="location.href='/dashboard';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -379,7 +257,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" onclick="location.href='/dashboard';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -398,7 +276,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" onclick="location.href='/dashboard';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -421,7 +299,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" onclick="location.href='/dashboard';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -440,7 +318,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" onclick="location.href='/dashboard';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -636,27 +514,7 @@
           </div>
         </div>
       </div>
-
-      <div class="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-3">
-              <img
-                src="{% static 'images/Logo.png' %}"
-                alt="logo"
-                style="height: 50px"
-              />
-            </div>
-            <div class="col-md">About Us</div>
-            <div class="col-md">FAQ</div>
-            <div class="col-md">Contact us</div>
-            <div class="col-md">
-              <div>Follow us</div>
-              <div></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div>{% include 'profiles/footer.html' %}</div>
     </div>
     <script src="{% static '/js/bootstrap/js/bootstrap.min.js' %%}"></script>
     <script

@@ -15,6 +15,7 @@ urlpatterns = [
     path('spreg/', views.spreg, name='servicep'),
     path("logout", views.logout_request, name='logout'),
     path("booking/", views.booking, name='booking'),
+    path("serviceuserdash/", views.serviceuserdash, name='serviceuserdash'),
     path('serviceprovider/', views.serviceprovider),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('sps/', views.sps),

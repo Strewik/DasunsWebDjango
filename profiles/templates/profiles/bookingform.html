@@ -20,7 +20,7 @@
   </head>
   <body>
   <div>
-   <div>{% include 'profiles/navbar.html' %}</div> 
+   <div>{% include 'profiles/authNavbar.html' %}</div> 
     <div class="main-booking">
       <div class="card" id="booking-card">
         <form class="" action="" method="POST" id="form">
@@ -38,37 +38,21 @@
           </h6>
           <br />
           {% comment %} {% endif %} {% endcomment %}
-          <div class="form-group row">
+         <div class="form-group row">
             <label for="" class="col-sm-3 col-form-label"
-              >Meeting Place:</label
+              >Full Name: </label
             >
             <div class="col-sm-9">
               <input
                 type="text"
                 class="form-control"
                 id=""
-                placeholder="Preffered meeting place"
+                placeholder="Enter your Full name"
               />
             </div>
           </div>
           </br>
-
-          <div class="form-group row">
-            <label for="" class="col-sm-3 col-form-label"
-              >Meeting Date:</label
-            >
-            <div class="col-sm-9">
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                placeholder="Schedule your preffered date"
-              />
-            </div>
-          </div>
-          </br>
-
-          <div class="form-group row">
+         <div class="form-group row">
             <label for="" class="col-sm-3 col-form-label"
               >Phone No:</label
             >
@@ -82,7 +66,48 @@
             </div>
           </div>
           </br>
-
+           <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Email: </label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id=""
+                placeholder="Enter your Email address"
+              />
+            </div>
+          </div>
+          </br>
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Meeting Place:</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id=""
+                placeholder="Preferred meeting place"
+              />
+            </div>
+          </div>
+          </br>
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Meeting Date:</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                class="form-control"
+                id=""
+                placeholder="Schedule your preferred date"
+              />
+            </div>
+          </div>
+          </br>
           <p class="col-sm-3 col-form-label"><b>Meeting Time:</b></p></br>
           <div class="form-row" id="time-stamp">
             <div class="form-group col-md-5" id="left-time">
@@ -110,8 +135,7 @@
               />
             </div>
           </div>
-
-          <div class="form-row">
+            <div class="form-row">
             <input type="submit" value="BOOK NOW"  class="signup-btn" id="book-btn"/>
           </div>
         </form>

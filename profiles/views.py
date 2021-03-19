@@ -21,7 +21,7 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
-
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -99,24 +99,27 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("profiles:homepage")
 
-
+@login_required(login_url='profiles:homepage')
 def spreg(request):
     return render(request, 'profiles/spreg.html')
 
-
-def sps(request):
+@login_required(login_url='profiles:homepage')
+def sps(request):  
     bookings = Booking.objects.all()
 
     context = {'bookings':bookings}
     return render(request, 'profiles/sps.html',context )
 
 
+@login_required(login_url='profiles:homepage')
 def serviceprovider(request):
     serviceproviders = ServiceProvider.objects.all()
 
     context = {'serviceproviders':serviceproviders}
     return render(request, 'profiles/sps.html', context)
 
+
+@login_required(login_url='profiles:homepage')
 def dashboard(request):
     bookings = Booking.objects.all()
     serviceproviders = Serviceprovider.objects.all()
@@ -125,15 +128,16 @@ def dashboard(request):
     context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers}
     return render(request, 'profiles/dashboard.html', context)
 
+
+@login_required(login_url='profiles:homepage')
 def booking(request):
     return render(request, template_name='profiles/bookingform.html')
 
+
+@login_required(login_url='profiles:homepage')
 def serviceuserdash(request):
     return render(request, 'profiles/serviceuserdash.html')
 
-
-def signuplogin(request):
-    return render(request, 'profiles/jointsinlogin.html')
 
 def serviceuser(request):
 
@@ -150,6 +154,8 @@ def serviceuser(request):
     context = {'form': form, serviceusers: serviceusers}
     return render(request,'profiles/serviceuser.html', context)
 
+
+@login_required(login_url='profiles:homepage')
 def updateServiceuser(request, pk):
 
     serviceusers = ServiceuserModel.objects.get(id=pk)
@@ -164,6 +170,8 @@ def updateServiceuser(request, pk):
     context = {'form': form}
     return render(request, 'profiles/serviceuser.html', context) 
 
+
+@login_required(login_url='profiles:homepage')
 def deleteServiceuser(request, pk):
     serviceusers = ServiceuserModel.objects.get(id=pk)
     if request.method == "POST":
@@ -171,7 +179,6 @@ def deleteServiceuser(request, pk):
         return redirect(reverse ('profiles:dashboard'))
     context = {'item': serviceusers}
     return render(request, 'profiles/deleteServiceuser.html', context) 
-
  
 
 # def spreg(request):
