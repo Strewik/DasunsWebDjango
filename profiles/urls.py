@@ -12,16 +12,22 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name="profiles/password/password_reset_done.html"), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(success_url=reverse_lazy('profiles:password_reset_complete'), template_name="profiles/password/password_reset_confirm.html"), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name="profiles/password/password_reset_complete.html"), name='password_reset_complete'),
+    path('logout/', views.logout_request, name='logout'),
+    path('user/', views.userPage, name='user-page'),
     path('spreg/', views.spreg, name='servicep'),
-    path("logout", views.logout_request, name='logout'),
-    path("booking/", views.booking, name='booking'),
-    path("serviceuserdash/", views.serviceuserdash, name='serviceuserdash'),
-    path('serviceprovider/', views.serviceprovider),
+    path('caption/', views.captioningList, name='captioning'),
+    path('intern/', views.internationalInterpList, name='international-interp'),
+    path('mobguide/', views.mobGuideList, name='mobility-guide'),
+    path('support/', views.personalSupportList, name='personal-support'),
+    path('ugandan/', views.ugandanInterpList, name='ugandan-interp'),
+    path('booking/', views.createbBooking, name="create_booking"),
+    path('serviceuserdash/', views.serviceuserdash, name='serviceuserdash'),
     path('dashboard/', views.dashboard, name="dashboard"),
-    path('sps/', views.sps),
+    path('spdash/', views.serviceproviderdash, name="serviceproviderdash"),
     path('serviceuser/', views.serviceuser, name="serviceusers"),
     path('update_serviceuser/<str:pk>', views.updateServiceuser, name="update_serviceuser"),
     path('delete_serviceuser/<str:pk>', views.deleteServiceuser, name="delete_serviceuser"),
+    
 
 ]
 
