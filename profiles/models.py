@@ -24,7 +24,7 @@ class Serviceprovider(models.Model):
     email = models.EmailField(max_length=200, unique=True)
     nin = models.CharField(max_length=200)
     dob = models.CharField(max_length=200)
-    gender = models.CharField(max_length=200, choices=GENDER)
+    gender = models.CharField(max_length=200, choices=GENDER,)
     phyadd = models.CharField(max_length=200)
     yearexp = models.CharField(max_length=200)
     notmidman = models.CharField(max_length=200)
@@ -45,7 +45,7 @@ class Serviceprovider(models.Model):
     availability = models.CharField(max_length=200)
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
-    pricevisit = models.CharField(max_length=200, blank=True)
+    pricevisit = models.CharField(max_length=200)
     terms = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     objects=models.Manager()
@@ -71,3 +71,15 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.meetplace
+
+class MultiStepFormModel(models.Model):
+    id=models.AutoField(primary_key=True)
+    fname=models.CharField(max_length=255)
+    lname=models.CharField(max_length=255)
+    phone=models.CharField(max_length=255)
+    twitter=models.CharField(max_length=255)
+    facebook=models.CharField(max_length=255)
+    gplus=models.CharField(max_length=255)
+    email=models.CharField(max_length=255)
+    password=models.CharField(max_length=255)
+    objects=models.Manager()

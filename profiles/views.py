@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Serviceprovider
 from .models import Booking
 from .models import Serviceuser as ServiceuserModel
@@ -100,10 +100,10 @@ def logout_request(request):
 	return redirect("profiles:homepage")
 
 
-def spreg(request):
+def spreg_save(request):
     
     if request.method != 'POST':
-        return render(request, 'profiles/spreg.html')
+        return render(request, 'profiles:spreg.html')
     else: 
         fullname = request.POST.get('fullname')
         phone =request.POST.get('phone')
@@ -209,6 +209,35 @@ def deleteServiceuser(request, pk):
     return render(request, 'profiles/deleteServiceuser.html', context) 
 
  
+def spreg(request):
+    return render(request,"profiles/spreg.html")
+
+def multistepformexample_save(request):
+    if request.method!="POST":
+        return redirect(reverse("profiles:spreg"))
+    else:
+        fname=request.POST.get("fname")
+        lname=request.POST.get("lname")
+        phone=request.POST.get("phone")
+        twitter=request.POST.get("twitter")
+        facebook=request.POST.get("facebook")
+        gplus=request.POST.get("gplus")
+        email=request.POST.get("email")
+        password=request.POST.get("pass")
+        cpass=request.POST.get("cpass")
+        if password!=cpass:
+            messages.error(request,"Confirm Password Doesn't Match")
+            return redirect(reverse('profiles:spreg'))
+
+        try:
+            multistepform=MultiStepFormModel(fname=fname,lname=lname,phone=phone,twitter=twitter,facebook=facebook,gplus=gplus,email=email,password=password)
+            multistepform.save()
+            messages.success(request,"Data Save Successfully")
+            return HttpResponseRedirect(reverse('profiles:spreg'))
+        except:
+            messages.error(request,"Error in Saving Data")
+            return HttpResponseRedirect(reverse('profiles:spreg'))
+
 
 # def spreg(request):
 #     return render(request, 'profiles/spreg.html')
