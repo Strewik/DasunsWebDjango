@@ -138,6 +138,8 @@ def spreg_save(request):
         
         ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
+        
+        return render(request, 'profiles:homepage')
            
             
 def sps(request):
