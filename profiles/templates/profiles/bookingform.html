@@ -2,6 +2,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+  {% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{{ bookingform.media }}
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
@@ -15,7 +20,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static '/css/styles2.css' %}"
+      href="{% static '/css/styles.css' %}"
     />
   </head>
   <body>
@@ -23,12 +28,13 @@
    <div>{% include 'profiles/authNavbar.html' %}</div> 
     <div class="main-booking">
       <div class="card" id="booking-card">
-        <form class="" action="" method="POST" id="form">
+        <form name="bookingform" class="" action="" method="POST" id="form">
           {% csrf_token %} 
-          {% comment %} {% if Serviceprovider is not None %}           {% endcomment %}
+           
+          {% comment %} {% if Serviceprovider is not None %} {% endcomment %}
           <h4 class="heading3">
-            <small style= "color:black", "fontSize: 30px", "fontWeight:
-            bold" > Booking </small> {{Serviceprovider.username}} Mark Shanty
+            <small style= "color:black", "fontSize: 30px", "fontWeight:bold"> Booking </small>
+            {{Serviceprovider.username}} Mark Shanty
           </h4>
           <h6 class="heading3">
             From {{Serviceprovider.phyadd}} Muyenga Kampala UG
@@ -36,19 +42,13 @@
           <h6 class="heading3">
             <small> {{Serviceprovider.pricevisit}} 20000UGX per visit</small>
           </h6>
-          <br />
+          <br /> 
           {% comment %} {% endif %} {% endcomment %}
          <div class="form-group row">
             <label for="" class="col-sm-3 col-form-label"
-              >Full Name: </label
-            >
+              >Full Name: </label>
             <div class="col-sm-9">
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                placeholder="Enter your Full name"
-              />
+              {{bookingform.name}}
             </div>
           </div>
           </br>
@@ -57,12 +57,7 @@
               >Phone No:</label
             >
             <div class="col-sm-9">
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                placeholder="Enter your phone number"
-              />
+              {{bookingform.phone}}
             </div>
           </div>
           </br>
@@ -71,12 +66,7 @@
               >Email: </label
             >
             <div class="col-sm-9">
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                placeholder="Enter your Email address"
-              />
+              {{bookingform.email}}
             </div>
           </div>
           </br>
@@ -85,12 +75,7 @@
               >Meeting Place:</label
             >
             <div class="col-sm-9">
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                placeholder="Preferred meeting place"
-              />
+              {{bookingform.meetplace}}
             </div>
           </div>
           </br>
@@ -99,12 +84,25 @@
               >Meeting Date:</label
             >
             <div class="col-sm-9">
-              <input
-                type="text"
-                class="form-control"
-                id=""
-                placeholder="Schedule your preferred date"
-              />
+              {{bookingform.meetdate}}
+            </div>
+          </div>
+          <br /> 
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Service User:</label
+            >
+            <div class="col-sm-9">
+              {{bookingform.serviceuser}}
+            </div>
+          </div>
+          <br /> 
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Service Provider:</label
+            >
+            <div class="col-sm-9">
+              {{bookingform.serviceprovider}}
             </div>
           </div>
           </br>
@@ -112,13 +110,7 @@
           <div class="form-row" id="time-stamp">
             <div class="form-group col-md-5" id="left-time">
               <label for="starttime">Start Time:</label>
-              <input
-                type="time"
-                class="form-control"
-                name="starttime"
-                id="starttime"
-                placeholder="Enter Starting time"
-              />
+               {{bookingform.starttime}}
             </div>
 
            
@@ -126,21 +118,33 @@
             
             <div class="form-group col-md-5" id="right-time">
               <label for="endtime" >End Time:</label>
-              <input
-                type="time"
-                class="form-control"
-                name="endtime"
-                id="endtime"
-                placeholder="Enter Ending time"
-              />
+               {{bookingform.endtime}}
             </div>
-          </div>
+          </div> 
+          {% comment %} <br />  {% endcomment %}
             <div class="form-row">
-            <input type="submit" value="BOOK NOW"  class="signup-btn" id="book-btn"/>
-          </div>
+            <input type="submit" value="BOOK NOW" name="booking-btn" class="btn btn-success" id="book-btn"/>
+          </div> 
         </form>
       </div>
     </div>
     </div>
+     <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

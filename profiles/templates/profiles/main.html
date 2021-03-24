@@ -110,7 +110,7 @@
                       </form>
                       <small class="forgot"
                         >Forgot Password?
-                        <a href="/password_reset"> Reset password</a></small
+                        <a id="password-reset" href="/password_reset"> Reset password</a></small
                       >
                     </div>
                   </div>
@@ -171,7 +171,7 @@
     </div>
     <div class="green-service">
       {% comment %} <div> {% endcomment %}
-        <div class="row">
+        <div class="row" id="all-services">
           <div class="col-md">
             <div>
               <img
@@ -238,7 +238,7 @@
     <div class="white-service">
       <h2>All Services</h2>
       <div class="row">
-        <div class="col-md-4" onclick="location.href='/dashboard';">
+        <div class="col-md-4" onclick="location.href='/support';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -251,13 +251,13 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">Personal Support Assistance</h5>
-                  <p class="card-text">view service providers</p>
+                  <p class="card-text" id="card-text">view service providers</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4" onclick="location.href='/dashboard';">
+        <div class="col-md-4" onclick="location.href='/ugandan';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -270,13 +270,13 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">Ugandan Sign language interpreter</h5>
-                  <p class="card-text">view service providers</p>
+                  <p class="card-text" id="card-text">view service providers</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4" onclick="location.href='/dashboard';">
+        <div class="col-md-4" onclick="location.href='/intern';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -291,7 +291,7 @@
                   <h5 class="card-title">
                     International sign language interpreter
                   </h5>
-                  <p class="card-text">view service providers</p>
+                  <p class="card-text" id="card-text">view service providers</p>
                 </div>
               </div>
             </div>
@@ -299,7 +299,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4" onclick="location.href='/dashboard';">
+        <div class="col-md-4" onclick="location.href='/mobguide';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -312,13 +312,13 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">Mobility Guide</h5>
-                  <p class="card-text">view service providers</p>
+                  <p class="card-text" id="card-text">view service providers</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-4" onclick="location.href='/dashboard';">
+        <div class="col-md-4" onclick="location.href='/caption';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -331,7 +331,7 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">Captioning</h5>
-                  <p class="card-text">view service providers</p>
+                  <p class="card-text" id="card-text">view service providers</p>
                 </div>
               </div>
             </div>
