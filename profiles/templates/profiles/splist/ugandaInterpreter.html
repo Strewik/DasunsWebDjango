@@ -1,15 +1,69 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <p> Ugandan Interpreters list </P>
-        <script src="" async defer></script>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+  </head>
+  <body>
+    <div>{% include 'profiles/authNavbar.html' %}</div>
+    <div class="dashSP">
+      <h3>Ugandan Signlanguage Interpreters</h3>
+      <br />
+      <div>
+      {% for serviceprovider in serviceproviders %}
+       {% if serviceprovider.service == "Ugandan Sign Language Interpreter" %}               
+        <table class="table">
+          <thead
+            class="thead-dark"
+            style="color: #fff; background-color: rgb(12, 83, 39)"
+          >
+            <tr>
+              <th scope="col">Service Provider</th>
+              <th scope="col">Service Offered</th>
+              <th scope="col">Location</th>
+              <th scope="col">Price per Visit</th>
+              <th scope="col">Book</th>
+              <th scope="col">Profile</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{serviceprovider.fullname}}</td>
+              <td>{{serviceprovider.service}}</td>
+              <td>{{serviceprovider.phyadd}}</td>
+              <td>{{serviceprovider.pricevisit}}</td>
+
+              <td>
+                <button type="button" class="btn btn-success" onclick="location.href='/booking';">Book Now</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-info">View Details</button>
+              </td>
+            </tr>
+            {% else %}
+            {% comment %} <span style="display: flex;", "justifyContent: center;" >
+                    There are no Personal Support Assistants now, check again
+                    later
+                  </span> {% endcomment %}
+                  <div></div>
+
+             {% endif %}
+             {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </body>
 </html>

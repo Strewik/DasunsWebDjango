@@ -1,16 +1,168 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-       <p> Service provider Dashboard </p>
-        
-        <script src="" async defer></script>
-    </body>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Service User Dashboard</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+    {% comment %}
+    <script src="{% static '/js/bootstrap/js/bootstrap.js' %}"></script>
+    {% endcomment %}
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light md-light"
+      id="navbar-service-user"
+    >
+      <a class="navbar-brand" onclick="location.href='/';">
+        <img
+          class="logo-img offset-2"
+          src="{% static 'images/Logo.png' %}"
+          alt="Dasuns logo"
+          style="height: 60px"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse offset-4" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Requests</a>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="btn btn-success"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+            >
+              Request service
+            </button>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Welcome, {{user.username}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Your Profile</a>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid" id="requestStatus">
+      <div class="row">
+        <div class="col-md">
+          <h4>My Service Requests</h4>
+        </div>
+        <div class="col-md">
+          <h4>On going</h4>
+        </div>
+        <div class="col-md">
+          <h4>Completed</h4>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          {% comment %} <h6 class="service-requsets">My Service Requests</h6>
+          <hr /> {% endcomment %}
+          <div class="orders">
+            <h3>Last 10 Bookings</h3>
+            <hr />
+            <br/>
+            <table class="table">
+              <thead
+                class="thead-dark"
+                style="color: #fff; background-color: rgb(12, 83, 39)"
+              >
+                <tr>
+                <th scope="col">Service Provider</th>
+                  <th scope="col">Service User</th>
+                  <th scope="col">Service booked</th>
+                  <th scope="col">Price per visit(UGX)</th>
+                  <th scope="col">Meeting Place</th>
+                  <th scope="col">Date/time</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for booking in bookings %}
+                <tr>
+                <td>{{booking.serviceprovider.fullname}}</td>
+                  <td>{{booking.serviceuser.name}}</td>
+                  <td>{{booking.serviceprovider.service}}</td>
+                  <td>{{booking.serviceprovider.pricevisit}}</td>
+                  <td>{{booking.meetplace}}</td>
+                  <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                  <td>{{booking.status}}Pending</td>
+
+                  {% comment %}
+                  <td>
+                    <button type="button" class="btn btn-info">Update</button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                  </td>
+                  {% endcomment %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>{% include 'profiles/footer.html' %}</div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
