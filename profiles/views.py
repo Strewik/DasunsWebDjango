@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Serviceprovider
-from .models import Booking
 from .models import Serviceuser as ServiceuserModel
 from .forms import CreateUserForm, ServiceuserForm
 from django.contrib import messages  # import messages
@@ -21,6 +19,10 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+
+from django.core.mail import send_mail
+from django.conf import settings
+# from django.template.loader import render_to_string
 
 
 
@@ -141,7 +143,10 @@ def spreg_save(request):
         
         return render(request, 'profiles:homepage')
            
-            
+
+def spreg(request):
+    return render(request, 'profiles:spregsuccess.html', context)
+          
 def sps(request):
     bookings = Booking.objects.all()
 
@@ -154,6 +159,10 @@ def serviceprovider(request):
 
     context = {'serviceproviders':serviceproviders}
     return render(request, 'profiles/sps.html', context)
+
+def spregsuccess(request):
+      
+    return render(request, 'profiles/spregsuccess.html')
 
 def dashboard(request):
     bookings = Booking.objects.all()

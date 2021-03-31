@@ -18,6 +18,7 @@ urlpatterns = [
     path("booking/", views.booking, name='booking'),
     path('serviceprovider/', views.serviceprovider),
     path('dashboard/', views.dashboard, name="dashboard"),
+    path('spregsuccess/', views.spregsuccess, name="spregsuccess"), 
     path('sps/', views.sps),
     path('serviceuser/', views.serviceuser, name="serviceusers"),
     path('update_serviceuser/<str:pk>', views.updateServiceuser, name="update_serviceuser"),

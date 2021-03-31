@@ -114,8 +114,25 @@
             style="color: #fff; background-color: rgb(12, 83, 39)"
           >
             <tr>
-              <th scope="col">Service Provider</th>
-              <th scope="col">Service</th>
+              <th scope="col">name</th>
+              <th scope="col">phone</th>
+              <th scope="col">email</th>
+              <th scope="col">nin</th>
+              <th scope="col">dob</th>
+              <th scope="col">gender</th>
+              <th scope="col">address</th>
+              <th scope="col">skill</th>
+              <th scope="col">internet</th>
+              <th scope="col">qualify</th>
+              <th scope="col">portfolio</th>
+              <th scope="col">ref1</th>
+              <th scope="col">ref2</th>
+              <th scope="col">service</th>
+              <th scope="col">availability</th>
+              <th scope="col">starttime</th>
+              <th scope="col">price</th>
+              <th scope="col">terms</th>
+              <th scope="col">submitted</th>
 
               <th scope="col">Update</th>
               <th scope="col">Cancel</th>
@@ -125,7 +142,24 @@
             {% for serviceprovider in serviceproviders %}
             <tr>
               <td>{{serviceprovider.fullname}}</td>
-              <td>{{i.serviceprovider.service}}</td>
+              <td>{{serviceprovider.phone}}</td>
+              <td>{{serviceprovider.email}}</td>
+              <td>{{serviceprovider.nin}}</td>
+              <td>{{serviceprovider.dob}}</td>
+              <td>{{serviceprovider.gender}}</td>
+              <td>{{serviceprovider.phyadd}}</td>
+              <td>{{serviceprovider.skillset}}</td>
+              <td>{{serviceprovider.internet}}</td>
+              <td>{{serviceprovider.qualification}}</td>
+              <td>{{serviceprovider.portifolio}}</td>
+              <td>{{serviceprovider.ref1name}}</td>
+              <td>{{serviceprovider.ref2name}}</td>
+              <td>{{serviceprovider.service}}</td>
+              <td>{{serviceprovider.availability}}</td>
+              <td>{{serviceprovider.starttime}}</td>
+              <td>{{serviceprovider.pricevisit}}</td>
+              <td>{{serviceprovider.terms}}</td>
+              <td>{{serviceprovider.date_created}}</td>
 
               <td>
                 <button type="button" class="btn btn-info">Update</button>

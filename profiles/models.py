@@ -17,6 +17,11 @@ class Serviceuser(models.Model):
 
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'),)
+    SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
+    ('Ugandan Sign Language Interpreter', 'Ugandan Sign Language Interpreter'),
+    ('International Sign Language Interpreter', 'International Sign Language Interpreter'),
+    ('Captioning', 'Captioning'),
+    ('Mobility Guide', 'Mobility Guide'),)
     fullname = models.CharField(max_length=200)
     # owner = models.ForeignKey(
     #     User, related_name='serviceProviders', on_delete=models.CASCADE, null=True)
