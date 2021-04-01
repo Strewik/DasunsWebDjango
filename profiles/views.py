@@ -161,6 +161,14 @@ def serviceprovider(request):
     return render(request, 'profiles/sps.html', context)
 
 def spregsuccess(request):
+    
+    send_mail(
+        'Dasuns Application',
+        'hello this is an automated email after application',
+        'lilngonian3000@gmail.com',
+        ['kawooyastevenug@gmail.com'],
+        fail_silently=False
+    )
       
     return render(request, 'profiles/spregsuccess.html')
 
