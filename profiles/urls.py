@@ -14,15 +14,22 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name="profiles/password/password_reset_complete.html"), name='password_reset_complete'),
     path('spregsave/', views.spreg_save, name='spregsave'),
     path('spreg/', views.spreg, name='spreg'),
-    path("logout", views.logout_request, name='logout'), 
-    path("booking/", views.booking, name='booking'),
-    path('serviceprovider/', views.serviceprovider),
-    path('dashboard/', views.dashboard, name="dashboard"),
     path('spregsuccess/', views.spregsuccess, name="spregsuccess"), 
-    path('sps/', views.sps),
+    path('logout/', views.logout_request, name='logout'),
+    path('user/', views.userPage, name='user-page'),
+    path('caption/', views.captioningList, name='captioning'),
+    path('intern/', views.internationalInterpList, name='international-interp'),
+    path('mobguide/', views.mobGuideList, name='mobility-guide'),
+    path('support/', views.personalSupportList, name='personal-support'),
+    path('ugandan/', views.ugandanInterpList, name='ugandan-interp'),
+    path('booking/', views.createbBooking, name="create_booking"),
+    path('serviceuserdash/', views.serviceuserdash, name='serviceuserdash'),
+    path('dashboard/', views.dashboard, name="dashboard"),
+    path('spdash/', views.serviceproviderdash, name="serviceproviderdash"),
     path('serviceuser/', views.serviceuser, name="serviceusers"),
     path('update_serviceuser/<str:pk>', views.updateServiceuser, name="update_serviceuser"),
     path('delete_serviceuser/<str:pk>', views.deleteServiceuser, name="delete_serviceuser"),
+    
 
 ]
 

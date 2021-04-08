@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Serviceuser(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -62,11 +63,13 @@ class Serviceprovider(models.Model):
 class Booking(models.Model):
     # STATUS = (('Available', 'Available'), ('Booked', 'Booked'),
     #           ('Not available', 'Not available'))
-    meetplace = models.CharField(max_length=200)
-    meetdate = models.CharField(max_length=200)
-    phone = models.CharField(max_length=200)
-    starttime = models.CharField(max_length=200)
-    endtime = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=200, null=True)
+    email = models.CharField(max_length=200, null=True)
+    meetplace = models.CharField(max_length=200, null=True)
+    meetdate = models.CharField(max_length=200, null=True)
+    starttime = models.CharField(max_length=200, null=True)
+    endtime = models.CharField(max_length=200, null=True)
     # owner = models.ForeignKey(
     #     User, related_name='booking', on_delete=models.CASCADE, null=True)
     serviceuser = models.ForeignKey(Serviceuser, null=True, on_delete=models.SET_NULL)
@@ -75,16 +78,4 @@ class Booking(models.Model):
     # status = models.CharField(max_length=200, null=True, choices=STATUS)
 
     def __str__(self):
-        return self.meetplace
-
-class MultiStepFormModel(models.Model):
-    id=models.AutoField(primary_key=True)
-    fname=models.CharField(max_length=255)
-    lname=models.CharField(max_length=255)
-    phone=models.CharField(max_length=255)
-    twitter=models.CharField(max_length=255)
-    facebook=models.CharField(max_length=255)
-    gplus=models.CharField(max_length=255)
-    email=models.CharField(max_length=255)
-    password=models.CharField(max_length=255)
-    objects=models.Manager()
+        return self.name

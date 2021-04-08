@@ -395,11 +395,15 @@
             <div class="form-group">
               <label>We only work with professionals:</label>
               <h3 class="fs-subtitle">
-                We would like you to tell us more about you and the professional
-                services you offer.
+                Please provide your technical training qualifications.
               </h3>
-
-              <textarea
+              <label for="myfile">Select a file:</label>
+              <input class="fullinput" type="file" id="myfile" name="myfile" />
+              <h3 class="fs-subtitle">
+                Please provide a link to your portfolio. (Could be a link to a
+                website or social media page)
+              </h3>
+              <input
                 class="fullinput"
                 class="form-control"
                 rows="5"
@@ -418,39 +422,98 @@
                   placeholder="Full name"
                 />
               </div>
-              <div class="col-6">
-                <input
-                  class="halfinput"
-                  type="text"
-                  name="ref1title"
-                  id="ref1title"
-                  class="ref1title"
-                  placeholder="Title/Desccription"
-                />
+              <div>Provide us with a reference whom we can contact</div>
+              <div>Referee 1</div>
+              <div class="row">
+                <div class="col-6">
+                  <input
+                    class="halfinput"
+                    type="text"
+                    name="ref1Name"
+                    id="ref1Name"
+                    class="ref1Name"
+                    placeholder="Full name"
+                  />
+                </div>
+                <div class="col-6">
+                  <input
+                    class="halfinput"
+                    type="text"
+                    name="ref1title"
+                    id="ref1title"
+                    class="ref1title"
+                    placeholder="Title/Desccription"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <input
-                  class="halfinput"
-                  type="text"
-                  name="ref1email"
-                  id="ref1email"
-                  class="ref1email"
-                  placeholder="Email"
-                />
+              <div class="row">
+                <div class="col-6">
+                  <input
+                    class="halfinput"
+                    type="text"
+                    name="ref1email"
+                    id="ref1email"
+                    class="ref1email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="col-6">
+                  <input
+                    class="halfinput"
+                    type="text"
+                    name="ref1phone"
+                    id="ref1phone"
+                    class="ref1phone"
+                    placeholder="Phone"
+                  />
+                </div>
               </div>
-              <div class="col-6">
-                <input
-                  class="halfinput"
-                  type="text"
-                  name="ref1phone"
-                  id="ref1phone"
-                  class="ref1phone"
-                  placeholder="Phone"
-                />
+
+              <div>Referee 2</div>
+              <div class="row">
+                <div class="col-6">
+                  <input
+                    class="halfinput"
+                    type="text"
+                    name="ref2Name"
+                    id="ref2Name"
+                    class="ref2Name"
+                    placeholder="Full name"
+                  />
+                </div>
+                <div class="col-6">
+                  <input
+                    class="halfinput"
+                    type="text"
+                    name="ref2title"
+                    id="ref2title"
+                    class="ref2title"
+                    placeholder="Title/Desccription"
+                  />
+                </div>
               </div>
-            </div>
+              <div class="row">
+                <div class="col-6">
+                  <input
+                    class="halfinput"
+                    type="text"
+                    name="ref2email"
+                    id="ref2email"
+                    class="ref2email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="col-6">
+                  <input
+                    class="halfinput"
+                    type="text"
+                    name="ref2phone"
+                    id="ref2phone"
+                    class="ref2phone"
+                    placeholder="Phone"
+                  />
+                </div>
+              </div>
 
             <div>Referee 2</div>
             <div class="row">
@@ -464,31 +527,27 @@
                   placeholder="Full name"
                 />
               </div>
-              <div class="col-6">
+              Time <br />
+              <div>
                 <input
-                  class="halfinput"
-                  type="text"
-                  name="ref2title"
-                  id="ref2title"
-                  class="ref2title"
-                  placeholder="Title/Desccription"
+                  class="fullinput"
+                  type="time"
+                  id="starttime"
+                  name="starttime"
+                  value="starttime"
+                />
+                <input
+                  class="fullinput"
+                  type="time"
+                  id="endtime"
+                  name="endtime"
+                  value="endtime"
                 />
               </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
+              price per visit <br />
+              <div>
                 <input
-                  class="halfinput"
-                  type="text"
-                  name="ref2email"
-                  id="ref2email"
-                  class="ref2email"
-                  placeholder="Email"
-                />
-              </div>
-              <div class="col-6">
-                <input
-                  class="halfinput"
+                  class="fullinput"
                   type="text"
                   name="ref2phone"
                   id="ref2phone"

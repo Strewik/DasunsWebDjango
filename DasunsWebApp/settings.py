@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'django_filters',
     'crispy_forms',
     'formtools',
+    'bootstrap_datepicker_plus',
+    "bootstrap4",
 ]
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

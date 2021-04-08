@@ -1,9 +1,26 @@
 body {
-  /* background-color: aliceblue; */
   background-color: #fff;
-  /* background:  linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6)); 
- background-repeat: no-repeat;
- background-size: 100%; */
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat";
+}
+
+.navbar {
+  min-height: 12px;
+}
+
+
+#requestStatus {
+  background-color: #40b295;
+  color: #fff;
+}
+
+#provide-btn,
+#request-btn,
+#logout-btn {
+  min-height: 10px;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 
 .container1 {
@@ -27,8 +44,7 @@ body {
 
 .green-service {
   background-color: #40b295;
-  padding: 30px;
-  /* padding-bottom: 20px; */
+  padding: 10px;
   color: #fff;
   align-content: center;
 }
@@ -56,10 +72,21 @@ body {
   font-size: 30px;
   margin: 40px;
   color: #40b295;
-  /* background-color:rgb(93, 140, 182); */
-  /* padding: 20px; */
   border-color: rgb(93, 140, 182);
   width: 80%;
+}
+
+#card-text {
+  color: #40b295;
+}
+
+.card {
+  cursor: pointer;
+  margin: 15px 0;
+}
+
+#password-reset {
+  color: #40b295;
 }
 
 .orders {
@@ -67,13 +94,12 @@ body {
   width: 95%;
 }
 
-.dashSP{
+.dashSP {
   margin: 40px;
 }
 
-.delete{
+.delete {
   margin: top 100px;
-  
 }
 
 /*SPReg form styles*/
@@ -105,7 +131,7 @@ body {
 }
 
 /*inputs*/
-.fullinput{
+.fullinput {
   padding: 5px;
   border: 1px solid #40b295;
   border-radius: 10px;
@@ -117,7 +143,7 @@ body {
   font-size: 15px;
 }
 
-.halfinput{
+.halfinput {
   padding: 5px;
   border: 1px solid #40b295;
   border-radius: 10px;
@@ -152,7 +178,7 @@ body {
   cursor: pointer;
   padding: 10px 5px;
   margin: 10px 5px;
-  float:right;
+  float: right;
 }
 
 #msform .action-button:hover,
@@ -273,4 +299,72 @@ body {
 .dme_link a:focus {
   background: #c5c5f1;
   text-decoration: none;
+}
+
+/* css for booking form */
+
+.main-booking {
+  background-color: #35d187;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#booking-card {
+  width: 50%;
+  padding: 20px;
+}
+
+#form {
+  background-color: #fff;
+  width: 100%;
+  margin-top: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.heading3 {
+  color: #35d187;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+#booking {
+  display: block;
+  width: 100%;
+  padding: 0 16px;
+  height: 44px;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  outline: gray;
+  font-family: "montserrat";
+}
+
+#endtime,
+#starttime {
+  width: 100px;
+  border-width: 2px;
+  border-radius: 5px;
+  height: 35px;
+  width: 150px;
+  margin-left: 35px;
+}
+
+#left-time {
+  float: left;
+}
+
+#right-time {
+  float: right;
+}
+
+#book-btn {
+  width: 50%;
+  margin-left: 25%;
+  margin-bottom: 0px;
+  font-weight: bold;
 }
