@@ -29,7 +29,7 @@ urlpatterns = [
     path('serviceuser/', views.serviceuser, name="serviceusers"),
     path('update_serviceuser/<str:pk>', views.updateServiceuser, name="update_serviceuser"),
     path('delete_serviceuser/<str:pk>', views.deleteServiceuser, name="delete_serviceuser"),
-    
+    path('generalDash/', views.generalDash, name="generalDash"),
 
 ]
 
