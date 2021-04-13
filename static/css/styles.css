@@ -368,3 +368,16 @@ body {
   margin-bottom: 0px;
   font-weight: bold;
 }
+
+.sidebar {
+  background-color: #707070;
+  color: #fff;
+  height:auto;
+}
+
+.mainbar {
+  background-color: #fff;
+}
+.dashcontainer {
+  margin-bottom: 100px;
+}
