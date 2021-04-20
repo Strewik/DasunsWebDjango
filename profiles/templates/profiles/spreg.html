@@ -314,9 +314,9 @@
             <div>
               <input
                 type="checkbox"
-                value="two"
+                value="yearexp"
                 id="defaultCheck1"
-                name="notmidman"
+                name="yearexp"
               />
               <label class="form-check-label" for="defaultCheck1">
                 Default checkbox
@@ -408,136 +408,291 @@
             />
           </fieldset>
           <fieldset>
+            <h2 class="fs-title">We only work with professionals</h2>
+            <h3 class="fs-subtitle">
+              We would like you to tell us more about yourself and the
+              professional service that you offer.
+            </h3>
+            <textarea
+              class="fullinput"
+              class="form-control"
+              rows="6"
+              name="profession"
+            ></textarea>
+            <h2 class="fs-title">
+              Provide us with 2 referees whom we can contact
+            </h2>
+            <div class="div">
+              <h3 class="fs-subtitle">Referee 1</h3>
+              <div class="row">
+                <div class="col-sm-6">
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref1name"
+                    id="ref1name"
+                    class="ref1name"
+                    placeholder="Full name"
+                  />
+                  <br />
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref1email"
+                    id="ref1email"
+                    class="ref1email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref1title"
+                    id="ref1title"
+                    class="ref1title"
+                    placeholder="Title/Desccription"
+                  />
+                  <br />
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref1phone"
+                    id="ref1phone"
+                    class="ref1phone"
+                    placeholder="Phone"
+                  />
+                </div>
+              </div>
+            </div>
             <div>
-              <h2 class="fs-title">We only work with professionals</h2>
-              <h3 class="fs-subtitle">
-                We would like you to tell us more about yourself and the
-                professional service that you offer.
-              </h3>
-              <textarea
-                class="fullinput"
-                class="form-control"
-                rows="6"
-                name="profession"
-              ></textarea>
-              <h2 class="fs-title">
-                Provide us with 2 referees whom we can contact
-              </h2>
-              <div class="div">
-                <h3 class="fs-subtitle">Referee 1</h3>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <input
-                      class="fullinput"
-                      type="text"
-                      name="ref1name"
-                      id="ref1name"
-                      class="ref1name"
-                      placeholder="Full name"
-                    />
-                    <br />
-                    <input
-                      class="fullinput"
-                      type="text"
-                      name="ref1email"
-                      id="ref1email"
-                      class="ref1email"
-                      placeholder="Email"
-                    />
-                  </div>
-                  <div class="col-sm-6">
-                    <input
-                      class="fullinput"
-                      type="text"
-                      name="ref1title"
-                      id="ref1title"
-                      class="ref1title"
-                      placeholder="Title/Desccription"
-                    />
-                    <br />
-                    <input
-                      class="fullinput"
-                      type="text"
-                      name="ref1phone"
-                      id="ref1phone"
-                      class="ref1phone"
-                      placeholder="Phone"
-                    />
-                  </div>
+              <h3 class="fs-subtitle">Referee 2</h3>
+              <div class="row">
+                <div class="col-sm-6">
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref2name"
+                    id="ref2name"
+                    class="ref2name"
+                    placeholder="Full name"
+                  />
+                  <br />
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref2email"
+                    id="ref2email"
+                    class="ref2email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref2title"
+                    id="ref2title"
+                    class="ref2title"
+                    placeholder="Title/Desccription"
+                  />
+                  <br />
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref2phone"
+                    id="ref2phone"
+                    class="ref2phone"
+                    placeholder="Phone"
+                  />
+                </div>
+              </div>
+            </div>
+            <input
+              type="button"
+              name="previous"
+              class="previous action-button-previous"
+              value="Previous"
+            />
+            <input
+              type="button"
+              name="next"
+              class="next action-button"
+              value="Next"
+            />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">
+              Finally enter your services, price & availability.
+            </h2>
+            <h3 class="fs-subtitle">
+              We would like you to capture your availability and pricing per
+              visit.
+            </h3>
+            <label>Service</label>
+            <select
+              class="fullinput"
+              class="custom-select my-1 mr-sm-2"
+              id="inlineFormCustomSelectPref"
+              name="service"
+            >
+              <option selected>Service</option>
+              <option value="Personal support assistance">
+                Personal Support Assistance
+              </option>
+              <option value="Ugandan sign language">
+                Ugandan sign language interpreter
+              </option>
+              <option value="International sign language">
+                Ugandan sign language interpreter
+              </option>
+              <option value="Mobility guide">Mobility guide</option>
+              <option value="Captioning">Captioning</option>
+            </select>
+            <label>Enter our service availability</label>
+            <br />
+            Days
+            <br />
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Sunday"
+                  name="day"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Sunday
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Monday"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Monday
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Tuesday"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Tuesday
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Wednesday"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Wednesday
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Thursday"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Thursday
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Friday"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Friday
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Friday"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Saturday
+                </label>
+                <br />
+              </div>
+            </div>
+            <br/>
+            <input type="hidden" id="status" name="status" value="Pending" />
+            <div>
+              <div class="row">
+                <div class="col-md-6">
+                  <input
+                    class="fullinput"
+                    type="time"
+                    id="starttime"
+                    name="starttime"
+                    value="starttime"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <input
+                    class="fullinput"
+                    type="time"
+                    id="endtime"
+                    name="endtime"
+                    value="endtime"
+                  />
                 </div>
               </div>
               <div>
-                <h3 class="fs-subtitle">Referee 2</h3>
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-md-6">
                     <input
                       class="fullinput"
                       type="text"
-                      name="ref2Name"
-                      id="ref2Name"
-                      class="ref2Name"
-                      placeholder="Full name"
-                    />
-                    <br />
-                    <input
-                      class="fullinput"
-                      type="text"
-                      name="ref2email"
-                      id="ref2email"
-                      class="ref2email"
-                      placeholder="Email"
-                    />
-                  </div>
-                  <div class="col-sm-6">
-                    <input
-                      class="fullinput"
-                      type="text"
-                      name="ref2title"
-                      id="ref2title"
-                      class="ref2title"
-                      placeholder="Title/Desccription"
-                    />
-                    <br />
-                    <input
-                      class="fullinput"
-                      type="text"
-                      name="ref2phone"
-                      id="ref2phone"
-                      class="ref2phone"
-                      placeholder="Phone"
+                      name="pricevisit"
+                      id="pricevisit"
+                      class="price"
+                      placeholder="Price per visit"
                     />
                   </div>
                 </div>
               </div>
-              <input
-                type="button"
-                name="previous"
-                class="previous action-button-previous"
-                value="Previous"
-              />
-              <input
-                type="button"
-                name="next"
-                class="next action-button"
-                value="Next"
-              />
             </div>
-          </fieldset>
-          <fieldset>
             <div>
-              <input
-                type="button"
-                name="previous"
-                class="previous action-button-previous"
-                value="Previous"
-              />
-              <input
-                type="button"
-                name="next"
-                class="next action-button"
-                value="Next"
-              />
+              <div class="form-check">
+                <input class="form-check-input" name="terms" type="checkbox" value="Agree to T&C" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  I agree to the terms and conditions set by Dasuns.
+                </label>
+              </div>
             </div>
+
+            <input
+              type="button"
+              name="previous"
+              class="previous action-button-previous"
+              value="Previous"
+            />
+            <input
+                type="submit"
+                name="submit"
+                class="next action-button"
+                value="Submit"
+              />
           </fieldset>
         </form>
       </div>

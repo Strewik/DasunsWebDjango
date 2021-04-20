@@ -21,6 +21,7 @@ class Serviceprovider(models.Model):
     ('International Sign Language Interpreter', 'International Sign Language Interpreter'), 
     ('Captioning', 'Captioning'),
     ('Mobility Guide', 'Mobility Guide'),)
+    STATUS = (('Pending', 'Pending'), ('Active', 'Active'), ('Suspended', 'Suspended'),)
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
@@ -46,13 +47,8 @@ class Serviceprovider(models.Model):
     ref2phone = models.CharField(max_length=200)
     service = models.CharField(max_length=200, choices=SERVICE, null=True)
     availability = models.CharField(max_length=200, null=True)
-    # sunday = models.CharField(max_length=200, null=True)
-    # monday = models.CharField(max_length=200, null=True)
-    # tuesday = models.CharField(max_length=200, null=True)
-    # wednesday = models.CharField(max_length=200, null=True)
-    # thursday = models.CharField(max_length=200, null=True)
-    # friday = models.CharField(max_length=200, null=True)
-    # saturday = models.CharField(max_length=200, null=True)
+    status = models.CharField(max_length=200, choices=STATUS,)
+    
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
     pricevisit = models.CharField(max_length=200)

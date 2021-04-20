@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Serviceprovider, Booking
@@ -25,6 +26,9 @@ from django.utils.encoding import force_bytes
 
 from django.core.mail import send_mail
 from django.conf import settings
+import smtplib
+from email.message import EmailMessage
+# import urllib.request
 # from django.template.loader import render_to_string
 
 from django.contrib.auth.decorators import login_required
@@ -144,6 +148,7 @@ def spreg_save(request):
         category = request.POST.get('category')
         service = request.POST.get('service')
         availability = request.POST.get('availability')
+        status = request.POST.get('status')
         starttime = request.POST.get('starttime')
         endtime = request.POST.get('endtime')
         pricevisit = request.POST.get('pricevisit')
@@ -153,7 +158,7 @@ def spreg_save(request):
         ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
         
-        return render(request, 'profiles:success')
+        return render(request, 'profiles/spregsuccess')
     
 def subscribe(request):
     form = SubscribeForm()
@@ -184,14 +189,55 @@ def serviceproviderdash(request):
 
 
 def spregsuccess(request):
+    # send_mail(
+    # 'Dasuns Application', 
+    # 'hello this is an automated email after application', 
+    # 'lilngonian3000@gmail.com', 
+    # ['kawooyastevenug@gmail.com'], 
+    # fail_silently=False, 
+    # )
+    # EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS')
+    # EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
     
-    send_mail(
-        'Dasuns Application',
-        'hello this is an automated email after application',
-        'lilngonian3000@gmail.com',
-        ['kawooyastevenug@gmail.com'],
-        fail_silently=False
-    )
+    # msg = EmailMessage()
+    # msg['Subject'] = 'Dasuns service provider application'
+    # msg['From'] = 'EMAIL_ADDRESS'
+    # msg['To'] = 'kawooyastevenug@gmail.com'
+    # msg.set_content('Your aplication has been successfully received. Please wait for someone to contact you fron Dasuns.')
+    
+    # with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+    #     smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD) 
+        
+    #     smtp.send_message(msg)
+    
+    
+    
+    '''---------------------''' 
+    
+    # with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+    #     smtp.ehlo()
+    #     smtp.starttls()
+    #     smtp.ehlo()
+    
+    #     smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD) 
+        
+    #     subject = 'dasuns application'
+    #     body = 'We have received your application'
+        
+    #     msg = f'Subject; {subject}\n\n{body}'
+        
+    #     smtp.sendmail(EMAIL_ADDRESS, 'kawooyastevenug@gmail.com', msg)
+    
+    '''------------------'''
+    
+    email = EmailMessage(
+        'subject',
+        'body',
+        settings.EMAIL_HOST_USER,
+        ['kawooyastevenug@gmail.com'], 
+        )
+    email.fail_silently=False
+    email.send()
       
     return render(request, 'profiles/spregsuccess.html')
 

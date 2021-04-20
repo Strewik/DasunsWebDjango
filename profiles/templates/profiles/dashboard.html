@@ -282,7 +282,7 @@
                 </div>
               </div>
               <div class="container">
-                <h3>Latest Applicants</h3>
+                <h3>Service Providers</h3>
                 <table class="table" style="margin-top: 20px">
                   <thead
                     class="thead-dark"
@@ -304,7 +304,7 @@
                       <td>Captioning</td>
                       <td>Muyenga</td>
                       <td>02/03/2020</td>
-                      <td>Pending</td>
+                      <td>Active</td>
                       <td>
                         <button type="button" class="btn btn-info">
                           Update
@@ -320,7 +320,7 @@
                 </table>
               </div>
               <div class="container">
-                <h3>Service Providers</h3>
+                <h3>Latest Applicants</h3>
                 <div>
                   <table class="table">
                     <thead
@@ -339,8 +339,8 @@
                       {% for serviceprovider in serviceproviders %}
                       <tr>
                         <td>{{serviceprovider.fullname}}</td>
-                        <td>{{i.serviceprovider.service}}</td>
-                        <td>Active</td>
+                        <td>{{serviceprovider.service}}</td>
+                        <td>{{serviceprovider.status}}</td>
                         <td>
                           <button type="button" class="btn btn-info">
                             Update
