@@ -19,8 +19,7 @@ class Serviceprovider(models.Model):
     SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
     ('Ugandan Sign Language Interpreter', 'Ugandan Sign Language Interpreter'),
     ('International Sign Language Interpreter', 'International Sign Language Interpreter'), 
-    ('Captioning', 'Captioning'),
-    ('Mobility Guide', 'Mobility Guide'),)
+    ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),)
     STATUS = (('Pending', 'Pending'), ('Active', 'Active'), ('Suspended', 'Suspended'),)
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=200)
@@ -58,7 +57,7 @@ class Serviceprovider(models.Model):
     
 
     def __str__(self):
-        return self.service
+        return self.fullname
 
 class Booking(models.Model):
     # STATUS = (('Pending', 'Pending'), ('Ongoing', 'Ongoing'),
@@ -75,5 +74,5 @@ class Booking(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     # status = models.CharField(max_length=200, null=True, choices=STATUS)
 
-    def __str__(self):
-        return self.serviceprovider.service
+    # def __str__(self):
+    #     return self.serviceuser.name

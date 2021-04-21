@@ -80,8 +80,8 @@
                       style="color: #fff; background-color: #35d187"
                     >
                       <div class="card-body">
-                        <h5 class="card-title">Total Requests</h5>
-                        <h2>00</h2>
+                        <h5 class="card-title">Total </h5>
+                        <h2>{{total_bookings}}</h2>
                       </div>
                     </div>
                   </div>
@@ -163,7 +163,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="container">
+                <div>
                   <div class="row">
                     <div
                       class="col-md-7"
@@ -184,15 +184,19 @@
                               <th scope="col">Service</th>
                               <th scope="col">Date</th>
                               <th scope="col">Status</th>
+                              
                             </tr>
                           </thead>
                           <tbody>
+                            {% for serviceprovider in pending_serviceproviders %}
                             <tr>
-                              <td>Mark Morty</td>
-                              <td>Captioning</td>
-                              <td>02/03/2020</td>
-                              <td>Pending</td>
+                              <td>{{serviceprovider.fullname}}</td>
+                              <td>{{serviceprovider.service}}</td>
+                              <td>{{serviceprovider.date_created}}</td>
+                              <td>{{serviceprovider.status}}</td>
+                              
                             </tr>
+                            {% endfor %}
                           </tbody>
                         </table>
                       </div>
@@ -212,11 +216,11 @@
                           <div class="row">
                             <div class="col">
                               <h5>Service Providers</h5>
-                              <h2>00</h2>
+                              <h2>{{activecount_serviceproviders}}</h2>
                             </div>
                             <div class="col">
                               <h5>Service Users</h5>
-                              <h2>00</h2>
+                              <h2>{{total_serviceusers}}</h2>
                             </div>
                           </div>
                         </div>
@@ -242,7 +246,7 @@
                     >
                       <div class="card-body">
                         <h5 class="card-title">Total</h5>
-                        <h2>00</h2>
+                        <h2>{{total_serviceproviders}}</h2>
                       </div>
                     </div>
                   </div>
@@ -253,7 +257,7 @@
                     >
                       <div class="card-body">
                         <h5 class="card-title">Active</h5>
-                        <h2>00</h2>
+                        <h2>{{activecount_serviceproviders}}</h2>
                       </div>
                     </div>
                   </div>
@@ -264,7 +268,7 @@
                     >
                       <div class="card-body">
                         <h5 class="card-title">Pending</h5>
-                        <h2>00</h2>
+                        <h2>{{pendingcount_serviceproviders}}</h2>
                       </div>
                     </div>
                   </div>
@@ -275,14 +279,14 @@
                     >
                       <div class="card-body">
                         <h5 class="card-title">Suspended</h5>
-                        <h2>00</h2>
+                        <h2>{{suspendedcount_serviceproviders}}</h2>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="container">
-                <h3>Service Providers</h3>
+                <h3>Latest Applicants</h3>
                 <table class="table" style="margin-top: 20px">
                   <thead
                     class="thead-dark"
@@ -299,12 +303,13 @@
                     </tr>
                   </thead>
                   <tbody>
+                    {% for serviceprovider in pending_serviceproviders %}
                     <tr>
-                      <td>Mark Morty</td>
-                      <td>Captioning</td>
-                      <td>Muyenga</td>
-                      <td>02/03/2020</td>
-                      <td>Active</td>
+                      <td>{{serviceprovider.fullname}}</td>
+                      <td>{{serviceprovider.service}}</td>
+                      <td>{{serviceprovider.phyadd}}</td>
+                      <td>{{serviceprovider.date_created}}</td>
+                      <td>{{serviceprovider.status}}</td>
                       <td>
                         <button type="button" class="btn btn-info">
                           Update
@@ -316,11 +321,13 @@
                         </button>
                       </td>
                     </tr>
+                    {% endfor %}
+                       
                   </tbody>
                 </table>
               </div>
               <div class="container">
-                <h3>Latest Applicants</h3>
+                <h3>Service Providers</h3>
                 <div>
                   <table class="table">
                     <thead
@@ -336,7 +343,45 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for serviceprovider in serviceproviders %}
+                      {% for serviceprovider in active_serviceproviders %}
+                      <tr>
+                        <td>{{serviceprovider.fullname}}</td>
+                        <td>{{serviceprovider.service}}</td>
+                        <td>{{serviceprovider.status}}</td>
+                        <td>
+                          <button type="button" class="btn btn-info">
+                            Update
+                          </button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-danger">
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="container">
+                <h3>Suspended Service Providers</h3>
+                <div>
+                  <table class="table">
+                    <thead
+                      class="thead-dark"
+                      style="color: #fff; background-color: #ae1b38"
+                    >
+                      <tr>
+                        <th scope="col">Service Provider</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for serviceprovider in suspended_serviceproviders %}
                       <tr>
                         <td>{{serviceprovider.fullname}}</td>
                         <td>{{serviceprovider.service}}</td>
@@ -374,7 +419,7 @@
                     >
                       <div class="card-body">
                         <h5 class="card-title">Total</h5>
-                        <h2>00</h2>
+                        <h2>{{total_serviceusers}}</h2>
                       </div>
                     </div>
                   </div>

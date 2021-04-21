@@ -155,25 +155,12 @@ def spreg_save(request):
         terms = request.POST.get('terms')
         
         
-        ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
+        ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
         
         return render(request, 'profiles/spregsuccess')
     
-def subscribe(request):
-    form = SubscribeForm()
-    if request.method == 'POST':
-        form = SubscribeForm(request.POST)
-        if form.is_valid():
-            subject = 'Code Band'
-            message = 'Sending Email through Gmail'
-            recipient = form.cleaned_data.get('email')
-            send_mail(subject, 
-              message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
-            messages.success(request, 'Success!')
-            return redirect('subscribe')
-    return render(request, 'subscriptions/home.html', {'form': form})
-           
+
 
 def spreg(request):
     return render(request, 'profiles/spreg.html',)
@@ -189,47 +176,7 @@ def serviceproviderdash(request):
 
 
 def spregsuccess(request):
-    # send_mail(
-    # 'Dasuns Application', 
-    # 'hello this is an automated email after application', 
-    # 'lilngonian3000@gmail.com', 
-    # ['kawooyastevenug@gmail.com'], 
-    # fail_silently=False, 
-    # )
-    # EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS')
-    # EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
-    
-    # msg = EmailMessage()
-    # msg['Subject'] = 'Dasuns service provider application'
-    # msg['From'] = 'EMAIL_ADDRESS'
-    # msg['To'] = 'kawooyastevenug@gmail.com'
-    # msg.set_content('Your aplication has been successfully received. Please wait for someone to contact you fron Dasuns.')
-    
-    # with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-    #     smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD) 
-        
-    #     smtp.send_message(msg)
-    
-    
-    
-    '''---------------------''' 
-    
-    # with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-    #     smtp.ehlo()
-    #     smtp.starttls()
-    #     smtp.ehlo()
-    
-    #     smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD) 
-        
-    #     subject = 'dasuns application'
-    #     body = 'We have received your application'
-        
-    #     msg = f'Subject; {subject}\n\n{body}'
-        
-    #     smtp.sendmail(EMAIL_ADDRESS, 'kawooyastevenug@gmail.com', msg)
-    
-    '''------------------'''
-    
+   
     email = EmailMessage(
         'subject',
         'body',
@@ -247,8 +194,23 @@ def dashboard(request):
     bookings = Booking.objects.all()
     serviceproviders = Serviceprovider.objects.all()
     serviceusers = ServiceuserModel.objects.all()
+    total_serviceproviders = serviceproviders.count()
+    pendingcount_serviceproviders = serviceproviders.filter(status='Pending').count()
+    pending_serviceproviders = serviceproviders.filter(status='Pending')
+    active_serviceproviders = serviceproviders.filter(status='Active')
+    activecount_serviceproviders = serviceproviders.filter(status='Active').count()
+    suspended_serviceproviders = serviceproviders.filter(status='Suspended')
+    suspendedcount_serviceproviders = serviceproviders.filter(status='Suspended').count()
+    
+    total_serviceusers = serviceusers.count()
+    total_bookings = bookings.count()
 
-    context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers}
+    context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers,
+               'total_serviceproviders': total_serviceproviders, 'pending_serviceproviders': pending_serviceproviders,
+               'active_serviceproviders': active_serviceproviders, 'activecount_serviceproviders': activecount_serviceproviders, 'suspended_serviceproviders': suspended_serviceproviders,
+               'pendingcount_serviceproviders': pendingcount_serviceproviders, 'suspendedcount_serviceproviders': suspendedcount_serviceproviders,
+               'total_serviceusers': total_serviceusers, 
+               'total_bookings':total_bookings,}
     return render(request, 'profiles/dashboard.html', context)
 
 
@@ -293,12 +255,13 @@ def serviceuser(request):
         if form.is_valid():
             form.save()
             return redirect(reverse ('profiles:dashboard'))
+        
 
     context = {'form': form, serviceusers: serviceusers}
     return render(request,'profiles/serviceuser.html', context)
 
 
-@login_required(login_url='profiles:homepage')
+# @login_required(login_url='profiles:homepage')
 def updateServiceuser(request, pk):
 
     serviceusers = ServiceuserModel.objects.get(id=pk)
