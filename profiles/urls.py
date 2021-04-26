@@ -29,6 +29,8 @@ urlpatterns = [
     path('serviceuser/', views.serviceuser, name="serviceuser"),
     path('update_serviceuser/<str:pk>', views.updateServiceuser, name="update_serviceuser"),
     path('delete_serviceuser/<str:pk>', views.deleteServiceuser, name="delete_serviceuser"),
+    path('update_serviceprovider/<str:pk>', views.updateServiceprovider, name="update_serviceprovider"),
+    path('delete_serviceprovider/<str:pk>', views.deleteServiceprovider, name="delete_serviceprovider"),
     path('generalDash/', views.generalDash, name="generalDash"),
 
 ]

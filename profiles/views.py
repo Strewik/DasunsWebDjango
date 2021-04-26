@@ -5,7 +5,7 @@ from .models import Serviceprovider, Booking
 # from .models import Booking
 # from .models import Serviceuser
 from .models import Serviceuser as ServiceuserModel
-from .forms import CreateUserForm, ServiceuserForm, BookingForm
+from .forms import *
 from django.contrib import messages  # import messages
 # from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import AuthenticationForm  # add this
@@ -263,7 +263,7 @@ def serviceuser(request):
 
 # @login_required(login_url='profiles:homepage')
 def updateServiceuser(request, pk):
-
+    
     serviceusers = ServiceuserModel.objects.get(id=pk)
     form = ServiceuserForm(instance=serviceusers)
 
@@ -276,9 +276,23 @@ def updateServiceuser(request, pk):
     context = {'form': form}
     return render(request, 'profiles/serviceuser.html', context) 
 
+def updateServiceprovider(request, pk):
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['admin'])
+    serviceprovider = Serviceprovider.objects.get(id=pk)
+    form = ServiceproviderForm(instance=serviceprovider)
+
+    if request.method == 'POST':
+        form = ServiceproviderForm(request.POST, instance=serviceprovider)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse ('profiles:dashboard'))
+
+    context = {'form': form}
+    return render(request, 'profiles/serviceprovider.html', context) 
+
+
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['admin'])
 def deleteServiceuser(request, pk):
     serviceusers = ServiceuserModel.objects.get(id=pk)
     if request.method == "POST":
@@ -286,6 +300,14 @@ def deleteServiceuser(request, pk):
         return redirect(reverse ('profiles:dashboard'))
     context = {'item': serviceusers}
     return render(request, 'profiles/deleteServiceuser.html', context) 
+
+def deleteServiceprovider(request, pk):
+    serviceprovider = Serviceprovider.objects.get(id=pk)
+    if request.method == "POST":
+        serviceprovider.delete()
+        return redirect(reverse ('profiles:dashboard'))
+    context = {'item': serviceprovider}
+    return render(request, 'profiles/deleteServiceprovider.html', context) 
 
  
 

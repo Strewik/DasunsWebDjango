@@ -80,7 +80,7 @@
                       style="color: #fff; background-color: #35d187"
                     >
                       <div class="card-body">
-                        <h5 class="card-title">Total </h5>
+                        <h5 class="card-title">Total</h5>
                         <h2>{{total_bookings}}</h2>
                       </div>
                     </div>
@@ -184,7 +184,6 @@
                               <th scope="col">Service</th>
                               <th scope="col">Date</th>
                               <th scope="col">Status</th>
-                              
                             </tr>
                           </thead>
                           <tbody>
@@ -194,7 +193,6 @@
                               <td>{{serviceprovider.service}}</td>
                               <td>{{serviceprovider.date_created}}</td>
                               <td>{{serviceprovider.status}}</td>
-                              
                             </tr>
                             {% endfor %}
                           </tbody>
@@ -311,18 +309,23 @@
                       <td>{{serviceprovider.date_created}}</td>
                       <td>{{serviceprovider.status}}</td>
                       <td>
-                        <button type="button" class="btn btn-info">
-                          Update
-                        </button>
+                        <a
+                            class="btn btn-info"
+                            href="{% url 'profiles:update_serviceprovider' serviceprovider.id %}"
+                          >
+                            Update
+                          </a>
                       </td>
                       <td>
-                        <button type="button" class="btn btn-danger">
-                          Delete
-                        </button>
+                        <a
+                            class="btn btn-danger"
+                            href="{% url 'profiles:delete_serviceprovider' serviceprovider.id %}"
+                            >Delete</a
+                          >
                       </td>
                     </tr>
+                    
                     {% endfor %}
-                       
                   </tbody>
                 </table>
               </div>
@@ -349,14 +352,19 @@
                         <td>{{serviceprovider.service}}</td>
                         <td>{{serviceprovider.status}}</td>
                         <td>
-                          <button type="button" class="btn btn-info">
+                          <a
+                            class="btn btn-info"
+                            href="{% url 'profiles:update_serviceprovider' serviceprovider.id %}"
+                          >
                             Update
-                          </button>
+                          </a>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-danger">
-                            Delete
-                          </button>
+                          <a
+                            class="btn btn-danger"
+                            href="{% url 'profiles:delete_serviceprovider' serviceprovider.id %}"
+                            >Delete</a
+                          >
                         </td>
                       </tr>
                       {% endfor %}
@@ -387,14 +395,19 @@
                         <td>{{serviceprovider.service}}</td>
                         <td>{{serviceprovider.status}}</td>
                         <td>
-                          <button type="button" class="btn btn-info">
+                          <a
+                            class="btn btn-info"
+                            href="{% url 'profiles:update_serviceprovider' serviceprovider.id %}"
+                          >
                             Update
-                          </button>
+                          </a>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-danger">
-                            Delete
-                          </button>
+                          <a
+                            class="btn btn-danger"
+                            href="{% url 'profiles:delete_serviceprovider' serviceprovider.id %}"
+                            >Delete</a
+                          >
                         </td>
                       </tr>
                       {% endfor %}
@@ -404,7 +417,7 @@
               </div>
             </div>
             <div
-              class="tab-pane fade "
+              class="tab-pane fade"
               id="list-messages"
               role="tabpanel"
               aria-labelledby="list-messages-list"
@@ -473,10 +486,18 @@
                         <td>{{serviceuser.email}}</td>
                         <td>Home</td>
                         <td>
-                          <a class="btn btn-info" href="{% url 'profiles:update_serviceuser' serviceuser.id %}">Update</a>
+                          <a
+                            class="btn btn-info"
+                            href="{% url 'profiles:update_serviceuser' serviceuser.id %}"
+                            >Update</a
+                          >
                         </td>
                         <td>
-                          <a class="btn btn-danger" href="{% url 'profiles:delete_serviceuser' serviceuser.id %}">Delete</a>
+                          <a
+                            class="btn btn-danger"
+                            href="{% url 'profiles:delete_serviceuser' serviceuser.id %}"
+                            >Delete</a
+                          >
                         </td>
                       </tr>
                       {% endfor %}

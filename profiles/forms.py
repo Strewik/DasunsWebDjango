@@ -27,6 +27,13 @@ class ServiceuserForm(ModelForm):
         model = Serviceuser
         fields = '__all__' 
 
+
+class ServiceproviderForm(ModelForm):
+    class Meta:
+        model = Serviceprovider
+        fields = '__all__' 
+        
+        
 class BookingForm(ModelForm):
 	class Meta:
 		model = Booking
@@ -55,6 +62,11 @@ class BookingForm(ModelForm):
 		} 
 
 
+        
+        
+        
+        
+        
 # from django import forms
 
 # class ContactForm(forms.Form):
