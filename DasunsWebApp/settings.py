@@ -41,11 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'profiles',
+    'profiles.apps.ProfilesConfig',
     'django_filters',
     'crispy_forms',
     'bootstrap_datepicker_plus',
     "bootstrap4",
+    
 ]
 
 
@@ -154,6 +155,8 @@ STATICFILES_DIRS =[
     os.path.join(BASE_DIR, 'static')
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
 
 # # AWS EMAIL_BACKEND SET UP
 # EMAIL_BACKEND = 'django_ses.SESBackend'
@@ -169,6 +172,9 @@ EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
 
 
 
+
+
+# Discarded settings
 
 # """
 # Django settings for DasunsWebApp project.

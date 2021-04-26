@@ -25,30 +25,42 @@
   </head>
   <body>
   <div>
-   <div>{% include 'profiles/authNavbar.html' %}</div> 
+   <div>{% include 'profiles/serviceUserNavbar.html' %}</div> 
     <div class="main-booking">
       <div class="card" id="booking-card">
-        <form name="bookingform" class="" action="" method="POST" id="form">
-          {% csrf_token %} 
-           
-          {% comment %} {% for serviceprovider in serviceproviders %} {% endcomment %}
+        {% comment %} <form name="bookingform" class="" action="" method="POST" id="form">
+          {% csrf_token %}  {% endcomment %}
+          {% if serviceprovider.id %}
           <h4 class="heading3">
             <small style= "color:black", "fontSize: 30px", "fontWeight:bold"> Booking </small>
-            {{serviceprovider.fullname}} Mark Shanty
+            {{serviceprovider.fullname}}
           </h4>
           <h6 class="heading3">
-            From {{serviceprovider.phyadd}} Muyenga Kampala UG
+            From {{serviceprovider.phyadd}}
           </h6>
           <h6 class="heading3">
-            <small> {{serviceprovider.pricevisit}} 20000UGX per visit</small>
+            <small> {{serviceprovider.pricevisit}}UGX per Visit</small>
           </h6>
           <br /> 
-          {% comment %} {% endfor %} {% endcomment %}
+          {% endif %}
+         {% if request.user.serviceuser and not request.user.serviceprovider  %}
+         <form name="bookingform" class="" action="" method="POST" id="form">
+          {% csrf_token %}
          <div class="form-group row">
-            <label for="" class="col-sm-3 col-form-label"
-              >Full Name: </label>
+            {% comment %} <label for="" class="col-sm-3 col-form-label"
+              >Full Name: </label> {% endcomment %}
             <div class="col-sm-9">
-              {{bookingform.name}}
+               <input
+                type="text"
+                name="name"
+                class="form-control"
+                value="{{user.serviceuser.firstname}} {{user.serviceuser.lastname}}"
+                hidden
+              /> 
+              {% comment %} <select name="serviceuser">
+              {% for serviceuser in serviceusers}
+                <option value=serviceuser.id selected=(serviceuser.id == serviceuser.id) #{serviceuser.name}/>
+                <select/> {% endcomment %}
             </div>
           </div>
           </br>
@@ -66,7 +78,12 @@
               >Email: </label
             >
             <div class="col-sm-9">
-              {{bookingform.email}}
+              <input
+                type="text"
+                name="email"
+                class="form-control"
+                value={{user.serviceuser.email}}
+              />
             </div>
           </div>
           </br>
@@ -89,22 +106,35 @@
           </div>
           <br /> 
           <div class="form-group row">
-            <label for="" class="col-sm-3 col-form-label"
+            {% comment %} <label for="" class="col-sm-3 col-form-label"
               >Service User:</label
-            >
+            > {% endcomment %}
             <div class="col-sm-9">
-              {{bookingform.serviceuser}}
-            </div>
+               <input
+                type="text"
+                name="serviceuser"
+                class="form-control"
+                value="{{user.serviceuser.firstname}} {{user.serviceuser.lastname}}"
+                hidden
+              />
+            </div> 
           </div>
           <br /> 
+          {% if serviceprovider.id %}
           <div class="form-group row">
-            <label for="" class="col-sm-3 col-form-label"
-              >Service Provider:</label
-            >
+            {% comment %} <label for="" class="col-sm-3 col-form-label-hidden"
+              >Service Provider:</label> {% endcomment %}
             <div class="col-sm-9" >
-              {{bookingform.serviceprovider}}
+               <input
+                type="text"
+                name="serviceprovider"
+                class="form-control"
+                value="{{serviceprovider.fullname}}"
+                hidden
+              />
             </div>
           </div>
+          {% endif %}
           </br>
           <p class="col-sm-3 col-form-label"><b>Meeting Time:</b></p></br>
           <div class="form-row" id="time-stamp">
@@ -113,7 +143,6 @@
                {{bookingform.starttime}}
             </div>
 
-           
             <div class="form-group col-md-2"></div>
             
             <div class="form-group col-md-5" id="right-time">
@@ -121,6 +150,7 @@
                {{bookingform.endtime}}
             </div>
           </div> 
+          {% endif %}
           {% comment %} <br />  {% endcomment %}
             <div class="form-row">
             <input type="submit" value="BOOK NOW" name="booking-btn" class="btn btn-success" id="book-btn"/>

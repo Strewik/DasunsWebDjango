@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Service User Dashboard</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+  </head>
+  <body>
+  {% if user.is_authenticated %}
+ <div>{% include 'profiles/serviceUserNavbar.html' %}</div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card card-body">
+          <a class="btn btn-warning" href="{% url 'profiles:profile'%}">
+            &#8592; Back to Profile</a
+          >
+          <hr />
+          <h3 style="text-align: center">Account Details</h3>
+          <hr />
+           {% if request.user.serviceuser%}
+          <img class="profile-pic" scr="{{request.user.serviceuser.profile_pic.url}}" alt="Profile-Pic"/>
+          {% endif %} 
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="card card-body">
+          <form method="POST" action="" enctype="multipart/form-data">
+           {% csrf_token %}
+           {{form.as_p}}
+            <input
+              class="btn btn-primary"
+              type="submit"
+              name="UpdateInformation"
+              value="Submit Update"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div>{% include 'profiles/footer.html' %}</div>
+  </body>
+</html>

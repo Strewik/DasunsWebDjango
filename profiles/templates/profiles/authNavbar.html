@@ -61,8 +61,18 @@
               Welcome, {{user.username}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/generalDash">My Dashboard</a>
+            {% if request.user.is_staff%}
+              <a class="dropdown-item" href="/dashboard">My Dashboard</a>
               <a class="dropdown-item" href="/logout">Logout</a>
+               {% elif request.user.serviceprovider %}
+                <a class="dropdown-item" href="/spdash">My Dashboard</a>
+                <a class="dropdown-item" href="/spdash">View Profile</a> 
+                <a class="dropdown-item" href="/logout">Logout</a>
+                {% elif request.user.serviceuser and not request.user.serviceprovider%}
+                <a class="dropdown-item" href="/serviceuserdash">My Dashboard</a>
+                <a class="dropdown-item" href="/profile">View Profile</a>
+                <a class="dropdown-item" href="/logout">Logout</a>
+                {% endif %}
             </div>
           </li>
         </ul>

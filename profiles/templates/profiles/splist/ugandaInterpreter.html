@@ -18,13 +18,11 @@
     />
   </head>
   <body>
-    <div>{% include 'profiles/authNavbar.html' %}</div>
+  <div>{% include 'profiles/serviceUserNavbar.html' %}</div>
     <div class="dashSP">
       <h3>Ugandan Signlanguage Interpreters</h3>
       <br />
-      <div>
-      {% for serviceprovider in serviceproviders %}
-       {% if serviceprovider.service == "Ugandan Sign Language Interpreter" %}               
+      <div>              
         <table class="table">
           <thead
             class="thead-dark"
@@ -40,6 +38,8 @@
             </tr>
           </thead>
           <tbody>
+          {% for serviceprovider in serviceproviders %}
+       {% if serviceprovider.service == "Ugandan Sign Language Interpreter" %} 
             <tr>
               <td>{{serviceprovider.fullname}}</td>
               <td>{{serviceprovider.service}}</td>
@@ -47,7 +47,10 @@
               <td>{{serviceprovider.pricevisit}}</td>
 
               <td>
-                <button type="button" class="btn btn-success" onclick="location.href='/booking';">Book Now</button>
+                     <a
+                class="btn btn-success"
+                href="{% url 'profiles:create_booking' serviceprovider.id %}"
+                >Book Now</a>
               </td>
               <td>
                 <button type="button" class="btn btn-info">View Details</button>

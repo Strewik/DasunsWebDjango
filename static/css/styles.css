@@ -368,3 +368,14 @@ body {
   margin-bottom: 0px;
   font-weight: bold;
 }
+
+.profile-pic{
+  max-width:200px;
+  max-height:200px;
+  margin:0 auto;
+  border-radius:50%;
+}
+
+/* styling side bar */
+
+

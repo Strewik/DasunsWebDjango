@@ -23,10 +23,12 @@
     <div>{% include 'profiles/authNavbar.html' %}</div>
     {% else %}
     <div>{% include 'profiles/navbar.html' %}</div>
-    {% comment %} {% for message in messages %}
+    {% endif %} 
+    <div> 
+    {% for message in messages %}
     <p id="messages">{{message}}</p>
-    {% endfor %}  {% endcomment %}
-    {% endif %}
+    {% endfor %}
+    </div>
     <div class="container">
       <div class="row">
         <div class="modal fade login-register-form" role="dialog">
@@ -104,13 +106,19 @@
                           name="loginbtn"
                           type="submit"
                           class="btn btn-success btn-block"
+                          {% comment %} data-target=".my-messages" {% endcomment %}
                         >
                           Login
                         </button>
                       </form>
+                      {% comment %} {% for message in messages %}
+                      <p id="messages">{{message}}</p>
+                      {% endfor %} {% endcomment %}
                       <small class="forgot"
                         >Forgot Password?
-                        <a id="password-reset" href="/password_reset"> Reset password</a></small
+                        <a id="password-reset" href="/password_reset">
+                          Reset password</a
+                        ></small
                       >
                     </div>
                   </div>
@@ -124,7 +132,8 @@
                       <form name="registerform" action="" method="POST">
                         {% csrf_token %}
                         <h4 id="form-title">Sign Up</h4>
-                        {{registerform.username}} {{registerform.email}}
+                        {{registerform.username}} {{registerform.firstname}}
+                        {{registerform.lastname}}{{registerform.email}}
                         {{registerform.password1}} {{registerform.password2}}
                         <div class="custom-control custom-checkbox">
                           <label>
@@ -146,7 +155,6 @@
                         >
                           Signup
                         </button>
-                        {{registerform.errors}}
                       </form>
                     </div>
                   </div>
@@ -157,7 +165,9 @@
         </div>
       </div>
     </div>
-    {% comment %} <div>{% include 'profiles/protected.html' %}</div> {% endcomment %}
+    {% comment %}
+    <div>{% include 'profiles/protected.html' %}</div>
+    {% endcomment %}
     <div>
       <div class="container1">
         <img
@@ -170,7 +180,9 @@
       </div>
     </div>
     <div class="green-service">
-      {% comment %} <div> {% endcomment %}
+      {% comment %}
+      <div>
+        {% endcomment %}
         <div class="row" id="all-services">
           <div class="col-md">
             <div>
@@ -233,7 +245,9 @@
             <div>Captioning</div>
           </div>
         </div>
-      {% comment %} </div> {% endcomment %}
+        {% comment %}
+      </div>
+      {% endcomment %}
     </div>
     <div class="white-service">
       <h2>All Services</h2>
@@ -489,6 +503,7 @@
                     class="col-md"
                     style="align-content: right; padding-top: 40px"
                   >
+                    {% comment %}
                     <svg
                       width="em"
                       height="2em"
@@ -503,6 +518,7 @@
                         d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
                       />
                     </svg>
+                    {% endcomment %}
                   </div>
                 </div>
                 <div class="card-body">
@@ -517,23 +533,6 @@
       <div>{% include 'profiles/footer.html' %}</div>
     </div>
     <script src="{% static '/js/bootstrap/js/bootstrap.min.js' %%}"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
     <script>
       var form_fields = document.getElementsByTagName("input");
       form_fields[1].placeholder = "User Name";

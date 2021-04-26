@@ -82,7 +82,7 @@
         <tbody>
           {% for booking in bookings %}
           <tr>
-            <td><strong>{{booking.serviceuser.name}}</strong></td>
+            <td><strong>{{booking.serviceuser.firstname}}  {{booking.serviceuser.lastname}}</strong></td>
             <td>{{booking.serviceprovider.service}}</td>
             <td>{{booking.meetplace}}</td>
             <td>{{booking.meetdate}}, {{booking.starttime}}</td>
