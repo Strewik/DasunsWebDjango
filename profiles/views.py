@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Serviceuser as ServiceuserModel, Booking, Serviceprovider
@@ -17,6 +18,14 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+
+from django.core.mail import send_mail
+from django.conf import settings
+import smtplib
+from email.message import EmailMessage
+# import urllib.request
+# from django.template.loader import render_to_string
+
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
@@ -56,10 +65,8 @@ def main(request):
 			else:
 				messages.error(request, "Invalid username or password.")
 			loginform = AuthenticationForm()
-		return render(request = request,
-                    template_name = "profiles/main.html")
+		return render(request = request, template_name = "profiles/main.html")
 	return render(request, 'profiles/main.html', context)
-
 
 def password_reset_request(request):
 	if request.method == "POST":
@@ -98,9 +105,54 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("profiles:homepage")
 
-@login_required(login_url='profiles:homepage')
+# @login_required(login_url='profiles:homepage')
+def spreg_save(request):
+    
+    if request.method != 'POST':
+        return render(request, 'profiles:spreg.html')
+    else: 
+        fullname = request.POST.get('fullname')
+        phone =request.POST.get('phone')
+        email = request.POST.get('email')
+        nin = request.POST.get('nin')
+        dob = request.POST.get('dob')
+        gender = request.POST.get('gender')
+        phyadd = request.POST.get('phyadd')
+        yearexp = request.POST.get('yearexp')
+        notmidman = request.POST.get('notmidman')
+        skillset = request.POST.get('skillset')
+        internet = request.POST.get('internet')
+        qualification = request.POST.get('qualification')
+        portifolio = request.POST.get('portifolio')
+        profession = request.POST.get('profession')
+        ref1name = request.POST.get('ref1name')
+        ref1title = request.POST.get('ref1title')
+        ref1email = request.POST.get('ref1email')
+        ref1phone = request.POST.get('ref1phone')
+        ref2name = request.POST.get('ref2name')
+        ref2title = request.POST.get('ref2title')
+        ref2email = request.POST.get('ref2email')
+        ref2phone = request.POST.get('ref2phone')
+        category = request.POST.get('category')
+        service = request.POST.get('service')
+        availability = request.POST.get('availability')
+        status = request.POST.get('status')
+        starttime = request.POST.get('starttime')
+        endtime = request.POST.get('endtime')
+        pricevisit = request.POST.get('pricevisit')
+        terms = request.POST.get('terms')
+        
+        
+        ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
+        ServProv.save()
+        
+        return render(request, 'profiles/spregsuccess')
+    
+
+
 def spreg(request):
-    return render(request, 'profiles/spreg.html')
+    return render(request, 'profiles/spreg.html',)
+          
 
 
 @login_required(login_url='profiles:homepage')
@@ -112,23 +164,43 @@ def serviceproviderdash(request):
 	return render(request, 'profiles/serviceProviderDashboard.html', context)
 
 
+def spregsuccess(request):
+   
+    email = EmailMessage(
+        'subject',
+        'body',
+        settings.EMAIL_HOST_USER,
+        ['kawooyastevenug@gmail.com'], 
+        )
+    email.fail_silently=False
+    email.send()
+      
+    return render(request, 'profiles/spregsuccess.html')
+
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['admin'])
 def dashboard(request):
-	bookings = Booking.objects.all()
-	serviceproviders = Serviceprovider.objects.all()
-	serviceusers = ServiceuserModel.objects.all()
+    bookings = Booking.objects.all()
+    serviceproviders = Serviceprovider.objects.all()
+    serviceusers = ServiceuserModel.objects.all()
+    total_serviceproviders = serviceproviders.count()
+    pendingcount_serviceproviders = serviceproviders.filter(status='Pending').count()
+    pending_serviceproviders = serviceproviders.filter(status='Pending')
+    active_serviceproviders = serviceproviders.filter(status='Active')
+    activecount_serviceproviders = serviceproviders.filter(status='Active').count()
+    suspended_serviceproviders = serviceproviders.filter(status='Suspended')
+    suspendedcount_serviceproviders = serviceproviders.filter(status='Suspended').count()
+    
+    total_serviceusers = serviceusers.count()
+    total_bookings = bookings.count()
 
-	total_bookings = bookings.count()
-	total_serviceproviders = serviceproviders.count()
-	total_serviceusers = serviceusers.count()
-
-	# ongoing = bookings.filter(status='Ongoing').count()
-	# completed = bookings.filter(status='Completed').count()
-	# cancelled = bookings.filter(status='Cancelled').count()
-
-	context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers}
-	return render(request, 'profiles/dashboard.html', context)
+    context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers,
+               'total_serviceproviders': total_serviceproviders, 'pending_serviceproviders': pending_serviceproviders,
+               'active_serviceproviders': active_serviceproviders, 'activecount_serviceproviders': activecount_serviceproviders, 'suspended_serviceproviders': suspended_serviceproviders,
+               'pendingcount_serviceproviders': pendingcount_serviceproviders, 'suspendedcount_serviceproviders': suspendedcount_serviceproviders,
+               'total_serviceusers': total_serviceusers, 
+               'total_bookings':total_bookings,}
+    return render(request, 'profiles/dashboard.html', context)
 
 
 @login_required(login_url='profiles:homepage')
@@ -213,9 +285,23 @@ def updateServiceuser(request, pk):
     context = {'form': form}
     return render(request, 'profiles/editServiceuser.html', context) 
 
+def updateServiceprovider(request, pk):
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['admin'])
+    serviceprovider = Serviceprovider.objects.get(id=pk)
+    form = ServiceproviderForm(instance=serviceprovider)
+
+    if request.method == 'POST':
+        form = ServiceproviderForm(request.POST, instance=serviceprovider)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse ('profiles:dashboard'))
+
+    context = {'form': form}
+    return render(request, 'profiles/serviceprovider.html', context) 
+
+
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['admin'])
 def deleteServiceuser(request, pk):
     serviceusers = ServiceuserModel.objects.get(id=pk)
     if request.method == "POST":
@@ -223,6 +309,17 @@ def deleteServiceuser(request, pk):
         return redirect(reverse ('profiles:dashboard'))
     context = {'item': serviceusers}
     return render(request, 'profiles/deleteServiceuser.html', context) 
+
+def deleteServiceprovider(request, pk):
+    serviceprovider = Serviceprovider.objects.get(id=pk)
+    if request.method == "POST":
+        serviceprovider.delete()
+        return redirect(reverse ('profiles:dashboard'))
+    context = {'item': serviceprovider}
+    return render(request, 'profiles/deleteServiceprovider.html', context) 
+
+ 
+
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])

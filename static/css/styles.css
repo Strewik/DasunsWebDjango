@@ -379,3 +379,15 @@ body {
 /* styling side bar */
 
 
+.sidebar {
+  background-color: #707070;
+  color: #fff;
+  height:auto;
+}
+
+.mainbar {
+  background-color: #fff;
+}
+.dashcontainer {
+  margin-bottom: 100px;
+}

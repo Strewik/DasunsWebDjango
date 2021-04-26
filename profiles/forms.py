@@ -43,6 +43,13 @@ class ServiceuserForm(ModelForm):
 
 		# }
 
+
+class ServiceproviderForm(ModelForm):
+    class Meta:
+        model = Serviceprovider
+        fields = '__all__' 
+        
+        
 class BookingForm(ModelForm):
 	class Meta:
 		model = Booking

@@ -21,15 +21,15 @@ class Serviceprovider(models.Model):
     SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
     ('Ugandan Sign Language Interpreter', 'Ugandan Sign Language Interpreter'),
     ('International Sign Language Interpreter', 'International Sign Language Interpreter'), 
-    ('Captioning', 'Captioning'),
-    ('Mobility Guide', 'Mobility Guide'),)
+    ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),)
+    STATUS = (('Pending', 'Pending'), ('Active', 'Active'), ('Suspended', 'Suspended'),)
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
     email = models.EmailField(max_length=200, unique=True)
     nin = models.CharField(max_length=200)
     dob = models.CharField(max_length=200)
-    gender = models.CharField(max_length=200, choices=GENDER)
+    gender = models.CharField(max_length=200, choices=GENDER,)
     phyadd = models.CharField(max_length=200)
     yearexp = models.CharField(max_length=200)
     notmidman = models.CharField(max_length=200)
@@ -48,18 +48,15 @@ class Serviceprovider(models.Model):
     ref2phone = models.CharField(max_length=200)
     service = models.CharField(max_length=200, choices=SERVICE, null=True)
     availability = models.CharField(max_length=200, null=True)
-    # sunday = models.CharField(max_length=200, null=True)
-    # monday = models.CharField(max_length=200, null=True)
-    # tuesday = models.CharField(max_length=200, null=True)
-    # wednesday = models.CharField(max_length=200, null=True)
-    # thursday = models.CharField(max_length=200, null=True)
-    # friday = models.CharField(max_length=200, null=True)
-    # saturday = models.CharField(max_length=200, null=True)
+    status = models.CharField(max_length=200, choices=STATUS,)
+    
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
-    pricevisit = models.CharField(max_length=200, blank=True)
+    pricevisit = models.CharField(max_length=200)
     terms = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    objects=models.Manager()
+    
 
     def __str__(self):
         return str(self.fullname)

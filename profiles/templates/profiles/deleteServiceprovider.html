@@ -24,7 +24,7 @@
         <div class="card">
           <div class="card-body">
             <p>Are you sure you want to delete "{{item}}"?</p>
-            <form action="{% url 'profiles:delete_serviceuser' item.id %}" method="POST">
+            <form action="{% url 'profiles:delete_serviceprovider' item.id %}" method="POST">
                 {% csrf_token %}
               <a class="btn btn-info" href="{% url 'profiles:dashboard'%}">Cancel</a>
               <input
