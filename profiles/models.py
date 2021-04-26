@@ -11,21 +11,23 @@ class Serviceuser(models.Model):
     email = models.CharField(max_length=200, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
-    # objects = models.Manager()
-
     def __str__(self):
         return self.name
 
 class Serviceprovider(models.Model):
-    GENDER = (('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other'),)
+    GENDER = (('Male', 'Male'), ('Female', 'Female'))
+    SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
+    ('Ugandan Sign Language Interpreter', 'Ugandan Sign Language Interpreter'),
+    ('International Sign Language Interpreter', 'International Sign Language Interpreter'), 
+    ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),)
+    STATUS = (('Pending', 'Pending'), ('Active', 'Active'), ('Suspended', 'Suspended'),)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=200)
-    # owner = models.ForeignKey(
-    #     User, related_name='serviceProviders', on_delete=models.CASCADE, null=True)
     phone = models.CharField(max_length=200)
     email = models.EmailField(max_length=200, unique=True)
     nin = models.CharField(max_length=200)
     dob = models.CharField(max_length=200)
-    gender = models.CharField(max_length=200, choices=GENDER)
+    gender = models.CharField(max_length=200, choices=GENDER,)
     phyadd = models.CharField(max_length=200)
     yearexp = models.CharField(max_length=200)
     notmidman = models.CharField(max_length=200)
@@ -42,20 +44,24 @@ class Serviceprovider(models.Model):
     ref2title = models.CharField(max_length=200)
     ref2email = models.EmailField(max_length=200)
     ref2phone = models.CharField(max_length=200)
-    service = models.CharField(max_length=200)
-    availability = models.CharField(max_length=200)
+    service = models.CharField(max_length=200, choices=SERVICE, null=True)
+    availability = models.CharField(max_length=200, null=True)
+    status = models.CharField(max_length=200, choices=STATUS,)
+    
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
-    pricevisit = models.CharField(max_length=200, blank=True)
+    pricevisit = models.CharField(max_length=200)
     terms = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    objects=models.Manager()
+    
 
     def __str__(self):
         return self.fullname
 
 class Booking(models.Model):
-    # STATUS = (('Available', 'Available'), ('Booked', 'Booked'),
-    #           ('Not available', 'Not available'))
+    # STATUS = (('Pending', 'Pending'), ('Ongoing', 'Ongoing'),
+    #           ('Completed', 'Completed'), ('Cancelled', 'Cancelled'))
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -63,12 +69,10 @@ class Booking(models.Model):
     meetdate = models.CharField(max_length=200, null=True)
     starttime = models.CharField(max_length=200, null=True)
     endtime = models.CharField(max_length=200, null=True)
-    # owner = models.ForeignKey(
-    #     User, related_name='booking', on_delete=models.CASCADE, null=True)
     serviceuser = models.ForeignKey(Serviceuser, null=True, on_delete=models.SET_NULL)
     serviceprovider = models.ForeignKey(Serviceprovider, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     # status = models.CharField(max_length=200, null=True, choices=STATUS)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.serviceuser.name

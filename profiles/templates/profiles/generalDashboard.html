@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>General Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link rel="stylesheet" href="{% static '/css/signlogin.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+  </head>
+  <body>
+   <div>{% include 'profiles/authNavbar.html' %}</div>
+   {% comment %} {% if request.user.groups.name == admin %}
+    <div>{% include 'profiles/dashboard.html' %}</div>
+   {% elif request.user.groups.name == serviceuser %}
+    <div>{% include 'profiles/serviceuserdash.html' %}</div>
+    {% elif request.user.groups.name == serviceprovider %}
+    <div>{% include 'profiles/serviceProviderDashboard.html'%}</div>
+    {% else %}
+    <div>{% include 'profiles/authNavbar.html' %}</div>
+    {% endif %} {% endcomment %}
+  </body>
+</html>

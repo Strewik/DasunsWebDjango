@@ -1,0 +1,578 @@
+<div class="row">
+  <div class="col-3 sidebar">
+    <div class="list-group list-group-flush" id="list-tab" role="tablist">
+      <a
+        class="list-group-item list-group-item-action active"
+        id="list-home-list"
+        style="color: #fff; background-color: #707070"
+        data-bs-toggle="list"
+        href="#list-home"
+        role="tab"
+        aria-controls="home"
+        ><h4>Dashboard</h4></a
+      >
+      <a
+        class="list-group-item list-group-item-action"
+        id="list-profile-list"
+        style="color: #fff; background-color: #707070"
+        data-bs-toggle="list"
+        href="#list-profile"
+        role="tab"
+        aria-controls="profile"
+        ><h4>Service Providers</h4></a
+      >
+      <a
+        class="list-group-item list-group-item-action"
+        id="list-messages-list"
+        style="color: #fff; background-color: #707070"
+        data-bs-toggle="list"
+        href="#list-messages"
+        role="tab"
+        aria-controls="messages"
+        ><h4>Service Users</h4></a
+      >
+      <a
+        class="list-group-item list-group-item-action"
+        id="list-settings-list"
+        style="color: #fff; background-color: #707070"
+        data-bs-toggle="list"
+        href="#list-settings"
+        role="tab"
+        aria-controls="settings"
+        ><h4>Sales</h4></a
+      >
+    </div>
+  </div>
+  <div class="col-9 mainbar">
+    <div class="tab-content" id="nav-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="list-home"
+        role="tabpanel"
+        aria-labelledby="list-home-list"
+      >
+        <div>
+          <div class="container">
+            <div class="row">
+              <h3>Requests</h3>
+              <div class="col-md">
+                <div
+                  class="card text-center"
+                  style="color: #fff; background-color: #35d187"
+                >
+                  <div class="card-body">
+                    <h5 class="card-title">Total Requests</h5>
+                    <h2>00</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md">
+                <div
+                  class="card text-center"
+                  style="color: #fff; background-color: #d0a733"
+                >
+                  <div class="card-body">
+                    <h5 class="card-title">Delivered</h5>
+                    <h2>00</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md">
+                <div
+                  class="card text-center"
+                  style="color: #fff; background-color: #707070"
+                >
+                  <div class="card-body">
+                    <h5 class="card-title">Pending</h5>
+                    <h2>00</h2>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md">
+                <div
+                  class="card text-center"
+                  style="color: #fff; background-color: #ae1b38"
+                >
+                  <div class="card-body">
+                    <h5 class="card-title">Cancelled</h5>
+                    <h2>00</h2>
+                  </div>
+                </div>
+              </div>
+
+              <h3>Latest Requests</h3>
+              <div>
+                <table class="table">
+                  <thead
+                    class="thead-dark"
+                    style="color: #fff; background-color: #35d187"
+                  >
+                    <tr>
+                      <th scope="col">Client</th>
+                      <th scope="col">Service</th>
+                      <th scope="col">Provider</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Date/time</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Update</th>
+                      <th scope="col">Cancel</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                      <td>
+                        <strong>{{booking.serviceuser.name}}</strong>
+                      </td>
+                      <td>{{booking.serviceprovider.service}}</td>
+                      <td>{{booking.serviceprovider.fullname}}</td>
+                      <td>{{booking.meetplace}}</td>
+                      <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                      <td>Pending</td>
+                      <td>
+                        <button type="button" class="btn btn-info">
+                          Update
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-danger">
+                          Cancel
+                        </button>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <div>
+                  <div class="row">
+                    <h3>Service Provider Applications</h3>
+                    <div
+                      class="col-md-7"
+                      style="margin-top: 20px; padding-top: 20px"
+                    >
+                      <div>
+                        <table class="table">
+                          <thead
+                            class="thead-dark"
+                            style="
+                              color: #fff;
+                              background-color: #4e76d5;
+                              margin-top: 20px;
+                            "
+                          >
+                            <tr>
+                              <th scope="col">Applicant</th>
+                              <th scope="col">Service</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Mark Morty</td>
+                              <td>Captioning</td>
+                              <td>02/03/2020</td>
+                              <td>Pending</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-5 text-center"
+                      style="
+                        color: #fff;
+                        background-color: #4e76d5;
+                        margin-top: 20px;
+                        padding-top: 20px;
+                      "
+                    >
+                      <h3>Registered Users</h3>
+                      <div>
+                        <div class="container" style="padding-top: 10px">
+                          <div class="row">
+                            <div class="col">
+                              <h5>Service Providers</h5>
+                              <h2>00</h2>
+                            </div>
+                            <div class="col">
+                              <h5>Service Users</h5>
+                              <h2>00</h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="list-profile"
+      role="tabpanel"
+      aria-labelledby="list-profile-list"
+    >
+      <div>
+        <h3>Service Providers</h3>
+        <div></div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="list-messages"
+      role="tabpanel"
+      aria-labelledby="list-messages-list"
+    >
+      Third random stuff...
+    </div>
+    <div
+      class="tab-pane fade"
+      id="list-settings"
+      role="tabpanel"
+      aria-labelledby="list-settings-list"
+    >
+      last random stuf... I promise...
+    </div>
+  </div>
+</div>
+
+
+
+<div>
+  <label>We only work with professionals:</label>
+  <h3 class="fs-subtitle">
+    Please provide your technical training qualifications.
+  </h3>
+  <label for="myfile">Select a file:</label>
+  <input class="fullinput" type="file" id="myfile" name="myfile" />
+  <h3 class="fs-subtitle">
+    Please provide a link to your portfolio. (Could be a link to a
+    website or social media page)
+  </h3>
+  <textarea
+    class="fullinput"
+    class="form-control"
+    rows="5"
+    name="profession"
+  ></textarea>
+  <div>Provide us with a reference whom we can contact</div>
+  <div class="row">
+  <div class="col-6">
+    <input
+      class="halfinput"
+      type="text"
+      name="ref1name"
+      id="ref1name"
+      class="ref1name"
+      placeholder="Full name"
+    />
+  </div>
+  <div>Provide us with a reference whom we can contact</div>
+  <div>Referee 1</div>
+  <div class="row">
+    <div class="col-6">
+      <input
+        class="halfinput"
+        type="text"
+        name="ref1Name"
+        id="ref1Name"
+        class="ref1Name"
+        placeholder="Full name"
+      />
+    </div>
+    <div class="col-6">
+      <input
+        class="halfinput"
+        type="text"
+        name="ref1title"
+        id="ref1title"
+        class="ref1title"
+        placeholder="Title/Desccription"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <input
+        class="halfinput"
+        type="text"
+        name="ref1email"
+        id="ref1email"
+        class="ref1email"
+        placeholder="Email"
+      />
+    </div>
+    <div class="col-6">
+      <input
+        class="halfinput"
+        type="text"
+        name="ref1phone"
+        id="ref1phone"
+        class="ref1phone"
+        placeholder="Phone"
+      />
+    </div>
+  </div>
+
+  <div>Referee 2</div>
+  <div class="row">
+    <div class="col-6">
+      <input
+        class="halfinput"
+        type="text"
+        name="ref2Name"
+        id="ref2Name"
+        class="ref2Name"
+        placeholder="Full name"
+      />
+    </div>
+    <div class="col-6">
+      <input
+        class="halfinput"
+        type="text"
+        name="ref2title"
+        id="ref2title"
+        class="ref2title"
+        placeholder="Title/Desccription"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <input
+        class="halfinput"
+        type="text"
+        name="ref2email"
+        id="ref2email"
+        class="ref2email"
+        placeholder="Email"
+      />
+    </div>
+    <div class="col-6">
+      <input
+        class="halfinput"
+        type="text"
+        name="ref2phone"
+        id="ref2phone"
+        class="ref2phone"
+        placeholder="Phone"
+      />
+    </div>
+  </div>
+
+  <div>Referee 2</div>
+ <div class="row">
+  <div class="col-6">
+    <input
+      class="halfinput"
+      type="text"
+      name="ref2name"
+      id="ref2Name"
+      class="ref2Name"
+      placeholder="Full name"
+    />
+  </div>
+  Time <br />
+  <div>
+    <input
+      class="fullinput"
+      type="time"
+      id="starttime"
+      name="starttime"
+      value="starttime"
+    />
+    <input
+      class="fullinput"
+      type="time"
+      id="endtime"
+      name="endtime"
+      value="endtime"
+    />
+  </div>
+  price per visit <br />
+  <div>
+    <input
+      class="fullinput"
+      type="text"
+      name="ref2phone"
+      id="ref2phone"
+      class="ref2phone"
+      placeholder="Phone"
+    />
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h2 class="fs-title">
+    Finally! Enter your service, price and availability
+  </h2>
+  <h3 class="fs-subtitle">
+    We would like to capture your availability and pricing per serice
+  </h3>
+  <h3 class="fs-subtitle">
+    We would like you to tell us more about you and the professional
+    services you offer.
+  </h3>
+
+  <div>Service</div>
+  <select
+    class="fullinput"
+    class="custom-select my-1 mr-sm-2"
+    id="inlineFormCustomSelectPref"
+    name="service"
+  >
+    <option selected>Select service</option>
+    <option value="female">Female</option>
+    <option value="male">Male</option>
+  </select>
+
+  Enter your service availability
+  <br />
+  Days
+  <br />
+  <div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="Sunday"
+        name="day"
+        id="defaultCheck1"
+      />
+      <label class="form-check-label" for="defaultCheck1">
+        Sunday
+      </label>
+      <br />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="Monday"
+        name="availability"
+        id="defaultCheck1"
+      />
+      <label class="form-check-label" for="defaultCheck1">
+        Monday
+      </label>
+      <br />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="Tuesday"
+        name="availability"
+        id="defaultCheck1"
+      />
+      <label class="form-check-label" for="defaultCheck1">
+        Tuesday
+      </label>
+      <br />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="Wednesday"
+        name="availability"
+        id="defaultCheck1"
+      />
+      <label class="form-check-label" for="defaultCheck1">
+        Wednesday
+      </label>
+      <br />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="Thursday"
+        name="availability"
+        id="defaultCheck1"
+      />
+      <label class="form-check-label" for="defaultCheck1">
+        Thursday
+      </label>
+      <br />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="Friday"
+        name="availability"
+        id="defaultCheck1"
+      />
+      <label class="form-check-label" for="defaultCheck1">
+        Friday
+      </label>
+      <br />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="Friday"
+        name="availability"
+        id="defaultCheck1"
+      />
+      <label class="form-check-label" for="defaultCheck1">
+        Saturday
+      </label>
+      <br />
+    </div>
+  </div>
+  Time <br />
+  <div>
+    <input
+      class="fullinput"
+      type="time"
+      id="starttime"
+      name="starttime"
+      value="starttime"
+    />
+    <input
+      class="fullinput"
+      type="time"
+      id="endtime"
+      name="endtime"
+      value="endtime"
+    />
+  </div>
+  price per visit <br />
+  <div>
+    <input
+      class="fullinput"
+      type="text"
+      name="pricevisit"
+      id="pricevisit"
+      class="price"
+      placeholder="Price per visit"
+    />
+  </div>
+  <input
+    class="form-check-input"
+    type="checkbox"
+    value="Agree to T&C"
+    name="terms"
+    id="defaultCheck1"
+  />
+  <label class="form-check-label" for="defaultCheck1">
+    I agree to the terms and conditions set by Dasuns.
+  </label>
+  <br />
+  <input
+    type="button"
+    name="previous"
+    class="previous action-button-previous"
+    value="Previous"
+  />
+  <input
+    type="submit"
+    name="submit"
+    class="submit action-button"
+    value="Submit"
+  />

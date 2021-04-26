@@ -12,9 +12,11 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name="profiles/password/password_reset_done.html"), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(success_url=reverse_lazy('profiles:password_reset_complete'), template_name="profiles/password/password_reset_confirm.html"), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name="profiles/password/password_reset_complete.html"), name='password_reset_complete'),
+    path('spregsave/', views.spreg_save, name='spregsave'),
+    path('spreg/', views.spreg, name='spreg'),
+    path('spregsuccess/', views.spregsuccess, name="spregsuccess"), 
     path('logout/', views.logout_request, name='logout'),
     path('user/', views.userPage, name='user-page'),
-    path('spreg/', views.spreg, name='servicep'),
     path('caption/', views.captioningList, name='captioning'),
     path('intern/', views.internationalInterpList, name='international-interp'),
     path('mobguide/', views.mobGuideList, name='mobility-guide'),
@@ -24,10 +26,12 @@ urlpatterns = [
     path('serviceuserdash/', views.serviceuserdash, name='serviceuserdash'),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('spdash/', views.serviceproviderdash, name="serviceproviderdash"),
-    path('serviceuser/', views.serviceuser, name="serviceusers"),
+    path('serviceuser/', views.serviceuser, name="serviceuser"),
     path('update_serviceuser/<str:pk>', views.updateServiceuser, name="update_serviceuser"),
     path('delete_serviceuser/<str:pk>', views.deleteServiceuser, name="delete_serviceuser"),
-    
+    path('update_serviceprovider/<str:pk>', views.updateServiceprovider, name="update_serviceprovider"),
+    path('delete_serviceprovider/<str:pk>', views.deleteServiceprovider, name="delete_serviceprovider"),
+    path('generalDash/', views.generalDash, name="generalDash"),
 
 ]
 
