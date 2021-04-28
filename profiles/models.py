@@ -48,8 +48,7 @@ class Serviceprovider(models.Model):
     ref2phone = models.CharField(max_length=200)
     service = models.CharField(max_length=200, choices=SERVICE, null=True)
     availability = models.CharField(max_length=200, null=True)
-    status = models.CharField(max_length=200, choices=STATUS,)
-    
+    status = models.CharField(max_length=200, null=True, choices=STATUS,)
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
     pricevisit = models.CharField(max_length=200)
@@ -62,7 +61,7 @@ class Serviceprovider(models.Model):
         return str(self.fullname)
 
 class Booking(models.Model):
-    # STATUS = (('Pending', 'Pending'), ('Ongoing', 'Ongoing'),
+    # STATUS = (('Pending', 'Pending'), ('Booked', 'Booked'),
     #           ('Completed', 'Completed'), ('Cancelled', 'Cancelled'))
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
@@ -74,7 +73,8 @@ class Booking(models.Model):
     serviceuser = models.ForeignKey(Serviceuser, null=True, on_delete=models.SET_NULL)
     serviceprovider = models.ForeignKey(Serviceprovider, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    # status = models.CharField(max_length=200, null=True, choices=STATUS)
+    status = models.CharField(max_length=200, null=True)
+    # status = models.CharField(max_length=200, default="Pending", null=True, choices=STATUS)
 
     def __str__(self):
         return str(self.name)

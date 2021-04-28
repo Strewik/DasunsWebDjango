@@ -146,7 +146,7 @@ def spreg_save(request):
         ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
         
-        return render(request, 'profiles/spregsuccess')
+    return render(request, 'profiles/spregSuccess.html')
     
 
 
@@ -205,7 +205,7 @@ def dashboard(request):
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser', 'admin'])
-def createbBooking(request, pk):
+def createBooking(request, pk):
 	serviceusers = ServiceuserModel.objects.all()
 	serviceprovider = Serviceprovider.objects.get(id=pk)
 	bookingform = BookingForm()
@@ -220,6 +220,34 @@ def createbBooking(request, pk):
 
 	context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceusers':serviceusers}
 	return render(request,'profiles/bookingform.html', context)
+
+
+@login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser', 'admin'])
+def updateBookingStatus(request, pk):
+	serviceusers = ServiceuserModel.objects.all()
+	serviceprovider = Serviceprovider.objects.get(id=pk)
+	# bookingform = BookingForm()
+	
+	if request.method == 'POST':
+		print('Printing post:', request.POST)
+		# bookingform = BookingForm(request.POST)
+
+		# First, you should retrieve the team instance you want to update
+		booking = Booking.objects.get(id=request.POST['id'])
+
+		# Next, you update the status
+		if request.POST.get('status'):
+			booking.status = request.POST.get('status')
+			booking.save()
+			return redirect(reverse ('profiles:serviceproviderdash'))
+		
+		# if bookingform.is_valid():
+		# 	bookingform.save()
+		# 	return redirect(reverse ('profiles:serviceuserdash'))
+	# context = {'bookingform': bookingform,'serviceprovider':serviceprovider,}
+	context = {'serviceusers':serviceusers}
+	return render(request,'profiles/serviceProviderDashboard.html', context)
 
 
 @login_required(login_url='profiles:homepage')
@@ -239,20 +267,6 @@ def serviceuserdash(request):
 	return render(request, 'profiles/serviceuserdash.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
-# def addServiceuser(request):
-# 	serviceusers = ServiceuserModel.objects.all()
-# 	user = request.user
-# 	form = ServiceuserForm(instance=user)
-# 	if request.method == 'POST':
-# 		form = ServiceuserForm(request.POST, request.FILES, instance=user)
-# 		if form.is_valid():
-# 			form.save()
-# 			return redirect(reverse ('profiles:homepage'))
-# 	else:
-# 		context = {'form': form, serviceusers: serviceusers}
-# 	return render(request,'profiles/addServiceuser.html', context)
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])
@@ -405,18 +419,3 @@ def spList(request):
 	return render(request, 'profiles/splist/allServiceProviders.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser', 'admin'])
-# def pickServiceuser(request, pk):
-# 	serviceproviders = Serviceprovider.objects.get(id=pk)
-# 	# form = ServiceuserForm(instance=serviceusers)
-
-# 	# if request.method == 'POST':
-# 	#     form = ServiceuserForm(request.POST, instance=serviceusers)
-# 	#     if form.is_valid():
-# 	#         form.save()
-# 	#         return redirect(reverse ('profiles:serviceuserdash'))
-
-# 	# context = {'form': form}
-# 	context = {}
-# 	return render(request, 'profiles/bookingform.html', context) 

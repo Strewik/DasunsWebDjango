@@ -69,8 +69,8 @@
               class="tab-pane fade show active"
               id="list-home"
               role="tabpanel"
-              aria-labelledby="list-home-list"
-            >
+              aria-labelledby="list-home-list">
+            
               <div class="container">
                 <div class="row">
                   <h3>Requests</h3>
@@ -141,7 +141,7 @@
                       {% for booking in bookings %}
                       <tr>
                         <td>
-                          <strong>{{booking.serviceuser.name}}</strong>
+                          <strong>{{booking.serviceuser.firstname}} {{booking.serviceuser.lastname}}</strong>
                         </td>
                         <td>{{booking.serviceprovider.service}}</td>
                         <td>{{booking.serviceprovider.fullname}}</td>
@@ -232,8 +232,8 @@
               class="tab-pane fade"
               id="list-profile"
               role="tabpanel"
-              aria-labelledby="list-profile-list"
-            >
+              aria-labelledby="list-profile-list">
+            
               <div class="container">
                 <div class="row">
                   <h3>Service Providers</h3>

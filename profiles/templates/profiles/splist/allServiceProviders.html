@@ -29,6 +29,7 @@
             style="color: #fff; background-color: rgb(12, 83, 39)"
           >
             <tr>
+            <th scope="col">Username</th>
               <th scope="col">Service Provider</th>
               <th scope="col">Service Offered</th>
               <th scope="col">Location</th>
@@ -42,6 +43,7 @@
            {% if serviceproviders %} 
            {% for serviceprovider in serviceproviders %}
             <tr>
+            <td>{{serviceprovider.user}}</td>
               <td>{{serviceprovider.fullname}}</td>
               <td>{{serviceprovider.service}}</td>
               <td>{{serviceprovider.phyadd}}</td>

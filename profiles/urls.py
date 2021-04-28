@@ -23,7 +23,7 @@ urlpatterns = [
     path('mobguide/', views.mobGuideList, name='mobility-guide'),
     path('support/', views.personalSupportList, name='personal-support'),
     path('ugandan/', views.ugandanInterpList, name='ugandan-interp'),
-    path('booking/<str:pk>', views.createbBooking, name="create_booking"),
+    path('booking/<str:pk>', views.createBooking, name="create_booking"),
     path('serviceuserdash/', views.serviceuserdash, name='serviceuserdash'),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('spdash/', views.serviceproviderdash, name="serviceproviderdash"),
@@ -36,6 +36,7 @@ urlpatterns = [
     path('profile/', views.serviceUserProfile, name="profile"),
     path('splist/', views.spList, name="splist"),
     path('profilesp/', views.serviceProviderProfile, name="profilesp"),
+    path('bookingstatus/<str:pk>', views.updateBookingStatus, name="updateBookingStatus"),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
