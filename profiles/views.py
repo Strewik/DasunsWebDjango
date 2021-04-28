@@ -1,23 +1,18 @@
 import os
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Serviceprovider, Booking
-# from .models import Booking
-# from .models import Serviceuser
-from .models import Serviceuser as ServiceuserModel
-from .forms import *
+from .models import Serviceuser as ServiceuserModel, Booking, Serviceprovider
+from .forms import CreateUserForm, ServiceuserForm, BookingForm
 from django.contrib import messages  # import messages
 # from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import AuthenticationForm  # add this
 from django.contrib.auth import authenticate, login, logout  # add this
-# from .models import *
 from .filters import BookingFilter
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import *
 # added imports
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.models import Group
 from django.template.loader import render_to_string
 from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
@@ -35,50 +30,43 @@ from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
 
+
 # Create your views here.
 
 # @unauthenticated_user. This works for separate register and login pages.
-# @admin_only
 def main(request):
-    registerform = CreateUserForm()
-    loginform = AuthenticationForm()
-    context = {'registerform':registerform, 'loginform':loginform }
-    if request.method == 'POST':
-        if 'registerbtn' in request.POST:
-            registerform = CreateUserForm(request.POST)
-            if registerform.is_valid():
-                # registerform.save()
-                # user = registerform.cleaned_data.get('username')
-                user = registerform.save()
-                username = registerform.cleaned_data.get('username')
-                group = Group.objects.get(name='serviceuser')
-                user.groups.add(group)
-                ServiceuserModel.objects.create(
-                    user=user,
-                )
-                messages.success(request, 'Account was created for ' + username)
-                return redirect('profiles:homepage')
-            else:
-                messages.error(request, "User was not created")
-            loginform = AuthenticationForm(data=request.POST)
-        elif 'loginbtn' in request.POST:
-            loginform = AuthenticationForm(data=request.POST)
-            if loginform.is_valid():
-                username = loginform.cleaned_data.get('username')
-                password = loginform.cleaned_data.get('password')
-                user = authenticate(username=username, password=password)
-                if user is not None:
-                    login(request, user)
-                    # messages.info(request, f"You are now logged in as {username}")
-                    return redirect('profiles:homepage')
-                else:
-                    messages.error(request, "No user in the system yet")
-            else:
-                messages.error(request, "Invalid username or password.")
-            loginform = AuthenticationForm()
-        return render(request = request,
-                    template_name = "profiles/main.html")
-    return render(request, 'profiles/main.html', context)
+	registerform = CreateUserForm()
+	loginform = AuthenticationForm()
+	context = {'registerform':registerform, 'loginform':loginform }
+
+	if request.method == 'POST':
+		if 'registerbtn' in request.POST:
+			registerform = CreateUserForm(request.POST)
+			if registerform.is_valid():
+				user = registerform.save()
+				username = registerform.cleaned_data.get('username')
+				messages.success(request, 'Account was created for ' + username)
+				return redirect('profiles:homepage')
+			else:
+				messages.error(request, "User was not created")
+			loginform = AuthenticationForm(data=request.POST)
+		elif 'loginbtn' in request.POST:
+			loginform = AuthenticationForm(data=request.POST)
+			if loginform.is_valid():
+				username = loginform.cleaned_data.get('username')
+				password = loginform.cleaned_data.get('password')
+				user = authenticate(username=username, password=password)
+				if user is not None:
+					login(request, user)
+					messages.info(request, f"You are now logged in as {username}")
+					return redirect('profiles:homepage')
+				else:
+					messages.error(request, "No user in the system yet")
+			else:
+				messages.error(request, "Invalid username or password.")
+			loginform = AuthenticationForm()
+		return render(request = request, template_name = "profiles/main.html")
+	return render(request, 'profiles/main.html', context)
 
 def password_reset_request(request):
 	if request.method == "POST":
@@ -158,7 +146,7 @@ def spreg_save(request):
         ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
         
-        return render(request, 'profiles/spregsuccess')
+    return render(request, 'profiles/spregSuccess.html')
     
 
 
@@ -168,9 +156,10 @@ def spreg(request):
 
 
 @login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceprovider'])
+# @allowed_users(allowed_roles=['serviceprovider'])
 def serviceproviderdash(request):
 	bookings = request.user.serviceprovider.booking_set.all()
+	
 	context = {'bookings': bookings }
 	return render(request, 'profiles/serviceProviderDashboard.html', context)
 
@@ -188,8 +177,8 @@ def spregsuccess(request):
       
     return render(request, 'profiles/spregsuccess.html')
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['admin'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['admin'])
 def dashboard(request):
     bookings = Booking.objects.all()
     serviceproviders = Serviceprovider.objects.all()
@@ -216,65 +205,99 @@ def dashboard(request):
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser', 'admin'])
-def createbBooking(request):
-
-    serviceusers = ServiceuserModel.objects.all()
-	# serviceproviders = Serviceprovider.objects.all()
-	# bookings = Booking.objects.all()
+def createBooking(request, pk):
+	serviceusers = ServiceuserModel.objects.all()
+	serviceprovider = Serviceprovider.objects.get(id=pk)
+	bookingform = BookingForm()
 	
+	if request.method == 'POST':
+		print('Printing post:', request.POST)
+		bookingform = BookingForm(request.POST)
+		
+		if bookingform.is_valid():
+			bookingform.save()
+			return redirect(reverse ('profiles:serviceuserdash'))
 
-    bookingform = BookingForm()
-    if request.method == 'POST':
-        # print('Printing post:', request.POST)
-        bookingform = BookingForm(request.POST)
-        if bookingform.is_valid():
-            bookingform.save()
-            return redirect(reverse ('profiles:serviceuserdash'))
+	context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceusers':serviceusers}
+	return render(request,'profiles/bookingform.html', context)
 
-    context = {'bookingform': bookingform, serviceusers: serviceusers}
-	# 	context = {'form': form, serviceusers: serviceusers, serviceproviders: serviceproviders, bookings: bookings}
-    return render(request,'profiles/bookingform.html', context)
-	# return render(request, template_name='profiles/bookingform.html', context)
+
+@login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser', 'admin'])
+def updateBookingStatus(request, pk):
+	serviceusers = ServiceuserModel.objects.all()
+	serviceprovider = Serviceprovider.objects.get(id=pk)
+	# bookingform = BookingForm()
+	
+	if request.method == 'POST':
+		print('Printing post:', request.POST)
+		# bookingform = BookingForm(request.POST)
+
+		# First, you should retrieve the team instance you want to update
+		booking = Booking.objects.get(id=request.POST['id'])
+
+		# Next, you update the status
+		if request.POST.get('status'):
+			booking.status = request.POST.get('status')
+			booking.save()
+			return redirect(reverse ('profiles:serviceproviderdash'))
+		
+		# if bookingform.is_valid():
+		# 	bookingform.save()
+		# 	return redirect(reverse ('profiles:serviceuserdash'))
+	# context = {'bookingform': bookingform,'serviceprovider':serviceprovider,}
+	context = {'serviceusers':serviceusers}
+	return render(request,'profiles/serviceProviderDashboard.html', context)
 
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])
 def serviceuserdash(request):
 	bookings = request.user.serviceuser.booking_set.all()
-	context = {'bookings': bookings}
+	
+	# for booking in bookings:
+	# 	booking.service_hours = (int(float(booking.endtime)) - int(float(booking.starttime)))
+	total_bookings = bookings.count()
+	# ongoing = bookings.filter(status='Ongoing').count()
+	# completed = bookings.filter(status='Completed').count()
+	# cancelled = bookings.filter(status='Cancelled').count()
 
+	# context = {'bookings': bookings, 'total_bookings': total_bookings, 'ongoing': ongoing, 'completed': completed, 'cancelled': cancelled,}
+	context = {'bookings': bookings}
 	return render(request, 'profiles/serviceuserdash.html', context)
 
 
-def serviceuser(request):
-    serviceusers = ServiceuserModel.objects.all()
-    form = ServiceuserForm()
-    if request.method == 'POST':
-        # print('Printing post:', request.POST)
-        form = ServiceuserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse ('profiles:dashboard'))
-        
 
-    context = {'form': form, serviceusers: serviceusers}
-    return render(request,'profiles/serviceuser.html', context)
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
+def serviceUserProfile(request):
+	serviceuser = request.user.serviceuser
+	username = request.user
+	firstname = serviceuser.firstname
+	lastname = serviceuser.lastname
+	phone = serviceuser.phone
+	email = serviceuser.email
+	date = serviceuser.date_created
+	profile_pic = serviceuser.profile_pic
+
+	context = {'username':username, 'firstname':firstname, 'lastname':lastname, 'phone':phone, 'email':email, 'date':date, }
+	return render(request, 'profiles/serviceuserProfile.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def updateServiceuser(request, pk):
-    
     serviceusers = ServiceuserModel.objects.get(id=pk)
     form = ServiceuserForm(instance=serviceusers)
 
     if request.method == 'POST':
-        form = ServiceuserForm(request.POST, instance=serviceusers)
+        form = ServiceuserForm(request.POST, request.FILES, instance=serviceusers)
         if form.is_valid():
             form.save()
-            return redirect(reverse ('profiles:dashboard'))
+            return redirect(reverse ('profiles:profile'))
 
     context = {'form': form}
-    return render(request, 'profiles/serviceuser.html', context) 
+    return render(request, 'profiles/editServiceuser.html', context) 
 
 def updateServiceprovider(request, pk):
 
@@ -313,12 +336,34 @@ def deleteServiceprovider(request, pk):
 
 
 @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
-def userPage(request):
-	# bookings = request.user.serviceuser.order_set.all()
-	context = {}
-	return render(request, 'profiles/user.html', context)
+@allowed_users(allowed_roles=['serviceuser'])
+def serviceProviderProfile(request):
+	serviceprovider = request.user.serviceprovider
+	username = request.user
+	fullname = serviceprovider.fullname
+	gender = serviceprovider.gender
+	phone = serviceprovider.phone
+	email = serviceprovider.email
+	address = serviceprovider.phyadd
+	service = serviceprovider.service
 
+	context = {'username':username, 'fullname':fullname, 'gender':gender, 'phone':phone, 'email':email, 'address':address, 'service':service}
+	return render(request, 'profiles/serviceproviderProfile.html', context)
+
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceprovider', 'admin'])
+# def updateServiceprovider(request, pk):
+#     serviceprovider = Serviceprovider.objects.get(id=pk)
+#     form = ServiceproviderForm(instance=serviceprovider)
+
+#     if request.method == 'POST':
+#         form = ServiceproviderForm(request.POST, request.FILES, instance=serviceprovider)
+#         if form.is_valid():
+#             form.save()
+#             return redirect(reverse ('profiles:profile'))
+
+#     context = {'form': form}
+#     return render(request, 'profiles/editServiceprovider.html', context) 
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser', 'admin'])
@@ -361,6 +406,16 @@ def ugandanInterpList(request):
 
 
 @login_required(login_url='profiles:homepage')
-@admin_only
+# @admin_only
 def generalDash(request):
 	return render(request, 'profiles/generalDashboard.html')
+
+
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser', 'admin'])
+def spList(request):
+	serviceproviders = Serviceprovider.objects.all()
+	context = {'serviceproviders': serviceproviders}
+	return render(request, 'profiles/splist/allServiceProviders.html', context)
+
+

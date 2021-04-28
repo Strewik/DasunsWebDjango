@@ -41,12 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'profiles',
+    'profiles.apps.ProfilesConfig',
     'django_filters',
     'crispy_forms',
     'formtools',
     'bootstrap_datepicker_plus',
     "bootstrap4",
+    
 ]
 
 
@@ -154,6 +155,8 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR, 'static')
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
 # # AWS EMAIL_BACKEND SET UP

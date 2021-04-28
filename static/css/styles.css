@@ -369,15 +369,47 @@ body {
   font-weight: bold;
 }
 
-.sidebar {
+.profile-pic{
+  max-width:200px;
+  max-height:200px;
+  margin:0 auto;
+  border-radius:50%;
+}
+
+/* styling side bar */
+
+/* .sidebar{
   background-color: #707070;
   color: #fff;
   height:auto;
+} */
+
+/* #list-tab{
+  background-color: #707070;
+} */
+
+div.list-group{
+  background-color: #707070; 
+  height:100%;
 }
 
-.mainbar {
+/* .mainbar {
   background-color: #fff;
-}
-.dashcontainer {
+} */
+/* .dashcontainer {
   margin-bottom: 100px;
+} */
+
+.list-group-item{
+  z-index: 2;
+  color: #fff;
+  background-color: #707070;
+  border-color: #707070;
+}
+
+.list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: #35d187;
+  border-color: #35d187;
 }

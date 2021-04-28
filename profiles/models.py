@@ -6,13 +6,15 @@ from django.contrib.auth.models import User
 
 class Serviceuser(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, null=True)
+    firstname = models.CharField(max_length=200, null=True)
+    lastname = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
+    profile_pic = models.ImageField(default="profile.png", null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.firstname)
 
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'))
@@ -46,8 +48,7 @@ class Serviceprovider(models.Model):
     ref2phone = models.CharField(max_length=200)
     service = models.CharField(max_length=200, choices=SERVICE, null=True)
     availability = models.CharField(max_length=200, null=True)
-    status = models.CharField(max_length=200, choices=STATUS,)
-    
+    status = models.CharField(max_length=200, null=True, choices=STATUS,)
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
     pricevisit = models.CharField(max_length=200)
@@ -57,10 +58,10 @@ class Serviceprovider(models.Model):
     
 
     def __str__(self):
-        return self.fullname
+        return str(self.fullname)
 
 class Booking(models.Model):
-    # STATUS = (('Pending', 'Pending'), ('Ongoing', 'Ongoing'),
+    # STATUS = (('Pending', 'Pending'), ('Booked', 'Booked'),
     #           ('Completed', 'Completed'), ('Cancelled', 'Cancelled'))
     name = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200, null=True)
@@ -72,7 +73,13 @@ class Booking(models.Model):
     serviceuser = models.ForeignKey(Serviceuser, null=True, on_delete=models.SET_NULL)
     serviceprovider = models.ForeignKey(Serviceprovider, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    # status = models.CharField(max_length=200, null=True, choices=STATUS)
+    status = models.CharField(max_length=200, null=True)
+    # status = models.CharField(max_length=200, default="Pending", null=True, choices=STATUS)
 
-    # def __str__(self):
-    #     return self.serviceuser.name
+    def __str__(self):
+        return str(self.name)
+    
+    # @property
+    # def service_hours(self):
+    #     return int(self.endtime - self.starttime)
+        

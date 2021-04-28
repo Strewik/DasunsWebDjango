@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
-
 from .models import Booking
 from .models import Serviceprovider
 from .models import Serviceuser
+
+# Register your models here.
 
 admin.site.register(Serviceuser)
 admin.site.register(Serviceprovider)
