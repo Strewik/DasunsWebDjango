@@ -33,7 +33,7 @@ class Serviceprovider(models.Model):
     notmidman = models.CharField(max_length=200)
     skillset = models.CharField(max_length=200)
     internet = models.CharField(max_length=200)
-    qualification = models.CharField(max_length=200)
+    qualification = models.FileField(null=True,)
     portifolio = models.CharField(max_length=200, blank=True)
     profession = models.CharField(max_length=200)
     ref1name = models.CharField(max_length=200)
@@ -47,8 +47,7 @@ class Serviceprovider(models.Model):
     service = models.CharField(max_length=200, choices=SERVICE, null=True)
     availability = models.CharField(max_length=200, null=True)
     status = models.CharField(max_length=200, choices=STATUS,)
-    
-    starttime = models.CharField(max_length=200)
+    starttime = models.CharField(max_length=200) 
     endtime = models.CharField(max_length=200)
     pricevisit = models.CharField(max_length=200)
     terms = models.CharField(max_length=200)

@@ -25,13 +25,75 @@ class CreateUserForm(UserCreationForm):
 class ServiceuserForm(ModelForm):
     class Meta:
         model = Serviceuser
-        fields = '__all__' 
+        fields = '__all__'
 
 
 class ServiceproviderForm(ModelForm):
     class Meta:
         model = Serviceprovider
         fields = '__all__' 
+        labels = {
+			'fullname':'Fullname',
+			'phone':'Phone number',
+   			'email':'Email',
+			'nin':'NIN',
+			'dob':'Date of birth',
+			'gender':'Gender',
+			'phyadd':'Physical address',
+			'yearexp':'At least one year of experience',
+			'notmidman':'Not a middleware',
+			'skillset':'I have the skillset',
+			'internet':'Device with an active connection',
+			'qualification':'Train certification',
+			'portifolio':'Portifolio link',
+			'profession':'About me',
+			'ref1name':'Ref 1 name',
+			'ref1title':'Ref 1 title',
+			'ref1email':'Ref 1 email',
+			'ref1phone':'Ref 1 phone number',
+			'ref2name':'Ref 2 name',
+			'ref2title':'Ref 2 title',
+			'ref2email':'Ref 2 email',
+			'ref2phone':'Ref 2 phone number',
+			'service':'Service',
+			'availability':'Availability',
+			'status':'Status',
+			'starttime':'Start time',
+			'endtime':'End time',
+			'pricevisit':'Price per  visit',
+			'terms':'Terms'
+		}
+        widgets = {
+			'fullname':forms.TextInput(attrs={'class':'form-control'}),
+			'phone':forms.TextInput(attrs={'class':'form-control'}),
+   			'email':forms.TextInput(attrs={'class':'form-control'}),
+			'nin':forms.TextInput(attrs={'class':'form-control'}),
+			'dob':forms.TextInput(attrs={'class':'form-control'}),
+			'gender':forms.TextInput(attrs={'class':'form-control'}),
+			'phyadd':forms.TextInput(attrs={'class':'form-control'}),
+			'yearexp':forms.TextInput(attrs={'class':'form-control'}),
+			'notmidman':forms.TextInput(attrs={'class':'form-control'}),
+			'skillset':forms.TextInput(attrs={'class':'form-control'}),
+			'internet':forms.TextInput(attrs={'class':'form-control'}),
+			'qualification':forms.TextInput(attrs={'class':'form-control'}),
+			'portifolio':forms.TextInput(attrs={'class':'form-control'}),
+			'profession':forms.TextInput(attrs={'class':'form-control'}),
+			'ref1name':forms.TextInput(attrs={'class':'form-control'}),
+			'ref1title':forms.TextInput(attrs={'class':'form-control'}),
+			'ref1email':forms.TextInput(attrs={'class':'form-control'}),
+			'ref1phone':forms.TextInput(attrs={'class':'form-control'}),
+			'ref2name':forms.TextInput(attrs={'class':'form-control'}),
+			'ref2title':forms.TextInput(attrs={'class':'form-control'}),
+			'ref2email':forms.TextInput(attrs={'class':'form-control'}),
+			'ref2phone':forms.TextInput(attrs={'class':'form-control'}),
+			'service':forms.TextInput(attrs={'class':'form-control'}),
+			'availability':forms.TextInput(attrs={'class':'form-control'}),
+			'status':forms.TextInput(attrs={'class':'form-control'}),
+			'starttime':forms.TextInput(attrs={'class':'form-control'}),
+			'endtime':forms.TextInput(attrs={'class':'form-control'}),
+			'pricevisit':forms.TextInput(attrs={'class':'form-control'}),
+			'terms':forms.TextInput(attrs={'class':'form-control'})
+		}
         
         
 class BookingForm(ModelForm):
@@ -63,51 +125,3 @@ class BookingForm(ModelForm):
 
 
         
-        
-        
-        
-        
-# from django import forms
-
-# class ContactForm(forms.Form):
-#     name = forms.CharField(max_length=30)
-#     email = forms.EmailField(max_length=254)
-#     message = forms.CharField(
-#         max_length=2000,
-#         widget=forms.Textarea(),
-#         help_text='Write here your message!'
-#     )
-#     source = forms.CharField(       # A hidden input for internal use
-#         max_length=50,              # tell from which page the user sent the message
-#         widget=forms.HiddenInput()
-#     )
-
-#     def clean(self):
-#         cleaned_data = super(ContactForm, self).clean()
-#         name = cleaned_data.get('name')
-#         email = cleaned_data.get('email')
-#         message = cleaned_data.get('message')
-#         if not name and not email and not message:
-#             raise forms.ValidationError('You have to write something!')
-
-
-# from django import forms
-# from django.contrib.auth.forms import UserCreationForm
-# from django.contrib.auth.models import User
-
-
-# # Create your forms here.
-
-# class SignUpForm(UserCreationForm):
-# 	email = forms.EmailField(max_length=254,required=True)
-
-# 	class Meta:
-# 		model = User
-# 		fields = ("username", "email", "password1", "password2")
-
-# 	def save(self, commit=True):
-# 		user = super(SignUpForm, self).save(commit=False)
-# 		user.email = self.cleaned_data['email']
-# 		if commit:
-# 			user.save()
-# 		return user

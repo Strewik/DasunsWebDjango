@@ -11,7 +11,7 @@ from django.contrib import messages  # import messages
 from django.contrib.auth.forms import AuthenticationForm  # add this
 from django.contrib.auth import authenticate, login, logout  # add this
 # from .models import *
-from .filters import BookingFilter
+from .filters import *
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import *
 # added imports
@@ -23,6 +23,7 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -204,13 +205,16 @@ def dashboard(request):
     
     total_serviceusers = serviceusers.count()
     total_bookings = bookings.count()
+    
+    myFilter = ServiceproviderFilter(request.GET, queryset=active_serviceproviders)
+    active_serviceproviders = myFilter.qs
 
     context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers,
                'total_serviceproviders': total_serviceproviders, 'pending_serviceproviders': pending_serviceproviders,
                'active_serviceproviders': active_serviceproviders, 'activecount_serviceproviders': activecount_serviceproviders, 'suspended_serviceproviders': suspended_serviceproviders,
                'pendingcount_serviceproviders': pendingcount_serviceproviders, 'suspendedcount_serviceproviders': suspendedcount_serviceproviders,
                'total_serviceusers': total_serviceusers, 
-               'total_bookings':total_bookings,}
+               'total_bookings':total_bookings, 'myFilter': myFilter,}
     return render(request, 'profiles/dashboard.html', context)
 
 
