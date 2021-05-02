@@ -23,7 +23,7 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
-
+from django.core.paginator import Paginator, EmptyPage
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -208,13 +208,22 @@ def dashboard(request):
     
     myFilter = ServiceproviderFilter(request.GET, queryset=active_serviceproviders)
     active_serviceproviders = myFilter.qs
+    
+    paginator = Paginator(serviceusers, 5)
+    page_number = request.GET.get('page', 1)
+    
+    try:
+        page_obj = paginator.get_page(page_number)
+    except EmptyPage:
+        page_number(1)
 
     context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers,
                'total_serviceproviders': total_serviceproviders, 'pending_serviceproviders': pending_serviceproviders,
                'active_serviceproviders': active_serviceproviders, 'activecount_serviceproviders': activecount_serviceproviders, 'suspended_serviceproviders': suspended_serviceproviders,
                'pendingcount_serviceproviders': pendingcount_serviceproviders, 'suspendedcount_serviceproviders': suspendedcount_serviceproviders,
                'total_serviceusers': total_serviceusers, 
-               'total_bookings':total_bookings, 'myFilter': myFilter,}
+               'total_bookings':total_bookings, 'myFilter': myFilter,
+               'page_obj': page_obj}
     return render(request, 'profiles/dashboard.html', context)
 
 
