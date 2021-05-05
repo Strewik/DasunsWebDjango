@@ -3,6 +3,8 @@ from . import views
 from django.contrib import admin
 from django.contrib.auth import views as auth_views #import this
 from django.urls import reverse_lazy
+from django.conf.urls.static import static
+from django.conf import settings
 
 app_name = "profiles"   
 
@@ -16,22 +18,29 @@ urlpatterns = [
     path('spreg/', views.spreg, name='spreg'),
     path('spregsuccess/', views.spregsuccess, name="spregsuccess"), 
     path('logout/', views.logout_request, name='logout'),
-    path('user/', views.userPage, name='user-page'),
     path('caption/', views.captioningList, name='captioning'),
     path('intern/', views.internationalInterpList, name='international-interp'),
     path('mobguide/', views.mobGuideList, name='mobility-guide'),
     path('support/', views.personalSupportList, name='personal-support'),
     path('ugandan/', views.ugandanInterpList, name='ugandan-interp'),
-    path('booking/', views.createbBooking, name="create_booking"),
+    path('booking/<str:pk>', views.createBooking, name="create_booking"),
     path('serviceuserdash/', views.serviceuserdash, name='serviceuserdash'),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('spdash/', views.serviceproviderdash, name="serviceproviderdash"),
-    path('serviceuser/', views.serviceuser, name="serviceuser"),
+    # path('addServiceuser/', views.addServiceuser, name="addServiceuser"),
     path('update_serviceuser/<str:pk>', views.updateServiceuser, name="update_serviceuser"),
     path('delete_serviceuser/<str:pk>', views.deleteServiceuser, name="delete_serviceuser"),
     path('update_serviceprovider/<str:pk>', views.updateServiceprovider, name="update_serviceprovider"),
     path('delete_serviceprovider/<str:pk>', views.deleteServiceprovider, name="delete_serviceprovider"),
     path('generalDash/', views.generalDash, name="generalDash"),
-
+    path('profile/', views.serviceUserProfile, name="profile"),
+    path('splist/', views.spList, name="splist"),
+    path('profilesp/', views.serviceProviderProfile, name="profilesp"),
+    path('bookingstatus/<str:pk>', views.updateBookingStatus, name="updateBookingStatus"),
 ]
 
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 
+
 # This works if you have a separate login and register pages which are not models on the home page
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
@@ -29,16 +30,16 @@ def admin_only(view_func):
         if request.user.groups.exists():
             group = request.user.groups.all()[0].name
         
+        if group == 'admin':
+            return redirect('profiles:dashboard')
+
+        if group == 'serviceprovider':
+            return redirect('profiles:serviceproviderdash')
+
         if group == 'serviceuser':
             return redirect('profiles:serviceuserdash')
         
-        if group == 'serviceprovider':
-            return redirect('profiles:serviceproviderdash')
-        
-        if group == 'admin':
-            return redirect('profiles:dashboard')
-        
         else:
-            return view_func(request, *args, **kwargs)
-           
+        #     return view_func(request, *args, **kwargs)
+            return HttpResponse(str("You don't belong to any user group yet, Contact admin"))           
     return wrapper_func

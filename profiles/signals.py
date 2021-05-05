@@ -1,19 +1,32 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from .models import *
+from django.contrib.auth.models import Group
 
-def create_serviceuser(sender,instance,created, **kwargs):
+from .models import Serviceuser, Serviceprovider
+
+
+def create_serviceuser_profile(sender, instance, created, **kwargs):
     if created:
-        Serviceuser.objects.create(user=instance)
-        print("profile created")
-        
-post_save.connect(create_serviceuser, sender=User)
+        group = Group.objects.get(name='serviceuser')
+        instance.groups.add(group) # instance is the user
+        Serviceuser.objects.create(
+                user=instance,
+                email=instance.email
+            )
+        print('Su profile created!')
 
-def update_serviceuser(sender,instance, created, **kwargs):
-    if created == False:
-        instance.serviceuser.save()
-        print("profile updated")
-        
-post_save.connect(update_serviceuser, sender=User)          
-        
+post_save.connect(create_serviceuser_profile, sender=User)
+
+# def create_serviceprovider_profile(sender, instance, created, **kwargs):
+#     if created:
+#         group = Group.objects.get(name='serviceprovider')
+#         instance.groups.add(group) # instance is the user
+#         Serviceprovider.objects.create(
+#                 user=instance,
+#                 fullname=instance.username,
+#                 email=instance.email
+#             )
+#         print('Sp profile created!')
+
+# post_save.connect(create_serviceprovider_profile, sender=User)

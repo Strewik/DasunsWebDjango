@@ -229,7 +229,7 @@ def dashboard(request):
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser', 'admin'])
-def createbBooking(request):
+def createBooking(request, pk):
 
     serviceusers = ServiceuserModel.objects.all()
 	# serviceproviders = Serviceprovider.objects.all()

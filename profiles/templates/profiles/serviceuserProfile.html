@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Service User Dashboard</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+  </head>
+  <body>
+  {% if user.is_authenticated %}
+   <div>{% include 'profiles/serviceUserNavbar.html' %}</div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card card-body">
+          <a class="btn btn-warning" href="{% url 'profiles:serviceuserdash'%}">
+            &#8592; Back to Dashboard</a
+          >
+          <hr />
+          <h3 style="text-align: center">Account Details</h3>
+          <hr />
+           {% if request.user.serviceuser.profile_pic %}
+          <img class="profile-pic" scr="{{request.user.serviceuser.profile_pic.url}}" />
+          {% endif %} 
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="card card-body">
+          <div><strong>Name:</strong>   {{firstname}} {{lastname}}</div>
+          <div><strong>UserName:</strong>   {{username}}</div>
+          <div><strong>Phone No.:</strong>   {{phone}}</div>
+          <div><strong>Email Address:</strong>   {{email}}</div>
+          <div><strong>Date of Signup:</strong>   {{date}}</div>
+          <br>
+          <div>
+              <a
+              class="btn btn-primary"
+              href="{% url 'profiles:update_serviceuser' request.user.serviceuser.id %}"
+              >Edit Information
+              </a> 
+          
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div>{% include 'profiles/footer.html' %}</div>
+  </body>
+</html>
