@@ -21,9 +21,7 @@
     />
   </head>
   <body>
-    {% comment %} {% if request.user.serviceprovider %} {% endcomment %}
     <div>{% include 'profiles/serviceUserNavbar.html' %}</div>
-    {% comment %} <div class="container-fluid"> {% endcomment %}
       <div class="row">
       <div class="col-3">
           <div class="list-group" id="list-tab" role="tablist">
@@ -74,12 +72,7 @@
             
               <div class="container">
                 <div>
-                 {% if bookings %} 
-                 {% for booking in bookings %}
-                 {% if booking.status == "None" %}
                   <h3>New Requests</h3>
-                  <form action="{% url 'profiles:updateBookingStatus' booking.id %}" method="POST">
-                      {% csrf_token %}
                   <table class="table">
                     <thead
                       class="thead-dark"
@@ -91,37 +84,27 @@
                   <th scope="col">Price per visit(UGX)</th>
                   <th scope="col">Meeting Place</th>
                   <th scope="col">Date/time</th>
-                  {% comment %} <th scope="col">Action</th> {% endcomment %}
                  </tr>
                 </thead>
                 <tbody>
+                 {% if bookings %} 
+                 {% for booking in bookings %}
+                 {% if booking.status == "None" %}
                 <tr>
                   <td>{{booking.serviceprovider.fullname}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
                   <td>{{booking.meetdate}}, {{booking.starttime}}</td>
-                  {% comment %} <td><a href="/"> <span style="color:purple;">Accept</span></a> | <a href="/"><span style="color:red">Deny</span></a></td> {% endcomment %}
-                  {% comment %} <td>
-                  
-                  <input type="submit" value="Accept" name="status" id="accept">
-                  <input type="submit" value="Deny" name="status" id="deny">
-                  <input type="hidden" name="id" value={{booking.id }}>
-                  </td> {% endcomment %}
                 </tr>
-                
-                 {% else %}
-                 <p>You haven't made any new booking requests</p>
                 {% endif %}
                 {% endfor %}
                 {% endif %}
                     </tbody>
                   </table>
-                  </form>
                 </div>
               </div>
             </div>
-        {% comment %} Booked  start{% endcomment %}
          <div
               class="tab-pane fade"
               id="list-home"
@@ -130,9 +113,6 @@
             
               <div class="container">
                 <div>
-                 {% if bookings %} 
-                 {% for booking in bookings %}
-                 {% if booking.status == "Accept" %}
                   <h3>Booked Requests</h3>
                   <table class="table">
                     <thead
@@ -145,20 +125,19 @@
                   <th scope="col">Price per visit(UGX)</th>
                   <th scope="col">Meeting Place</th>
                   <th scope="col">Date/time</th>
-                  {% comment %} <th scope="col">Status</th> {% endcomment %}
                 </tr>
                     </thead>
                     <tbody>
+                    {% if bookings %} 
+                 {% for booking in bookings %}
+                 {% if booking.status == "Accept" %}
                       <tr>
                   <td>{{booking.serviceprovider.fullname}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
                   <td>{{booking.meetdate}}, {{booking.starttime}}</td>
-                  {% comment %} <td>{{booking.status}}Booked</td> {% endcomment %}
                 </tr>
-                  {% else %}
-                 <p>You have no accepted requests yet :-)</p>
                 {% endif %}
                 {% endfor %}
                 {% endif %}
@@ -167,11 +146,7 @@
                 </div>
               </div>
             </div>
-            {% comment %} Booked  end{% endcomment %}
-
-
-            {% comment %} Completed start{% endcomment %}
-                  <div
+            <div
               class="tab-pane fade"
               id="list-profile"
               role="tabpanel"
@@ -179,9 +154,6 @@
             
              <div class="container">
                 <div>
-                 {% if bookings %} 
-                 {% for booking in bookings %}
-                  {% if booking.status == "Accept" and booking.endtime == "" %}
                   <h3>Completed Requests</h3>
                   <table class="table">
                     <thead
@@ -198,6 +170,9 @@
                 </tr>
                     </thead>
                     <tbody>
+                    {% if bookings %} 
+                 {% for booking in bookings %}
+                  {% if booking.status == "Accept" and booking.endtime == "" %}
                       <tr>
                   <td>{{booking.serviceprovider.fullname}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
@@ -206,22 +181,14 @@
                   <td>{{booking.meetdate}}, {{booking.starttime}}</td>
                   <td>{{booking.status}}Completed</td>
                 </tr>
-                  {% else %}
-                 <p>You have no Completed requests</p>
                 {% endif %}
                 {% endfor %}
-                {% comment %} {% else %}
-                <p>You have not yet booked any service</p> {% endcomment %}
                 {% endif %}
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-            {% comment %} Completed end{% endcomment %}
-
-            {% comment %} Cancelled start {% endcomment %}
-
               <div
               class="tab-pane fade"
               id="list-messages"
@@ -230,9 +197,6 @@
               >
                 <div class="container" style="margin-top: 20px">
                 <div>
-                 {% if bookings %} 
-                 {% for booking in bookings %}
-                  {% if booking.status == "Deny" %}
                 <h3>Cancelled Requests</h3>
                   <table class="table">
                     <thead
@@ -245,35 +209,30 @@
                   <th scope="col">Price per visit(UGX)</th>
                   <th scope="col">Meeting Place</th>
                   <th scope="col">Date/time</th>
-                  {% comment %} <th scope="col">Status</th> {% endcomment %}
                 </tr>
                     </thead>
                     <tbody>
+                    {% if bookings %} 
+                 {% for booking in bookings %}
+                  {% if booking.status == "Deny" %}
                       <tr>
                   <td>{{booking.serviceprovider.fullname}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
                   <td>{{booking.meetdate}}, {{booking.starttime}}</td>
-                  {% comment %} <td>{{booking.status}}Cancelled</td> {% endcomment %}
                 </tr>
-                        {% else %}
-                 <p>You have no cancelled requests</p>
                 {% endif %}
                 {% endfor %}
-                {% comment %} {% else %}
-                <p>You have not yet booked any service</p> {% endcomment %}
                 {% endif %}
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-            {% comment %} Cancelled end {% endcomment %}
         </div>
         </div>
       </div>
-    {% comment %} </div> {% endcomment %}
   </div>
     <div>{% include 'profiles/footer.html' %}</div>
   </body>

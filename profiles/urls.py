@@ -36,7 +36,7 @@ urlpatterns = [
     path('profile/', views.serviceUserProfile, name="profile"),
     path('splist/', views.spList, name="splist"),
     path('profilesp/', views.serviceProviderProfile, name="profilesp"),
-    path('bookingstatus/<str:pk>', views.updateBookingStatus, name="updateBookingStatus"),
+    path('updatebookingstatus/<str:pk>', views.updateBookingStatus, name="updatebookingstatus"),
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

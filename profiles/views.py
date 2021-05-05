@@ -228,50 +228,84 @@ def dashboard(request):
 
 
 @login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser', 'admin'])
+# @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def createBooking(request, pk):
-
-    serviceusers = ServiceuserModel.objects.all()
-	# serviceproviders = Serviceprovider.objects.all()
-	# bookings = Booking.objects.all()
+	# serviceusers = ServiceuserModel.objects.all()
+	# serviceuser = ServiceuserModel.objects.get(id=pk)
+	serviceuser = request.user.serviceuser
+	serviceprovider = Serviceprovider.objects.get(id=pk)
+	bookingform = BookingForm()
 	
+	if request.method == 'POST':
+		print('Printing post:', request.POST)
+		bookingform = BookingForm(request.POST)
+		
+		if bookingform.is_valid():
+			# serviceuser = bookingform.cleaned_data.get('serviceuser')
+			# serviceprovider = bookingform.cleaned_data.get('serviceprovider')
+			bookingform.save()
+			return redirect(reverse ('profiles:serviceuserdash'))
 
-    bookingform = BookingForm()
-    if request.method == 'POST':
-        # print('Printing post:', request.POST)
-        bookingform = BookingForm(request.POST)
-        if bookingform.is_valid():
-            bookingform.save()
-            return redirect(reverse ('profiles:serviceuserdash'))
+	context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceuser':serviceuser}
+	return render(request,'profiles/bookingform.html', context)
 
-    context = {'bookingform': bookingform, serviceusers: serviceusers}
-	# 	context = {'form': form, serviceusers: serviceusers, serviceproviders: serviceproviders, bookings: bookings}
-    return render(request,'profiles/bookingform.html', context)
-	# return render(request, template_name='profiles/bookingform.html', context)
+ 
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider', 'admin'])
+def updateBookingStatus(request, pk):
+	serviceusers = ServiceuserModel.objects.all()
+	serviceprovider = Serviceprovider.objects.get(id=pk)
+	booking = Booking.objects.get(id=pk)
+
+	if request.method == 'POST':
+		print('Printing post:', request.POST)
+		
+		# First, you should retrieve the team instance you want to update
+		booking = Booking.objects.get(id=request.POST['id'])
+
+		# Next, you update the status
+		if request.POST.get('status'):
+			booking.status = request.POST.get('status')
+			booking.save()
+			return redirect(reverse ('profiles:serviceproviderdash'))
+
+	context = {'serviceusers':serviceusers, 'booking':booking, 'serviceprovider':serviceprovider}
+	return render(request,'profiles/serviceProviderDashboard.html', context)
 
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])
 def serviceuserdash(request):
-	bookings = request.user.serviceuser.booking_set.all()
+	mybookings = request.user.serviceuser.booking_set.all()
+	bookings = mybookings.order_by('-date_created')
+	print('my bookings:', bookings)
+	# for booking in bookings:
+	# 	booking.service_hours = (int(float(booking.endtime)) - int(float(booking.starttime)))
+	# total_bookings = bookings.count()
+	# ongoing = bookings.filter(status='Ongoing').count()
+	# completed = bookings.filter(status='Completed').count()
+	# cancelled = bookings.filter(status='Cancelled').count()
+
+	# context = {'bookings': bookings, 'total_bookings': total_bookings, 'ongoing': ongoing, 'completed': completed, 'cancelled': cancelled,}
 	context = {'bookings': bookings}
 
 	return render(request, 'profiles/serviceuserdash.html', context)
 
 
-def serviceuser(request):
-    serviceusers = ServiceuserModel.objects.all()
-    form = ServiceuserForm()
-    if request.method == 'POST':
-        # print('Printing post:', request.POST)
-        form = ServiceuserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse ('profiles:dashboard'))
-        
-
-    context = {'form': form, serviceusers: serviceusers}
-    return render(request,'profiles/serviceuser.html', context)
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
+def serviceUserProfile(request):
+    serviceuser = request.user.serviceuser
+    username = request.user
+    firstname = serviceuser.firstname
+    lastname = serviceuser.lastname
+    phone = serviceuser.phone
+    email = serviceuser.email
+    date = serviceuser.date_created
+    profile_pic = serviceuser.profile_pic
+    context = {'username':username, 'firstname':firstname, 'lastname':lastname, 'phone':phone, 'email':email, 'date':date, }
+    return render(request, 'profiles/serviceuserProfile.html', context)
 
 
 # @login_required(login_url='profiles:homepage')
@@ -377,3 +411,11 @@ def ugandanInterpList(request):
 @admin_only
 def generalDash(request):
 	return render(request, 'profiles/generalDashboard.html')
+
+
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser', 'admin'])
+def spList(request):
+    serviceproviders = Serviceprovider.objects.all()
+    context = {'serviceproviders': serviceproviders}
+    return render(request, 'profiles/splist/allServiceProviders.html', context)

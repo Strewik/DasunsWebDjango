@@ -56,7 +56,7 @@
             Welcome, {{user.username}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {% if request.user.serviceuser%}
+            {% if request.user.serviceuser and not request.user.serviceprovider%}
             <a class="dropdown-item" href="/serviceuserdash">My Dashboard</a>
             <a class="dropdown-item" href="/profile">View Profile</a>
             <a class="dropdown-item" href="/logout">Logout</a>
