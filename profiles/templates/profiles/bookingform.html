@@ -42,7 +42,7 @@
           <br /> 
           {% endif %}
 
-         {% if request.user.serviceuser and not request.user.serviceprovider  %}
+         {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider  %} {% endcomment %}
          <form name="bookingform" class="" action="" method="POST" id="form">
           {% csrf_token %}
          <div class="form-group row">
@@ -146,8 +146,8 @@
                {{bookingform.endtime}}
             </div>
           </div> 
-          {% endif %}
-          {% comment %} <br />  {% endcomment %}
+          {% comment %} {% endif %} {% endcomment %}
+          <br /> 
             <div class="form-row">
             <input type="submit" value="BOOK NOW" name="booking-btn" class="btn btn-success" id="book-btn"/>
           </div> 

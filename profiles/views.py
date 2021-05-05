@@ -2,7 +2,7 @@ import os
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Serviceuser as ServiceuserModel, Booking, Serviceprovider
-from .forms import CreateUserForm, ServiceuserForm, BookingForm
+from .forms import *
 from django.contrib import messages  # import messages
 # from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import AuthenticationForm  # add this
@@ -231,7 +231,7 @@ def createBooking(request, pk):
 def updateBookingStatus(request, pk):
 	serviceusers = ServiceuserModel.objects.all()
 	serviceprovider = Serviceprovider.objects.get(id=pk)
-	booking = Booking.objects.get(id=pk)
+	# booking = Booking.objects.get(id=pk)
 
 	if request.method == 'POST':
 		print('Printing post:', request.POST)
