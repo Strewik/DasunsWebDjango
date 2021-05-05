@@ -252,7 +252,11 @@
     <div class="white-service">
       <h2>All Services</h2>
       <div class="row">
+      {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
         <div class="col-md-4" onclick="location.href='/support';">
+        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
+        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -271,7 +275,11 @@
             </div>
           </div>
         </div>
+         {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
         <div class="col-md-4" onclick="location.href='/ugandan';">
+        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
+        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -290,7 +298,11 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4" onclick="location.href='/intern';">
+        {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
+       <div class="col-md-4" onclick="location.href='/intern';">
+        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
+        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -313,7 +325,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4" onclick="location.href='/mobguide';">
+      {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
+      <div class="col-md-4" onclick="location.href='/mobguide';">
+        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
+        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -332,7 +348,11 @@
             </div>
           </div>
         </div>
+      {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
         <div class="col-md-4" onclick="location.href='/caption';">
+        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
+        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -503,22 +523,6 @@
                     class="col-md"
                     style="align-content: right; padding-top: 40px"
                   >
-                    {% comment %}
-                    <svg
-                      width="em"
-                      height="2em"
-                      viewBox="0 0 16 16"
-                      className="bi bi-arrow-right"
-                      fill="#707070"
-                      xmlns="http://www.w3.org/2000/svg"
-                      float="right"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                      />
-                    </svg>
-                    {% endcomment %}
                   </div>
                 </div>
                 <div class="card-body">
