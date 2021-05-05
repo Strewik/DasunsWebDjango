@@ -204,9 +204,11 @@ def dashboard(request):
 
 
 @login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser', 'admin'])
+# @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def createBooking(request, pk):
-	serviceusers = ServiceuserModel.objects.all()
+	# serviceusers = ServiceuserModel.objects.all()
+	# serviceuser = ServiceuserModel.objects.get(id=pk)
+	serviceuser = request.user.serviceuser
 	serviceprovider = Serviceprovider.objects.get(id=pk)
 	bookingform = BookingForm()
 	
@@ -215,24 +217,25 @@ def createBooking(request, pk):
 		bookingform = BookingForm(request.POST)
 		
 		if bookingform.is_valid():
+			# serviceuser = bookingform.cleaned_data.get('serviceuser')
+			# serviceprovider = bookingform.cleaned_data.get('serviceprovider')
 			bookingform.save()
 			return redirect(reverse ('profiles:serviceuserdash'))
 
-	context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceusers':serviceusers}
+	context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceuser':serviceuser}
 	return render(request,'profiles/bookingform.html', context)
 
 
 @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser', 'admin'])
+@allowed_users(allowed_roles=['serviceprovider', 'admin'])
 def updateBookingStatus(request, pk):
 	serviceusers = ServiceuserModel.objects.all()
 	serviceprovider = Serviceprovider.objects.get(id=pk)
-	# bookingform = BookingForm()
-	
+	booking = Booking.objects.get(id=pk)
+
 	if request.method == 'POST':
 		print('Printing post:', request.POST)
-		# bookingform = BookingForm(request.POST)
-
+		
 		# First, you should retrieve the team instance you want to update
 		booking = Booking.objects.get(id=request.POST['id'])
 
@@ -241,23 +244,20 @@ def updateBookingStatus(request, pk):
 			booking.status = request.POST.get('status')
 			booking.save()
 			return redirect(reverse ('profiles:serviceproviderdash'))
-		
-		# if bookingform.is_valid():
-		# 	bookingform.save()
-		# 	return redirect(reverse ('profiles:serviceuserdash'))
-	# context = {'bookingform': bookingform,'serviceprovider':serviceprovider,}
-	context = {'serviceusers':serviceusers}
+
+	context = {'serviceusers':serviceusers, 'booking':booking, 'serviceprovider':serviceprovider}
 	return render(request,'profiles/serviceProviderDashboard.html', context)
 
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])
 def serviceuserdash(request):
-	bookings = request.user.serviceuser.booking_set.all()
-	
+	mybookings = request.user.serviceuser.booking_set.all()
+	bookings = mybookings.order_by('-date_created')
+	print('my bookings:', bookings)
 	# for booking in bookings:
 	# 	booking.service_hours = (int(float(booking.endtime)) - int(float(booking.starttime)))
-	total_bookings = bookings.count()
+	# total_bookings = bookings.count()
 	# ongoing = bookings.filter(status='Ongoing').count()
 	# completed = bookings.filter(status='Completed').count()
 	# cancelled = bookings.filter(status='Cancelled').count()

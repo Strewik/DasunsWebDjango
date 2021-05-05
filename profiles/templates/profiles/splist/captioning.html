@@ -26,7 +26,7 @@
         <table class="table">
           <thead
             class="thead-dark"
-            style="color: #fff; background-color: rgb(12, 83, 39)"
+            style="color: #fff; background-color: #35d187"
           >
             <tr>
               <th scope="col">Service Provider</th>
@@ -47,10 +47,18 @@
               <td>{{serviceprovider.pricevisit}}</td>
 
               <td>
+              {% comment %} {% if request.user.serviceuser.lastname == " " or request.user.serviceuser.firstname == " "%}
+                    <p> Please first Update your Service User profile<p>
                   <a
+                class="btn btn-success"
+                href="{% url 'profiles:update_serviceuser' request.user.serviceuser.id %}"
+                >Book Now</a>
+                  {% else %} {% endcomment %}
+                   <a
                 class="btn btn-success"
                 href="{% url 'profiles:create_booking' serviceprovider.id %}"
                 >Book Now</a>
+                {% comment %} {% endif %} {% endcomment %}
               </td>
               <td>
                 <button type="button" class="btn btn-info">View Details</button>
