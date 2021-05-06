@@ -364,15 +364,19 @@ def deleteServiceprovider(request, pk):
     context = {'item': serviceprovider}
     return render(request, 'profiles/deleteServiceprovider.html', context) 
 
- 
-
-
 @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
-def userPage(request):
-	# bookings = request.user.serviceuser.order_set.all()
-	context = {}
-	return render(request, 'profiles/user.html', context)
+@allowed_users(allowed_roles=['serviceuser'])
+def serviceProviderProfile(request):
+    serviceprovider = request.user.serviceprovider
+    username = request.user
+    fullname = serviceprovider.fullname
+    gender = serviceprovider.gender
+    phone = serviceprovider.phone
+    email = serviceprovider.email
+    address = serviceprovider.phyadd
+    service = serviceprovider.service
+    context = {'username':username, 'fullname':fullname, 'gender':gender, 'phone':phone, 'email':email, 'address':address, 'service':service}
+    return render(request, 'profiles/serviceproviderProfile.html', context)
 
 
 @login_required(login_url='profiles:homepage')
