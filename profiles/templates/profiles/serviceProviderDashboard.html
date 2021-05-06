@@ -21,11 +21,7 @@
     />
   </head>
   <body>
-    {% comment %} {% if request.user.serviceprovider %} {% endcomment %}
-    <div>{% include 'profiles/serviceProvNavbar.html' %}</div>
-    {% comment %}
-    <div class="container-fluid">
-      {% endcomment %}
+    <div>{% include 'profiles/serviceProvNavbar.html' %}</div> 
       <div class="row">
         <div class="col-3">
           <div class="list-group" id="list-tab" role="tablist">
@@ -78,13 +74,6 @@
               <div class="container">
                 <div>
                   <h3>Booking Requests</h3>
-                  {% comment %} {% if bookings %}
-                  {% for booking in bookings %}
-                  {% if booking.status == "Pending" %} {% endcomment %}
-                  {% comment %} {% if booking.id%} {% endcomment %}
-                  {% comment %} <form action="{% url 'profiles:updatebookingstatus' booking.id %}" method="POST">
-                    {% csrf_token %}  {% endcomment %}
-                    {% comment %} {% endif %}  {% endcomment %}
                     <table class="table">
                       <thead
                         class="thead-dark"
@@ -118,15 +107,9 @@
                           <td>{{booking.meetplace}}</td>
                           <td>{{booking.meetdate}}, {{booking.starttime}}</td>
                           <td>
-                            {% comment %} <form
-                              action="{% url 'profiles:updatebookingstatus' booking.id %}"
-                              method="POST"
-                            > 
-                              {% csrf_token %} {% endcomment %}
                               <input type="submit" value="Accept" name="status" id="accept"/>
                               <input type="submit" value="Deny" name="status" id="deny" />
                               <input type="hidden" name="id" value="{{booking.id }}" />
-                           {% comment %} </form>  {% endcomment %}
                           </td>
                         </tr>
                         </form> 
@@ -276,7 +259,6 @@
           </div>
         </div>
       </div>
-    </div>
     <div>{% include 'profiles/footer.html' %}</div>
   </body>
 </html>
