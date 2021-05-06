@@ -41,13 +41,12 @@
           </h6>
           <br /> 
           {% endif %}
-
          {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider  %} {% endcomment %}
          <form name="bookingform" class="" action="" method="POST" id="form">
           {% csrf_token %}
          <div class="form-group row">
           <label for="" class="col-sm-3 col-form-label"
-              >Full Name: </label>
+              >Full Name: </label> 
             <div class="col-sm-9">
                <input
                 type="text"
@@ -69,9 +68,9 @@
           </div>
           </br>
            <div class="form-group row">
-            <label for="" class="col-sm-3 col-form-label"
+           <label for="" class="col-sm-3 col-form-label"
               >Email: </label
-            >
+            > 
             <div class="col-sm-9">
               <input
                 type="text"
@@ -110,8 +109,7 @@
                 type="text"
                 name="serviceuser"
                 class="form-control"
-                value="{{user.serviceuser.id}}"
-                {% comment %} hidden {% endcomment %}
+                value="{{user.serviceuser.firstname}} {{user.serviceuser.lastname}}"
               />
             </div> 
           </div> 
@@ -125,8 +123,7 @@
                 type="text"
                 name="serviceprovider"
                 class="form-control"
-                value="{{serviceprovider.id}}"
-                {% comment %} hidden {% endcomment %}
+                value="{{serviceprovider.fullname}}"
               />
             </div>
           </div>

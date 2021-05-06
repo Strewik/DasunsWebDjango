@@ -30,18 +30,6 @@ class ServiceuserForm(ModelForm):
 		model = Serviceuser
 		fields = '__all__'
 		exclude=['user']
-		# fields = ('name', 'phone', 'email')
-		# labels  = {
-		# 	'name':'Full Name', 
-		# 	'phone':'Phone No.', 
-		# 	'email':'Email', 
-		# 	}
-		# widgets = {
-		# 	'name': forms.TextInput(attrs={'placeholder': 'Enter your Full name','class':'form-control'}),
-		# 	'phone': forms.TextInput(attrs={'placeholder': 'Enter your phone number','class':'form-control'}),
-		# 	'email': forms.TextInput(attrs={'placeholder': 'Enter your Email address','class':'form-control'}),
-
-		# }
 
 
 class ServiceproviderForm(ModelForm):
@@ -54,7 +42,7 @@ class BookingForm(ModelForm):
 	class Meta:
 		model = Booking
 		fields = '__all__'
-		exclude = ('status',) 
+		exclude = ['status']
 		labels  = {
 			'name':'Full Name', 
 			'phone':'Phone No.', 
