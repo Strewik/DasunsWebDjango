@@ -48,6 +48,68 @@ class ServiceproviderForm(ModelForm):
     class Meta:
         model = Serviceprovider
         fields = '__all__' 
+        # labels = {
+		# 	'fullname':'Fullname',
+		# 	'phone':'Phone number',
+   		# 	'email':'Email',
+		# 	'nin':'NIN',
+		# 	'dob':'Date of birth',
+		# 	'gender':'Gender',
+		# 	'phyadd':'Physical address',
+		# 	'yearexp':'At least one year of experience',
+		# 	'notmidman':'Not a middleware',
+		# 	'skillset':'I have the skillset',
+		# 	'internet':'Device with an active connection',
+		# 	'qualification':'Train certification',
+		# 	'portifolio':'Portifolio link',
+		# 	'profession':'About me',
+		# 	'ref1name':'Ref 1 name',
+		# 	'ref1title':'Ref 1 title',
+		# 	'ref1email':'Ref 1 email',
+		# 	'ref1phone':'Ref 1 phone number',
+		# 	'ref2name':'Ref 2 name',
+		# 	'ref2title':'Ref 2 title',
+		# 	'ref2email':'Ref 2 email',
+		# 	'ref2phone':'Ref 2 phone number',
+		# 	'service':'Service',
+		# 	'availability':'Availability',
+		# 	'status':'Status',
+		# 	'starttime':'Start time',
+		# 	'endtime':'End time',
+		# 	'pricevisit':'Price per  visit',
+		# 	'terms':'Terms'
+		# }
+        # widgets = {
+		# 	'fullname':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'phone':forms.TextInput(attrs={'class':'form-control'}),
+   		# 	'email':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'nin':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'dob':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'gender':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'phyadd':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'yearexp':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'notmidman':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'skillset':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'internet':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'qualification':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'portifolio':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'profession':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'ref1name':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'ref1title':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'ref1email':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'ref1phone':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'ref2name':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'ref2title':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'ref2email':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'ref2phone':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'service':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'availability':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'status':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'starttime':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'endtime':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'pricevisit':forms.TextInput(attrs={'class':'form-control'}),
+		# 	'terms':forms.TextInput(attrs={'class':'form-control'})
+		# }
         
         
 class BookingForm(ModelForm):
@@ -77,4 +139,3 @@ class BookingForm(ModelForm):
 			# 'serviceuser': forms.TextInput(attrs={'placeholder': 'Select service user','class':'form-control'}),
 			# 'serviceprovider': forms.TextInput(attrs={'placeholder': 'Select service provider','class':'form-control'}),
 		} 
-

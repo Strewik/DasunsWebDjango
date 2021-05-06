@@ -240,12 +240,11 @@
     </style>
   </head>
   <body>
-    {% comment %} <div>{% include 'profiles/serviceProvNavbar.html' %}</div> {% endcomment %}
     <!-- MultiStep Form -->
 
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <form id="msform" action="{% url 'profiles:spregsave' %}" method="post">
+        <form id="msform" action="{% url 'profiles:spregsave' %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <!-- progressbar -->
           <ul id="progressbar">
@@ -289,8 +288,8 @@
               name="gender"
             >
               <option selected>Gender</option>
-              <option value="female">Female</option>
-              <option value="male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
             </select>
             <input
               class="fullinput"
@@ -538,16 +537,16 @@
               name="service"
             >
               <option selected>Service</option>
-              <option value="Personal support assistance">
+              <option value="Personal Support Assistance">
                 Personal Support Assistance
               </option>
-              <option value="Ugandan sign language">
+              <option value="Ugandan Sign Language Interpreter">
                 Ugandan sign language interpreter
               </option>
-              <option value="International sign language">
+              <option value="International Sign Language Interpreter">
                 Ugandan sign language interpreter
               </option>
-              <option value="Mobility guide">Mobility guide</option>
+              <option value="Mobility Guide">Mobility guide</option>
               <option value="Captioning">Captioning</option>
             </select>
             <label>Enter our service availability</label>

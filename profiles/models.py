@@ -36,7 +36,7 @@ class Serviceprovider(models.Model):
     notmidman = models.CharField(max_length=200)
     skillset = models.CharField(max_length=200)
     internet = models.CharField(max_length=200)
-    qualification = models.CharField(max_length=200)
+    qualification = models.FileField(null=True,)
     portifolio = models.CharField(max_length=200, blank=True)
     profession = models.CharField(max_length=200)
     ref1name = models.CharField(max_length=200)

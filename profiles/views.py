@@ -2,12 +2,13 @@ import os
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Serviceuser as ServiceuserModel, Booking, Serviceprovider
-from .forms import CreateUserForm, ServiceuserForm, BookingForm
+from .forms import *
 from django.contrib import messages  # import messages
 # from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import AuthenticationForm  # add this
 from django.contrib.auth import authenticate, login, logout  # add this
-from .filters import BookingFilter
+# from .models import *
+from .filters import *
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import *
 # added imports
@@ -18,6 +19,7 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -155,7 +157,7 @@ def spreg(request):
           
 
 
-@login_required(login_url='profiles:homepage')
+# @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceprovider'])
 def serviceproviderdash(request):
 	bookings = request.user.serviceprovider.booking_set.all()
@@ -177,8 +179,8 @@ def spregsuccess(request):
       
     return render(request, 'profiles/spregsuccess.html')
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['admin'])
 def dashboard(request):
     bookings = Booking.objects.all()
     serviceproviders = Serviceprovider.objects.all()
@@ -193,17 +195,20 @@ def dashboard(request):
     
     total_serviceusers = serviceusers.count()
     total_bookings = bookings.count()
+    
+    myFilter = ServiceproviderFilter(request.GET, queryset=active_serviceproviders)
+    active_serviceproviders = myFilter.qs
 
     context = {'bookings': bookings, 'serviceproviders': serviceproviders, 'serviceusers': serviceusers,
                'total_serviceproviders': total_serviceproviders, 'pending_serviceproviders': pending_serviceproviders,
                'active_serviceproviders': active_serviceproviders, 'activecount_serviceproviders': activecount_serviceproviders, 'suspended_serviceproviders': suspended_serviceproviders,
                'pendingcount_serviceproviders': pendingcount_serviceproviders, 'suspendedcount_serviceproviders': suspendedcount_serviceproviders,
                'total_serviceusers': total_serviceusers, 
-               'total_bookings':total_bookings,}
+               'total_bookings':total_bookings, 'myFilter': myFilter,}
     return render(request, 'profiles/dashboard.html', context)
 
 
-@login_required(login_url='profiles:homepage')
+# @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def createBooking(request, pk):
 	# serviceusers = ServiceuserModel.objects.all()
@@ -226,8 +231,8 @@ def createBooking(request, pk):
 	return render(request,'profiles/bookingform.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceprovider', 'admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceprovider', 'admin'])
 def updateBookingStatus(request, pk):
 	serviceusers = ServiceuserModel.objects.all()
 	serviceprovider = Serviceprovider.objects.get(id=pk)
@@ -249,8 +254,8 @@ def updateBookingStatus(request, pk):
 	return render(request,'profiles/serviceProviderDashboard.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser'])
 def serviceuserdash(request):
 	mybookings = request.user.serviceuser.booking_set.all()
 	bookings = mybookings.order_by('-date_created')
@@ -268,8 +273,8 @@ def serviceuserdash(request):
 
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser'])
 def serviceUserProfile(request):
 	serviceuser = request.user.serviceuser
 	username = request.user
@@ -284,8 +289,8 @@ def serviceUserProfile(request):
 	return render(request, 'profiles/serviceuserProfile.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser', 'admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def updateServiceuser(request, pk):
     serviceusers = ServiceuserModel.objects.get(id=pk)
     form = ServiceuserForm(instance=serviceusers)
@@ -300,7 +305,7 @@ def updateServiceuser(request, pk):
     return render(request, 'profiles/editServiceuser.html', context) 
 
 def updateServiceprovider(request, pk):
-
+    
     serviceprovider = Serviceprovider.objects.get(id=pk)
     form = ServiceproviderForm(instance=serviceprovider)
 
@@ -312,6 +317,7 @@ def updateServiceprovider(request, pk):
 
     context = {'form': form}
     return render(request, 'profiles/serviceprovider.html', context) 
+
 
 
 # @login_required(login_url='profiles:homepage')
