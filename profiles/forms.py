@@ -47,7 +47,8 @@ class ServiceuserForm(ModelForm):
 class ServiceproviderForm(ModelForm):
     class Meta:
         model = Serviceprovider
-        fields = '__all__' 
+        fields = '__all__'
+        exclude=['user']
         # labels = {
 		# 	'fullname':'Fullname',
 		# 	'phone':'Phone number',
