@@ -42,7 +42,7 @@
           <br /> 
           {% endif %}
 
-         {% if request.user.serviceuser and not request.user.serviceprovider  %}
+         {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider  %} {% endcomment %}
          <form name="bookingform" class="" action="" method="POST" id="form">
           {% csrf_token %}
          <div class="form-group row">
@@ -101,7 +101,7 @@
           </div>
           <br /> 
 
-         <div class="form-group row">
+          <div class="form-group row">
             <label for="" class="col-sm-3 col-form-label"
               >Service User:</label
             > 
@@ -110,12 +110,12 @@
                 type="text"
                 name="serviceuser"
                 class="form-control"
-                value="{{serviceuser.id}}"
+                value="{{user.serviceuser.id}}"
                 {% comment %} hidden {% endcomment %}
               />
             </div> 
           </div> 
-          <br/>
+          <br/> 
            {% if serviceprovider.id %}
           <div class="form-group row"> 
            <label for="" class="col-sm-3 col-form-label"
@@ -131,7 +131,7 @@
             </div>
           </div>
           {% endif %}
-          </br> 
+          </br>
           <p class="col-sm-3 col-form-label"><b>Meeting Time:</b></p></br>
           <div class="form-row" id="time-stamp">
             <div class="form-group col-md-5" id="left-time">
@@ -146,8 +146,8 @@
                {{bookingform.endtime}}
             </div>
           </div> 
-          {% endif %}
-          {% comment %} <br />  {% endcomment %}
+          {% comment %} {% endif %} {% endcomment %}
+          <br /> 
             <div class="form-row">
             <input type="submit" value="BOOK NOW" name="booking-btn" class="btn btn-success" id="book-btn"/>
           </div> 
