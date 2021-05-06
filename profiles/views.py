@@ -189,7 +189,7 @@ def spregsuccess(request):
       
     return render(request, 'profiles/spregsuccess.html')
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['admin'])
 def dashboard(request):
     bookings = Booking.objects.all()
@@ -242,8 +242,8 @@ def createBooking(request, pk):
 		if bookingform.is_valid():
 			serviceuser = bookingform.cleaned_data.get('serviceuser')
 			serviceprovider = bookingform.cleaned_data.get('serviceprovider')
-			# mybookingform = bookingform.save()
-			# print('Printing mybookingform:', mybookingform.serviceprovider)
+			mybookingform = bookingform.save()
+			print('Printing mybookingform:', mybookingform.serviceprovider)
 			bookingform.save()
 			return redirect(reverse ('profiles:serviceuserdash'))
 
@@ -364,6 +364,7 @@ def deleteServiceprovider(request, pk):
     context = {'item': serviceprovider}
     return render(request, 'profiles/deleteServiceprovider.html', context) 
 
+ 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])
 def serviceProviderProfile(request):
