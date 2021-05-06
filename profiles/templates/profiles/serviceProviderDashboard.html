@@ -78,12 +78,12 @@
               <div class="container">
                 <div>
                   <h3>Booking Requests</h3>
-                  {% if bookings %}
+                  {% comment %} {% if bookings %}
                   {% for booking in bookings %}
-                  {% if booking.status == "Pending" %}
+                  {% if booking.status == "Pending" %} {% endcomment %}
                   {% comment %} {% if booking.id%} {% endcomment %}
-                  <form action="{% url 'profiles:updatebookingstatus' booking.id %}" method="POST">
-                    {% csrf_token %} 
+                  {% comment %} <form action="{% url 'profiles:updatebookingstatus' booking.id %}" method="POST">
+                    {% csrf_token %}  {% endcomment %}
                     {% comment %} {% endif %}  {% endcomment %}
                     <table class="table">
                       <thead
@@ -100,9 +100,14 @@
                         </tr>
                       </thead>
                       <tbody>
-                        {% comment %} {% if bookings %}
+                        {% if bookings %}
                         {% for booking in bookings %}
-                        {% if booking.status == "Pending" %} {% endcomment %}
+                        {% if booking.status == "Pending" %}
+                        <form
+                              action="{% url 'profiles:updatebookingstatus' booking.id %}"
+                              method="POST"
+                            > 
+                        {% csrf_token %}
                         <tr>
                           <td>
                             {{booking.serviceuser.firstname}}
@@ -116,14 +121,15 @@
                             {% comment %} <form
                               action="{% url 'profiles:updatebookingstatus' booking.id %}"
                               method="POST"
-                            > {% endcomment %}
-                              {% comment %} {% csrf_token %} {% endcomment %}
+                            > 
+                              {% csrf_token %} {% endcomment %}
                               <input type="submit" value="Accept" name="status" id="accept"/>
                               <input type="submit" value="Deny" name="status" id="deny" />
                               <input type="hidden" name="id" value="{{booking.id }}" />
-                            {% comment %} </form> {% endcomment %}
+                           {% comment %} </form>  {% endcomment %}
                           </td>
                         </tr>
+                        </form> 
                         {% endif %}
                         {% endfor %}
                         {% endif %}

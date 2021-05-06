@@ -54,7 +54,7 @@ class BookingForm(ModelForm):
 	class Meta:
 		model = Booking
 		fields = '__all__'
-		exclude = ('serviceuser', 'serviceprovider', 'status') 
+		exclude = ('status',) 
 		labels  = {
 			'name':'Full Name', 
 			'phone':'Phone No.', 
@@ -63,8 +63,8 @@ class BookingForm(ModelForm):
 			'meetdate':'Meeting Date',
 			'starttime':'Start Time',
 			'endtime':'End Time',
-			# 'serviceuser':'Service User',
-			# 'serviceprovider':'Service Provider'
+			'serviceuser':'Service User',
+			'serviceprovider':'Service Provider'
 			}
 		widgets = {
 			'name': forms.TextInput(attrs={'placeholder': 'Enter your Full name','class':'form-control'}),
@@ -74,7 +74,7 @@ class BookingForm(ModelForm):
 			'meetdate': DatePickerInput(attrs={'placeholder': 'Schedule your preferred date','class':'form-control'}),
 			'starttime': TimePickerInput(attrs={'placeholder': 'Enter Starting time','class':'form-control'}),
 			'endtime': TimePickerInput(attrs={'placeholder': 'Enter Ending time','class':'form-control'}),
-			# 'serviceuser': forms.TextInput(attrs={'placeholder': 'Select service user','class':'form-control'}),
-			# 'serviceprovider': forms.TextInput(attrs={'placeholder': 'Select service provider','class':'form-control'}),
+			'serviceuser': forms.TextInput(attrs={'placeholder': 'Select service user','class':'form-control'}),
+			'serviceprovider': forms.TextInput(attrs={'placeholder': 'Select service provider','class':'form-control'}),
 		} 
 
