@@ -72,7 +72,7 @@ class Booking(models.Model):
     serviceuser = models.ForeignKey(Serviceuser, null=True, on_delete=models.SET_NULL)
     serviceprovider = models.ForeignKey(Serviceprovider, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    status = models.CharField(max_length=200, null=True, blank=True)
+    status = models.CharField(max_length=200, default="Pending", blank=True, null=True)
    
 
     def __str__(self):

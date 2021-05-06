@@ -21,11 +21,7 @@
     />
   </head>
   <body>
-    {% comment %} {% if request.user.serviceprovider %} {% endcomment %}
-    <div>{% include 'profiles/serviceProvNavbar.html' %}</div>
-    {% comment %}
-    <div class="container-fluid">
-      {% endcomment %}
+    <div>{% include 'profiles/serviceProvNavbar.html' %}</div> 
       <div class="row">
         <div class="col-3">
           <div class="list-group" id="list-tab" role="tablist">
@@ -78,12 +74,6 @@
               <div class="container">
                 <div>
                   <h3>Booking Requests</h3>
-                  {% comment %} {% if booking.id%}
-                  <form
-                    action="{% url 'profiles:updatebookingstatus' booking.id %}"
-                    method="POST"
-                  >
-                    {% csrf_token %} {% endif %} {% endcomment %}
                     <table class="table">
                       <thead
                         class="thead-dark"
@@ -101,7 +91,12 @@
                       <tbody>
                         {% if bookings %}
                         {% for booking in bookings %}
-                        {% if booking.status == "None" %}
+                        {% if booking.status == "Pending" %}
+                        <form
+                              action="{% url 'profiles:updatebookingstatus' booking.id %}"
+                              method="POST"
+                            > 
+                        {% csrf_token %}
                         <tr>
                           <td>
                             {{booking.serviceuser.firstname}}
@@ -112,39 +107,18 @@
                           <td>{{booking.meetplace}}</td>
                           <td>{{booking.meetdate}}, {{booking.starttime}}</td>
                           <td>
-                            <form
-                              action="{% url 'profiles:updatebookingstatus' booking.id %}"
-                              method="POST"
-                            >
-                              {% csrf_token %}
-                              <input
-                                type="submit"
-                                value="Accept"
-                                name="status"
-                                id="accept"
-                              />
-                              <input
-                                type="submit"
-                                value="Deny"
-                                name="status"
-                                id="deny"
-                              />
-                              <input
-                                type="hidden"
-                                name="id"
-                                value="{{booking.id }}"
-                              />
-                            </form>
+                              <input type="submit" value="Accept" name="status" id="accept"/>
+                              <input type="submit" value="Deny" name="status" id="deny" />
+                              <input type="hidden" name="id" value="{{booking.id }}" />
                           </td>
                         </tr>
+                        </form> 
                         {% endif %}
                         {% endfor %}
                         {% endif %}
                       </tbody>
-                    </table>
-                    {% comment %}
+                    </table> 
                   </form>
-                  {% endcomment %}
                 </div>
               </div>
             </div>
@@ -285,7 +259,6 @@
           </div>
         </div>
       </div>
-    </div>
     <div>{% include 'profiles/footer.html' %}</div>
   </body>
 </html>

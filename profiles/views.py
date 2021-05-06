@@ -1,9 +1,6 @@
 import os
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Serviceprovider, Booking
-# from .models import Booking
-# from .models import Serviceuser
 from .models import Serviceuser as ServiceuserModel
 from .forms import *
 from django.contrib import messages  # import messages
@@ -240,12 +237,13 @@ def createBooking(request, pk):
 	bookingform = BookingForm()
 	
 	if request.method == 'POST':
-		print('Printing post:', request.POST)
 		bookingform = BookingForm(request.POST)
-		
+
 		if bookingform.is_valid():
-			# serviceuser = bookingform.cleaned_data.get('serviceuser')
-			# serviceprovider = bookingform.cleaned_data.get('serviceprovider')
+			serviceuser = bookingform.cleaned_data.get('serviceuser')
+			serviceprovider = bookingform.cleaned_data.get('serviceprovider')
+			# mybookingform = bookingform.save()
+			# print('Printing mybookingform:', mybookingform.serviceprovider)
 			bookingform.save()
 			return redirect(reverse ('profiles:serviceuserdash'))
 
@@ -259,7 +257,7 @@ def createBooking(request, pk):
 def updateBookingStatus(request, pk):
 	serviceusers = ServiceuserModel.objects.all()
 	serviceprovider = Serviceprovider.objects.get(id=pk)
-	booking = Booking.objects.get(id=pk)
+	# booking = Booking.objects.get(id=pk)
 
 	if request.method == 'POST':
 		print('Printing post:', request.POST)
@@ -280,9 +278,9 @@ def updateBookingStatus(request, pk):
 # @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceuser'])
 def serviceuserdash(request):
-	mybookings = request.user.serviceuser.booking_set.all()
-	bookings = mybookings.order_by('-date_created')
-	print('my bookings:', bookings)
+	bookings = request.user.serviceuser.booking_set.all()
+	# bookings = mybookings.order_by('-date_created')
+	# print('my bookings:', bookings)
 	# for booking in bookings:
 	# 	booking.service_hours = (int(float(booking.endtime)) - int(float(booking.starttime)))
 	# total_bookings = bookings.count()
@@ -328,6 +326,8 @@ def updateServiceuser(request, pk):
     context = {'form': form}
     return render(request, 'profiles/serviceuser.html', context) 
 
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['admin'])
 def updateServiceprovider(request, pk):
     
     serviceprovider = Serviceprovider.objects.get(id=pk)
@@ -354,6 +354,8 @@ def deleteServiceuser(request, pk):
     context = {'item': serviceusers}
     return render(request, 'profiles/deleteServiceuser.html', context) 
 
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['admin'])
 def deleteServiceprovider(request, pk):
     serviceprovider = Serviceprovider.objects.get(id=pk)
     if request.method == "POST":

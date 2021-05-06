@@ -89,7 +89,7 @@
                 <tbody>
                  {% if bookings %} 
                  {% for booking in bookings %}
-                 {% if booking.status == "None" %}
+                 {% if booking.status == "Pending" %}
                 <tr>
                   <td>{{booking.serviceprovider.fullname}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
@@ -128,7 +128,7 @@
                 </tr>
                     </thead>
                     <tbody>
-                    {% if bookings %} 
+                  {% if bookings %} 
                  {% for booking in bookings %}
                  {% if booking.status == "Accept" %}
                       <tr>
@@ -212,7 +212,7 @@
                 </tr>
                     </thead>
                     <tbody>
-                    {% if bookings %} 
+                {% if bookings %} 
                  {% for booking in bookings %}
                   {% if booking.status == "Deny" %}
                       <tr>
