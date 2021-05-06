@@ -488,12 +488,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for serviceuser in serviceusers %}
+                      {% for serviceuser in page_obj %}
                       <tr>
                         <td>{{serviceuser.name}}</td>
                         <td>{{serviceuser.phone}}</td>
                         <td>{{serviceuser.email}}</td>
-                        <td>Home</td>
+                        <td>{{serviceuser.phyadd}}</td>
                         <td>
                           <a
                             class="btn btn-info"
@@ -512,6 +512,12 @@
                       {% endfor %}
                     </tbody>
                   </table>
+                  {% if page_obj.has_previous%}
+                  <a href="{% url 'profiles:dashboard'%}?page={{ page_obj.previou_page_number}}" class="btn btn-primary">Previous</a>
+                  {% endif %}
+                  {% if page_obj.has_next %}
+                  <a href="{% url 'profiles:dashboard'%}?page={{ page_obj.next_page_number}}" class="btn btn-primary">Next</a>
+                  {% endif %}
                 </div>
               </div>
             </div>

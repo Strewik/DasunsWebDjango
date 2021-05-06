@@ -29,7 +29,7 @@ class ServiceuserForm(ModelForm):
 	class Meta:
 		model = Serviceuser
 		fields = '__all__'
-		exclude=['user']
+		exclude=['user'] 
 		# fields = ('name', 'phone', 'email')
 		# labels  = {
 		# 	'name':'Full Name', 
