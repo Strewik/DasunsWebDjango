@@ -108,45 +108,47 @@ def logout_request(request):
 # @login_required(login_url='profiles:homepage')
 def spreg_save(request):
     
-    if request.method != 'POST':
-        return render(request, 'profiles:spreg.html')
-    else: 
-        fullname = request.POST.get('fullname')
-        phone =request.POST.get('phone')
-        email = request.POST.get('email')
-        nin = request.POST.get('nin')
-        dob = request.POST.get('dob')
-        gender = request.POST.get('gender')
-        phyadd = request.POST.get('phyadd')
-        yearexp = request.POST.get('yearexp')
-        notmidman = request.POST.get('notmidman')
-        skillset = request.POST.get('skillset')
-        internet = request.POST.get('internet')
-        qualification = request.POST.get('qualification')
-        portifolio = request.POST.get('portifolio')
-        profession = request.POST.get('profession')
-        ref1name = request.POST.get('ref1name')
-        ref1title = request.POST.get('ref1title')
-        ref1email = request.POST.get('ref1email')
-        ref1phone = request.POST.get('ref1phone')
-        ref2name = request.POST.get('ref2name')
-        ref2title = request.POST.get('ref2title')
-        ref2email = request.POST.get('ref2email')
-        ref2phone = request.POST.get('ref2phone')
-        category = request.POST.get('category')
-        service = request.POST.get('service')
-        availability = request.POST.get('availability')
-        status = request.POST.get('status')
-        starttime = request.POST.get('starttime')
-        endtime = request.POST.get('endtime')
-        pricevisit = request.POST.get('pricevisit')
-        terms = request.POST.get('terms')
-        
-        
-        ServProv = Serviceprovider(fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
-        ServProv.save()
-        
-    return render(request, 'profiles/spregSuccess.html')
+	if request.method != 'POST':
+		return render(request, 'profiles:spreg.html')
+	else: 
+		user = request.user
+		fullname = request.POST.get('fullname')
+		phone =request.POST.get('phone')
+		email = request.POST.get('email')
+		nin = request.POST.get('nin')
+		dob = request.POST.get('dob')
+		gender = request.POST.get('gender')
+		phyadd = request.POST.get('phyadd')
+		yearexp = request.POST.get('yearexp')
+		notmidman = request.POST.get('notmidman')
+		skillset = request.POST.get('skillset')
+		internet = request.POST.get('internet')
+		qualification = request.POST.get('qualification')
+		portifolio = request.POST.get('portifolio')
+		profession = request.POST.get('profession')
+		ref1name = request.POST.get('ref1name')
+		ref1title = request.POST.get('ref1title')
+		ref1email = request.POST.get('ref1email')
+		ref1phone = request.POST.get('ref1phone')
+		ref2name = request.POST.get('ref2name')
+		ref2title = request.POST.get('ref2title')
+		ref2email = request.POST.get('ref2email')
+		ref2phone = request.POST.get('ref2phone')
+		category = request.POST.get('category')
+		service = request.POST.get('service')
+		availability = request.POST.get('availability')
+		status = request.POST.get('status')
+		starttime = request.POST.get('starttime')
+		endtime = request.POST.get('endtime')
+		pricevisit = request.POST.get('pricevisit')
+		terms = request.POST.get('terms')
+
+		
+		
+		ServProv = Serviceprovider(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
+		ServProv.save()
+		
+	return render(request, 'profiles/spregSuccess.html')
     
 
 
@@ -178,7 +180,7 @@ def spregsuccess(request):
     return render(request, 'profiles/spregsuccess.html')
 
 @login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def dashboard(request):
     bookings = Booking.objects.all()
     serviceproviders = Serviceprovider.objects.all()
@@ -218,8 +220,8 @@ def createBooking(request, pk):
 		if bookingform.is_valid():
 			serviceuser = bookingform.cleaned_data.get('serviceuser')
 			serviceprovider = bookingform.cleaned_data.get('serviceprovider')
-			# mybookingform = bookingform.save()
-			# print('Printing mybookingform:', mybookingform.serviceprovider)
+			mybookingform = bookingform.save()
+			print('Printing mybookingform:', mybookingform.serviceprovider)
 			bookingform.save()
 			return redirect(reverse ('profiles:serviceuserdash'))
 
@@ -338,8 +340,6 @@ def deleteServiceprovider(request, pk):
     return render(request, 'profiles/deleteServiceprovider.html', context) 
 
  
-
-
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])
 def serviceProviderProfile(request):
