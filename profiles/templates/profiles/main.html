@@ -106,14 +106,10 @@
                           name="loginbtn"
                           type="submit"
                           class="btn btn-success btn-block"
-                          {% comment %} data-target=".my-messages" {% endcomment %}
                         >
                           Login
                         </button>
                       </form>
-                      {% comment %} {% for message in messages %}
-                      <p id="messages">{{message}}</p>
-                      {% endfor %} {% endcomment %}
                       <small class="forgot"
                         >Forgot Password?
                         <a id="password-reset" href="/password_reset">
@@ -165,9 +161,6 @@
         </div>
       </div>
     </div>
-    {% comment %}
-    <div>{% include 'profiles/protected.html' %}</div>
-    {% endcomment %}
     <div>
       <div class="container1">
         <img
@@ -183,9 +176,6 @@
       </div>
     </div>
     <div class="green-service">
-      {% comment %}
-      <div>
-        {% endcomment %}
         <div class="row" id="all-services">
           <div class="col-md">
             <div>
@@ -207,7 +197,7 @@
             </div>
             <div>Personal Assistance</div>
           </div>
-          <div class="col-md">
+          <div class="col-md" >
             <div>
               <img
                 src="{% static 'images/deaf2.png' %}"
@@ -248,18 +238,11 @@
             <div>Captioning</div>
           </div>
         </div>
-        {% comment %}
-      </div>
-      {% endcomment %}
     </div>
     <div class="white-service">
       <h2>All Services</h2>
       <div class="row">
-      {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
         <div class="col-md-4" onclick="location.href='/support';">
-        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
-        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
-        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -278,11 +261,7 @@
             </div>
           </div>
         </div>
-         {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
         <div class="col-md-4" onclick="location.href='/ugandan';">
-        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
-        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
-        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -301,11 +280,7 @@
             </div>
           </div>
         </div>
-        {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
        <div class="col-md-4" onclick="location.href='/intern';">
-        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
-        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
-        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -328,11 +303,7 @@
         </div>
       </div>
       <div class="row">
-      {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
       <div class="col-md-4" onclick="location.href='/mobguide';">
-        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
-        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
-        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -351,11 +322,7 @@
             </div>
           </div>
         </div>
-      {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider%} {% endcomment %}
         <div class="col-md-4" onclick="location.href='/caption';">
-        {% comment %} {% elif request.user.serviceprovider %} {% endcomment %}
-        {% comment %} <div class="col-md-4" onclick="location.href='/';"> {% endcomment %}
-        {% comment %} {% endif %} {% endcomment %}
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">

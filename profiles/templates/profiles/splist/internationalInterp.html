@@ -30,11 +30,11 @@
           >
             <tr>
               <th scope="col">Service Provider</th>
+              <th scope="col">Gender</th>
               <th scope="col">Service Offered</th>
               <th scope="col">Location</th>
-              <th scope="col">Price per Visit</th>
+              <th scope="col">Price per Visit(UGX)</th>
               <th scope="col">Book</th>
-              <th scope="col">Profile</th>
             </tr>
           </thead>
           <tbody>
@@ -43,6 +43,7 @@
        
             <tr>
               <td>{{serviceprovider.fullname}}</td>
+              <td>{{serviceprovider.gender}}</td>
               <td>{{serviceprovider.service}}</td>
               <td>{{serviceprovider.phyadd}}</td>
               <td>{{serviceprovider.pricevisit}}</td>
@@ -53,11 +54,7 @@
                 href="{% url 'profiles:create_booking' serviceprovider.id %}"
                 >Book Now</a>
               </td>
-              <td>
-                <button type="button" class="btn btn-info">View Details</button>
-              </td>
             </tr>         
-           
              {% else %}
                   <div>
                   {% comment %} <p> There are no International Signlanguage Interpreters at the moment, please check later {% endcomment %}

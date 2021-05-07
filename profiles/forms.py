@@ -6,7 +6,7 @@ from .models import *
 from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput
 
 class CreateUserForm(UserCreationForm):
-	username = forms.CharField(max_length=254,required=True, widget=forms.TextInput(attrs={'placeholder': 'User Name', 'class': 'form-control'}))
+	username = forms.CharField(max_length=254,required=True, widget=forms.TextInput(attrs={'placeholder': 'User Name e.g kente', 'class': 'form-control'}))
 	# firstname = forms.CharField(max_length=254,required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'}))
 	# lastname = forms.CharField(max_length=254,required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}))
 	email = forms.EmailField(max_length=254,required=True, widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'form-control'}))
@@ -20,10 +20,13 @@ class CreateUserForm(UserCreationForm):
 		
 	def save(self, commit=True):
 		user = super(CreateUserForm, self).save(commit=False)
+		# user.firstname = self.cleaned_data['firstname']
+		# user.lastname = self.cleaned_data['lastname']
 		user.email = self.cleaned_data['email']
 		if commit:
 			user.save()
 		return user
+
 
 class ServiceuserForm(ModelForm):
 	class Meta:
