@@ -50,11 +50,6 @@ def main(request):
                 # user = registerform.cleaned_data.get('username')
                 user = registerform.save()
                 username = registerform.cleaned_data.get('username')
-                group = Group.objects.get(name='serviceuser')
-                user.groups.add(group)
-                ServiceuserModel.objects.create(
-                    user=user,
-                )
                 messages.success(request, 'Account was created for ' + username)
                 return redirect('profiles:homepage')
             else:
@@ -68,7 +63,7 @@ def main(request):
                 user = authenticate(username=username, password=password)
                 if user is not None:
                     login(request, user)
-                    # messages.info(request, f"You are now logged in as {username}")
+                    messages.info(request, f"You are now logged in as {username}")
                     return redirect('profiles:homepage')
                 else:
                     messages.error(request, "No user in the system yet")
@@ -235,7 +230,7 @@ def createBooking(request, pk):
 	serviceuser = request.user.serviceuser
 	serviceprovider = Serviceprovider.objects.get(id=pk)
 	bookingform = BookingForm()
-	
+
 	if request.method == 'POST':
 		bookingform = BookingForm(request.POST)
 
@@ -321,10 +316,10 @@ def updateServiceuser(request, pk):
         form = ServiceuserForm(request.POST, instance=serviceusers)
         if form.is_valid():
             form.save()
-            return redirect(reverse ('profiles:dashboard'))
+            return redirect(reverse ('profiles:profile'))
 
     context = {'form': form}
-    return render(request, 'profiles/serviceuser.html', context) 
+    return render(request, 'profiles/editServiceuser.html', context) 
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['admin'])
@@ -366,7 +361,7 @@ def deleteServiceprovider(request, pk):
 
  
 @login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+@allowed_users(allowed_roles=['serviceprovider'])
 def serviceProviderProfile(request):
     serviceprovider = request.user.serviceprovider
     username = request.user
