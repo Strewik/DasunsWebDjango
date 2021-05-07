@@ -50,11 +50,6 @@ def main(request):
                 # user = registerform.cleaned_data.get('username')
                 user = registerform.save()
                 username = registerform.cleaned_data.get('username')
-                group = Group.objects.get(name='serviceuser')
-                user.groups.add(group)
-                ServiceuserModel.objects.create(
-                    user=user,
-                )
                 messages.success(request, 'Account was created for ' + username)
                 return redirect('profiles:homepage')
             else:
@@ -68,7 +63,7 @@ def main(request):
                 user = authenticate(username=username, password=password)
                 if user is not None:
                     login(request, user)
-                    # messages.info(request, f"You are now logged in as {username}")
+                    messages.info(request, f"You are now logged in as {username}")
                     return redirect('profiles:homepage')
                 else:
                     messages.error(request, "No user in the system yet")
@@ -159,7 +154,7 @@ def spreg_save(request):
         ServProv = Serviceprovider(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
         
-        return render(request, 'profiles/spregsuccess')
+    return render(request, 'profiles/spregsuccess.html')
     
 
 
@@ -326,8 +321,8 @@ def updateServiceuser(request, pk):
     context = {'form': form}
     return render(request, 'profiles/serviceuser.html', context) 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['admin'])
 def updateServiceprovider(request, pk):
     
     serviceprovider = Serviceprovider.objects.get(id=pk)
