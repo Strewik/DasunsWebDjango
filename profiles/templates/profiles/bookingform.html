@@ -29,8 +29,9 @@
     <div class="main-booking">
       <div class="card" id="booking-card">
         {% if serviceprovider.id %}
+        <div class="booking-member">
           <h4 class="heading3">
-            <small style= "color:black", "fontSize: 30px", "fontWeight:bold"> Booking </small>
+            <small style= "color:black", "fontSize: 30px", "fontWeight:bold"> Booking </small><br/>
             {{serviceprovider.fullname}}
           </h4>
           <h6 class="heading3">
@@ -40,6 +41,7 @@
             <small> {{serviceprovider.pricevisit}}UGX per Visit</small>
           </h6>
           <br /> 
+        </div>
           {% endif %}
          {% comment %} {% if request.user.serviceuser and not request.user.serviceprovider  %} {% endcomment %}
          <form name="bookingform" class="" action="" method="POST" id="form">
@@ -53,7 +55,6 @@
                 name="name"
                 class="form-control"
                 value="{{serviceuser.firstname}} {{serviceuser.lastname}}"
-                {% comment %} hidden {% endcomment %}
               /> 
             </div>
           </div>
@@ -92,59 +93,43 @@
           </br>
           <div class="form-group row">
             <label for="" class="col-sm-3 col-form-label"
-              >Meeting Date:</label
-            >
+              >Meeting Date:</label>
             <div class="col-sm-9">
               {{bookingform.meetdate}}
             </div>
           </div>
-          <br /> 
-
-          <div class="form-group row">
-            <label for="" class="col-sm-3 col-form-label"
-              >Service User:</label
-            > 
-            <div class="col-sm-9">
-               <input
-                type="text"
-                name="serviceuser"
-                class="form-control"
-                value="{{serviceuser.firstname}} {{serviceuser.lastname}}"
-              />
-            </div> 
-          </div> 
-          <br/> 
-           {% if serviceprovider.id %}
-          <div class="form-group row"> 
-           <label for="" class="col-sm-3 col-form-label"
-              >Service Provider:</label> 
-           <div class="col-sm-9" >
-               <input
-                type="text"
-                name="serviceprovider"
-                class="form-control"
-                value="{{serviceprovider.fullname}}"
-              />
-            </div>
-          </div>
-          {% endif %}
-          </br>
-          <p class="col-sm-3 col-form-label"><b>Meeting Time:</b></p></br>
+          <p class="col-sm-5 col-form-label"><b>Meeting Time:</b></p><br/>
           <div class="form-row" id="time-stamp">
             <div class="form-group col-md-5" id="left-time">
               <label for="starttime">Start Time:</label>
                {{bookingform.starttime}}
             </div>
-
             <div class="form-group col-md-2"></div>
-            
             <div class="form-group col-md-5" id="right-time">
               <label for="endtime" >End Time:</label>
                {{bookingform.endtime}}
             </div>
           </div> 
-          {% comment %} {% endif %} {% endcomment %}
-          <br /> 
+          <div class="form-group row">
+            <div class="col-sm-5">
+               <input
+                type="text"
+                name="serviceuser"
+                class="form-control"
+                value="{{serviceuser.id}}"
+                hidden
+              />
+            </div> 
+            <div class="col-sm-5" >
+               <input
+                type="text"
+                name="serviceprovider"
+                class="form-control"
+                value="{{serviceprovider.id}}"
+                hidden
+              />
+            </div>
+          </div>       
             <div class="form-row">
             <input type="submit" value="BOOK NOW" name="booking-btn" class="btn btn-success" id="book-btn"/>
           </div> 
