@@ -313,7 +313,7 @@ body {
 
 #booking-card {
   width: 50%;
-  padding: 20px;
+  padding: 40px;
 }
 
 #form {
@@ -369,6 +369,11 @@ body {
   font-weight: bold;
 }
 
+.booking-member{
+  text-align: center;
+  margin-right: 25px;
+}
+
 .profile-pic{
   max-width:200px;
   max-height:200px;
@@ -376,29 +381,12 @@ body {
   border-radius:50%;
 }
 
-/* styling side bar */
-
-/* .sidebar{
-  background-color: #707070;
-  color: #fff;
-  height:auto;
-} */
-
-/* #list-tab{
-  background-color: #707070;
-} */
+/* css for side bar */
 
 div.list-group{
   background-color: #707070; 
   height:100%;
 }
-
-/* .mainbar {
-  background-color: #fff;
-} */
-/* .dashcontainer {
-  margin-bottom: 100px;
-} */
 
 .list-group-item{
   z-index: 2;
@@ -413,3 +401,4 @@ div.list-group{
   background-color: #35d187;
   border-color: #fff;
 }
+

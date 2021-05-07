@@ -184,7 +184,7 @@ def spregsuccess(request):
       
     return render(request, 'profiles/spregsuccess.html')
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['admin'])
 def dashboard(request):
     bookings = Booking.objects.all()
@@ -230,15 +230,15 @@ def createBooking(request, pk):
 	serviceuser = request.user.serviceuser
 	serviceprovider = Serviceprovider.objects.get(id=pk)
 	bookingform = BookingForm()
-	
+
 	if request.method == 'POST':
 		bookingform = BookingForm(request.POST)
 
 		if bookingform.is_valid():
 			serviceuser = bookingform.cleaned_data.get('serviceuser')
 			serviceprovider = bookingform.cleaned_data.get('serviceprovider')
-			# mybookingform = bookingform.save()
-			# print('Printing mybookingform:', mybookingform.serviceprovider)
+			mybookingform = bookingform.save()
+			print('Printing mybookingform:', mybookingform.serviceprovider)
 			bookingform.save()
 			return redirect(reverse ('profiles:serviceuserdash'))
 
@@ -316,10 +316,10 @@ def updateServiceuser(request, pk):
         form = ServiceuserForm(request.POST, instance=serviceusers)
         if form.is_valid():
             form.save()
-            return redirect(reverse ('profiles:dashboard'))
+            return redirect(reverse ('profiles:profile'))
 
     context = {'form': form}
-    return render(request, 'profiles/serviceuser.html', context) 
+    return render(request, 'profiles/editServiceuser.html', context) 
 
 # @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['admin'])
@@ -359,8 +359,9 @@ def deleteServiceprovider(request, pk):
     context = {'item': serviceprovider}
     return render(request, 'profiles/deleteServiceprovider.html', context) 
 
+ 
 @login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+@allowed_users(allowed_roles=['serviceprovider'])
 def serviceProviderProfile(request):
     serviceprovider = request.user.serviceprovider
     username = request.user
