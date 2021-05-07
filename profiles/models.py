@@ -60,6 +60,9 @@ class Serviceprovider(models.Model):
 
     def __str__(self):
         return str(self.fullname)
+    
+    class Meta:
+        ordering = ['-date_created','fullname']
 
 class Booking(models.Model):
     name = models.CharField(max_length=200)
