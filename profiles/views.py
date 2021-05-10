@@ -50,6 +50,8 @@ def main(request):
                 # user = registerform.cleaned_data.get('username')
                 user = registerform.save()
                 username = registerform.cleaned_data.get('username')
+                # firstname = registerform.cleaned_data.get('firstname')
+                # lastname = registerform.cleaned_data.get('lastname')
                 messages.success(request, 'Account was created for ' + username)
                 return redirect('profiles:homepage')
             else:
@@ -251,24 +253,23 @@ def createBooking(request, pk):
 # @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceprovider', 'admin'])
 def updateBookingStatus(request, pk):
-	serviceusers = ServiceuserModel.objects.all()
-	serviceprovider = Serviceprovider.objects.get(id=pk)
-	# booking = Booking.objects.get(id=pk)
+    # serviceusers = ServiceuserModel.objects.all()
+    booking = Booking.objects.get(id=pk)
 
-	if request.method == 'POST':
-		print('Printing post:', request.POST)
-		
-		# First, you should retrieve the team instance you want to update
-		booking = Booking.objects.get(id=request.POST['id'])
+    if request.method == 'POST':
+        print('Printing post:', request.POST)
+        
+        # First, you should retrieve the team instance you want to update
+        booking = Booking.objects.get(id=request.POST['id'])
 
-		# Next, you update the status
-		if request.POST.get('status'):
-			booking.status = request.POST.get('status')
-			booking.save()
-			return redirect(reverse ('profiles:serviceproviderdash'))
+        # Next, you update the status
+        if request.POST.get('status'):
+            booking.status = request.POST.get('status')
+            booking.save()
+            return redirect(reverse ('profiles:serviceproviderdash'))
 
-	context = {'serviceusers':serviceusers, 'booking':booking, 'serviceprovider':serviceprovider}
-	return render(request,'profiles/serviceProviderDashboard.html', context)
+    context = {'booking':booking}
+    return render(request,'profiles/serviceProviderDashboard.html', context)
 
 
 # @login_required(login_url='profiles:homepage')
@@ -304,7 +305,17 @@ def serviceUserProfile(request):
     context = {'username':username, 'firstname':firstname, 'lastname':lastname, 'phone':phone, 'email':email, 'date':date, }
     return render(request, 'profiles/serviceuserProfile.html', context)
 
-
+def serviceUserDetails(request):
+    serviceuser = Serviceuser.objects.get(id=pk)
+    username = request.user
+    firstname = serviceuser.firstname
+    lastname = serviceuser.lastname
+    phone = serviceuser.phone
+    email = serviceuser.email
+    date = serviceuser.date_created
+    profile_pic = serviceuser.profile_pic
+    context = {'username':username, 'firstname':firstname, 'lastname':lastname, 'phone':phone, 'email':email, 'date':date, }
+    return render(request, 'profiles/serviceuserProfile.html', context)
 
 # @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceuser', 'admin'])

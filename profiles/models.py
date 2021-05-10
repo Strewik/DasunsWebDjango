@@ -16,6 +16,8 @@ class Serviceuser(models.Model):
     def __str__(self):
         return str(self.firstname)
     #    return "%s %s" % (self.first_name, self.last_name)
+    class Meta:
+        ordering = ['-date_created','firstname'] 
 
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'))
