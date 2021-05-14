@@ -16,16 +16,21 @@ class Serviceuser(models.Model):
     def __str__(self):
         return str(self.firstname)
     #    return "%s %s" % (self.first_name, self.last_name)
+
     class Meta:
-        ordering = ['-date_created','firstname'] 
+        ordering = ['-date_created', 'firstname']
+
 
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'))
     SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
-    ('Ugandan Sign Language Interpreter', 'Ugandan Sign Language Interpreter'),
-    ('International Sign Language Interpreter', 'International Sign Language Interpreter'), 
-    ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),)
-    STATUS = (('Pending', 'Pending'), ('Active', 'Active'), ('Suspended', 'Suspended'),)
+               ('Ugandan Sign Language Interpreter',
+                'Ugandan Sign Language Interpreter'),
+               ('International Sign Language Interpreter',
+                'International Sign Language Interpreter'),
+               ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),)
+    STATUS = (('Pending', 'Pending'), ('Active', 'Active'),
+              ('Suspended', 'Suspended'),)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
@@ -52,19 +57,19 @@ class Serviceprovider(models.Model):
     service = models.CharField(max_length=200, choices=SERVICE)
     availability = models.CharField(max_length=200)
     status = models.CharField(max_length=200, choices=STATUS,)
-    starttime = models.CharField(max_length=200) 
+    starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
     pricevisit = models.CharField(max_length=200)
     terms = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
-    objects=models.Manager()
-    
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.fullname)
-    
+
     class Meta:
-        ordering = ['-date_created','fullname']
+        ordering = ['-date_created', 'fullname']
+
 
 class Booking(models.Model):
     name = models.CharField(max_length=200)
@@ -74,18 +79,18 @@ class Booking(models.Model):
     meetdate = models.CharField(max_length=200)
     starttime = models.CharField(max_length=200)
     endtime = models.CharField(max_length=200)
-    serviceuser = models.ForeignKey(Serviceuser, null=True, on_delete=models.SET_NULL)
-    serviceprovider = models.ForeignKey(Serviceprovider, null=True, on_delete=models.SET_NULL)
+    serviceuser = models.ForeignKey(
+        Serviceuser, null=True, on_delete=models.SET_NULL)
+    serviceprovider = models.ForeignKey(
+        Serviceprovider, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=200, default="Pending", blank=True)
-   
 
     def __str__(self):
         return str(self.name)
 
     class Meta:
-        ordering = ['-date_created','name']       
+        ordering = ['-date_created', 'name']
     # @property
     # def service_hours(self):
     #     return int(self.endtime - self.starttime)
-        
