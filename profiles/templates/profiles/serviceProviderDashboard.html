@@ -108,7 +108,7 @@
                           <td>{{booking.meetdate}}, {{booking.starttime}}</td>
                           <td>
                               <input type="submit" value="Accept" name="status" id="accept"/>
-                              <input type="submit" value="Deny" name="status" id="deny" />
+                              <input type="submit" value="Decline" name="status" id="decline" />
                               <input type="hidden" name="id" value="{{booking.id }}" />
                           </td>
                         </tr>
@@ -237,7 +237,7 @@
                     <tbody>
                       {% if bookings %}
                       {% for booking in bookings %}
-                      {% if booking.status == "Deny" %}
+                      {% if booking.status == "Decline" %}
                       <tr>
                         <td>
                           {{booking.serviceuser.firstname}}

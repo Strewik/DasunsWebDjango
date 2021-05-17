@@ -44,10 +44,8 @@ def main(request):
     context = {'registerform':registerform, 'loginform':loginform }
     if request.method == 'POST':
         if 'registerbtn' in request.POST:
-            registerform = CreateUserForm(request.POST)
+            registerform = CreateUserForm(request.POST or None)
             if registerform.is_valid():
-                # registerform.save()
-                # user = registerform.cleaned_data.get('username')
                 user = registerform.save()
                 username = registerform.cleaned_data.get('username')
                 # firstname = registerform.cleaned_data.get('firstname')
@@ -55,7 +53,23 @@ def main(request):
                 messages.success(request, 'Account was created for ' + username)
                 return redirect('profiles:homepage')
             else:
-                messages.error(request, "User was not created")
+                username = registerform.data['username']
+                email = registerform.data['email']
+                password1 = registerform.data['password1']
+                password2 = registerform.data['password2']
+                for msg in registerform.errors.as_data():
+                    # if msg == 'username' and username is None:
+                    #     messages.error(request, f"username must be filled")
+                    if msg == 'username' and User.objects.filter(username=username).exists():
+                        messages.error(request, f"username {username} already exists, choose another one")
+                    if msg == 'email' and User.objects.filter(email=email).exists():
+                        messages.error(request, f"This Email address {email} is already in use. Please provide a different email address.")
+                    elif msg == 'email':
+                        messages.error(request, f"Declared email {email} is not valid")
+                    if msg == 'password2' and password1 == password2:
+                        messages.error(request, f"Selected password: {password1} is not strong enough,it should have atleast 8 aphanumeric characters and not similar to your username")
+                    elif msg == 'password2' and password1 != password2:
+                        messages.error(request, f"Password: '{password1}' and Confirmation Password: '{password2}' do not match")
             loginform = AuthenticationForm(data=request.POST)
         elif 'loginbtn' in request.POST:
             loginform = AuthenticationForm(data=request.POST)
@@ -165,8 +179,8 @@ def spreg(request):
           
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceprovider'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider'])
 def serviceproviderdash(request):
 	bookings = request.user.serviceprovider.booking_set.all()
 	context = {'bookings': bookings }
@@ -187,7 +201,7 @@ def spregsuccess(request):
     return render(request, 'profiles/spregsuccess.html')
 
 @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin'])
 def dashboard(request):
     bookings = Booking.objects.all()
     serviceproviders = Serviceprovider.objects.all()

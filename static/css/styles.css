@@ -402,3 +402,9 @@ div.list-group{
   border-color: #fff;
 }
 
+.alert .alert-danger{
+  width: 20%;
+  height: 20%;
+  background-color: #707070;
+}
+
