@@ -133,6 +133,7 @@ def spreg_save(request):
     if request.method != 'POST':
         return render(request, 'profiles:spreg.html')
     else: 
+        
         user = request.user
         fullname = request.POST.get('fullname')
         phone =request.POST.get('phone')
@@ -145,7 +146,7 @@ def spreg_save(request):
         notmidman = request.POST.get('notmidman')
         skillset = request.POST.get('skillset')
         internet = request.POST.get('internet')
-        qualification = request.POST.get('qualification')
+        qualification = request.FILES['qualification']
         portifolio = request.POST.get('portifolio')
         profession = request.POST.get('profession')
         ref1name = request.POST.get('ref1name')
@@ -354,7 +355,7 @@ def updateServiceprovider(request, pk):
     form = ServiceproviderForm(instance=serviceprovider)
 
     if request.method == 'POST':
-        form = ServiceproviderForm(request.POST, instance=serviceprovider)
+        form = ServiceproviderForm(request.POST,request.FILES, instance=serviceprovider)
         if form.is_valid():
             form.save()
             return redirect(reverse ('profiles:dashboard'))

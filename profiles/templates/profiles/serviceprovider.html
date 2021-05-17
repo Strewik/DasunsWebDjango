@@ -19,20 +19,25 @@
 </head>
 <body>
   <div>{% include 'profiles/authNavbar.html' %}</div>
-
+  <div class="row">
+    <div class="col-md-6 offset-md-3"></div>
     <fieldset>
        
         <form action="" method="POST" enctype="multipart/form-data">
 
+          
           {% csrf_token %}
           {{form.as_p}}
-      
+        
+
         <button 
         type="submit" 
         class="btn btn-success"
         name="Submit">Submit</button>
       </form>
       </fieldset>
+    </div>
+  </div>
        <div>{% include 'profiles/footer.html' %}</div>
        <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
