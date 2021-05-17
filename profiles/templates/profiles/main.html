@@ -23,11 +23,14 @@
     <div>{% include 'profiles/authNavbar.html' %}</div>
     {% else %}
     <div>{% include 'profiles/navbar.html' %}</div>
-    {% endif %} 
-    <div> 
-    {% for message in messages %}
-    <p id="messages">{{message}}</p>
-    {% endfor %}
+    {% endif %}
+    <div class="error-popup">
+      {% for message in messages %}
+      <div class="alert alert-danger">
+        <a class="close" href="#" data-dismiss="alert" style="text-decoration:none; color:#000;"><button>x</button></a>
+        {{ message }}
+      </div>
+      {% endfor %} 
     </div>
     <div class="container">
       <div class="row">
@@ -128,9 +131,12 @@
                       <form name="registerform" action="" method="POST">
                         {% csrf_token %}
                         <h4 id="form-title">Sign Up</h4>
-                        {{registerform.username}} {{registerform.firstname}}
-                        {{registerform.lastname}}{{registerform.email}}
-                        {{registerform.password1}} {{registerform.password2}}
+                        {{registerform.username}}
+                        {% comment %} {{registerform.firstname}}
+                        {{registerform.lastname}} {% endcomment %}
+                        {{registerform.email}}
+                        {{registerform.password1}}
+                        {{registerform.password2}}
                         <div class="custom-control custom-checkbox">
                           <label>
                             <input
@@ -170,74 +176,81 @@
         />
 
         <div class="top-right">
-          <h1>Access professional support service<br /> providers at your finger tips.</h1>
-          <h5>Leveraging technology to advance right, choices and opportunities for <br /> persons with disabilities</h5>
+          <h1>
+            Access professional support service<br />
+            providers at your finger tips.
+          </h1>
+          <h5>
+            Leveraging technology to advance right, choices and opportunities
+            for <br />
+            persons with disabilities
+          </h5>
         </div>
       </div>
     </div>
     <div class="green-service">
-        <div class="row" id="all-services">
-          <div class="col-md">
-            <div>
-              <img
-                src="{% static 'images/physical.png' %}"
-                alt="logo"
-                style="height: 50px"
-              />
-            </div>
-            <div id="services">All services</div>
+      <div class="row" id="all-services">
+        <div class="col-md">
+          <div>
+            <img
+              src="{% static 'images/physical.png' %}"
+              alt="logo"
+              style="height: 50px"
+            />
           </div>
-          <div class="col-md">
-            <div>
-              <img
-                src="{% static 'images/physical2.png' %}"
-                alt="logo"
-                style="height: 50px"
-              />
-            </div>
-            <div>Personal Assistance</div>
-          </div>
-          <div class="col-md" >
-            <div>
-              <img
-                src="{% static 'images/deaf2.png' %}"
-                alt="logo"
-                style="height: 50px"
-              />
-            </div>
-            <div>Ugandan Interpreter</div>
-          </div>
-          <div class="col-md">
-            <div>
-              <img
-                src="{% static 'images/deaf2.png' %}"
-                alt="logo"
-                style="height: 50px"
-              />
-            </div>
-            <div>International Interpreter</div>
-          </div>
-          <div class="col-md">
-            <div>
-              <img
-                src="{% static 'images/mobility.png' %}"
-                alt="logo"
-                style="height: 50px"
-              />
-            </div>
-            <div>Mobility Guide</div>
-          </div>
-          <div class="col-md">
-            <div>
-              <img
-                src="{% static 'images/hear2.png' %}"
-                alt="logo"
-                style="height: 50px"
-              />
-            </div>
-            <div>Captioning</div>
-          </div>
+          <div id="services">All services</div>
         </div>
+        <div class="col-md">
+          <div>
+            <img
+              src="{% static 'images/physical2.png' %}"
+              alt="logo"
+              style="height: 50px"
+            />
+          </div>
+          <div>Personal Assistance</div>
+        </div>
+        <div class="col-md">
+          <div>
+            <img
+              src="{% static 'images/deaf2.png' %}"
+              alt="logo"
+              style="height: 50px"
+            />
+          </div>
+          <div>Ugandan Interpreter</div>
+        </div>
+        <div class="col-md">
+          <div>
+            <img
+              src="{% static 'images/deaf2.png' %}"
+              alt="logo"
+              style="height: 50px"
+            />
+          </div>
+          <div>International Interpreter</div>
+        </div>
+        <div class="col-md">
+          <div>
+            <img
+              src="{% static 'images/mobility.png' %}"
+              alt="logo"
+              style="height: 50px"
+            />
+          </div>
+          <div>Mobility Guide</div>
+        </div>
+        <div class="col-md">
+          <div>
+            <img
+              src="{% static 'images/hear2.png' %}"
+              alt="logo"
+              style="height: 50px"
+            />
+          </div>
+          <div>Captioning</div>
+        </div>
+      </div>
     </div>
     <div class="white-service">
       <h2>All Services</h2>
@@ -280,7 +293,7 @@
             </div>
           </div>
         </div>
-       <div class="col-md-4" onclick="location.href='/intern';">
+        <div class="col-md-4" onclick="location.href='/intern';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -303,7 +316,7 @@
         </div>
       </div>
       <div class="row">
-      <div class="col-md-4" onclick="location.href='/mobguide';">
+        <div class="col-md-4" onclick="location.href='/mobguide';">
           <div class="card mb-3" style="max-width: 540px">
             <div class="row g-0">
               <div class="col-md-4">
@@ -492,8 +505,7 @@
                   <div
                     class="col-md"
                     style="align-content: right; padding-top: 40px"
-                  >
-                  </div>
+                  ></div>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">Receive service</h5>
@@ -514,4 +526,3 @@
     </script>
   </body>
 </html>
-

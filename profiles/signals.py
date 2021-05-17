@@ -13,6 +13,8 @@ def create_serviceuser_profile(sender, instance, created, **kwargs):
         Serviceuser.objects.create(
                 user=instance,
                 email=instance.email
+                # firstname=instance.firstname
+                # lastname=instance.lastname
             )
         print('Su profile created!')
 
