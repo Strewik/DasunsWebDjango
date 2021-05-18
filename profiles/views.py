@@ -3,15 +3,12 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Serviceuser as ServiceuserModel
 from .forms import *
-from django.contrib import messages  # import messages
+from django.contrib import messages
 # from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.forms import AuthenticationForm  # add this
-from django.contrib.auth import authenticate, login, logout  # add this
-# from .models import *
+from django.contrib.auth.forms import AuthenticationForm  
+from django.contrib.auth import authenticate, login, logout  
 from .filters import *
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import *
-# added imports
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import Group
@@ -21,8 +18,6 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.core.paginator import Paginator, EmptyPage
-
-
 from django.core.mail import send_mail
 from django.conf import settings
 import smtplib
@@ -36,8 +31,6 @@ from .decorators import unauthenticated_user, allowed_users, admin_only
 
 # Create your views here.
 
-# @unauthenticated_user. This works for separate register and login pages.
-# @admin_only
 def main(request):
     registerform = CreateUserForm()
     loginform = AuthenticationForm()
@@ -48,9 +41,6 @@ def main(request):
             if registerform.is_valid():
                 user = registerform.save()
                 username = registerform.cleaned_data.get('username')
-                # firstname = registerform.cleaned_data.get('firstname')
-                # lastname = registerform.cleaned_data.get('lastname')
-                email = registerform.cleaned_data.get('email')
                 password = registerform.cleaned_data.get('password1')
                 user = authenticate(username=username, password=password)
                 login(request, user)
@@ -62,8 +52,6 @@ def main(request):
                 password1 = registerform.data['password1']
                 password2 = registerform.data['password2']
                 for msg in registerform.errors.as_data():
-                    # if msg == 'username' and username is None:
-                    #     messages.error(request, f"username must be filled")
                     if msg == 'username' and User.objects.filter(username=username).exists():
                         messages.error(request, f"username '{username}' already exists, choose another one")
                     if msg == 'email' and User.objects.filter(email=email).exists():
@@ -178,11 +166,9 @@ def spreg_save(request):
     return render(request, 'profiles/spregsuccess.html')
     
 
-
 def spreg(request):
     return render(request, 'profiles/spreg.html',)
           
-
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceprovider'])
@@ -246,8 +232,6 @@ def dashboard(request):
 # @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def createBooking(request, pk):
-	# serviceusers = ServiceuserModel.objects.all()
-	# serviceuser = ServiceuserModel.objects.get(id=pk)
 	serviceuser = request.user.serviceuser
 	serviceprovider = Serviceprovider.objects.get(id=pk)
 	bookingform = BookingForm()
@@ -271,7 +255,6 @@ def createBooking(request, pk):
 # @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceprovider', 'admin'])
 def updateBookingStatus(request, pk):
-    # serviceusers = ServiceuserModel.objects.all()
     booking = Booking.objects.get(id=pk)
 
     if request.method == 'POST':
