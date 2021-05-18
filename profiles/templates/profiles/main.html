@@ -26,7 +26,7 @@
     {% endif %}
     <div class="error-popup">
       {% for message in messages %}
-      <div class="alert alert-danger">
+      <div class="alert alert-success">
         <a class="close" href="#" data-dismiss="alert" style="text-decoration:none; color:#000;"><button>x</button></a>
         {{ message }}
       </div>
@@ -131,9 +131,11 @@
                       <form name="registerform" action="" method="POST">
                         {% csrf_token %}
                         <h4 id="form-title">Sign Up</h4>
-                        {{registerform.username}}
-                        {% comment %} {{registerform.firstname}}
-                        {{registerform.lastname}} {% endcomment %}
+                        {% csrf_token %}
+                       {{registerform.username}}
+                        {{registerform.firstname}}
+                        {{registerform.lastname}}
+                        {{registerform.phone}}
                         {{registerform.email}}
                         {{registerform.password1}}
                         {{registerform.password2}}

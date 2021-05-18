@@ -7,8 +7,9 @@ from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, DateTime
 
 class CreateUserForm(UserCreationForm):
 	username = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'User Name e.g kente', 'class': 'form-control'}))
-	# firstname = forms.CharField(max_length=254,required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'}))
-	# lastname = forms.CharField(max_length=254,required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}))
+	firstname = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'}))
+	lastname = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}))
+	phone = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'form-control'}))
 	email = forms.EmailField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'form-control'}))
 	password1 = forms.CharField(max_length=254, widget=forms.PasswordInput(attrs={'placeholder': 'Create Password', 'class': 'form-control'}))
 	password2 = forms.CharField(max_length=254, widget=forms.PasswordInput(attrs={'placeholder': 'Confrim Password', 'class': 'form-control'}))
@@ -19,8 +20,7 @@ class CreateUserForm(UserCreationForm):
 		return self.cleaned_data['email']
 	class Meta:
 		model = User
-		fields = ("username", "email", "password1", "password2")
-		# fields = ("username", "firstname", "lastname", "email", "password1", "password2")
+		fields = ("username", "firstname", "lastname", "phone", "email", "password1", "password2")
 		
 	# def clean_username(self, *args, **kwargs):
 	# 	username = self.cleaned_data.get("username")
@@ -45,8 +45,9 @@ class CreateUserForm(UserCreationForm):
 
 	def save(self, commit=True):
 		user = super(CreateUserForm, self).save(commit=False)
-		# user.firstname = self.cleaned_data['firstname']
-		# user.lastname = self.cleaned_data['lastname']
+		user.firstname = self.cleaned_data['firstname']
+		user.lastname = self.cleaned_data['lastname']
+		user.phone = self.cleaned_data['phone']
 		user.email = self.cleaned_data['email']
 		if commit:
 			user.save()
