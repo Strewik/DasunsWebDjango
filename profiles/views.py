@@ -50,7 +50,11 @@ def main(request):
                 username = registerform.cleaned_data.get('username')
                 # firstname = registerform.cleaned_data.get('firstname')
                 # lastname = registerform.cleaned_data.get('lastname')
-                messages.success(request, 'Account was created for ' + username)
+                email = registerform.cleaned_data.get('email')
+                password = registerform.cleaned_data.get('password1')
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                messages.success(request, 'Account was created for ' + username +' and logged in')
                 return redirect('profiles:homepage')
             else:
                 username = registerform.data['username']
@@ -61,13 +65,13 @@ def main(request):
                     # if msg == 'username' and username is None:
                     #     messages.error(request, f"username must be filled")
                     if msg == 'username' and User.objects.filter(username=username).exists():
-                        messages.error(request, f"username {username} already exists, choose another one")
+                        messages.error(request, f"username '{username}' already exists, choose another one")
                     if msg == 'email' and User.objects.filter(email=email).exists():
-                        messages.error(request, f"This Email address {email} is already in use. Please provide a different email address.")
+                        messages.error(request, f"This Email address '{email}' is already in use. Please provide a different email address.")
                     elif msg == 'email':
-                        messages.error(request, f"Declared email {email} is not valid")
+                        messages.error(request, f"Declared email '{email}' is not valid")
                     if msg == 'password2' and password1 == password2:
-                        messages.error(request, f"Selected password: {password1} is not strong enough,it should have atleast 8 aphanumeric characters and not similar to your username")
+                        messages.error(request, f"Selected password: '{password1}' is not strong enough,it should have atleast 8 aphanumeric characters and not similar to your username")
                     elif msg == 'password2' and password1 != password2:
                         messages.error(request, f"Password: '{password1}' and Confirmation Password: '{password2}' do not match")
             loginform = AuthenticationForm(data=request.POST)
