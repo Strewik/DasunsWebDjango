@@ -23,6 +23,7 @@ urlpatterns = [
     path('mobguide/', views.mobGuideList, name='mobility-guide'),
     path('support/', views.personalSupportList, name='personal-support'),
     path('ugandan/', views.ugandanInterpList, name='ugandan-interp'),
+    path('tactile/', views.tactileInterpList, name='tactile-interp'),
     path('booking/<str:pk>', views.createBooking, name="create_booking"),
     path('serviceuserdash/', views.serviceuserdash, name='serviceuserdash'),
     path('dashboard/', views.dashboard, name="dashboard"),

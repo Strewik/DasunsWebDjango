@@ -244,7 +244,12 @@
 
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <form id="msform" action="{% url 'profiles:spregsave' %}" method="post" enctype="multipart/form-data">
+        <form
+          id="msform"
+          action="{% url 'profiles:spregsave' %}"
+          method="post"
+          enctype="multipart/form-data"
+        >
           {% csrf_token %}
           <!-- progressbar -->
           <ul id="progressbar">
@@ -261,26 +266,32 @@
               service providers
             </h3>
             <!-- <h3 class="fs-subtitle">Tell us something more about you</h3> -->
+            <label for="">Fullname</label>
             <input
               class="fullinput"
               type="text"
               name="fullname"
               placeholder="Fullname"
             />
+            <label for="">Phone number</label>
             <input
               class="fullinput"
               type="text"
               name="phone"
               placeholder="Phone"
             />
+            <label for="">Email</label>
             <input
               class="fullinput"
               type="email"
               name="email"
               placeholder="Email"
             />
+            <label for="">NIN/Passport number</label>
             <input class="fullinput" type="text" name="nin" placeholder="NIN" />
+            <label for="">Date of Birth</label>
             <input class="fullinput" type="date" name="dob" placeholder="DOB" />
+            <label for="">Gender</label>
             <select
               class="fullinput"
               class="custom-select my-1 mr-sm-2"
@@ -291,6 +302,7 @@
               <option value="Female">Female</option>
               <option value="Male">Male</option>
             </select>
+            <label for="">Physical Address</label>
             <input
               class="fullinput"
               class="fullinput"
@@ -322,6 +334,7 @@
                 At least one year of experience in your profession
               </label>
               <br />
+              <br />
               <input
                 type="checkbox"
                 value="I'm not a middleman"
@@ -331,6 +344,7 @@
               <label class="form-check-label" for="defaultCheck1">
                 Your not a middleman
               </label>
+              <br />
               <br />
               <input
                 class="form-check-input"
@@ -343,6 +357,7 @@
                 You have the skillset to give professional service
               </label>
               <br />
+              <br />
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -353,6 +368,7 @@
               <label class="form-check-label" for="defaultCheck1">
                 You have a phone/computer with an active Internet connection
               </label>
+              <br />
               <br />
             </div>
             <input
@@ -373,7 +389,7 @@
             <h3 class="fs-subtitle">
               Please provide your technical training qualifications.
             </h3>
-            <label for="myfile">Select a file:</label>
+            <label for="myfile">Select your Qualifications:</label>
             <input
               class="fullinput"
               type="file"
@@ -384,6 +400,7 @@
               Please provide a link to your portfolio. (Could be a link to a
               website or social media page)
             </h3>
+            <label for="">Link to your portfolio</label>
             <input
               class="fullinput"
               type="text"
@@ -413,6 +430,9 @@
               We would like you to tell us more about yourself and the
               professional service that you offer.
             </h3>
+            <label for=""
+              >Tell us more about yourself and your experience</label
+            >
             <textarea
               class="fullinput"
               class="form-control"
@@ -426,6 +446,7 @@
               <h3 class="fs-subtitle">Referee 1</h3>
               <div class="row">
                 <div class="col-sm-6">
+                  <label for="">Fullname</label>
                   <input
                     class="fullinput"
                     type="text"
@@ -435,6 +456,7 @@
                     placeholder="Full name"
                   />
                   <br />
+                  <label for="">Email</label>
                   <input
                     class="fullinput"
                     type="text"
@@ -445,6 +467,7 @@
                   />
                 </div>
                 <div class="col-sm-6">
+                  <label for="">Title</label>
                   <input
                     class="fullinput"
                     type="text"
@@ -454,6 +477,7 @@
                     placeholder="Title/Desccription"
                   />
                   <br />
+                  <label for="">Active phone number</label>
                   <input
                     class="fullinput"
                     type="text"
@@ -469,6 +493,7 @@
               <h3 class="fs-subtitle">Referee 2</h3>
               <div class="row">
                 <div class="col-sm-6">
+                  <label for="">Fullname</label>
                   <input
                     class="fullinput"
                     type="text"
@@ -478,6 +503,7 @@
                     placeholder="Full name"
                   />
                   <br />
+                  <label for="">Email</label>
                   <input
                     class="fullinput"
                     type="text"
@@ -488,6 +514,7 @@
                   />
                 </div>
                 <div class="col-sm-6">
+                  <label for="">Title</label>
                   <input
                     class="fullinput"
                     type="text"
@@ -497,6 +524,7 @@
                     placeholder="Title/Desccription"
                   />
                   <br />
+                  <label for="">Active phone number</label>
                   <input
                     class="fullinput"
                     type="text"
@@ -530,28 +558,70 @@
               visit.
             </h3>
             <label>Service</label>
-            <select
-              class="fullinput"
-              class="custom-select my-1 mr-sm-2"
-              id="inlineFormCustomSelectPref"
-              name="service"
-            >
-              <option selected>Service</option>
-              <option value="Personal Support Assistance">
-                Personal Support Assistance
-              </option>
-              <option value="Ugandan Sign Language Interpreter">
-                Ugandan sign language interpreter
-              </option>
-              <option value="International Sign Language Interpreter">
-                Ugandan sign language interpreter
-              </option>
-              <option value="Mobility Guide">Mobility guide</option>
-              <option value="Captioning">Captioning</option>
-            </select>
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Personal Support Assistance"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Personal Support Assistance
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Ugandan Sign Language Interpreter"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Ugandan Sign Language Interpreter
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="International Sign Language Interpreter"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  International Sign Language Interpreter
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Captioning"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Captioning
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Tactile Sign Language Interpreter"
+                  name="availability"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Tactile Sign Language Interpreter
+                </label>
+              </div>
+            </div>
+            <br /><br />
             <label>Enter our service availability</label>
             <br />
+            <br />
             Days
+            <br />
             <br />
             <div>
               <div class="form-check">
@@ -634,11 +704,12 @@
                 <br />
               </div>
             </div>
-            <br/>
+            <br />
             <input type="hidden" id="status" name="status" value="Pending" />
             <div>
               <div class="row">
                 <div class="col-md-6">
+                  <label for="">Start Time</label>
                   <input
                     class="fullinput"
                     type="time"
@@ -648,6 +719,7 @@
                   />
                 </div>
                 <div class="col-md-6">
+                  <label for="">End time</label>
                   <input
                     class="fullinput"
                     type="time"
@@ -660,6 +732,8 @@
               <div>
                 <div class="row">
                   <div class="col-md-6">
+                    <label for="">Price per visit</label>
+                    Price per visit
                     <input
                       class="fullinput"
                       type="text"
@@ -674,7 +748,13 @@
             </div>
             <div>
               <div class="form-check">
-                <input class="form-check-input" name="terms" type="checkbox" value="Agree to T&C" id="flexCheckDefault">
+                <input
+                  class="form-check-input"
+                  name="terms"
+                  type="checkbox"
+                  value="Agree to T&C"
+                  id="flexCheckDefault"
+                />
                 <label class="form-check-label" for="flexCheckDefault">
                   I agree to the terms and conditions set by Dasuns.
                 </label>
@@ -688,11 +768,11 @@
               value="Previous"
             />
             <input
-                type="submit"
-                name="submit"
-                class="next action-button"
-                value="Submit"
-              />
+              type="submit"
+              name="submit"
+              class="next action-button"
+              value="Submit"
+            />
           </fieldset>
         </form>
       </div>

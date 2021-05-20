@@ -20,7 +20,7 @@
   <body>
   <div>{% include 'profiles/serviceUserNavbar.html' %}</div>
     <div class="dashSP">
-      <h3>Personal Support Assistants</h3>
+      <h3>Tactile Sign Language Interpreters</h3>
       <br />
       <div>             
         <table class="table">
@@ -39,7 +39,7 @@
           </thead>
           <tbody>
            {% for serviceprovider in serviceproviders %}
-       {% if serviceprovider.service == "Personal Support Assistance" %}  
+       {% if serviceprovider.service == "Tactile Sign Language Interpreter" %}  
             <tr>
               <td>{{serviceprovider.fullname}}</td>
               <td>{{serviceprovider.gender}}</td>
@@ -55,8 +55,8 @@
               </td>
             </tr>
             {% else %}
-            {% comment %} <span style="display: flex; justify-content: center;" >
-                    There are no Personal Support Assistants now, check again
+            {% comment %} <span style="display: flex; justify-content: center" >
+                    There are no Tactile sign language interpreters now, check again
                     later
                   </span> {% endcomment %}
                   <div></div>
