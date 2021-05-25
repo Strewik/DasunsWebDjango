@@ -43,6 +43,7 @@ urlpatterns = [
     path('declinedbooking/<str:pk>', views.bookingdeclined, name="bookingdeclined"),
     path('spcanceledbooking/<str:pk>', views.bookingcanceled_sp, name="bookingcanceledbysp"),
     path('sucanceledbooking/<str:pk>', views.bookingcanceled_su, name="bookingcanceledbysu"),
+    path('bookingdetails/<str:pk>', views.bookingdetails, name="bookingdetails"),
 
 ]
 

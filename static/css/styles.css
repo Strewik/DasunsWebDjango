@@ -414,3 +414,8 @@ div.list-group{
   text-align: center;
   margin:0 auto;
 }
+
+.table tr {
+  cursor: pointer;
+}
+
