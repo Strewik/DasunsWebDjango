@@ -254,6 +254,25 @@ def createBooking(request, pk):
     context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceuser':serviceuser}
     return render(request,'profiles/bookingform.html', context)
 
+
+def bookingdetails(request, pk):
+    booking = Booking.objects.get(id=pk)
+    name = booking.name
+    phone = booking.phone
+    email = booking.email
+    meetplace = booking.meetplace
+    meetdate = booking.meetdate
+    starttime = booking.starttime
+    endtime = booking.endtime
+    serviceuser = booking.serviceuser
+    serviceprovider = booking.serviceprovider
+    date = booking.date_created
+    status = booking.status
+    context = {'name':name, 'phone':phone,  'email':email, 'meetplace':meetplace, 'meetdate':meetdate, 'starttime':starttime, 'endtime':endtime, 'serviceuser':serviceuser, 'serviceprovider':serviceprovider, 'date':date, 'status':status}
+    return render(request, 'profiles/bookingdetails.html', context)
+
+
+
  
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])

@@ -97,7 +97,7 @@
                               method="POST"
                             > 
                         {% csrf_token %}
-                        <tr>
+                        <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                           <td>
                             {{booking.serviceuser.firstname}}
                             {{booking.serviceuser.lastname}}
@@ -149,7 +149,7 @@
                       {% if bookings %}
                       {% for booking in bookings %}
                       {% if booking.status == "Accept" %}
-                      <tr>
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>
                           {{booking.serviceuser.firstname}}
                           {{booking.serviceuser.lastname}}
@@ -198,7 +198,7 @@
                       {% if bookings %}
                       {% for booking in bookings %}
                       {% if booking.endtime == "" %}
-                      <tr>
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>
                           {{booking.serviceuser.firstname}}
                           {{booking.serviceuser.lastname}}
@@ -243,7 +243,7 @@
                       {% if bookings %}
                       {% for booking in bookings %}
                       {% if booking.status == "Decline" %}
-                      <tr>
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>
                           {{booking.serviceuser.firstname}}
                           {{booking.serviceuser.lastname}}

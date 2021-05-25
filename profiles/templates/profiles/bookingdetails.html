@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Service User Dashboard</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+  </head>
+  <body>
+
+  {% if request.user.serviceuser and not request.user.serviceprovider%}
+    <div>{% include 'profiles/serviceUserNavbar.html' %}</div>
+    {% elif request.user.serviceprovider%}
+    <div>{% include 'profiles/serviceProvNavbar.html' %}</div>
+    {% endif %}
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="card card-body">
+          <div><strong>Person Booked:</strong>   {{serviceprovider.fullname}}</div>
+          <div><strong>Service Booked:</strong>   {{serviceprovider.service}}</div>
+          <div><strong>Booked By:</strong>   {{serviceuser.firstname}} {{serviceuser.lastname}}</div>
+          <div><strong>Booked For:</strong>   {{name}}</div>
+          <div><strong>Serviceuser Phone No:</strong>   {{phone}}</div>
+          <div><strong>Serviceuser Email Address:</strong>   {{email}}</div>
+          <div><strong>Meeting Place:</strong>   {{meetplace}}</div>
+          <div><strong>Meeting Date:</strong>   {{meetdate}}</div>
+          <div><strong>Start Time:</strong>   {{starttime}}</div>
+          <div><strong>End Time:</strong>   {{endtime}}</div>
+          <div><strong>Booked On:</strong>   {{date}}</div>
+          <br>
+          <div>
+            {% if request.user.serviceuser and not request.user.serviceprovider%}
+            <a class="btn btn-success" href="{% url 'profiles:serviceuserdash'%}">
+                &#8592; Back to Dashboard
+            </a>
+            {% elif request.user.serviceprovider%}
+            <a class="btn btn-success" href="{% url 'profiles:serviceproviderdash'%}">
+                &#8592; Back to Dashboard
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <div>{% include 'profiles/footer.html' %}</div>
+  </body>
+</html>
