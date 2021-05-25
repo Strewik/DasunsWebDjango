@@ -125,6 +125,7 @@
                   <th scope="col">Price per visit(UGX)</th>
                   <th scope="col">Meeting Place</th>
                   <th scope="col">Date/time</th>
+                  {% comment %} <th scope="col">Cancel</th> {% endcomment %}
                 </tr>
                     </thead>
                     <tbody>
@@ -137,6 +138,10 @@
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
                   <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                  {% comment %} <td>
+                      <input type="submit" value="Decline" name="status" id="decline" onclick="location.href='{% url 'profiles:bookingcanceledbysu' booking.serviceprovider.id%}'"/>
+                      <input type="hidden" name="id" value="{{booking.id }}" />
+                  </td> {% endcomment %}
                 </tr>
                 {% endif %}
                 {% endfor %}

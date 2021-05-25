@@ -25,12 +25,14 @@
     <div>{% include 'profiles/navbar.html' %}</div>
     {% endif %}
     <div class="error-popup">
+    {% if messages %}
       {% for message in messages %}
       <div class="alert alert-success">
         <a class="close" href="#" data-dismiss="alert" style="text-decoration:none; color:#000;"><button>x</button></a>
         {{ message }}
       </div>
       {% endfor %} 
+      {% endif %}
     </div>
     <div class="container">
       <div class="row">

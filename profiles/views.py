@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout  
 from .filters import *
 from django.contrib.auth.forms import *
-from django.core.mail import send_mail, BadHeaderError
+# from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import Group
 from django.template.loader import render_to_string
@@ -21,12 +21,14 @@ from django.core.paginator import Paginator, EmptyPage
 from django.core.mail import send_mail
 from django.conf import settings
 import smtplib
-from email.message import EmailMessage
+# from email.message import EmailMessage
+from django.core.mail import EmailMessage
 # import urllib.request
 # from django.template.loader import render_to_string
 
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
+from django.core.files.storage import FileSystemStorage
 
 
 # Create your views here.
@@ -180,16 +182,17 @@ def serviceproviderdash(request):
 
 def spregsuccess(request):
    
-    email = EmailMessage(
-        'subject',
-        'body',
-        settings.EMAIL_HOST_USER,
-        ['kawooyastevenug@gmail.com'], 
-        )
-    email.fail_silently=False
-    email.send()
+#     email = EmailMessage(
+#         'subject',
+#         'body',
+#         settings.EMAIL_HOST_USER,
+#         ['kawooyastevenug@gmail.com'], 
+#         )
+#     email.fail_silently=False
+#     email.send()
       
     return render(request, 'profiles/spregsuccess.html')
+
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['admin'])
@@ -232,28 +235,123 @@ def dashboard(request):
 # @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def createBooking(request, pk):
-	serviceuser = request.user.serviceuser
-	serviceprovider = Serviceprovider.objects.get(id=pk)
-	bookingform = BookingForm()
+    serviceuser = request.user.serviceuser
+    serviceprovider = Serviceprovider.objects.get(id=pk)
+    bookingform = BookingForm()
 
-	if request.method == 'POST':
-		bookingform = BookingForm(request.POST)
+    if request.method == 'POST':
+        bookingform = BookingForm(request.POST)
 
-		if bookingform.is_valid():
-			serviceuser = bookingform.cleaned_data.get('serviceuser')
-			serviceprovider = bookingform.cleaned_data.get('serviceprovider')
-			mybookingform = bookingform.save()
-			print('Printing mybookingform:', mybookingform.serviceprovider)
-			bookingform.save()
-			return redirect(reverse ('profiles:serviceuserdash'))
+        if bookingform.is_valid():
+            serviceuser = bookingform.cleaned_data.get('serviceuser')
+            serviceprovider = bookingform.cleaned_data.get('serviceprovider')
+            # mybookingform = bookingform.save()
+            # print('Printing mybookingform:', mybookingform.serviceprovider)
+            bookingform.save()
+            return redirect(reverse ('profiles:bookingsuccess', kwargs={"pk": serviceprovider.id}))
 
-	context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceuser':serviceuser}
-	return render(request,'profiles/bookingform.html', context)
+
+    context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceuser':serviceuser}
+    return render(request,'profiles/bookingform.html', context)
 
  
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
+def bookingsuccess(request, pk):
+    serviceprovider = Serviceprovider.objects.get(id=pk)
+    serviceuser = request.user.serviceuser
+    template = render_to_string('profiles/booksucess_email_template.html', {'spname': serviceprovider.fullname, 'suname': serviceuser.firstname, 'service': serviceprovider.service})
+    email = EmailMessage(
+        'New booking',
+        template,
+        settings.EMAIL_HOST_USER,
+        [serviceprovider.email], 
+        )
+    email.fail_silently=False
+    email.send()
+    
+    context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
+    return render(request, 'profiles/booksuccess.html', context)
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceprovider', 'admin'])
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider'])
+def bookingaccepted(request, pk):
+    serviceprovider = request.user.serviceprovider
+    serviceuser = Serviceuser.objects.get(id=pk)
+    template = render_to_string('profiles/bookingaccepted_email_template.html', {'spname': serviceprovider.fullname, 'suname': serviceuser.firstname, 'service': serviceprovider.service})
+    email = EmailMessage(
+        'Booking Accepted!',
+        template,
+        settings.EMAIL_HOST_USER,
+        [serviceuser.email], 
+        )
+    email.fail_silently=False
+    email.send()
+    
+    context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
+    return render(request, 'profiles/bookingaccepted.html', context)
+
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider'])
+def bookingdeclined(request, pk):
+    serviceprovider = request.user.serviceprovider
+    serviceuser = Serviceuser.objects.get(id=pk)
+    template = render_to_string('profiles/bookingdeclined_email_template.html', {'spname': serviceprovider.fullname, 'suname': serviceuser.firstname, 'service': serviceprovider.service})
+    email = EmailMessage(
+        'Booking Declined',
+        template,
+        settings.EMAIL_HOST_USER,
+        [serviceuser.email], 
+        )
+    email.fail_silently=False
+    email.send()
+    
+    context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
+    return render(request, 'profiles/bookingdeclined.html', context)
+
+
+@login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceprovider'])
+def bookingcanceled_sp(request, pk):
+    serviceprovider = request.user.serviceprovider
+    serviceuser = Serviceuser.objects.get(id=pk)
+    template = render_to_string('profiles/bookingcanceledbysp_email_template.html', {'spname': serviceprovider.fullname, 'suname': serviceuser.firstname, 'service': serviceprovider.service})
+    email = EmailMessage(
+        'Booking Canceled by Service Provider',
+        template,
+        settings.EMAIL_HOST_USER,
+        [serviceuser.email], 
+        )
+    email.fail_silently=False
+    email.send()
+    
+    context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
+    return render(request, 'profiles/bookingcanceledbysp.html', context)
+
+
+@login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser'])
+def bookingcanceled_su(request, pk):
+    serviceprovider = Serviceprovider.objects.get(id=pk)
+    serviceuser = request.user.serviceuser
+    template = render_to_string('profiles/bookingcanceledbysu_email_template.html', {'spname': serviceprovider.fullname, 'suname': serviceuser.firstname, 'service': serviceprovider.service})
+    email = EmailMessage(
+        'Booking Canceled by Service User',
+        template,
+        settings.EMAIL_HOST_USER,
+        [serviceprovider.email], 
+        )
+    email.fail_silently=False
+    email.send()
+    
+    context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
+    return render(request, 'profiles/bookingcanceledbysu.html', context)
+
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider', 'admin'])
 def updateBookingStatus(request, pk):
     booking = Booking.objects.get(id=pk)
 
@@ -271,6 +369,7 @@ def updateBookingStatus(request, pk):
 
     context = {'booking':booking}
     return render(request,'profiles/serviceProviderDashboard.html', context)
+
 
 
 # @login_required(login_url='profiles:homepage')
@@ -292,18 +391,20 @@ def serviceuserdash(request):
 	return render(request, 'profiles/serviceuserdash.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
 def serviceUserProfile(request):
     serviceuser = request.user.serviceuser
     username = request.user
     firstname = serviceuser.firstname
     lastname = serviceuser.lastname
+    gender = serviceuser.gender
     phone = serviceuser.phone
     email = serviceuser.email
     date = serviceuser.date_created
-    profile_pic = serviceuser.profile_pic
-    context = {'username':username, 'firstname':firstname, 'lastname':lastname, 'phone':phone, 'email':email, 'date':date, }
+    profile_pic = serviceuser.profile_pic.url
+    print('Profile',  profile_pic)
+    context = {'username':username, 'firstname':firstname, 'lastname':lastname, 'gender':gender, 'phone':phone, 'email':email, 'date':date }
     return render(request, 'profiles/serviceuserProfile.html', context)
 
 def serviceUserDetails(request):
@@ -311,28 +412,49 @@ def serviceUserDetails(request):
     username = request.user
     firstname = serviceuser.firstname
     lastname = serviceuser.lastname
+    gender = serviceuser.gender
     phone = serviceuser.phone
     email = serviceuser.email
     date = serviceuser.date_created
     profile_pic = serviceuser.profile_pic
-    context = {'username':username, 'firstname':firstname, 'lastname':lastname, 'phone':phone, 'email':email, 'date':date, }
+    context = {'username':username, 'firstname':firstname, 'lastname':lastname, 'gender':gender, 'phone':phone, 'email':email, 'date':date}
     return render(request, 'profiles/serviceuserProfile.html', context)
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser', 'admin'])
+
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
 def updateServiceuser(request, pk):
-    
-    serviceusers = ServiceuserModel.objects.get(id=pk)
-    form = ServiceuserForm(instance=serviceusers)
+    # serviceuser = ServiceuserModel.objects.get(id=pk)
+    serviceuser = request.user.serviceuser
+    form = ServiceuserForm(instance=serviceuser)
 
     if request.method == 'POST':
-        form = ServiceuserForm(request.POST, instance=serviceusers)
+        form = ServiceuserForm(request.POST, request.FILES, instance=serviceuser)
         if form.is_valid():
             form.save()
+
+        # form=ServiceuserForm.save(request.POST, request.FILES)
+        # form.user=user
+
+        # if 'profile_pic' in request.FILES:
+        #     form.profile_pic=request.FILES['profile_pic']
+
+        #     form.save()
+
+            # image = request.FILES.get('profile_pic', None)
+            # if image: 
+            #     # filename = FileSystemStorage().save('profile_pics/' + image.name, image)
+            #     filename = FileSystemStorage().save('profile_pics/', image)
+            #     serviceuser.profile_pic = filename
+            #     print('image name', image)
+            # serviceuser.save()
+            messages.success(request, 'Your profile was updated successfully!')
             return redirect(reverse ('profiles:profile'))
 
-    context = {'form': form}
+    context = {'form': form, 'serviceuser':serviceuser}
     return render(request, 'profiles/editServiceuser.html', context) 
+
 
 # @login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['admin'])
