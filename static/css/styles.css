@@ -1,8 +1,10 @@
-body {
+html, body {
   background-color: #fff;
   margin: 0;
   padding: 0;
   font-family: "Montserrat";
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -400,5 +402,20 @@ div.list-group{
   color: #fff;
   background-color: #35d187;
   border-color: #fff;
+}
+
+.alert .alert-danger{
+  width: 20%;
+  height: 20%;
+  background-color: #707070;
+}
+
+.email-success{
+  text-align: center;
+  margin:0 auto;
+}
+
+.table tr {
+  cursor: pointer;
 }
 

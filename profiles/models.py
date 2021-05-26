@@ -2,25 +2,24 @@ from django.db import models
 from django.contrib.auth.models import User
 from multiselectfield import MultiSelectField
 
+
 # Create your models here.
 
-
 class Serviceuser(models.Model):
+    GENDER = (('Male', 'Male'), ('Female', 'Female'))
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
-    profile_pic = models.ImageField(default="profile.png", blank=True)
+    email = models.EmailField(max_length=200)
+    gender = models.CharField(max_length=200, choices=GENDER, null=True)
+    profile_pic = models.ImageField(upload_to='profilepics/', default="profile.png", blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.firstname)
-    #    return "%s %s" % (self.first_name, self.last_name)
-
+       return "%s %s" % (self.firstname, self.lastname)
     class Meta:
-        ordering = ['-date_created', 'firstname']
-
+        ordering = ['-date_created','firstname' ] 
 
 # class Day(models.Model):
 #     DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),

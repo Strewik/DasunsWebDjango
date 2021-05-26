@@ -39,7 +39,7 @@
           </thead>
           <tbody>
                 {% for serviceprovider in serviceproviders %}
-       {% if serviceprovider.service == "Mobility Guide" %}  
+       {% if serviceprovider.service == "Mobility Guide" and serviceprovider.status == "Active" %}  
             <tr>
               <td>{{serviceprovider.fullname}}</td>
               <td>{{serviceprovider.gender}}</td>

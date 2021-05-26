@@ -21,6 +21,14 @@
   <body>
   {% if user.is_authenticated %}
    <div>{% include 'profiles/serviceUserNavbar.html' %}</div>
+    <div class="error-popup">
+      {% for message in messages %}
+      <div class="alert alert-success">
+        <a class="close" href="#" data-dismiss="alert" style="text-decoration:none; color:#000;"><button>x</button></a>
+        {{ message }}
+      </div>
+      {% endfor %} 
+    </div>
     <div class="row">
       <div class="col-md-3">
         <div class="card card-body">
@@ -31,14 +39,15 @@
           <h3 style="text-align: center">Account Details</h3>
           <hr />
            {% if request.user.serviceuser.profile_pic %}
-          <img class="profile-pic" scr="{{request.user.serviceuser.profile_pic.url}}" />
-          {% endif %} 
+          <img scr="{{request.user.serviceuser.profile_pic.url}}" class="profile-pic"  alt="Profile-Picture">
+          {% endif %}
         </div>
       </div>
       <div class="col-md-9">
         <div class="card card-body">
           <div><strong>Name:</strong>   {{firstname}} {{lastname}}</div>
           <div><strong>UserName:</strong>   {{username}}</div>
+          <div><strong>Gender:</strong>   {{gender}}</div>
           <div><strong>Phone No.:</strong>   {{phone}}</div>
           <div><strong>Email Address:</strong>   {{email}}</div>
           <div><strong>Date of Signup:</strong>   {{date}}</div>

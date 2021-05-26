@@ -97,7 +97,7 @@
                               method="POST"
                             > 
                         {% csrf_token %}
-                        <tr>
+                        <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                           <td>
                             {{booking.serviceuser.firstname}}
                             {{booking.serviceuser.lastname}}
@@ -107,8 +107,8 @@
                           <td>{{booking.meetplace}}</td>
                           <td>{{booking.meetdate}}, {{booking.starttime}}</td>
                           <td>
-                              <input type="submit" value="Accept" name="status" id="accept"/>
-                              <input type="submit" value="Deny" name="status" id="deny" />
+                              <input type="submit" value="Accept" name="status" id="accept" onclick="location.href='{% url 'profiles:bookingaccepted' booking.serviceuser.id%}'"/>
+                              <input type="submit" value="Decline" name="status" id="decline" onclick="location.href='{% url 'profiles:bookingdeclined' booking.serviceuser.id%}'"/>
                               <input type="hidden" name="id" value="{{booking.id }}" />
                           </td>
                         </tr>
@@ -142,13 +142,14 @@
                         <th scope="col">Price per visit(UGX)</th>
                         <th scope="col">Meeting Place</th>
                         <th scope="col">Date/time</th>
+                        {% comment %} <th scope="col">Cancel</th> {% endcomment %}
                       </tr>
                     </thead>
                     <tbody>
                       {% if bookings %}
                       {% for booking in bookings %}
                       {% if booking.status == "Accept" %}
-                      <tr>
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>
                           {{booking.serviceuser.firstname}}
                           {{booking.serviceuser.lastname}}
@@ -157,6 +158,10 @@
                         <td>{{booking.serviceprovider.pricevisit}}</td>
                         <td>{{booking.meetplace}}</td>
                         <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                        {% comment %} <td>
+                            <input type="submit" value="Decline" name="status" id="decline" onclick="location.href='{% url 'profiles:bookingcanceledbysp' booking.serviceuser.id%}'"/>
+                            <input type="hidden" name="id" value="{{booking.id }}" />
+                        </td> {% endcomment %}
                       </tr>
                       {% endif %}
                       {% endfor %}
@@ -193,7 +198,7 @@
                       {% if bookings %}
                       {% for booking in bookings %}
                       {% if booking.endtime == "" %}
-                      <tr>
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>
                           {{booking.serviceuser.firstname}}
                           {{booking.serviceuser.lastname}}
@@ -237,8 +242,8 @@
                     <tbody>
                       {% if bookings %}
                       {% for booking in bookings %}
-                      {% if booking.status == "Deny" %}
-                      <tr>
+                      {% if booking.status == "Decline" %}
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>
                           {{booking.serviceuser.firstname}}
                           {{booking.serviceuser.lastname}}

@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.conf.urls.static import static
 from django.conf import settings
 
+
 app_name = "profiles"   
 
 urlpatterns = [
@@ -30,7 +31,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name="dashboard"),
     path('rating/', views.rating, name="rating"),
     path('spdash/', views.serviceproviderdash, name="serviceproviderdash"),
-    # path('addServiceuser/', views.addServiceuser, name="addServiceuser"),
     path('update_serviceuser/<str:pk>', views.updateServiceuser, name="update_serviceuser"),
     path('delete_serviceuser/<str:pk>', views.deleteServiceuser, name="delete_serviceuser"),
     path('update_serviceprovider/<str:pk>', views.updateServiceprovider, name="update_serviceprovider"),
@@ -41,6 +41,13 @@ urlpatterns = [
     path('profilesp/', views.serviceProviderProfile, name="profilesp"),
     path('updatebookingstatus/<str:pk>', views.updateBookingStatus, name="updatebookingstatus"),
     path('serviceuserdetails/', views.serviceUserDetails, name="serviceuserdetails"),
+    path('successbooking/<str:pk>', views.bookingsuccess, name="bookingsuccess"),
+    path('acceptedbooking/<str:pk>', views.bookingaccepted, name="bookingaccepted"),
+    path('declinedbooking/<str:pk>', views.bookingdeclined, name="bookingdeclined"),
+    path('spcanceledbooking/<str:pk>', views.bookingcanceled_sp, name="bookingcanceledbysp"),
+    path('sucanceledbooking/<str:pk>', views.bookingcanceled_su, name="bookingcanceledbysu"),
+    path('bookingdetails/<str:pk>', views.bookingdetails, name="bookingdetails"),
+
 ]
 
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -48,3 +55,6 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+
+
