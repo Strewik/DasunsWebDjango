@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>stars.css Demos</title>
+    <link
+      rel="stylesheet"
+      href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+    />
+    <style>
+      @import url(http://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
+
+      /* * {
+        margin: 0;
+        padding: 0;
+        font-family: roboto;
+      } */
+
+      body {
+        background: rgb(197, 194, 194);
+        
+      }
+
+      .cont {
+        justify-content: center
+      }
+
+      hr {
+        margin: 20px;
+        border: none;
+        border-bottom: thin solid rgba(255, 255, 255, 0.1);
+      }
+
+      div.title {
+        font-size: 2em;
+      }
+
+      h1 span {
+        font-weight: 300;
+        color: #fd4;
+      }
+
+      div.stars {
+        width: 50%;
+
+        display: inline-block;
+        align-items: center;
+      }
+
+      input.star {
+        display: none;
+      }
+
+      label.star {
+        float: right;
+        padding: 10px;
+        font-size: 36px;
+        color: #444;
+        transition: all 0.2s;
+      }
+
+      input.star:checked ~ label.star:before {
+        content: "\f005";
+        color: #fd4;
+        transition: all 0.25s;
+      }
+
+      input.star-5:checked ~ label.star:before {
+        color: #fe7;
+        text-shadow: 0 0 20px #952;
+      }
+
+      input.star-1:checked ~ label.star:before {
+        color: #f62;
+      }
+
+      label.star:hover {
+        transform: rotate(-15deg) scale(1.3);
+      }
+
+      label.star:before {
+        content: "\f006";
+        font-family: FontAwesome;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="cont">
+      <div class="stars">
+        <form action="{% url 'profiles:ratingsave' %}" method="POST" >
+          {% csrf_token %}
+          <div>
+            <input class="star star-5" id="star-5-2" type="radio" value="5" name="star" />
+            <label class="star star-5" for="star-5-2"></label>
+            <input class="star star-4" id="star-4-2" type="radio" value="4" name="star" />
+            <label class="star star-4" for="star-4-2"></label>
+            <input class="star star-3" id="star-3-2" type="radio" value="3" name="star" />
+            <label class="star star-3" for="star-3-2"></label>
+            <input class="star star-2" id="star-2-2" type="radio" value="2" name="star" />
+            <label class="star star-2" for="star-2-2"></label>
+            <input class="star star-1" id="star-1-2" type="radio" value="1"name="star" />
+            <label class="star star-1" for="star-1-2"></label>
+          </div>
+          <div>
+            <label class="" for="comment"></label>
+            <textarea class="form-control" style="min-width: 100%" col="200" rows="10"></textarea>
+          </div>
+          <button type="submit" name="comment" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

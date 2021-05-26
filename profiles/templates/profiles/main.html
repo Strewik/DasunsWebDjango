@@ -176,19 +176,12 @@
         <img
           src="{% static 'images/banner.jpg' %}"
           alt="Snow"
-          style="width: 100%"
-        />
+          style="width: 100%"/>
 
-        <div class="top-right">
-          <h1>
-            Access professional support service<br />
-            providers at your finger tips.
-          </h1>
-          <h5>
-            Leveraging technology to advance right, choices and opportunities
-            for <br />
-            persons with disabilities
-          </h5>
+        <div class="top-right"
+        style="margin:80px">
+          <h1>Access professional support service<br /> providers at your finger tips.</h1>
+          <h5>Leveraging technology to advance right, choices and opportunities for <br /> persons with disabilities</h5>
         </div>
       </div>
     </div>
@@ -283,7 +276,7 @@
             <div class="row g-0">
               <div class="col-md-4">
                 <img
-                  src="{% static 'images/physical.png' %}"
+                  src="{% static 'images/deaf.png' %}"
                   alt="..."
                   style="padding: 10px"
                 />
@@ -302,7 +295,7 @@
             <div class="row g-0">
               <div class="col-md-4">
                 <img
-                  src="{% static 'images/physical.png' %}"
+                  src="{% static 'images/deaf.png' %}"
                   alt="..."
                   style="padding: 10px"
                 />
@@ -325,8 +318,8 @@
             <div class="row g-0">
               <div class="col-md-4">
                 <img
-                  style="padding: 10px"
-                  src="{% static 'images/physical.png' %}"
+                  style="padding: 12px; width: 105px; "
+                  src="{% static 'images/mobility.png' %}"
                   alt="..."
                 />
               </div>
@@ -345,13 +338,32 @@
               <div class="col-md-4">
                 <img
                   style="padding: 10px"
-                  src="{% static 'images/physical.png' %}"
+                  src="{% static 'images/hear.png' %}"
                   alt="..."
                 />
               </div>
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">Captioning</h5>
+                  <p class="card-text" id="card-text">view service providers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" onclick="location.href='/tactile';">
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img
+                  style="padding: 10px"
+                  src="{% static 'images/hear.png' %}"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">Tactile Sign Language Interpreter</h5>
                   <p class="card-text" id="card-text">view service providers</p>
                 </div>
               </div>
