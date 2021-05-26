@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     'formtools',
     'bootstrap_datepicker_plus',
     "bootstrap4",
-    'multiselectfield',
-      
+    'multiselectfield',      
 ]
 
 

@@ -98,12 +98,6 @@ class Serviceprovider(models.Model):
     class Meta:
         ordering = ['-date_created', 'fullname']
         
-class Rating(models.Model):
-    stars = models.CharField(max_length=200)
-    comments = models.CharField(max_length=300, null=True)
-    
-
-
 class Booking(models.Model):
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
@@ -128,4 +122,12 @@ class Booking(models.Model):
     # def service_hours(self):
     #     return int(self.endtime - self.starttime)
 
-   
+class Rating(models.Model):
+    star = models.IntegerField(max_length=10, blank=True)
+    comment = models.CharField(max_length=256, blank=True)
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
+        
+    # def __str__(self):
+    #     return str(self.booking.name)
+    
+    

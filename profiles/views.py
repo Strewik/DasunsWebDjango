@@ -167,6 +167,26 @@ def spreg_save(request):
 
 def spreg(request):
     return render(request, 'profiles/spreg.html',)
+
+def rating(request):
+    return render(request, 'profiles/rating.html',)
+
+
+def rating_save(request):
+    # if request.method == 'POST':
+    #     count = Rating(request.POST)
+    #     print(count)
+    # return render(request, 'profiles/rating.html',)
+    
+    if request.method != 'POST':
+        return render(request, 'profiles:rating.html')
+    else: 
+        star = request.POST.get("star")
+        comment = request.POST.get('comment')
+        
+    Rate = Rating(star=star, comment=comment,)
+    Rate.save()
+
           
 
 

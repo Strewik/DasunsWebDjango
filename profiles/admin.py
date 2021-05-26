@@ -6,7 +6,7 @@ from .models import *
 
 admin.site.register(Serviceuser)
 admin.site.register(Serviceprovider)
-admin.site.register(Booking) 
-# admin.site.register(Day)
+admin.site.register(Booking)
+admin.site.register(Rating)
 # admin.site.register(Service)
 
