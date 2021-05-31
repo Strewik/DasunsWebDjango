@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
 
 
 # Create your models here.
@@ -20,13 +21,43 @@ class Serviceuser(models.Model):
     class Meta:
         ordering = ['-date_created','firstname' ] 
 
+# class Day(models.Model):
+#     DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
+#            ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
+#     name = MultiSelectField(choices=DAY)
+    
+#     def __str__(self):
+#         return str(self.name)
+    
+# class Service(models.Model):
+#     SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
+#                ('Ugandan Sign Language Interpreter',
+#                 'Ugandan Sign Language Interpreter'),
+#                ('International Sign Language Interpreter',
+#                 'International Sign Language Interpreter'),
+#                ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),
+#                ('Tactile Sign Language Interpreter', 'Tactile Sign Language Interpreter'),)
+#     name = MultiSelectField(choices=SERVICE)
+    
+#     def __str__(self):
+#         return str(self.name)
+    
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'))
     SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
-    ('Ugandan Sign Language Interpreter', 'Ugandan Sign Language Interpreter'),
-    ('International Sign Language Interpreter', 'International Sign Language Interpreter'), 
-    ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),)
-    STATUS = (('Pending', 'Pending'), ('Active', 'Active'), ('Suspended', 'Suspended'),)
+               ('Ugandan Sign Language Interpreter',
+                'Ugandan Sign Language Interpreter'),
+               ('International Sign Language Interpreter',
+                'International Sign Language Interpreter'),
+               ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),
+               ('Tactile Sign Language Interpreter', 'Tactile Sign Language Interpreter'),)
+    
+    STATUS = (('Pending', 'Pending'), ('Active', 'Active'),
+              ('Suspended', 'Suspended'),)
+    
+    DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
+           ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
+    
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
@@ -50,23 +81,22 @@ class Serviceprovider(models.Model):
     ref2title = models.CharField(max_length=200)
     ref2email = models.EmailField(max_length=200)
     ref2phone = models.CharField(max_length=200)
-    service = models.CharField(max_length=200, choices=SERVICE)
-    availability = models.CharField(max_length=200)
+    service = MultiSelectField(max_length=200, choices=SERVICE)
+    availability = MultiSelectField(max_length=200, choices=DAY)
     status = models.CharField(max_length=200, choices=STATUS,)
     starttime = models.TimeField(max_length=200) 
     endtime = models.TimeField(max_length=200)
     pricevisit = models.CharField(max_length=200)
     terms = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
-    objects=models.Manager()
-    
+    objects = models.Manager()
 
     def __str__(self):
         return str(self.fullname)
-    
-    class Meta:
-        ordering = ['-date_created','fullname']
 
+    class Meta:
+        ordering = ['-date_created', 'fullname']
+        
 class Booking(models.Model):
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
@@ -79,11 +109,19 @@ class Booking(models.Model):
     serviceprovider = models.ForeignKey(Serviceprovider, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=200, default="Pending", blank=True)
-   
 
     def __str__(self):
         return str(self.name)
 
     class Meta:
-        ordering = ['-date_created','name']       
-   
+        ordering = ['-date_created', 'name']
+
+class Rating(models.Model):
+    star = models.IntegerField(blank=True)
+    comment = models.CharField(max_length=256, blank=True)
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
+        
+    # def __str__(self):
+    #     return str(self.booking.name)
+    
+    
