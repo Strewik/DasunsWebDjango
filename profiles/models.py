@@ -121,7 +121,7 @@ class Rating(models.Model):
     comment = models.CharField(max_length=256, blank=True)
     booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
         
-    # def __str__(self):
-    #     return str(self.booking.name)
+    def __str__(self):
+        return str(self.booking.name)
     
     
