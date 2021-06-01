@@ -23,7 +23,7 @@
   <body>
     <div>{% include 'profiles/serviceProvNavbar.html' %}</div> 
       <div class="row">
-        <div class="col-3">
+        <div class="col-2">
           <div class="list-group" id="list-tab" role="tablist">
             <a
               class="list-group-item list-group-item-action active"
@@ -59,11 +59,21 @@
               href="#list-messages"
               role="tab"
               aria-controls="messages"
-              ><h5>Cancelled</h5></a
-            >
+              ><h5>Declined</h5>
+            </a>
+
+            <a
+              class="list-group-item list-group-item-action"
+              id="list-messages-list"
+              data-bs-toggle="list"
+              href="#requests-expired"
+              role="tab"
+              aria-controls="messages"
+              ><h5>Expired</h5>
+            </a>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-10">
           <div class="tab-content" id="nav-tabContent">
             <div
               class="tab-pane fade show active"
@@ -84,7 +94,7 @@
                           <th scope="col">Service booked</th>
                           <th scope="col">Price per visit(UGX)</th>
                           <th scope="col">Meeting Place</th>
-                          <th scope="col">Date/time</th>
+                          <th scope="col">Start Date/time</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -92,6 +102,29 @@
                         {% if bookings %}
                         {% for booking in bookings %}
                         {% if booking.status == "Pending" %}
+                        {% if booking.meetdate > today_date %}
+                        <form
+                              action="{% url 'profiles:updatebookingstatus' booking.id %}"
+                              method="POST"
+                            > 
+                        {% csrf_token %}
+                        <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
+                          <td>
+                            {{booking.serviceuser.firstname}}
+                            {{booking.serviceuser.lastname}}
+                          </td>
+                          <td>{{booking.serviceprovider.service}}</td>
+                          <td>{{booking.serviceprovider.pricevisit}}</td>
+                          <td>{{booking.meetplace}}</td>
+                          <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                          <td>
+                              <input type="submit" value="Accept" name="status" id="accept" onclick="location.href='{% url 'profiles:bookingaccepted' booking.serviceuser.id%}'"/>
+                              <input type="submit" value="Decline" name="status" id="decline" onclick="location.href='{% url 'profiles:bookingdeclined' booking.serviceuser.id%}'"/>
+                              <input type="hidden" name="id" value="{{booking.id }}" />
+                          </td>
+                        </tr>
+                        </form> 
+                        {% elif booking.meetdate == today_date and booking.starttime > time_now %}
                         <form
                               action="{% url 'profiles:updatebookingstatus' booking.id %}"
                               method="POST"
@@ -114,6 +147,7 @@
                         </tr>
                         </form> 
                         {% endif %}
+                        {% endif %}
                         {% endfor %}
                         {% endif %}
                       </tbody>
@@ -130,7 +164,7 @@
             >
               <div class="container">
                 <div>
-                  <h3>Booked</h3>
+                  <h3>Booked Requests</h3>
                   <table class="table">
                     <thead
                       class="thead-dark"
@@ -141,14 +175,15 @@
                         <th scope="col">Service booked</th>
                         <th scope="col">Price per visit(UGX)</th>
                         <th scope="col">Meeting Place</th>
-                        <th scope="col">Date/time</th>
-                        {% comment %} <th scope="col">Cancel</th> {% endcomment %}
+                        <th scope="col">Start Date/time</th>
+                        <th scope="col">End Date/time</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% if bookings %}
                       {% for booking in bookings %}
                       {% if booking.status == "Accept" %}
+                      {% if booking.meetdate > today_date %}
                       <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>
                           {{booking.serviceuser.firstname}}
@@ -158,11 +193,21 @@
                         <td>{{booking.serviceprovider.pricevisit}}</td>
                         <td>{{booking.meetplace}}</td>
                         <td>{{booking.meetdate}}, {{booking.starttime}}</td>
-                        {% comment %} <td>
-                            <input type="submit" value="Decline" name="status" id="decline" onclick="location.href='{% url 'profiles:bookingcanceledbysp' booking.serviceuser.id%}'"/>
-                            <input type="hidden" name="id" value="{{booking.id }}" />
-                        </td> {% endcomment %}
+                        <td>{{booking.meetdate}}, {{booking.endtime}}</td>
                       </tr>
+                       {% elif booking.meetdate == today_date and booking.endtime > time_now %}
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
+                        <td>
+                          {{booking.serviceuser.firstname}}
+                          {{booking.serviceuser.lastname}}
+                        </td>
+                        <td>{{booking.serviceprovider.service}}</td>
+                        <td>{{booking.serviceprovider.pricevisit}}</td>
+                        <td>{{booking.meetplace}}</td>
+                        <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                        <td>{{booking.meetdate}}, {{booking.endtime}}</td>
+                      </tr>
+                      {% endif %}
                       {% endif %}
                       {% endfor %}
                       {% endif %}
@@ -190,14 +235,15 @@
                         <th scope="col">Service booked</th>
                         <th scope="col">Price per visit(UGX)</th>
                         <th scope="col">Meeting Place</th>
-                        <th scope="col">Date/time</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Start Date/time</th>
+                        <th scope="col">End Date/time</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% if bookings %}
                       {% for booking in bookings %}
-                      {% if booking.endtime == "" %}
+                      {% if booking.status == "Accept" %}
+                      {% if booking.meetdate < today_date %}
                       <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>
                           {{booking.serviceuser.firstname}}
@@ -207,8 +253,21 @@
                         <td>{{booking.serviceprovider.pricevisit}}</td>
                         <td>{{booking.meetplace}}</td>
                         <td>{{booking.meetdate}}, {{booking.starttime}}</td>
-                        <td>{{booking.status}}</td>
+                        <td>{{booking.meetdate}}, {{booking.endtime}}</td>
                       </tr>
+                      {% elif booking.meetdate == today_date and booking.endtime < time_now %}
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
+                        <td>
+                          {{booking.serviceuser.firstname}}
+                          {{booking.serviceuser.lastname}}
+                        </td>
+                        <td>{{booking.serviceprovider.service}}</td>
+                        <td>{{booking.serviceprovider.pricevisit}}</td>
+                        <td>{{booking.meetplace}}</td>
+                        <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                        <td>{{booking.meetdate}}, {{booking.endtime}}</td>
+                      </tr>
+                      {% endif %}
                       {% endif %}
                       {% endfor %}
                       {% endif %}
@@ -217,15 +276,15 @@
                 </div>
               </div>
             </div>
-            <div
+             <div
               class="tab-pane fade"
               id="list-messages"
               role="tabpanel"
               aria-labelledby="list-messages-list"
-            >
+             >
               <div class="container" style="margin-top: 20px">
                 <div>
-                  <h3>Cancelled</h3>
+                  <h3>Declined</h3>
                   <table class="table">
                     <thead
                       class="thead-dark"
@@ -236,7 +295,8 @@
                         <th scope="col">Service booked</th>
                         <th scope="col">Price per visit(UGX)</th>
                         <th scope="col">Meeting Place</th>
-                        <th scope="col">Date/time</th>
+                        <th scope="col">Start Date/time</th>
+                        <th scope="col">End Date/time</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -252,6 +312,7 @@
                         <td>{{booking.serviceprovider.pricevisit}}</td>
                         <td>{{booking.meetplace}}</td>
                         <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                        <td>{{booking.meetdate}}, {{booking.endtime}}</td>
                       </tr>
                       {% endif %}
                       {% endfor %}
@@ -261,6 +322,67 @@
                 </div>
               </div>
             </div>
+             <div
+              class="tab-pane fade"
+              id="requests-expired"
+              role="tabpanel"
+              aria-labelledby="list-messages-list"
+             >
+              <div class="container" style="margin-top: 20px">
+                <div>
+                  <h3>Expired Requests</h3>
+                  <table class="table">
+                    <thead
+                      class="thead-dark"
+                      style="color: #fff; background-color: #35d187"
+                    >
+                      <tr>
+                        <th scope="col">Client</th>
+                        <th scope="col">Service booked</th>
+                        <th scope="col">Price per visit(UGX)</th>
+                        <th scope="col">Meeting Place</th>
+                        <th scope="col">Start Date/time</th>
+                        <th scope="col">End Date/time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if bookings %}
+                      {% for booking in bookings %}
+                      {% if booking.status == "Pending" %}
+                      {% if booking.meetdate < today_date %}
+                      <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
+                        <td>
+                          {{booking.serviceuser.firstname}}
+                          {{booking.serviceuser.lastname}}
+                        </td>
+                        <td>{{booking.serviceprovider.service}}</td>
+                        <td>{{booking.serviceprovider.pricevisit}}</td>
+                        <td>{{booking.meetplace}}</td>
+                        <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                        <td>{{booking.meetdate}}, {{booking.endtime}}</td>
+                      </tr>
+                      {% elif booking.meetdate == today_date and booking.starttime < time_now %}
+                          <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
+                        <td>
+                          {{booking.serviceuser.firstname}}
+                          {{booking.serviceuser.lastname}}
+                        </td>
+                        <td>{{booking.serviceprovider.service}}</td>
+                        <td>{{booking.serviceprovider.pricevisit}}</td>
+                        <td>{{booking.meetplace}}</td>
+                        <td>{{booking.meetdate}}, {{booking.starttime}}</td>
+                        <td>{{booking.meetdate}}, {{booking.endtime}}</td>
+                      </tr>
+                      {% endif %}
+                      {% endif %}
+                      {% endfor %}
+                      {% endif %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

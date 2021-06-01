@@ -84,8 +84,8 @@ class Serviceprovider(models.Model):
     service = MultiSelectField(max_length=200, choices=SERVICE)
     availability = MultiSelectField(max_length=200, choices=DAY)
     status = models.CharField(max_length=200, choices=STATUS,)
-    starttime = models.CharField(max_length=200)
-    endtime = models.CharField(max_length=200)
+    starttime = models.TimeField(max_length=200) 
+    endtime = models.TimeField(max_length=200)
     pricevisit = models.CharField(max_length=200)
     terms = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -102,13 +102,11 @@ class Booking(models.Model):
     phone = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     meetplace = models.CharField(max_length=200)
-    meetdate = models.CharField(max_length=200)
-    starttime = models.CharField(max_length=200)
-    endtime = models.CharField(max_length=200)
-    serviceuser = models.ForeignKey(
-        Serviceuser, null=True, on_delete=models.SET_NULL)
-    serviceprovider = models.ForeignKey(
-        Serviceprovider, null=True, on_delete=models.SET_NULL)
+    meetdate = models.DateField(max_length=200)
+    starttime = models.TimeField(max_length=200)
+    endtime = models.TimeField(max_length=200)
+    serviceuser = models.ForeignKey(Serviceuser, null=True, on_delete=models.SET_NULL)
+    serviceprovider = models.ForeignKey(Serviceprovider, null=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=200, default="Pending", blank=True)
 
@@ -117,12 +115,9 @@ class Booking(models.Model):
 
     class Meta:
         ordering = ['-date_created', 'name']
-    # @property
-    # def service_hours(self):
-    #     return int(self.endtime - self.starttime)
 
 class Rating(models.Model):
-    star = models.IntegerField(max_length=10, blank=True)
+    star = models.IntegerField(blank=True)
     comment = models.CharField(max_length=256, blank=True)
     booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
         
