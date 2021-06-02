@@ -1,249 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>Multiple step form</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    <script
-      type="text/javascript"
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js"
-    ></script>
-    <style type="text/css">
-      #personal_information,
-      #company_information {
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="col-lg-8">
-        <form class="form-horizontal" action="" method="POST" id="myform">
-          <fieldset id="account_information" class="">
-            <legend>Account information</legend>
-            <div class="form-group">
-              <label for="username" class="col-lg-4 control-label"
-                >Username</label
-              >
-              <div class="col-lg-8">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="username"
-                  name="username"
-                  placeholder="username"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="password" class="col-lg-4 control-label"
-                >Password</label
-              >
-              <div class="col-lg-8">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="conf_password" class="col-lg-4 control-label"
-                >Confirm password</label
-              >
-              <div class="col-lg-8">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="conf_password"
-                  name="conf_password"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-            <p><a class="btn btn-primary next">next</a></p>
-          </fieldset>
-
-          <fieldset id="company_information" class="">
-            <legend>Account information</legend>
-            <div class="form-group">
-              <label for="company" class="col-lg-4 control-label"
-                >Company</label
-              >
-              <div class="col-lg-8">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="company"
-                  name="company"
-                  placeholder="Company"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="url" class="col-lg-4 control-label"
-                >Website url</label
-              >
-              <div class="col-lg-8">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="url"
-                  name="url"
-                  placeholder="Website url"
-                />
-              </div>
-            </div>
-            <p><a class="btn btn-primary next">next</a></p>
-          </fieldset>
-
-          <fieldset id="personal_information" class="">
-            <legend>Personal information</legend>
-            <div class="form-group">
-              <label for="name" class="col-lg-4 control-label">Name</label>
-              <div class="col-lg-8">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  name="name"
-                  placeholder="Name"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="email" class="col-lg-4 control-label">Email</label>
-              <div class="col-lg-8">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                />
-              </div>
-            </div>
-            <p><a class="btn btn-primary" id="previous">Previous</a></p>
-            <p>
-              <input class="btn btn-success" type="submit" value="submit" />
-            </p>
-          </fieldset>
-        </form>
-      </div>
-    </div>
-
-    <script type="text/javascript">
-      $(document).ready(function () {
-        // Custom method to validate username
-        $.validator.addMethod(
-          "usernameRegex",
-          function (value, element) {
-            return this.optional(element) || /^[a-zA-Z0-9]*$/i.test(value);
-          },
-          "Username must contain only letters, numbers"
-        );
-
-        $(".next").click(function () {
-          var form = $("#myform");
-          form.validate({
-            errorElement: "span",
-            errorClass: "help-block",
-            highlight: function (element, errorClass, validClass) {
-              $(element).closest(".form-group").addClass("has-error");
-            },
-            unhighlight: function (element, errorClass, validClass) {
-              $(element).closest(".form-group").removeClass("has-error");
-            },
-            rules: {
-              username: {
-                required: true,
-                usernameRegex: true,
-                minlength: 6,
-              },
-              password: {
-                required: true,
-              },
-              conf_password: {
-                required: true,
-                equalTo: "#password",
-              },
-              company: {
-                required: true,
-              },
-              url: {
-                required: true,
-              },
-              name: {
-                required: true,
-                minlength: 3,
-              },
-              email: {
-                required: true,
-                minlength: 3,
-              },
-            },
-            messages: {
-              username: {
-                required: "Username required",
-              },
-              password: {
-                required: "Password required",
-              },
-              conf_password: {
-                required: "Password required",
-                equalTo: "Password don't match",
-              },
-              name: {
-                required: "Name required",
-              },
-              email: {
-                required: "Email required",
-              },
-            },
-          });
-          if (form.valid() === true) {
-            if ($("#account_information").is(":visible")) {
-              current_fs = $("#account_information");
-              next_fs = $("#company_information");
-            } else if ($("#company_information").is(":visible")) {
-              current_fs = $("#company_information");
-              next_fs = $("#personal_information");
-            }
-
-            next_fs.show();
-            current_fs.hide();
-          }
-        });
-
-        $("#previous").click(function () {
-          if ($("#company_information").is(":visible")) {
-            current_fs = $("#company_information");
-            next_fs = $("#account_information");
-          } else if ($("#personal_information").is(":visible")) {
-            current_fs = $("#personal_information");
-            next_fs = $("#company_information");
-          }
-          next_fs.show();
-          current_fs.hide();
-        });
-      });
-    </script>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -535,7 +289,7 @@
               placeholder="Email"
             />
             <label for="">NIN/Passport number</label>
-            <input class="fullinput" type="text" name="nin" placeholder="NIN" />
+            <input class="fullinput" type="text" name="nin" placeholder="NIN/passport number" />
             <label for="">Date of Birth</label>
             <input class="fullinput" type="date" name="dob" placeholder="DOB" />
             <label for="">Gender</label>
@@ -589,7 +343,7 @@
                 name="notmidman"
               />
               <label class="form-check-label" for="defaultCheck1">
-                Your not a middleman
+                You are not a middleman
               </label>
               <br />
               <br />
@@ -674,7 +428,7 @@
           <fieldset>
             <h2 class="fs-title">We only work with professionals</h2>
             <h3 class="fs-subtitle">
-              We would like you to tell us more about yourself and the
+              We would like to tell us more about yourself and the
               professional service that you offer.
             </h3>
             <label for=""
@@ -806,12 +560,12 @@
             </h3>
             <label>Service</label>
             <div>
-              <div class="form-check">
+              <div >
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Personal Support Assistance"
-                  name="availability"
+                  name="service"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
@@ -819,10 +573,10 @@
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Ugandan Sign Language Interpreter"
-                  name="availability"
+                  name="service"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
@@ -830,10 +584,10 @@
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="International Sign Language Interpreter"
-                  name="availability"
+                  name="service"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
@@ -841,21 +595,32 @@
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Captioning"
-                  name="availability"
+                  name="service"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
                   Captioning
                 </label>
                 <br />
+                 <input
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  type="checkbox"
+                  value="Mobility Guide"
+                  name="service"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Mobility Guide
+                </label>
+                <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Tactile Sign Language Interpreter"
-                  name="availability"
+                  name="service"
                   id="defaultCheck1"
                 />
                 <label class="form-check-label" for="defaultCheck1">
@@ -864,44 +629,44 @@
               </div>
             </div>
             <br /><br />
-            <label>Enter our service availability</label>
+            <label>Enter your service availability</label>
             <br />
             <br />
             Days
             <br />
             <br />
             <div>
-              <div class="form-check">
+              <div>
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Sunday"
-                  name="day"
-                  id="defaultCheck1"
+                  name="availability"
+                  id="sunday"
                 />
-                <label class="form-check-label" for="defaultCheck1">
+                <label class="form-check-label" for="sunday">
                   Sunday
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Monday"
                   name="availability"
-                  id="defaultCheck1"
+                  id="monday"
                 />
-                <label class="form-check-label" for="defaultCheck1">
+                <label class="form-check-label" for="monday">
                   Monday
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Tuesday"
                   name="availability"
-                  id="defaultCheck1"
+                  id="tuesday"
                 />
-                <label class="form-check-label" for="defaultCheck1">
+                <label class="form-check-label" for="tuesday">
                   Tuesday
                 </label>
                 <br />
@@ -910,42 +675,42 @@
                   type="checkbox"
                   value="Wednesday"
                   name="availability"
-                  id="defaultCheck1"
+                  id="wednesday"
                 />
-                <label class="form-check-label" for="defaultCheck1">
+                <label class="form-check-label" for="wednesday">
                   Wednesday
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Thursday"
                   name="availability"
-                  id="defaultCheck1"
+                  id="thursday"
                 />
-                <label class="form-check-label" for="defaultCheck1">
+                <label class="form-check-label" for="thursday">
                   Thursday
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Friday"
                   name="availability"
-                  id="defaultCheck1"
+                  id="friday"
                 />
-                <label class="form-check-label" for="defaultCheck1">
+                <label class="form-check-label" for="friday">
                   Friday
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Friday"
                   name="availability"
-                  id="defaultCheck1"
+                  id="saturday"
                 />
-                <label class="form-check-label" for="defaultCheck1">
+                <label class="form-check-label" for="saturday">
                   Saturday
                 </label>
                 <br />
@@ -956,7 +721,7 @@
             <div>
               <div class="row">
                 <div class="col-md-6">
-                  <label for="">Start Time</label>
+                  <label for="starttime">Start Time</label>
                   <input
                     class="fullinput"
                     type="time"
@@ -966,7 +731,7 @@
                   />
                 </div>
                 <div class="col-md-6">
-                  <label for="">End time</label>
+                  <label for="endtime">End time</label>
                   <input
                     class="fullinput"
                     type="time"
@@ -979,8 +744,7 @@
               <div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="">Price per visit</label>
-                    Price per visit
+                    <label for="pricevisit">Price per visit</label>
                     <input
                       class="fullinput"
                       type="text"
