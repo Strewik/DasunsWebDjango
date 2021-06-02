@@ -121,7 +121,7 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("profiles:homepage")
 
-@login_required(login_url='profiles:homepage')
+# @login_required(login_url='profiles:homepage')
 def spreg_save(request):
     
     if request.method != 'POST':
@@ -197,8 +197,8 @@ def rating_save(request):
 
           
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceprovider'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceprovider'])
 def serviceproviderdash(request):
     bookings = request.user.serviceprovider.booking_set.all()
 
@@ -256,8 +256,8 @@ def dashboard(request):
     return render(request, 'profiles/dashboard.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser', 'admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def createBooking(request, pk):
     serviceuser = request.user.serviceuser
     serviceprovider = Serviceprovider.objects.get(id=pk)
@@ -294,8 +294,8 @@ def bookingdetails(request, pk):
     return render(request, 'profiles/bookingdetails.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser'])
 def bookingsuccess(request, pk):
     serviceprovider = Serviceprovider.objects.get(id=pk)
     serviceuser = request.user.serviceuser
@@ -313,8 +313,8 @@ def bookingsuccess(request, pk):
     return render(request, 'profiles/booksuccess.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceprovider'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceprovider'])
 def bookingaccepted(request, pk):
     serviceprovider = request.user.serviceprovider
     serviceuser = Serviceuser.objects.get(id=pk)
@@ -332,8 +332,8 @@ def bookingaccepted(request, pk):
     return render(request, 'profiles/bookingaccepted.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceprovider'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceprovider'])
 def bookingdeclined(request, pk):
     serviceprovider = request.user.serviceprovider
     serviceuser = Serviceuser.objects.get(id=pk)
@@ -351,8 +351,8 @@ def bookingdeclined(request, pk):
     return render(request, 'profiles/bookingdeclined.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceprovider'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceprovider'])
 def bookingcanceled_sp(request, pk):
     serviceprovider = request.user.serviceprovider
     serviceuser = Serviceuser.objects.get(id=pk)
@@ -370,8 +370,8 @@ def bookingcanceled_sp(request, pk):
     return render(request, 'profiles/bookingcanceledbysp.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser'])
 def bookingcanceled_su(request, pk):
     serviceprovider = Serviceprovider.objects.get(id=pk)
     serviceuser = request.user.serviceuser
@@ -389,8 +389,8 @@ def bookingcanceled_su(request, pk):
     return render(request, 'profiles/bookingcanceledbysu.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceprovider', 'admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceprovider', 'admin'])
 def updateBookingStatus(request, pk):
     booking = Booking.objects.get(id=pk)
 
@@ -411,8 +411,8 @@ def updateBookingStatus(request, pk):
 
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser'])
 def serviceuserdash(request):
     bookings = request.user.serviceuser.booking_set.all()
     today_date = datetime.now().date()
@@ -423,8 +423,8 @@ def serviceuserdash(request):
     return render(request, 'profiles/serviceuserdash.html', context)
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser'])
 def serviceUserProfile(request):
     serviceuser = request.user.serviceuser
     username = request.user
@@ -454,8 +454,8 @@ def serviceUserDetails(request, pk):
 
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['serviceuser'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['serviceuser'])
 def updateServiceuser(request, pk):
     serviceuser = request.user.serviceuser
     form = ServiceuserForm(instance=serviceuser)
@@ -473,8 +473,8 @@ def updateServiceuser(request, pk):
     return render(request, 'profiles/editServiceuser.html', context) 
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['admin'])
 def updateServiceprovider(request, pk):
     
     serviceprovider = Serviceprovider.objects.get(id=pk)
@@ -490,8 +490,8 @@ def updateServiceprovider(request, pk):
     return render(request, 'profiles/serviceprovider.html', context) 
 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['admin'])
 def deleteServiceuser(request, pk):
     serviceusers = ServiceuserModel.objects.get(id=pk)
     if request.method == "POST":
@@ -500,8 +500,8 @@ def deleteServiceuser(request, pk):
     context = {'item': serviceusers}
     return render(request, 'profiles/deleteServiceuser.html', context) 
 
-@login_required(login_url='profiles:homepage')
-@allowed_users(allowed_roles=['admin'])
+# @login_required(login_url='profiles:homepage')
+# @allowed_users(allowed_roles=['admin'])
 def deleteServiceprovider(request, pk):
     serviceprovider = Serviceprovider.objects.get(id=pk)
     if request.method == "POST":
