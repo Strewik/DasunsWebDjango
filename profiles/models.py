@@ -21,26 +21,6 @@ class Serviceuser(models.Model):
     class Meta:
         ordering = ['-date_created','firstname' ] 
 
-# class Day(models.Model):
-#     DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
-#            ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
-#     name = MultiSelectField(choices=DAY)
-    
-#     def __str__(self):
-#         return str(self.name)
-    
-# class Service(models.Model):
-#     SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
-#                ('Ugandan Sign Language Interpreter',
-#                 'Ugandan Sign Language Interpreter'),
-#                ('International Sign Language Interpreter',
-#                 'International Sign Language Interpreter'),
-#                ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),
-#                ('Tactile Sign Language Interpreter', 'Tactile Sign Language Interpreter'),)
-#     name = MultiSelectField(choices=SERVICE)
-    
-#     def __str__(self):
-#         return str(self.name)
     
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'))
@@ -121,7 +101,7 @@ class Rating(models.Model):
     comment = models.CharField(max_length=256, blank=True)
     booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
         
-    # def __str__(self):
-    #     return str(self.booking.name)
+    def __str__(self):
+        return str(self.booking.name)
     
     
