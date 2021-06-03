@@ -151,14 +151,15 @@ def spreg_save(request):
         ref2title = request.POST.get('ref2title')
         ref2email = request.POST.get('ref2email')
         ref2phone = request.POST.get('ref2phone')
-        service = request.POST.get('service')
-        availability = request.POST.get('availability')
+        service = request.POST.getlist('service')
+        availability = request.POST.getlist('availability')
         status = request.POST.get('status')
         starttime = request.POST.get('starttime')
         endtime = request.POST.get('endtime')
         pricevisit = request.POST.get('pricevisit')
         terms = request.POST.get('terms')
-        
+        print('Printing services', service)
+        print('Printing availability', availability)
         
         
         ServProv = Serviceprovider(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, 
