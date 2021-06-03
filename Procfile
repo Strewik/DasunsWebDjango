@@ -1,1 +1,1 @@
-web: gunicorn DasunsWebDjango.wsgi --log-file -
+web: gunicorn DasunsWebApp.wsgi --log-file -
