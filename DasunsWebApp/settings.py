@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     "bootstrap4",
     'multiselectfield',      
     'django_cleanup',
-    'herokuapp',
       
 ]
 
