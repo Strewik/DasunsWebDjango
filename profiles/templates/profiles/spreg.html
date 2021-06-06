@@ -560,12 +560,13 @@
               visit.
             </h3>
             <label>Service</label>
+            {% if service %}
             <div>
               <div >
                 <input
                   {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
-                  value="Personal Support Assistance"
+                  value="{{service.Personal Support Assistance}}"
                   name="service"
                   id="defaultCheck1"
                 />
@@ -576,7 +577,7 @@
                 <input
                   {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
-                  value="Ugandan Sign Language Interpreter"
+                  value="{{service.Ugandan Sign Language Interpreter}}"
                   name="service"
                   id="defaultCheck1"
                 />
@@ -587,7 +588,7 @@
                 <input
                   {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
-                  value="International Sign Language Interpreter"
+                  value="{{service.International Sign Language Interpreter}}"
                   name="service"
                   id="defaultCheck1"
                 />
@@ -598,7 +599,7 @@
                 <input
                   {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
-                  value="Captioning"
+                  value="{{service.Captioning}}"
                   name="service"
                   id="defaultCheck1"
                 />
@@ -609,7 +610,7 @@
                  <input
                   {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
-                  value="Mobility Guide"
+                  value="{{service.Mobility Guide}}"
                   name="service"
                   id="defaultCheck1"
                 />
@@ -672,7 +673,7 @@
                 </label>
                 <br />
                 <input
-                  class="form-check-input form-check-inline"
+                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
                   type="checkbox"
                   value="Wednesday"
                   name="availability"

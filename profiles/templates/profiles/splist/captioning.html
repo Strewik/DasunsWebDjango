@@ -39,9 +39,10 @@
           </thead>
           <tbody>
         {% for serviceprovider in serviceproviders %}   
-          {% if serviceprovider.service == "Captioning" and serviceprovider.status == "Active" %} 
+          {% if serviceprovider.status == "Active"%} 
+            {% if  serviceprovider.service.name == "Captioning" %}
             <tr>
-              <td>{{serviceprovider.fullname}}</td>
+               <td>{{serviceprovider.fullname}}</td>
               <td>{{serviceprovider.gender}}</td>
               <td>{{serviceprovider.service}}</td>
               <td>{{serviceprovider.phyadd}}</td>
@@ -58,6 +59,7 @@
                   {% comment %} <p> There are no Captioners at the moment, please check later {% endcomment %}
                   </div>
              {% endif %}
+               {% endif %}
               {% endfor %}
           </tbody>
         </table>

@@ -125,7 +125,11 @@ def logout_request(request):
 def spreg_save(request):
     
     if request.method != 'POST':
-        return render(request, 'profiles:spreg.html')
+        service = request.POST.getlist('service')
+        availability = request.POST.getlist('availability')
+
+        context = {'service': service, 'availability':availability}
+        return render(request, 'profiles:spreg.html', context)
     else: 
         
         user = request.user
@@ -153,6 +157,8 @@ def spreg_save(request):
         ref2phone = request.POST.get('ref2phone')
         service = request.POST.getlist('service')
         availability = request.POST.getlist('availability')
+        # service = request.POST.get('service')
+        # availability = request.POST.get('availability')
         status = request.POST.get('status')
         starttime = request.POST.get('starttime')
         endtime = request.POST.get('endtime')
@@ -160,21 +166,58 @@ def spreg_save(request):
         terms = request.POST.get('terms')
         print('Printing services', service)
         print('Printing availability', availability)
+        print(list(enumerate(service)))
+
+        # returnedQueryset = form.cleaned_data.get('specialFieldName')
+        # dummyObject = ObjectModel.objects.create(..using all the info except specialFieldname..)
+        # for member in returnedQueryset.iterator():
+        #     dummyObject.add(member)
         
         
-        ServProv = Serviceprovider(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, 
+       
+        # ServProv = Serviceprovider(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, 
+        #                            phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, 
+        #                            qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, 
+        #                            ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,
+        #                            ref2email=ref2email, ref2phone=ref2phone,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
+        # ServProv.save()
+        # return render(request, 'profiles/spregsuccess.html')
+
+        # service = request.POST.get('service')
+        # availability = request.POST.get('availability')
+        ServProv = Serviceprovider.objects.create(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, 
                                    phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, 
                                    qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, 
                                    ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,
-                                   ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, 
-                                   starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
-        ServProv.save()
-        
-        
+                                   ref2email=ref2email, ref2phone=ref2phone,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
+        # service.save()
+        ServProv.service.add(service)
+        ServProv.services.all()
+
+        availability.save()
+        ServProv.availability.add(availability)
+        # ServProv.availabilities.all()
+
+        # for service in request.POST.getlist('service'):
+        #         ServProv.service.add(service)
+        #         ServProv.save()
+
+        # for day in request.POST.getlist('availability'):
+        #         ServProv.availability.add(day)
+        #         ServProv.save()
+
+                
+        ServProv.save_m2m()
+
+        # ServProv.services.add(request.POST.getlist('service'))
+        # ServProv.availabilities.add(request.POST.getlist('availability'))
+
+        # ServProv.save_m2m()         
     return render(request, 'profiles/spregsuccess.html')
     
 
 def spreg(request):
+
     return render(request, 'profiles/spreg.html',)
 
 def rating(request):
