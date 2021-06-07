@@ -536,8 +536,8 @@ def serviceProviderProfile(request):
 @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def captioningList(request):
     serviceproviders = Serviceprovider.objects.all()
-    captioners = Serviceprovider.objects.service.Captioning.all()
-    context = {'serviceproviders': serviceproviders, 'captioners':captioners}
+    # captioners = Serviceprovider.objects.service.Captioning.all()
+    context = {'serviceproviders': serviceproviders, }
     return render(request, 'profiles/splist/captioning.html', context)
 
 
