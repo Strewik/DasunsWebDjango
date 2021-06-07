@@ -9,8 +9,19 @@ html, body {
 
 .navbar {
   min-height: 12px;
+  background-color: #f0f0f0
+}
+/* ul.navbar-nav{
+  background-color: #40b295;
+} */
+/* #navbarNavDropdown.navbar-collapse ul li {
+  background-color: #40b295 !important
 }
 
+.navbar .navbar-expand-lg .navbar-light .navbar-toggler {
+  color: grey;
+  border-color: rgba(0, 0, 0, 0.1);
+} */
 
 #requestStatus {
   background-color: #40b295;

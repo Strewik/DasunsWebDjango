@@ -26,7 +26,7 @@
     color: rgb(7, 107, 7);
 }
 
-.nav-item {
+#item-login, #item-Signup{
     display: table-cell;
     background: #fff
 }
@@ -75,12 +75,17 @@
     background-color: #fff;
     border: none;
 }
-.nav-link{
+/* .nav-link{
     color: #000;
     background-color:#fff;
+} */
+
+#pills-home-tab, #pills-profile-tab{
+    color: #000;
+    background-color:#fff; 
 }
 
-.nav-pills .nav-link.active{
+.nav-pills #pills-home-tab.active, .nav-pills #pills-profile-tab.active{
     color:rgb(7, 107, 7);
     background-color:#fff;
     border-bottom: 2px solid rgb(7, 107, 7);
