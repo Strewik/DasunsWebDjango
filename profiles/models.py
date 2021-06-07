@@ -21,7 +21,7 @@ class Serviceuser(models.Model):
     class Meta:
         ordering = ['-date_created','firstname' ] 
 
-    
+
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'))
     SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
@@ -61,8 +61,8 @@ class Serviceprovider(models.Model):
     ref2title = models.CharField(max_length=200)
     ref2email = models.EmailField(max_length=200)
     ref2phone = models.CharField(max_length=200)
-    service = MultiSelectField(max_length=200, choices=SERVICE)
-    availability = MultiSelectField(max_length=200, choices=DAY)
+    service = MultiSelectField(max_length=200, choices=SERVICE, null=True)
+    availability = MultiSelectField(max_length=200, choices=DAY, null=True)
     status = models.CharField(max_length=200, choices=STATUS,)
     starttime = models.TimeField(max_length=200) 
     endtime = models.TimeField(max_length=200)
@@ -76,6 +76,7 @@ class Serviceprovider(models.Model):
 
     class Meta:
         ordering = ['-date_created', 'fullname']
+    
         
 class Booking(models.Model):
     name = models.CharField(max_length=200)

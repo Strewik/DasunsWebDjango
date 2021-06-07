@@ -16,7 +16,7 @@ The Digital Ability Support Network System (Dasuns) is to promote social and inc
 * In the main project folder set up a virtual environment (venv) e.g.
 'python3 -m venv venv' for ubuntu
 * Activate the virtual environment
-* While in the virtual environment do 'pip install -r requirements.txt' and any other dependencies as need be. 
+* While in the virtual environment do 'pip3 install -r requirements.txt' and any other dependencies as need be. 
 * After run 'pip freeze > requirements.txt'
 
 ##  Run the application
