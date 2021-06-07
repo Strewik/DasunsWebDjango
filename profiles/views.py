@@ -121,15 +121,11 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("profiles:homepage")
 
-# @login_required(login_url='profiles:homepage')
+
 def spreg_save(request):
     
     if request.method != 'POST':
-        service = request.POST.getlist('service')
-        availability = request.POST.getlist('availability')
-
-        context = {'service': service, 'availability':availability}
-        return render(request, 'profiles:spreg.html', context)
+        return render(request, 'profiles:spreg.html')
     else: 
         
         user = request.user
@@ -157,8 +153,6 @@ def spreg_save(request):
         ref2phone = request.POST.get('ref2phone')
         service = request.POST.getlist('service')
         availability = request.POST.getlist('availability')
-        # service = request.POST.get('service')
-        # availability = request.POST.get('availability')
         status = request.POST.get('status')
         starttime = request.POST.get('starttime')
         endtime = request.POST.get('endtime')
@@ -166,64 +160,31 @@ def spreg_save(request):
         terms = request.POST.get('terms')
         print('Printing services', service)
         print('Printing availability', availability)
-        print(list(enumerate(service)))
-
-        # returnedQueryset = form.cleaned_data.get('specialFieldName')
-        # dummyObject = ObjectModel.objects.create(..using all the info except specialFieldname..)
-        # for member in returnedQueryset.iterator():
-        #     dummyObject.add(member)
+        print('Printing services array', service[2])
         
         
-       
-        # ServProv = Serviceprovider(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, 
-        #                            phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, 
-        #                            qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, 
-        #                            ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,
-        #                            ref2email=ref2email, ref2phone=ref2phone,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
-        # ServProv.save()
-        # return render(request, 'profiles/spregsuccess.html')
-
-        # service = request.POST.get('service')
-        # availability = request.POST.get('availability')
-        ServProv = Serviceprovider.objects.create(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, 
+        ServProv = Serviceprovider(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, 
                                    phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, 
                                    qualification=qualification, portifolio=portifolio, profession=profession, ref1name=ref1name, 
                                    ref1title=ref1title,ref1email=ref1email, ref1phone=ref1phone, ref2name=ref2name, ref2title=ref2title,
-                                   ref2email=ref2email, ref2phone=ref2phone,status=status, starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
-        # service.save()
-        ServProv.service.add(service)
-        ServProv.services.all()
-
-        availability.save()
-        ServProv.availability.add(availability)
-        # ServProv.availabilities.all()
-
-        # for service in request.POST.getlist('service'):
-        #         ServProv.service.add(service)
-        #         ServProv.save()
-
-        # for day in request.POST.getlist('availability'):
-        #         ServProv.availability.add(day)
-        #         ServProv.save()
-
-                
-        ServProv.save_m2m()
-
-        # ServProv.services.add(request.POST.getlist('service'))
-        # ServProv.availabilities.add(request.POST.getlist('availability'))
-
-        # ServProv.save_m2m()         
+                                   ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, 
+                                   starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
+        ServProv.save()
+        
+        print('Printing them', Serviceprovider.service)
     return render(request, 'profiles/spregsuccess.html')
-    
+
 
 def spreg(request):
 
     return render(request, 'profiles/spreg.html',)
 
+@login_required(login_url='profiles:homepage')
 def rating(request):
     return render(request, 'profiles/rating.html',)
 
 
+@login_required(login_url='profiles:homepage')
 def rating_save(request):
     # if request.method == 'POST':
     #     count = Rating(request.POST)
@@ -241,8 +202,8 @@ def rating_save(request):
 
           
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceprovider'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider'])
 def serviceproviderdash(request):
     bookings = request.user.serviceprovider.booking_set.all()
 
@@ -259,8 +220,8 @@ def spregsuccess(request):
           
     return render(request, 'profiles/spregsuccess.html')
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['admin'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['admin'])
 def dashboard(request):
     bookings = Booking.objects.all()
     serviceproviders = Serviceprovider.objects.all()
@@ -300,8 +261,8 @@ def dashboard(request):
     return render(request, 'profiles/dashboard.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser', 'admin'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def createBooking(request, pk):
     serviceuser = request.user.serviceuser
     serviceprovider = Serviceprovider.objects.get(id=pk)
@@ -338,8 +299,8 @@ def bookingdetails(request, pk):
     return render(request, 'profiles/bookingdetails.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
 def bookingsuccess(request, pk):
     serviceprovider = Serviceprovider.objects.get(id=pk)
     serviceuser = request.user.serviceuser
@@ -357,8 +318,8 @@ def bookingsuccess(request, pk):
     return render(request, 'profiles/booksuccess.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceprovider'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider'])
 def bookingaccepted(request, pk):
     serviceprovider = request.user.serviceprovider
     serviceuser = Serviceuser.objects.get(id=pk)
@@ -376,8 +337,8 @@ def bookingaccepted(request, pk):
     return render(request, 'profiles/bookingaccepted.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceprovider'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider'])
 def bookingdeclined(request, pk):
     serviceprovider = request.user.serviceprovider
     serviceuser = Serviceuser.objects.get(id=pk)
@@ -395,7 +356,7 @@ def bookingdeclined(request, pk):
     return render(request, 'profiles/bookingdeclined.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceprovider'])
 def bookingcanceled_sp(request, pk):
     serviceprovider = request.user.serviceprovider
@@ -414,7 +375,7 @@ def bookingcanceled_sp(request, pk):
     return render(request, 'profiles/bookingcanceledbysp.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
 # @allowed_users(allowed_roles=['serviceuser'])
 def bookingcanceled_su(request, pk):
     serviceprovider = Serviceprovider.objects.get(id=pk)
@@ -433,8 +394,8 @@ def bookingcanceled_su(request, pk):
     return render(request, 'profiles/bookingcanceledbysu.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceprovider', 'admin'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider', 'admin'])
 def updateBookingStatus(request, pk):
     booking = Booking.objects.get(id=pk)
 
@@ -455,8 +416,8 @@ def updateBookingStatus(request, pk):
 
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
 def serviceuserdash(request):
     bookings = request.user.serviceuser.booking_set.all()
     today_date = datetime.now().date()
@@ -467,8 +428,8 @@ def serviceuserdash(request):
     return render(request, 'profiles/serviceuserdash.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
 def serviceUserProfile(request):
     serviceuser = request.user.serviceuser
     username = request.user
@@ -498,8 +459,8 @@ def serviceUserDetails(request, pk):
 
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser'])
 def updateServiceuser(request, pk):
     serviceuser = request.user.serviceuser
     form = ServiceuserForm(instance=serviceuser)
@@ -517,8 +478,8 @@ def updateServiceuser(request, pk):
     return render(request, 'profiles/editServiceuser.html', context) 
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['admin'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['admin'])
 def updateServiceprovider(request, pk):
     
     serviceprovider = Serviceprovider.objects.get(id=pk)
@@ -534,8 +495,8 @@ def updateServiceprovider(request, pk):
     return render(request, 'profiles/serviceprovider.html', context) 
 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['admin'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['admin'])
 def deleteServiceuser(request, pk):
     serviceusers = ServiceuserModel.objects.get(id=pk)
     if request.method == "POST":
@@ -544,8 +505,9 @@ def deleteServiceuser(request, pk):
     context = {'item': serviceusers}
     return render(request, 'profiles/deleteServiceuser.html', context) 
 
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['admin'])
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['admin'])
 def deleteServiceprovider(request, pk):
     serviceprovider = Serviceprovider.objects.get(id=pk)
     if request.method == "POST":
@@ -555,8 +517,8 @@ def deleteServiceprovider(request, pk):
     return render(request, 'profiles/deleteServiceprovider.html', context) 
 
  
-# @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceprovider'])
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceprovider'])
 def serviceProviderProfile(request):
     serviceprovider = request.user.serviceprovider
     username = request.user
@@ -570,35 +532,41 @@ def serviceProviderProfile(request):
     return render(request, 'profiles/serviceproviderProfile.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def captioningList(request):
-	serviceproviders = Serviceprovider.objects.all()
-	context = {'serviceproviders': serviceproviders}
-	return render(request, 'profiles/splist/captioning.html', context)
+    serviceproviders = Serviceprovider.objects.all()
+    captioners = Serviceprovider.objects.service.Captioning.all()
+    context = {'serviceproviders': serviceproviders, 'captioners':captioners}
+    return render(request, 'profiles/splist/captioning.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def internationalInterpList(request):
 	serviceproviders = Serviceprovider.objects.all()
 	context = {'serviceproviders': serviceproviders}
 	return render(request, 'profiles/splist/internationalInterp.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def mobGuideList(request):
 	serviceproviders = Serviceprovider.objects.all()
 	context = {'serviceproviders': serviceproviders}
 	return render(request, 'profiles/splist/mobGuide.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def personalSupportList(request):
 	serviceproviders = Serviceprovider.objects.all()
 	context = {'serviceproviders': serviceproviders}
 	return render(request, 'profiles/splist/personalSupport.html', context)
 
 
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def ugandanInterpList(request):
 	serviceproviders = Serviceprovider.objects.all()
 	context = {'serviceproviders': serviceproviders}
@@ -606,15 +574,15 @@ def ugandanInterpList(request):
 
 
 @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser', 'admin'])
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def tactileInterpList(request):
 	serviceproviders = Serviceprovider.objects.all()
 	context = {'serviceproviders': serviceproviders}
 	return render(request, 'profiles/splist/tactileInterpreter.html', context)
 
 
-
-# @login_required(login_url='profiles:homepage')
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
 def spList(request):
     serviceproviders = Serviceprovider.objects.all()
     context = {'serviceproviders': serviceproviders}

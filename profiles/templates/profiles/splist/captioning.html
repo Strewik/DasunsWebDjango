@@ -40,7 +40,8 @@
           <tbody>
         {% for serviceprovider in serviceproviders %}   
           {% if serviceprovider.status == "Active"%} 
-            {% if  serviceprovider.service.name == "Captioning" %}
+            {% comment %} {% if  serviceprovider.service.name == "Captioning" %} {% endcomment %}
+             {% if  serviceprovider.service[2]%}
             <tr>
                <td>{{serviceprovider.fullname}}</td>
               <td>{{serviceprovider.gender}}</td>

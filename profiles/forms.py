@@ -68,8 +68,8 @@ class ServiceuserForm(ModelForm):
 # 			('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),
 # 			('Tactile Sign Language Interpreter', 'Tactile Sign Language Interpreter'),)
 
-# DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
-# 	('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
+DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
+	('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
 
 class ServiceproviderForm(ModelForm):
 	class Meta:
@@ -139,8 +139,9 @@ class ServiceproviderForm(ModelForm):
 			'ref2title':forms.TextInput(attrs={'class':'form-control'}),
 			'ref2email':forms.TextInput(attrs={'class':'form-control'}),
 			'ref2phone':forms.TextInput(attrs={'class':'form-control'}),
-			'service':forms.CheckboxSelectMultiple,
-			'availability':forms.CheckboxSelectMultiple,
+			'service':forms.Select(attrs={'class':'form-control'}),
+			# 'service':forms.CheckboxSelectMultiple(choices=SERVICE),
+			'availability':forms.CheckboxSelectMultiple(choices=DAY),
 			'status':forms.Select(attrs={'class':'form-control'}),
 			'starttime':forms.TextInput(attrs={'class':'form-control'}),
 			'endtime':forms.TextInput(attrs={'class':'form-control'}),

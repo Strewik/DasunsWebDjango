@@ -22,42 +22,21 @@ class Serviceuser(models.Model):
         ordering = ['-date_created','firstname' ] 
 
 
-class Day(models.Model):
-    # DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
-    #        ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
-    name = models.CharField(max_length=200, null=True) 
-    
-    def __str__(self):
-        return str(self.name)
-    
-class Service(models.Model):
-    # SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
-    #            ('Ugandan Sign Language Interpreter',
-    #             'Ugandan Sign Language Interpreter'),
-    #            ('International Sign Language Interpreter',
-    #             'International Sign Language Interpreter'),
-    #            ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),
-    #            ('Tactile Sign Language Interpreter', 'Tactile Sign Language Interpreter'),)
-    name = models.CharField(max_length=200, null=True) 
-    
-    def __str__(self):
-        return str(self.name)
-    
 class Serviceprovider(models.Model):
     GENDER = (('Male', 'Male'), ('Female', 'Female'))
-    # SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
-    #            ('Ugandan Sign Language Interpreter',
-    #             'Ugandan Sign Language Interpreter'),
-    #            ('International Sign Language Interpreter',
-    #             'International Sign Language Interpreter'),
-    #            ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),
-    #            ('Tactile Sign Language Interpreter', 'Tactile Sign Language Interpreter'),)
+    SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
+               ('Ugandan Sign Language Interpreter',
+                'Ugandan Sign Language Interpreter'),
+               ('International Sign Language Interpreter',
+                'International Sign Language Interpreter'),
+               ('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),
+               ('Tactile Sign Language Interpreter', 'Tactile Sign Language Interpreter'),)
     
     STATUS = (('Pending', 'Pending'), ('Active', 'Active'),
               ('Suspended', 'Suspended'),)
     
-    # DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
-    #        ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
+    DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
+           ('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     fullname = models.CharField(max_length=200)
@@ -82,8 +61,8 @@ class Serviceprovider(models.Model):
     ref2title = models.CharField(max_length=200)
     ref2email = models.EmailField(max_length=200)
     ref2phone = models.CharField(max_length=200)
-    service = models.ManyToManyField(Service)
-    availability = models.ManyToManyField(Day)
+    service = MultiSelectField(max_length=200, choices=SERVICE, null=True)
+    availability = MultiSelectField(max_length=200, choices=DAY, null=True)
     status = models.CharField(max_length=200, choices=STATUS,)
     starttime = models.TimeField(max_length=200) 
     endtime = models.TimeField(max_length=200)
@@ -97,6 +76,7 @@ class Serviceprovider(models.Model):
 
     class Meta:
         ordering = ['-date_created', 'fullname']
+    
         
 class Booking(models.Model):
     name = models.CharField(max_length=200)
