@@ -31,7 +31,7 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dasuns.org', '127.0.0.1',]
+ALLOWED_HOSTS = ['dasuns.org', '127.0.0.1','www.dasuns.org','https://dasuns.org/']
 
 
 # Application definition
