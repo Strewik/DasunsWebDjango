@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['dasuns.org', '127.0.0.1','www.dasuns.org','https://dasuns.org/']
 
