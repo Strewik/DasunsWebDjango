@@ -26,9 +26,9 @@ to start the App.
 
 
 ## Deployment 
-* This App is hosted on [Heroku](https://xxxxxx.herokuapp.com/)
+* This App is hosted on [DigitalOcean](https://dasuns.org/)
 
 
-## Author 
+## Authors
 Steven Kawooya,
 Irene Nyakate
