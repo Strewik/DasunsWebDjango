@@ -30,11 +30,9 @@
           <hr />
           <h3 style="text-align: center">Account Details</h3>
           <hr />
-          {% comment %} {% if serviceuser.id %} {% endcomment %}
            {% if request.user.serviceuser.profile_pic %}
           <img class="profile-pic" scr="{{serviceuser.profile_pic.url}}" alt="Profile-Picture"/>
           {% endif %} 
-          {% comment %} {% endif %} {% endcomment %}
         </div>
       </div>
       <div class="col-md-9">

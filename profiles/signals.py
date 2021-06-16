@@ -21,3 +21,19 @@ def create_serviceuser_profile(sender, instance, created, **kwargs):
 
 post_save.connect(create_serviceuser_profile, sender=User)
 
+# def create_serviceprovider_profile(sender, instance, created, **kwargs):
+#     if created:
+#         group = Group.objects.get(name='serviceprovider')
+#         instance.groups.add(group) # instance is the user
+#         Serviceprovider.objects.create(
+#                 user=instance,
+#                 # email=instance.email,
+#                 # firstname=instance.firstname,
+#                 # lastname=instance.lastname,
+#                 # phone=instance.phone
+#             )
+#         print('Service Provider profile created!')
+
+# post_save.connect(create_serviceprovider_profile, sender=Serviceuser)
+
+
