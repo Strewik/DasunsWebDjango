@@ -23,8 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.getenv('SECRET_KEY')
-SECRET_KEY = 'xz0kcu_*ku8+91$h8i%7*!4voeo6&s_9xls8+znd$yo#y%fg-2'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
@@ -180,25 +179,14 @@ MEDIA_URL = '/media/'
 # AWS_SES_REGION_NAME = 'REGION-NAME' #(ex: us-east-2)
 # AWS_SES_REGION_ENDPOINT ='REGION-ENDPOINT' #(ex: email.us-east-2.amazonaws.com)
 
-# # email for password recovery
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-# EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
-
 
 # email for notification
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = os.getenv('EMAIL_HOST')
-# EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
-# EMAIL_PORT = os.getenv('EMAIL_PORT')
-# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True 
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'dasunsdev@gmail.com'
-EMAIL_HOST_PASSWORD = 'asbpgcsbnljiqgpx'
-# DEFAULT_FROM_EMAIL = 'Dasunsadmin Team <noreply@dasunsadmin.com>'
 
 django_heroku.settings(locals())

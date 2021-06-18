@@ -167,11 +167,9 @@ def spreg_save(request):
                                    ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, 
                                    starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
-        # servicep = ServProv.save()
         # group = Group.objects.get(name='serviceprovider')
-        # servicep.groups.add(group)
+        # ServProv.groups.add(group)
         
-    # return render(request, 'profiles/spregsuccess.html')
     return redirect(reverse ('profiles:spregsuccess'))
 
 
