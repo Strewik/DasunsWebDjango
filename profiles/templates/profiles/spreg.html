@@ -561,9 +561,23 @@
             </h3>
             <label>Service</label>
             <div>
-              <div >
+            <select
+              class="fullinput"
+              class="custom-select my-1 mr-sm-2"
+              id="inlineFormCustomSelectPref"
+              name="service"
+              >
+              <option selected>Service</option>
+              <option value="Personal Support Assistance">Personal Support Assistance</option>
+              <option value="Ugandan Sign Language Interpreter">Ugandan Sign Language Interpreter</option>
+              <option value="International Sign Language Interpreter">International Sign Language Interpreter</option>
+              <option value="Captioning">Captioning</option>
+              <option value="Mobility Guide">Mobility Guide</option>
+              <option value="Tactile Sign Language Interpreter">Tactile Sign Language Interpreter</option>
+            </select>
+              {% comment %} <div >
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  class="form-check-input form-check-inline"
                   type="checkbox"
                   value="Personal Support Assistance"
                   name="service"
@@ -574,7 +588,7 @@
                 </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  class="form-check-input form-check-inline"
                   type="checkbox"
                   value="Ugandan Sign Language Interpreter"
                   name="service"
@@ -585,7 +599,7 @@
                 </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  class="form-check-input form-check-inline"
                   type="checkbox"
                   value="International Sign Language Interpreter"
                   name="service"
@@ -596,7 +610,7 @@
                 </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  class="form-check-input form-check-inline"
                   type="checkbox"
                   value="Captioning"
                   name="service"
@@ -607,7 +621,7 @@
                 </label>
                 <br />
                  <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  class="form-check-input form-check-inline"
                   type="checkbox"
                   value="Mobility Guide"
                   name="service"
@@ -618,7 +632,7 @@
                 </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  class="form-check-input form-check-inline"
                   type="checkbox"
                   value="Tactile Sign Language Interpreter"
                   name="service"
@@ -627,11 +641,10 @@
                 <label class="form-check-label" for="defaultCheck1">
                   Tactile Sign Language Interpreter
                 </label>
-              </div>
+              </div> {% endcomment %}
             </div>
-            <br /><br />
-            <label>Enter your service availability</label>
             <br />
+            <label>Enter your service availability</label>
             <br />
             Days
             <br />
