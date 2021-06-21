@@ -105,7 +105,7 @@ def password_reset_request(request):
 					}
 					email = render_to_string(email_template_name, c)
 					try:
-						send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+						send_mail(subject, email, 'dasunsdev@gmail.com' , [user.email], fail_silently=False)
 					except BadHeaderError:
 						return HttpResponse('Invalid header found.')
 					# messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
@@ -151,17 +151,14 @@ def spreg_save(request):
         ref2title = request.POST.get('ref2title')
         ref2email = request.POST.get('ref2email')
         ref2phone = request.POST.get('ref2phone')
-        service = request.POST.getlist('service')
+        service = request.POST.get('service')
         availability = request.POST.getlist('availability')
         status = request.POST.get('status')
         starttime = request.POST.get('starttime')
         endtime = request.POST.get('endtime')
         pricevisit = request.POST.get('pricevisit')
         terms = request.POST.get('terms')
-        print('Printing services', service)
-        print('Printing availability', availability)
-        print('Printing services array', service[2])
-        
+       
         
         ServProv = Serviceprovider(user=user, fullname=fullname, phone=phone, email=email, nin=nin, dob=dob, gender=gender, 
                                    phyadd=phyadd, yearexp=yearexp, notmidman=notmidman, skillset=skillset, internet=internet, 
@@ -170,9 +167,10 @@ def spreg_save(request):
                                    ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, 
                                    starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
+        # group = Group.objects.get(name='serviceprovider')
+        # ServProv.groups.add(group)
         
-        print('Printing them', Serviceprovider.service)
-    return render(request, 'profiles/spregsuccess.html')
+    return redirect(reverse ('profiles:spregsuccess'))
 
 
 def spreg(request):
@@ -210,15 +208,24 @@ def serviceproviderdash(request):
     today_date = datetime.now().date()
     time_now = datetime.now().time()
     context = {'bookings': bookings, 'time_now':time_now, 'today_date':today_date }
-    print('Printing today_date', today_date)
-    print('Printing time_now', time_now)
 
     return render(request, 'profiles/serviceProviderDashboard.html', context)
 
 
 def spregsuccess(request):
-          
-    return render(request, 'profiles/spregsuccess.html')
+    template = render_to_string('profiles/successEmail.html', {'spname': request.user.username})
+    email = EmailMessage(
+        'New Application',
+        template,
+        settings.EMAIL_HOST_USER,
+        [request.user.email, settings.EMAIL_HOST_USER], 
+        )
+    email.fail_silently=False
+    email.send()
+    
+    # context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
+    # return render(request, 'profiles/booksuccess.html', context)
+    return render(request, 'profiles/spregSuccess.html')
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['admin'])
@@ -309,13 +316,15 @@ def bookingsuccess(request, pk):
         'New booking',
         template,
         settings.EMAIL_HOST_USER,
-        [serviceprovider.email], 
+        [serviceprovider.email, settings.EMAIL_HOST_USER], 
         )
     email.fail_silently=False
     email.send()
     
     context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
     return render(request, 'profiles/booksuccess.html', context)
+    
+
 
 
 @login_required(login_url='profiles:homepage')
@@ -328,7 +337,7 @@ def bookingaccepted(request, pk):
         'Booking Accepted!',
         template,
         settings.EMAIL_HOST_USER,
-        [serviceuser.email], 
+        [serviceuser.email, settings.EMAIL_HOST_USER], 
         )
     email.fail_silently=False
     email.send()
@@ -347,7 +356,7 @@ def bookingdeclined(request, pk):
         'Booking Declined',
         template,
         settings.EMAIL_HOST_USER,
-        [serviceuser.email], 
+        [serviceuser.email, settings.EMAIL_HOST_USER], 
         )
     email.fail_silently=False
     email.send()
@@ -357,7 +366,7 @@ def bookingdeclined(request, pk):
 
 
 @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceprovider'])
+@allowed_users(allowed_roles=['serviceprovider'])
 def bookingcanceled_sp(request, pk):
     serviceprovider = request.user.serviceprovider
     serviceuser = Serviceuser.objects.get(id=pk)
@@ -366,7 +375,7 @@ def bookingcanceled_sp(request, pk):
         'Booking Canceled by Service Provider',
         template,
         settings.EMAIL_HOST_USER,
-        [serviceuser.email], 
+        [serviceuser.email, settings.EMAIL_HOST_USER], 
         )
     email.fail_silently=False
     email.send()
@@ -376,7 +385,7 @@ def bookingcanceled_sp(request, pk):
 
 
 @login_required(login_url='profiles:homepage')
-# @allowed_users(allowed_roles=['serviceuser'])
+@allowed_users(allowed_roles=['serviceuser'])
 def bookingcanceled_su(request, pk):
     serviceprovider = Serviceprovider.objects.get(id=pk)
     serviceuser = request.user.serviceuser
@@ -385,7 +394,7 @@ def bookingcanceled_su(request, pk):
         'Booking Canceled by Service User',
         template,
         settings.EMAIL_HOST_USER,
-        [serviceprovider.email], 
+        [serviceprovider.email, settings.EMAIL_HOST_USER], 
         )
     email.fail_silently=False
     email.send()
@@ -536,7 +545,6 @@ def serviceProviderProfile(request):
 @allowed_users(allowed_roles=['serviceuser', 'admin'])
 def captioningList(request):
     serviceproviders = Serviceprovider.objects.all()
-    # captioners = Serviceprovider.objects.service.Captioning.all()
     context = {'serviceproviders': serviceproviders, }
     return render(request, 'profiles/splist/captioning.html', context)
 
