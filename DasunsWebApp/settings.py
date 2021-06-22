@@ -93,22 +93,11 @@ TIME_INPUT_FORMATS = ('%H:%M',)
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-
-if DEVELOPMENT_MODE is True:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
-    }
-elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
-    }
-
+DATABASES = {
+    'default': {
+    # Connection to Local Database :nSqlite3
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
     # Connection to Local Database : PostgresQL
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -117,6 +106,13 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
         # 'PORT': os.getenv('DB_APP_PORT'),
         # 'USER': os.getenv('DB_USERNAME'),
         # 'PASSWORD': os.getenv('DB_PASSWORD'),   
+    # Connection to Remote Database : PostgresQL
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': os.getenv('DB_NAME'),
+        # 'HOST': os.getenv('DB_HOST_NAME'),
+        # 'PORT': os.getenv('DB_APP_PORT'),
+        # 'USER': os.getenv('DB_USERNAME'),
+        # 'PASSWORD': os.getenv('DB_PASSWORD'), 
 
     # Connection to Remote / cloud Database : PostgresQL
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -125,9 +121,8 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
         # 'PORT': os.getenv('AWS_PGDB_PORT'),
         # 'USER': os.getenv('AWS_PGDB_MASTERUSERNAME'),
         # 'PASSWORD': os.getenv('AWS_PGDB_MASTERPASSWORD'),
-    # }
-# }
-
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -198,6 +193,12 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'dasunsdev@gmail.com'
+# EMAIL_HOST_PASSWORD ='asbpgcsbnljiqgpx'
 
 
 django_heroku.settings(locals())
