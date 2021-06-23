@@ -51,13 +51,22 @@ footer{
   position: relative;
   text-align: center;
   color: white;
+  /* max-width: 100%;
+  height: auto; */
 }
 
-.top-right {
+.img-fluid{ 
+  max-width: 100%;
+  height: auto;
+  background: url("../images/banner.jpg") 100% 0 no-repeat fixed;
+
+};
+
+/* .top-right {
   position: absolute;
   top: 8px;
   right: 16px;
-}
+} */
 
 .whoweare {
   background-color: #e8e8e8;

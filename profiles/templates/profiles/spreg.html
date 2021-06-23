@@ -303,7 +303,12 @@
               placeholder="Email"
             />
             <label for="">NIN/Passport number</label>
-            <input class="fullinput" type="text" name="nin" placeholder="NIN/passport number" />
+            <input
+              class="fullinput"
+              type="text"
+              name="nin"
+              placeholder="NIN/passport number"
+            />
             <label for="">Date of Birth</label>
             <input class="fullinput" type="date" name="dob" placeholder="DOB" />
             <label for="">Gender</label>
@@ -442,8 +447,8 @@
           <fieldset>
             <h2 class="fs-title">We only work with professionals</h2>
             <h3 class="fs-subtitle">
-              We would like to tell us more about yourself and the
-              professional service that you offer.
+              We would like to tell us more about yourself and the professional
+              service that you offer.
             </h3>
             <label for=""
               >Tell us more about yourself and your experience</label
@@ -574,21 +579,30 @@
             </h3>
             <label>Service</label>
             <div>
-            <select
-              class="fullinput"
-              class="custom-select my-1 mr-sm-2"
-              id="inlineFormCustomSelectPref"
-              name="service"
+              <select
+                class="fullinput"
+                class="custom-select my-1 mr-sm-2"
+                id="inlineFormCustomSelectPref"
+                name="service"
               >
-              <option selected>Service</option>
-              <option value="Personal Support Assistance">Personal Support Assistance</option>
-              <option value="Ugandan Sign Language Interpreter">Ugandan Sign Language Interpreter</option>
-              <option value="International Sign Language Interpreter">International Sign Language Interpreter</option>
-              <option value="Captioning">Captioning</option>
-              <option value="Mobility Guide">Mobility Guide</option>
-              <option value="Tactile Sign Language Interpreter">Tactile Sign Language Interpreter</option>
-            </select>
-              {% comment %} <div >
+                <option selected>Service</option>
+                <option value="Personal Support Assistance">
+                  Personal Support Assistance
+                </option>
+                <option value="Ugandan Sign Language Interpreter">
+                  Ugandan Sign Language Interpreter
+                </option>
+                <option value="International Sign Language Interpreter">
+                  International Sign Language Interpreter
+                </option>
+                <option value="Captioning">Captioning</option>
+                <option value="Mobility Guide">Mobility Guide</option>
+                <option value="Tactile Sign Language Interpreter">
+                  Tactile Sign Language Interpreter
+                </option>
+              </select>
+              {% comment %}
+              <div>
                 <input
                   class="form-check-input form-check-inline"
                   type="checkbox"
@@ -633,7 +647,7 @@
                   Captioning
                 </label>
                 <br />
-                 <input
+                <input
                   class="form-check-input form-check-inline"
                   type="checkbox"
                   value="Mobility Guide"
@@ -654,7 +668,8 @@
                 <label class="form-check-label" for="defaultCheck1">
                   Tactile Sign Language Interpreter
                 </label>
-              </div> {% endcomment %}
+              </div>
+              {% endcomment %}
             </div>
             <br />
             <label>Enter your service availability</label>
@@ -665,40 +680,58 @@
             <div>
               <div>
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
                   type="checkbox"
                   value="Sunday"
                   name="availability"
                   id="sunday"
                 />
-                <label class="form-check-label" for="sunday">
-                  Sunday
-                </label>
+                <label class="form-check-label" for="sunday"> Sunday </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
                   type="checkbox"
                   value="Monday"
                   name="availability"
                   id="monday"
                 />
-                <label class="form-check-label" for="monday">
-                  Monday
-                </label>
+                <label class="form-check-label" for="monday"> Monday </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
                   type="checkbox"
                   value="Tuesday"
                   name="availability"
                   id="tuesday"
                 />
-                <label class="form-check-label" for="tuesday">
-                  Tuesday
-                </label>
+                <label class="form-check-label" for="tuesday"> Tuesday </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
                   type="checkbox"
                   value="Wednesday"
                   name="availability"
@@ -709,7 +742,13 @@
                 </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
                   type="checkbox"
                   value="Thursday"
                   name="availability"
@@ -720,18 +759,28 @@
                 </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
                   type="checkbox"
                   value="Friday"
                   name="availability"
                   id="friday"
                 />
-                <label class="form-check-label" for="friday">
-                  Friday
-                </label>
+                <label class="form-check-label" for="friday"> Friday </label>
                 <br />
                 <input
-                  {% comment %} class="form-check-input form-check-inline" {% endcomment %}
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
                   type="checkbox"
                   value="Friday"
                   name="availability"
@@ -815,7 +864,7 @@
         </form>
       </div>
     </div>
-    <div>{% include 'profiles/footer.html' %}</div>
+    <footer>{% include 'profiles/footer.html' %}</footer>
     <script>
       //jQuery time
       var current_fs, next_fs, previous_fs; //fieldsets

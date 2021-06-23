@@ -13,11 +13,17 @@ import os
 import django_heroku
 from pathlib import Path
 from getenv import env
+import dotenv
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -106,13 +112,13 @@ DATABASES = {
         # 'PORT': os.getenv('DB_APP_PORT'),
         # 'USER': os.getenv('DB_USERNAME'),
         # 'PASSWORD': os.getenv('DB_PASSWORD'),   
-    Connection to Remote Database : PostgresQL
+    # Connection to Remote Database : PostgresQL
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('DB_NAME'),
         'HOST': os.getenv('DB_HOST_NAME'),
         'PORT': os.getenv('DB_APP_PORT'),
         'USER': os.getenv('DB_USERNAME'),
-        'PASSWORD': os.getenv('DB_PASSWORD'), 
+        'PASSWORD': os.getenv('DB_PASSWORD'),
 
     # Connection to Remote / cloud Database : PostgresQL
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
