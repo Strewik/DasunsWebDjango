@@ -55,18 +55,18 @@ footer{
   height: auto; */
 }
 
-.img-fluid{ 
+/* .img-fluid{ 
   max-width: 100%;
   height: auto;
   background: url("../images/banner.jpg") 100% 0 no-repeat fixed;
 
-};
+}; */
 
-/* .top-right {
+.top-right {
   position: absolute;
   top: 8px;
   right: 16px;
-} */
+}
 
 .whoweare {
   background-color: #e8e8e8;
