@@ -3,18 +3,65 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <img
-          src="{% static 'images/Logo.png' %}"
-          alt="logo"
-          style="height: 50px"
-        />
+        <a class="navbar-brand" onclick="location.href='/';">
+          <img
+            class="logo-img"
+            src="{% static 'images/Logo.png' %}"
+            alt="Dasuns logo"
+            style="height: 50px"
+          />
+        </a>
       </div>
-      <div class="col-md">FAQ</div>
-      <div class="col-md">Contact us</div>
-      <div class="col-md">
-        <div>Follow us</div>
-        <div></div>
+      <div class="col-md-3">
+        <h5>FAQ</h5>
+      </div>
+      <div class="col-md-3">
+        <h5>Contact Us</h5>
+        <p>dasunsorg@gmail.com</p>
+        <p>+256 701 909835</p>
+        <p>+256 772 909835</p>
+      </div>
+      <div class="col-md-3">
+        <h5>Follow Us</h5>
+        <ul style="display: flex; list-style:none; padding-left:0;">
+          <li>
+            <a
+              href="https://www.facebook.com/dasunsorg"
+              style="color: #fff; text-decoration: none; margin-right: 10px"
+            >
+              <img
+                src="{% static 'images/facebook.png' %}"
+                alt="facebook"
+                style="height: 30px"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/company/dasuns/posts/?feedView=all&viewAsMember=true"
+              style="color: #fff; text-decoration: none; margin-right: 10px"
+            >
+              <img
+                src="{% static 'images/linkedin.png' %}"
+                alt="facebook"
+                style="height: 30px"
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://twitter.com/Dasuns5?s=20"
+              style="color: #fff; text-decoration: none"
+            >
+              <img
+                src="{% static 'images/twitter.png' %}"
+                alt="facebook"
+                style="height: 30px"
+              />
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
- </div>
+</div>

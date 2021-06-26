@@ -5,10 +5,17 @@ from django import forms
 from .models import *
 from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput
 
+
+GENDER = (
+(None, 'Select your gender'),
+('male', 'male'),
+('female', 'female'),
+)
 class CreateUserForm(UserCreationForm):
 	username = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'User Name e.g kente', 'class': 'form-control'}))
 	firstname = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'}))
 	lastname = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}))
+	gender = forms.ChoiceField(choices=GENDER, widget=forms.Select(attrs={'class': 'form-control'}))
 	phone = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'form-control'}))
 	email = forms.EmailField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'form-control'}))
 	password1 = forms.CharField(max_length=254, widget=forms.PasswordInput(attrs={'placeholder': 'Create Password', 'class': 'form-control'}))
@@ -20,33 +27,13 @@ class CreateUserForm(UserCreationForm):
 		return self.cleaned_data['email']
 	class Meta:
 		model = User
-		fields = ("username", "firstname", "lastname", "phone", "email", "password1", "password2")
+		fields = ("username", "firstname", "lastname", "gender", "phone", "email", "password1", "password2")
 		
-	# def clean_username(self, *args, **kwargs):
-	# 	username = self.cleaned_data.get("username")
-	# 	if "done" in username:
-	# 		return username
-	# 	else:
-	# 		raise forms.ValidationError("This is an invalid username")
-	
-	# def clean_email(self, *args, **kwargs):
-	# 	email = self.cleaned_data.get('email')
-	
-	# def clean(self, *args, **kwargs):
-	# 	cleaned_data  = super().clean()
-
-	# 	password1 = cleaned_data.get('password1')
-	# 	password2 = cleaned_data.get('password2')
-
-	# 	if password1 != password2:
-	# 		raise forms.ValidationError("Your passwords don't match")
-	# 	return cleaned_data
-	
-
 	def save(self, commit=True):
 		user = super(CreateUserForm, self).save(commit=False)
 		user.firstname = self.cleaned_data['firstname']
 		user.lastname = self.cleaned_data['lastname']
+		user.gender = self.cleaned_data['gender']
 		user.phone = self.cleaned_data['phone']
 		user.email = self.cleaned_data['email']
 		if commit:
@@ -60,13 +47,6 @@ class ServiceuserForm(ModelForm):
 		fields = '__all__'
 		exclude=['user']
 
-
-# SERVICE = (('Personal Support Assistance', 'Personal Support Assistance'),
-# 			('Ugandan Sign Language Interpreter', 'Ugandan Sign Language Interpreter'),
-# 			('International Sign Language Interpreter',
-# 			'International Sign Language Interpreter'),
-# 			('Captioning', 'Captioning'), ('Mobility Guide', 'Mobility Guide'),
-# 			('Tactile Sign Language Interpreter', 'Tactile Sign Language Interpreter'),)
 
 DAY = (('Monday', 'Monday'), ('Tuesday', 'Tuesday'), ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
 	('Friday', 'Friday'), ('Saturday', 'Saturday'), ('Sunday', 'Sunday'))
@@ -140,7 +120,6 @@ class ServiceproviderForm(ModelForm):
 			'ref2email':forms.TextInput(attrs={'class':'form-control'}),
 			'ref2phone':forms.TextInput(attrs={'class':'form-control'}),
 			'service':forms.Select(attrs={'class':'form-control'}),
-			# 'service':forms.CheckboxSelectMultiple(choices=SERVICE),
 			'availability':forms.CheckboxSelectMultiple(choices=DAY),
 			'status':forms.Select(attrs={'class':'form-control'}),
 			'starttime':forms.TextInput(attrs={'class':'form-control'}),

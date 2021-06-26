@@ -24,9 +24,25 @@
   </head>
   <body>
     <div>{% include 'profiles/serviceUserNavbar.html' %}</div>
-    <div class="email-success">
-      {% if serviceprovider.id %} You have successfully made a booking to {{serviceprovider.fullname}} for {{serviceprovider.service}} service
-      {% endif %}
+     <div class="container p-4">
+      <div class="card mb-3" style="max-width: 700px">
+        <div class="row g-0">
+          <div class="col-md-12">
+            <div class="card-body">
+              <h3 class="font-weight-bold mt-3">Booking Successfully submitted!</h3>
+              <hr />
+              {% if serviceprovider.id %}
+               <p> Hey {{request.user.serviceuser}}, <br/>
+               You have successfully made a booking to {{serviceprovider.fullname}}<br/>
+               for {{serviceprovider.service}} service <br/>
+                Please Wait for feedback from {{serviceprovider.fullname}}.<br>  
+             </p>
+             {% endif %}
+              <a class="btn btn-success" href="/serviceuserdash"> &#8592; Return Home</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
      <footer>{% include 'profiles/footer.html' %}</footer>
   </body>
