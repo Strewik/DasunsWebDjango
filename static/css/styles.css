@@ -20,19 +20,8 @@ footer{
 
 .navbar {
   min-height: 12px;
-  background-color: #f0f0f0
+  background-color: #f0f0f0;
 }
-/* ul.navbar-nav{
-  background-color: #40b295;
-} */
-/* #navbarNavDropdown.navbar-collapse ul li {
-  background-color: #40b295 !important
-}
-
-.navbar .navbar-expand-lg .navbar-light .navbar-toggler {
-  color: grey;
-  border-color: rgba(0, 0, 0, 0.1);
-} */
 
 #requestStatus {
   background-color: #40b295;
@@ -68,13 +57,15 @@ footer{
   right: 16px;
 }
 
-.whoweare {
+.whoweare, .partners{
   background-color: #e8e8e8;
   padding-left: 50px;
   padding-top: 50px;
   padding-bottom: 50px;
 }
-
+.partners{
+  background-color: #fff;
+}
 .green-service {
   background-color: #40b295;
   padding: 10px;

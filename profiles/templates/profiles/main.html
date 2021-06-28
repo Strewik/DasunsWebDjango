@@ -137,17 +137,22 @@
                       <form name="registerform" action="" method="POST">
                         {% csrf_token %}
                         <h4 id="form-title">Sign Up</h4>
-                        {% csrf_token %} {{registerform.username}}
-                        {{registerform.firstname}} {{registerform.lastname}}
-                        {{registerform.phone}} {{registerform.email}}
-                        {{registerform.password1}} {{registerform.password2}}
+                        {% csrf_token %}
+                        {{registerform.username}}
+                        {{registerform.firstname}}
+                        {{registerform.lastname}}
+                        {{registerform.gender}}
+                        {{registerform.phone}}
+                        {{registerform.email}}
+                        {{registerform.password1}}
+                        {{registerform.password2}}
                         <div class="custom-control custom-checkbox">
                           <label>
                             <input
                               type="checkbox"
                               class="checkbox"
                               name="terms"
-                              required=""
+                              required
                             />
                             <small class="terms-word"
                               >I agree to the terms & conditions set by
@@ -396,7 +401,6 @@
         and opportunities for persons with disabilities
       </div>
     </div>
-    <div>
       <div>
         <div id="howitworks" class="howitworks">
           <h2>How It Works</h2>
@@ -409,7 +413,7 @@
                   <div class="col-md">
                     <img
                       src="{% static 'images/order.png' %}"
-                      alt="..."
+                      alt="order-service-logo"
                       style="padding: 10px; height: 100px; width: 100px"
                     />
                   </div>
@@ -448,7 +452,7 @@
                   <div class="col-md">
                     <img
                       src="{% static 'images/getsp.png' %}"
-                      alt="..."
+                      alt="get-serviceprovider-logo"
                       style="padding: 10px; height: 100px; width: 100px"
                     />
                   </div>
@@ -487,7 +491,7 @@
                   <div class="col-md">
                     <img
                       src="{% static 'images/book.png' %}"
-                      alt="..."
+                      alt="booking-logo"
                       style="padding: 10px; height: 100px; width: 100px"
                     />
                   </div>
@@ -525,7 +529,7 @@
                   <div class="col-md">
                     <img
                       src="{% static 'images/relax.png' %}"
-                      alt="..."
+                      alt="relax-logo"
                       style="padding: 10px; height: 100px; width: 100px"
                     />
                   </div>
@@ -543,8 +547,54 @@
           </div>
         </div>
       </div>
+      <div id="ourpartners" class="partners">
+        <h2 >Our Partners</h2>
+        <br />
+        <div class="container">
+          <div class="row">
+            <div class="col-4">
+                <img 
+                src="{% static 'images/partners/USflag.gif' %}" 
+                alt="US-Flag"
+                style="padding-left: 0; height: 150px; width: 300px"
+                />
+            </div>
+            <div class="col-3">
+                <img 
+                src="{% static 'images/partners/State-Department.jpg' %}" 
+                alt="State-Department"
+                style="padding: 10px; height: 150px; width: 150px;"
+                />
+            </div>
+
+            <div class="col-5">
+                <img 
+                src="{% static 'images/partners/AUCD.jpg' %}" 
+                alt="US-Flag"
+                style="padding: 10px; height: 150px; width: 300px;"
+                />
+            </div>
+          </div>
+          <div class="row" style="margin-top:30px;">
+            <div class="col-6">
+                <img 
+                src="{% static 'images/partners/ICI-UMass.png' %}" 
+                alt="State-Department"
+                style="padding-left: 0; height: 150px; width: 400px;"
+                />
+            </div>
+            <div class="col-1"></div>
+            <div class="col-5">
+                <img 
+                src="{% static 'images/partners/Humanity&Inclusion.jpg' %}" 
+                alt="US-Flag"
+                style="padding: 10px; height: 150px; width: 300px;"
+                />
+            </div>
+          </div>
+        </div>
+      </div>
       <footer>{% include 'profiles/footer.html' %}</footer>
-    </div>
     <script src="{% static '/js/bootstrap/js/bootstrap.min.js' %%}"></script>
     <script>
       var form_fields = document.getElementsByTagName("input");

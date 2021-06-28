@@ -9,31 +9,17 @@ from .models import Serviceuser, Serviceprovider
 def create_serviceuser_profile(sender, instance, created, **kwargs):
     if created:
         group = Group.objects.get(name='serviceuser')
-        instance.groups.add(group) # instance is the user
+        instance.groups.add(group) 
         Serviceuser.objects.create(
                 user=instance,
                 email=instance.email,
                 firstname=instance.firstname,
                 lastname=instance.lastname,
+                gender=instance.gender,
                 phone=instance.phone
             )
         print('Su profile created!')
 
 post_save.connect(create_serviceuser_profile, sender=User)
-
-# def create_serviceprovider_profile(sender, instance, created, **kwargs):
-#     if created:
-#         group = Group.objects.get(name='serviceprovider')
-#         instance.groups.add(group) # instance is the user
-#         Serviceprovider.objects.create(
-#                 user=instance,
-#                 # email=instance.email,
-#                 # firstname=instance.firstname,
-#                 # lastname=instance.lastname,
-#                 # phone=instance.phone
-#             )
-#         print('Service Provider profile created!')
-
-# post_save.connect(create_serviceprovider_profile, sender=Serviceuser)
 
 

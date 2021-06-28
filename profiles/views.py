@@ -19,19 +19,13 @@ from django.core.paginator import Paginator, EmptyPage
 from django.core.mail import send_mail
 from django.conf import settings
 import smtplib
-# from email.message import EmailMessage
 from django.core.mail import EmailMessage
-# import urllib.request
 from django.template.loader import render_to_string
-
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.core.files.storage import FileSystemStorage
 from datetime import date, time, datetime
-# from django.utils import timezone
 
-
-# Create your views here.
 
 def main(request):
     registerform = CreateUserForm()
@@ -96,12 +90,12 @@ def password_reset_request(request):
 					email_template_name = "profiles/password/password_reset_email.txt"
 					c = {
 					"email":user.email,
-					'domain':'127.0.0.1:8000',
+					'domain':'dasuns.org',
 					'site_name': 'Website',
 					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
 					"user": user,
 					'token': default_token_generator.make_token(user),
-					'protocol': 'http',
+					'protocol': 'https',
 					}
 					email = render_to_string(email_template_name, c)
 					try:
@@ -167,8 +161,6 @@ def spreg_save(request):
                                    ref2email=ref2email, ref2phone=ref2phone, service=service, availability=availability,status=status, 
                                    starttime=starttime, endtime=endtime, pricevisit=pricevisit, terms=terms,)
         ServProv.save()
-        # group = Group.objects.get(name='serviceprovider')
-        # ServProv.groups.add(group)
         
     return redirect(reverse ('profiles:spregsuccess'))
 
@@ -184,11 +176,7 @@ def rating(request):
 
 @login_required(login_url='profiles:homepage')
 def rating_save(request):
-    # if request.method == 'POST':
-    #     count = Rating(request.POST)
-    #     print(count)
-    # return render(request, 'profiles/rating.html',)
-    
+   
     if request.method != 'POST':
         return render(request, 'profiles:rating.html')
     else: 
@@ -197,8 +185,7 @@ def rating_save(request):
         
     Rate = Rating(star=star, comment=comment,)
     Rate.save()
-
-          
+      
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceprovider'])
@@ -223,17 +210,17 @@ def spregsuccess(request):
     email.fail_silently=False
     email.send()
     
-    # context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
-    # return render(request, 'profiles/booksuccess.html', context)
     return render(request, 'profiles/spregSuccess.html')
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['admin'])
 def dashboard(request):
+    users = User.objects.all()
     bookings = Booking.objects.all()
     serviceproviders = Serviceprovider.objects.all()
     serviceusers = ServiceuserModel.objects.all()
     total_serviceproviders = serviceproviders.count()
+    total_users = users.count()
     pendingcount_serviceproviders = serviceproviders.filter(status='Pending').count()
     pending_serviceproviders = serviceproviders.filter(status='Pending')
     active_serviceproviders = serviceproviders.filter(status='Active')
@@ -264,7 +251,7 @@ def dashboard(request):
                'pendingcount_serviceproviders': pendingcount_serviceproviders, 'suspendedcount_serviceproviders': suspendedcount_serviceproviders,
                'total_serviceusers': total_serviceusers, 
                'total_bookings':total_bookings, 'myFilter': myFilter,
-               'page_obj': page_obj}
+               'page_obj': page_obj, users:'users', 'total_users':total_users}
     return render(request, 'profiles/dashboard.html', context)
 
 
@@ -324,8 +311,6 @@ def bookingsuccess(request, pk):
     context = {'serviceprovider': serviceprovider, 'serviceuser': serviceuser}
     return render(request, 'profiles/booksuccess.html', context)
     
-
-
 
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceprovider'])
@@ -467,7 +452,6 @@ def serviceUserDetails(request, pk):
     return render(request, 'profiles/serviceuserProfile.html', context)
 
 
-
 @login_required(login_url='profiles:homepage')
 @allowed_users(allowed_roles=['serviceuser'])
 def updateServiceuser(request, pk):
@@ -493,14 +477,14 @@ def updateServiceprovider(request, pk):
     
     serviceprovider = Serviceprovider.objects.get(id=pk)
     form = ServiceproviderForm(instance=serviceprovider)
-
     if request.method == 'POST':
         form = ServiceproviderForm(request.POST,request.FILES, instance=serviceprovider)
         if form.is_valid():
-            form.save()
+            myform= form.save()
+            print('my data of the sp', myform)
             return redirect(reverse ('profiles:dashboard'))
 
-    context = {'form': form}
+    context = {'form': form, 'serviceprovider':serviceprovider}
     return render(request, 'profiles/serviceprovider.html', context) 
 
 
