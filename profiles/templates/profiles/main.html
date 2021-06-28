@@ -25,14 +25,18 @@
     <div>{% include 'profiles/navbar.html' %}</div>
     {% endif %}
     <div class="error-popup">
-    {% if messages %}
-      {% for message in messages %}
+      {% if messages %} {% for message in messages %}
       <div class="alert alert-success">
-        <a class="close" href="#" data-dismiss="alert" style="text-decoration:none; color:#000;"><button>x</button></a>
+        <a
+          class="close"
+          href="#"
+          data-dismiss="alert"
+          style="text-decoration: none; color: #000"
+          ><button>x</button></a
+        >
         {{ message }}
       </div>
-      {% endfor %} 
-      {% endif %}
+      {% endfor %} {% endif %}
     </div>
     <div class="container">
       <div class="row">
@@ -56,7 +60,7 @@
                 </button>
                 <div>
                   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item text-center" id='item-login'>
+                    <li class="nav-item text-center" id="item-login">
                       <a
                         class="nav-link active btl"
                         id="pills-home-tab"
@@ -68,7 +72,7 @@
                         >Login</a
                       >
                     </li>
-                    <li class="nav-item text-center" id='item-Signup'>
+                    <li class="nav-item text-center" id="item-Signup">
                       <a
                         class="nav-link btr"
                         id="pills-profile-tab"
@@ -173,16 +177,27 @@
       </div>
     </div>
     <div>
-      <div class="container1">
-        <img
-          src="{% static 'images/banner.jpg' %}"
-          alt="Snow"
-          style="width: 100%"/>
+      <div class="container1 img-fluid">
+        <div class="row">
+          <div class="col-md-12 col-sm-6 col-xsm-3">
+            <img
+              src="{% static 'images/banner.jpg' %}"
+              alt="Snow"
+              style="width: 100%"
+            />
 
-        <div class="top-right"
-        style="margin:80px">
-          <h1>Access Professional Support Services<br /> at your Fingertips.</h1>
-          <h5>Leveraging technology to advance rights, choices and opportunities for <br /> persons with disabilities</h5>
+            <div class="top-right" style="margin: 80px">
+              <h1>
+                Access Professional Support Services<br />
+                at your Fingertips.
+              </h1>
+              <h5>
+                Leveraging technology to advance rights, choices and
+                opportunities for <br />
+                persons with disabilities
+              </h5>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -319,7 +334,7 @@
             <div class="row g-0">
               <div class="col-md-4">
                 <img
-                  style="padding: 12px; width: 105px; "
+                  style="padding: 12px; width: 105px"
                   src="{% static 'images/mobility.png' %}"
                   alt="..."
                 />
@@ -377,8 +392,8 @@
       <h2>Who We Are</h2>
       <br />
       <div>
-        The Diversity Ability Support Network System (Dasuns) is a social enterprise
-        company registered <br />
+        The Diversity Ability Support Network System (Dasuns) is a social
+        enterprise company registered <br />
         in Uganda to promote social and inclusive development through
         facilitating access to <br />
         professional assistive support services and technologies to advance

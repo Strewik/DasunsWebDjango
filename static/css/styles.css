@@ -40,7 +40,16 @@ footer{
   position: relative;
   text-align: center;
   color: white;
+  /* max-width: 100%;
+  height: auto; */
 }
+
+/* .img-fluid{ 
+  max-width: 100%;
+  height: auto;
+  background: url("../images/banner.jpg") 100% 0 no-repeat fixed;
+
+}; */
 
 .top-right {
   position: absolute;

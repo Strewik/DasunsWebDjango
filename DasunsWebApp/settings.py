@@ -13,19 +13,17 @@ import os
 import django_heroku
 from pathlib import Path
 from getenv import env
-import dotenv # <- New
+import dotenv
 
+# from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Add .env variables anywhere before SECRET_KEY <----New
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-# UPDATE secret key
-# SECRET_KEY = os.environ['SECRET_KEY'] #
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -103,9 +101,9 @@ TIME_INPUT_FORMATS = ('%H:%M',)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
-
+    # Connection to Local Database :nSqlite3
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
     # Connection to Local Database : PostgresQL
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -114,6 +112,13 @@ DATABASES = {
         # 'PORT': os.getenv('DB_APP_PORT'),
         # 'USER': os.getenv('DB_USERNAME'),
         # 'PASSWORD': os.getenv('DB_PASSWORD'),   
+    # Connection to Remote Database : PostgresQL
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DB_NAME'),
+        'HOST': os.getenv('DB_HOST_NAME'),
+        'PORT': os.getenv('DB_APP_PORT'),
+        'USER': os.getenv('DB_USERNAME'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
 
     # Connection to Remote / cloud Database : PostgresQL
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -124,7 +129,6 @@ DATABASES = {
         # 'PASSWORD': os.getenv('AWS_PGDB_MASTERPASSWORD'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -195,6 +199,12 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'dasunsdev@gmail.com'
+# EMAIL_HOST_PASSWORD ='asbpgcsbnljiqgpx'
 
 
 django_heroku.settings(locals())
