@@ -89,6 +89,7 @@
                     >
                       <tr>
                   <th scope="col">Service Provider</th>
+                  <th scope="col">Gender</th>
                   <th scope="col">Service booked</th>
                   <th scope="col">Price per visit(UGX)</th>
                   <th scope="col">Meeting Place</th>
@@ -103,6 +104,7 @@
                  {% if booking.meetdate > today_date %}
                 <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                   <td>{{booking.serviceprovider.fullname}}</td>
+                  <td>{{booking.serviceprovider.gender}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
@@ -143,6 +145,7 @@
                       >
                       <tr>
                         <th scope="col">Service Provider</th>
+                        <th scope="col">Gender</th>
                         <th scope="col">Service</th>
                         <th scope="col">Price per visit(UGX)</th>
                         <th scope="col">Meeting Place</th>
@@ -158,6 +161,7 @@
                         {% if booking.meetdate > today_date %}
                       <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>{{booking.serviceprovider.fullname}}</td>
+                        <td>{{booking.serviceprovider.gender}}</td>
                         <td>{{booking.serviceprovider.service}}</td>
                         <td>{{booking.serviceprovider.pricevisit}}</td>
                         <td>{{booking.meetplace}}</td>
@@ -167,6 +171,7 @@
                       {% elif booking.meetdate == today_date and booking.endtime > time_now %}
                       <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                         <td>{{booking.serviceprovider.fullname}}</td>
+                        <td>{{booking.serviceprovider.gender}}</td>
                         <td>{{booking.serviceprovider.service}}</td>
                         <td>{{booking.serviceprovider.pricevisit}}</td>
                         <td>{{booking.meetplace}}</td>
@@ -198,6 +203,7 @@
                     >
                       <tr>
                   <th scope="col">Service Provider</th>
+                  <th scope="col">Gender</th>
                   <th scope="col">Service</th>
                   <th scope="col">Price per visit(UGX)</th>
                   <th scope="col">Meeting Place</th>
@@ -212,6 +218,7 @@
                 {% if booking.meetdate < today_date %}
                 <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                   <td>{{booking.serviceprovider.fullname}}</td>
+                  <td>{{booking.serviceprovider.gender}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
@@ -221,6 +228,7 @@
                   {% elif booking.meetdate == today_date and booking.endtime < time_now %}
                    <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                   <td>{{booking.serviceprovider.fullname}}</td>
+                  <td>{{booking.serviceprovider.gender}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
@@ -252,6 +260,7 @@
                     >
                      <tr>
                   <th scope="col">Service Provider</th>
+                  <th scope="col">Gender</th>
                   <th scope="col">Service</th>
                   <th scope="col">Price per visit(UGX)</th>
                   <th scope="col">Meeting Place</th>
@@ -265,6 +274,7 @@
                   {% if booking.status == "Decline" %}
                 <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                   <td>{{booking.serviceprovider.fullname}}</td>
+                  <td>{{booking.serviceprovider.gender}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
@@ -295,6 +305,7 @@
                     >
                       <tr>
                   <th scope="col">Service Provider</th>
+                  <th scope="col">Gender</th>
                   <th scope="col">Service</th>
                   <th scope="col">Price per visit(UGX)</th>
                   <th scope="col">Meeting Place</th>
@@ -309,6 +320,7 @@
                 {% if booking.meetdate < today_date %}
                 <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                   <td>{{booking.serviceprovider.fullname}}</td>
+                  <td>{{booking.serviceprovider.gender}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>
@@ -318,6 +330,7 @@
                 {% elif booking.meetdate == today_date and booking.starttime < time_now %}
                 <tr onclick="location.href='{% url 'profiles:bookingdetails' booking.id%}'">
                   <td>{{booking.serviceprovider.fullname}}</td>
+                  <td>{{booking.serviceprovider.gender}}</td>
                   <td>{{booking.serviceprovider.service}}</td>
                   <td>{{booking.serviceprovider.pricevisit}}</td>
                   <td>{{booking.meetplace}}</td>

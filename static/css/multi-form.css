@@ -28,31 +28,3 @@ button:hover {opacity: 0.8; }
 checkbox {
     float: left;
 }
-
-
-/* .fake-input {
-    float: left;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #9f9f9f;
-    background: #fff;
-    vertical-align: middle;
-    position: relative;
-    margin-right: 10px;
-    border-radius: 4px;
-}
-input[type="checkbox"] {
-    position: fixed;
-    top: -9999px;
-    left: -9999px;
-}
-input[type="checkbox"]:checked + .fake-input:before {
-    content:"\2713";
-    position: absolute;
-    color: #000;
-    text-align: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-} */
