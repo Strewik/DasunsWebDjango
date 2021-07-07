@@ -137,14 +137,10 @@
                       <form name="registerform" action="" method="POST">
                         {% csrf_token %}
                         <h4 id="form-title">Sign Up</h4>
-                        {% csrf_token %}
-                        {{registerform.username}}
-                        {{registerform.firstname}}
-                        {{registerform.lastname}}
-                        {{registerform.gender}}
-                        {{registerform.phone}}
-                        {{registerform.email}}
-                        {{registerform.password1}}
+                        {% csrf_token %} {{registerform.username}}
+                        {{registerform.firstname}} {{registerform.lastname}}
+                        {{registerform.gender}} {{registerform.phone}}
+                        {{registerform.email}} {{registerform.password1}}
                         {{registerform.password2}}
                         <div class="custom-control custom-checkbox">
                           <label>
@@ -401,200 +397,210 @@
         and opportunities for persons with disabilities
       </div>
     </div>
-      <div>
-        <div id="howitworks" class="howitworks">
-          <h2>How It Works</h2>
-          <br />
-          <br />
-          <div class="row">
-            <div class="col-md-3">
-              <div class="card" style="border-width: 0px">
-                <div class="row">
-                  <div class="col-md">
-                    <img
-                      src="{% static 'images/order.png' %}"
-                      alt="order-service-logo"
-                      style="padding: 10px; height: 100px; width: 100px"
-                    />
-                  </div>
-                  <div
-                    class="col-md"
-                    style="align-content: right; padding-top: 40px"
-                  >
-                    <svg
-                      width="em"
-                      height="2em"
-                      viewBox="0 0 16 16"
-                      className="bi bi-arrow-right"
-                      fill="#707070"
-                      xmlns="http://www.w3.org/2000/svg"
-                      float="right"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Resquest service</h5>
-                  <p class="card-text">
-                    Browse through our services, submit request details and pay
-                    deposit.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card" style="border-width: 0px">
-                <div class="row">
-                  <div class="col-md">
-                    <img
-                      src="{% static 'images/getsp.png' %}"
-                      alt="get-serviceprovider-logo"
-                      style="padding: 10px; height: 100px; width: 100px"
-                    />
-                  </div>
-                  <div
-                    class="col-md"
-                    style="align-content: right; padding-top: 40px"
-                  >
-                    <svg
-                      width="em"
-                      height="2em"
-                      viewBox="0 0 16 16"
-                      className="bi bi-arrow-right"
-                      fill="#707070"
-                      xmlns="http://www.w3.org/2000/svg"
-                      float="right"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Choose a professional</h5>
-                  <p class="card-text">
-                    In the list choose a service provider that you want to get
-                    service from
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card" style="border-width: 0px">
-                <div class="row">
-                  <div class="col-md">
-                    <img
-                      src="{% static 'images/book.png' %}"
-                      alt="booking-logo"
-                      style="padding: 10px; height: 100px; width: 100px"
-                    />
-                  </div>
-                  <div
-                    class="col-md"
-                    style="align-content: right; padding-top: 40px"
-                  >
-                    <svg
-                      width="em"
-                      height="2em"
-                      viewBox="0 0 16 16"
-                      className="bi bi-arrow-right"
-                      fill="#707070"
-                      xmlns="http://www.w3.org/2000/svg"
-                      float="right"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Make Appointment</h5>
-                  <p class="card-text">
-                    Make an appointment according to the providers availability
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card" style="border-width: 0px">
-                <div class="row">
-                  <div class="col-md">
-                    <img
-                      src="{% static 'images/relax.png' %}"
-                      alt="relax-logo"
-                      style="padding: 10px; height: 100px; width: 100px"
-                    />
-                  </div>
-                  <div
-                    class="col-md"
-                    style="align-content: right; padding-top: 40px"
-                  ></div>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Receive service</h5>
-                  <p class="card-text">After booking sit back and relax</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="ourpartners" class="partners">
-        <h2 >Our Partners</h2>
+    <div>
+      <div id="howitworks" class="howitworks">
+        <h2>How It Works</h2>
         <br />
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <img 
-                src="{% static 'images/partners/USflag.gif' %}" 
-                alt="US-Flag"
-                style="padding-left: 0; height: 150px; width: 300px"
-                />
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-12">
-                <img 
-                src="{% static 'images/partners/State-Department.jpg' %}" 
-                alt="State-Department"
-                style="padding: 10px; height: 150px; width: 150px;"
-                />
-            </div>
-
-            <div class="col-lg-5 col-md-5 col-sm-12">
-                <img 
-                src="{% static 'images/partners/AUCD.jpg' %}" 
-                alt="US-Flag"
-                style="padding: 10px; height: 150px; width: 300px;"
-                />
+        <br />
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card" style="border-width: 0px">
+              <div class="row">
+                <div class="col-md">
+                  <img
+                    src="{% static 'images/order.png' %}"
+                    alt="order-service-logo"
+                    style="padding: 10px; height: 100px; width: 100px"
+                  />
+                </div>
+                <div
+                  class="col-md"
+                  style="align-content: right; padding-top: 40px"
+                >
+                  <svg
+                    width="em"
+                    height="2em"
+                    viewBox="0 0 16 16"
+                    className="bi bi-arrow-right"
+                    fill="#707070"
+                    xmlns="http://www.w3.org/2000/svg"
+                    float="right"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Resquest service</h5>
+                <p class="card-text">
+                  Browse through our services, submit request details and pay
+                  deposit.
+                </p>
+              </div>
             </div>
           </div>
-          <div class="row" style="margin-top:30px;">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <img 
-                src="{% static 'images/partners/ICI-UMass.png' %}" 
-                alt="State-Department"
-                style="padding-left: 0; height: 150px; width: 400px;"
-                />
+          <div class="col-md-3">
+            <div class="card" style="border-width: 0px">
+              <div class="row">
+                <div class="col-md">
+                  <img
+                    src="{% static 'images/getsp.png' %}"
+                    alt="get-serviceprovider-logo"
+                    style="padding: 10px; height: 100px; width: 100px"
+                  />
+                </div>
+                <div
+                  class="col-md"
+                  style="align-content: right; padding-top: 40px"
+                >
+                  <svg
+                    width="em"
+                    height="2em"
+                    viewBox="0 0 16 16"
+                    className="bi bi-arrow-right"
+                    fill="#707070"
+                    xmlns="http://www.w3.org/2000/svg"
+                    float="right"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Choose a professional</h5>
+                <p class="card-text">
+                  In the list choose a service provider that you want to get
+                  service from
+                </p>
+              </div>
             </div>
-            <div class="col-lg-1 "></div>
-            <div class="col-lg-5 col-md-5 col-sm-12">
-                <img 
-                src="{% static 'images/partners/Humanity&Inclusion.jpg' %}" 
-                alt="US-Flag"
-                style="padding: 10px; height: 150px; width: 300px;"
-                />
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="border-width: 0px">
+              <div class="row">
+                <div class="col-md">
+                  <img
+                    src="{% static 'images/book.png' %}"
+                    alt="booking-logo"
+                    style="padding: 10px; height: 100px; width: 100px"
+                  />
+                </div>
+                <div
+                  class="col-md"
+                  style="align-content: right; padding-top: 40px"
+                >
+                  <svg
+                    width="em"
+                    height="2em"
+                    viewBox="0 0 16 16"
+                    className="bi bi-arrow-right"
+                    fill="#707070"
+                    xmlns="http://www.w3.org/2000/svg"
+                    float="right"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Make Appointment</h5>
+                <p class="card-text">
+                  Make an appointment according to the providers availability
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="border-width: 0px">
+              <div class="row">
+                <div class="col-md">
+                  <img
+                    src="{% static 'images/relax.png' %}"
+                    alt="relax-logo"
+                    style="padding: 10px; height: 100px; width: 100px"
+                  />
+                </div>
+                <div
+                  class="col-md"
+                  style="align-content: right; padding-top: 40px"
+                ></div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Receive service</h5>
+                <p class="card-text">After booking sit back and relax</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <footer>{% include 'profiles/footer.html' %}</footer>
+    </div>
+    <div id="ourpartners" class="partners">
+      <h2>Our Partners</h2>
+      <br />
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <img
+              src="{% static 'images/partners/USflag.gif' %}"
+              alt="US-Flag"
+              style="padding-left: 0px; width: 250px"
+            />
+          </div>
+          <div class="col-lg-4 col-md-3 col-sm-12">
+            <img
+              src="{% static 'images/partners/State-Department.jpg' %}"
+              alt="State-Department"
+              style="padding: 10px; width: 150px"
+            />
+          </div>
+
+          <div class="col-lg-4 col-md-5 col-sm-12">
+            <img
+              src="{% static 'images/partners/AUCD.jpg' %}"
+              alt="US-Flag"
+              style="padding: 10px; width: 250px"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="row" style="margin-top: 30px">
+          <div class="col-lg-4 col-md-5 col-sm-12">
+            <img
+              src="{% static 'images/partners/ICI-UMass.png' %}"
+              alt="ICI-UMass"
+              style="padding: 10px; width: 150px"
+            />
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-12">
+            <img
+              src="{% static 'images/partners/Humanity&Inclusion.jpg' %}"
+              alt="Humanity and Inclusion"
+              style="padding: 10px; width: 200px"
+            />
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-12">
+            <img
+              src="{% static 'images/partners/rotary-int.jpg' %}"
+              alt="Rotary International"
+              style="padding: 10px; width: 250px"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>{% include 'profiles/footer.html' %}</footer>
     <script src="{% static '/js/bootstrap/js/bootstrap.min.js' %%}"></script>
     <script>
       var form_fields = document.getElementsByTagName("input");
