@@ -66,6 +66,9 @@ footer{
 .partners{
   background-color: #fff;
 }
+.partner-logo{
+  padding: 5px;
+}
 .green-service {
   background-color: #40b295;
   padding: 10px;
