@@ -180,10 +180,11 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static') 
 MEDIA_URL = '/media/' 
-
+ 
 # # AWS EMAIL_BACKEND SET UP
 # EMAIL_BACKEND = 'django_ses.SESBackend'
 # AWS_ACCESS_KEY_ID = 'YOUR-ACCESS-KEY-ID'
@@ -199,6 +200,8 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 

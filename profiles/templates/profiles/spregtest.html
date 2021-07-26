@@ -1,0 +1,1040 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Service provider registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/bootstrap/css/bootstrap.css' %}"
+    />
+    <link rel="stylesheet" href="{% static '/css/signlogin.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/styles.css' %}"
+    />
+    <style>
+      /*custom font*/
+      @import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+      /*basic reset*/
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        height: 100%;
+        background: #eeeeee;
+        /*background: -webkit-linear-gradient(
+        to left,
+        #6441a5,
+        #2a0845
+      ); Chrome 10-25, Safari 5.1-6 */
+      }
+
+      body {
+        /* font-family: montserrat, arial, verdana; */
+        background: transparent;
+      }
+
+      /*form styles*/
+      #msform {
+        text-align: center;
+        position: relative;
+        margin-top: 30px;
+      }
+
+      #msform fieldset {
+        background: white;
+        border: 1px;
+        border-radius: 5px;
+        /* box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4); */
+        padding: 20px 30px;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0 10%;
+        text-align: left;
+        font-size: 15px;
+
+        /*stacking fieldsets above each other*/
+        position: relative;
+      }
+
+      /*Hide all except first fieldset*/
+      #msform fieldset:not(:first-of-type) {
+        display: none;
+      }
+
+      /*inputs*/
+      .fullinput {
+        padding: 5px;
+        border: 1px solid grey;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        /* font-family: montserrat; */
+        color: grey;
+        font-size: 15px;
+      }
+
+      .halfinput {
+        padding: 5px;
+        border: 1px solid grey;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        color: grey;
+        font-size: 15px;
+      }
+
+      #msform input:focus,
+      #msform textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid grey;
+        border-radius: 10px;
+        outline-width: 0;
+        transition: All 0.5s ease-in;
+        -webkit-transition: All 0.5s ease-in;
+        -moz-transition: All 0.5s ease-in;
+        -o-transition: All 0.5s ease-in;
+      }
+
+      /*buttons*/
+      #msform .action-button {
+        width: 100px;
+        background: #40b295;
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        float: right;
+      }
+
+      #msform .action-button:hover,
+      #msform .action-button:focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #40b295;
+      }
+
+      #msform .action-button-previous {
+        width: 100px;
+        background: #c5c5f1;
+        font-weight: bold;
+        color: grey;
+        border: 0 none;
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        float: left;
+      }
+
+      #msform .action-button-previous:hover,
+      #msform .action-button-previous:focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #c5c5f1;
+      }
+
+      /*headings*/
+      .fs-title {
+        font-size: 18px;
+        /* text-transform: uppercase; */
+        color: #2c3e50;
+        margin-bottom: 30px;
+        letter-spacing: 2px;
+        /* font-weight: bold; */
+      }
+
+      .fs-subtitle {
+        font-weight: normal;
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      /*progressbar*/
+      #progressbar {
+        margin-bottom: 30px;
+        margin-top: 10%;
+        overflow: hidden;
+        /*CSS counters to number the steps*/
+        counter-reset: step;
+        padding-left: 160px;
+        /* text-align: center; */
+      }
+
+      #progressbar li {
+        list-style-type: none;
+        color: grey;
+        /* text-transform: uppercase; */
+        font-size: 13px;
+        width: 20%;
+        float: left;
+        position: relative;
+        letter-spacing: 1px;
+      }
+
+      #progressbar li:before {
+        content: counter(step);
+        counter-increment: step;
+        width: 32px;
+        height: 32px;
+        line-height: 35px;
+        display: block;
+        font-size: 12px;
+        color: #333;
+        background: white;
+        border-radius: 25px;
+        margin: 0 auto 10px auto;
+      }
+
+      /*progressbar connectors*/
+      #progressbar li:after {
+        content: "";
+        width: 100%;
+        height: 3px;
+        background: white;
+        position: absolute;
+        left: -50%;
+        top: 15px;
+        z-index: -1; /*put it behind the numbers*/
+      }
+
+      #progressbar li:first-child:after {
+        /*connector not needed before the first step*/
+        content: none;
+      }
+
+      /*marking active/completed steps green*/
+      /*The number of the step and the connector before it = green*/
+      #progressbar li.active:before,
+      #progressbar li.active:after {
+        background: #40b295;
+        color: white;
+      }
+
+      /* Not relevant to this form */
+      .dme_link {
+        margin-top: 30px;
+        text-align: center;
+      }
+      .dme_link a {
+        background: #fff;
+        font-weight: bold;
+        color: #ee0979;
+        border: 0 none;
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 5px 25px;
+        font-size: 12px;
+      }
+
+      .dme_link a:hover,
+      .dme_link a:focus {
+        background: #c5c5f1;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MultiStep Form -->
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <form
+          id="msform"
+          action="{% url 'profiles:spregsave' %}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <!-- progressbar -->
+          <ul id="progressbar">
+            <li class="active">Personal Info</li>
+            <li>Eligibility</li>
+            <li>Evidence of Expertise</li>
+            <li>Referees</li>
+            <li>Pricing and Availability</li>
+          </ul>
+          <!-- fieldsets -->
+          <fieldset>
+            <h3 class="fs-title text-center">
+              Sign up by following the process to join Dasuns community of
+              service providers
+            </h3>
+            <!-- <h3 class="fs-subtitle">Tell us something more about you</h3> -->
+            <label for="">Fullname</label>
+            <input
+              class="fullinput"
+              type="text"
+              name="fullname"
+              id="fullname"
+              placeholder="Fullname"
+              required
+            />
+            <label for="">Phone number</label>
+            <input
+              class="fullinput"
+              type="text"
+              name="phone"
+              placeholder="Phone"
+            />
+            <label for="">Email</label>
+            <input
+              class="fullinput"
+              type="email"
+              name="email"
+              placeholder="Email"
+            />
+            <small id="emailerr"></small>
+            <label for="">NIN/Passport number</label>
+            <input
+              class="fullinput"
+              type="text"
+              name="nin"
+              placeholder="NIN/passport number"
+            />
+            <label for="">Date of Birth</label>
+            <input class="fullinput" type="date" name="dob" placeholder="DOB" />
+            <label for="">Gender</label>
+            <select
+              class="fullinput"
+              class="custom-select my-1 mr-sm-2"
+              id="inlineFormCustomSelectPref"
+              name="gender"
+            >
+              <option selected>Gender</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+            </select>
+            <label for="">Physical Address</label>
+            <input
+              class="fullinput"
+              class="fullinput"
+              type="text"
+              name="phyadd"
+              placeholder="Address"
+            />
+            <input
+              type="button"
+              name="next"
+              class="next action-button"
+              value="Next"
+              id="next1"
+            />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">Eligibility</h2>
+            <h3 class="fs-subtitle">
+              As a Dasuns professional Service Provider, make sure you meet the
+              criteria by selecting the options which apply to you below
+            </h3>
+            <div>
+              <input
+                type="checkbox"
+                value="I have at least one year of experience"
+                id="defaultCheck1"
+                name="yearexp"
+              />
+              <label class="form-check-label" for="defaultCheck1">
+                At least one year of experience in your profession
+              </label>
+              <br />
+              <br />
+              <input
+                type="checkbox"
+                value="I'm not a middleman"
+                id="defaultCheck1"
+                name="notmidman"
+              />
+              <label class="form-check-label" for="defaultCheck1">
+                You are not a middleman
+              </label>
+              <br />
+              <br />
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="I have the skillset"
+                id="defaultCheck1"
+                name="skillset"
+              />
+              <label class="form-check-label" for="defaultCheck1">
+                You have the skillset to give professional service
+              </label>
+              <br />
+              <br />
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="I have a connected device"
+                id="defaultCheck1"
+                name="internet"
+              />
+              <label class="form-check-label" for="defaultCheck1">
+                You have a phone/computer with an active Internet connection
+              </label>
+              <br />
+              <br />
+            </div>
+            <input
+              type="button"
+              name="previous"
+              class="previous action-button-previous"
+              value="Previous"
+            />
+            <input
+              type="button"
+              name="next"
+              class="next action-button"
+              value="Next"
+            />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">Evidence of Expertise</h2>
+            <h3 class="fs-subtitle">
+              Please provide your technical training qualifications.
+            </h3>
+            <label for="myfile">Upload your Qualifications:</label>
+            <input
+              class="fullinput"
+              type="file"
+              id="myfile"
+              name="qualification"
+              required
+            />
+            <h3 class="fs-subtitle">
+              Please provide a link to your portfolio. (Could be a link to a
+              website or social media page)
+            </h3>
+            <label for="">Link to your portfolio</label>
+            <input
+              class="fullinput"
+              type="text"
+              name="portifolio"
+              id="portfolio"
+              placeholder="Portfolio"
+            />
+            <h3 class="fs-subtitle">
+              Please leave it blank if you don't have an online portfolio.
+            </h3>
+            <input
+              type="button"
+              name="previous"
+              class="previous action-button-previous"
+              value="Previous"
+            />
+            <input
+              type="button"
+              name="next"
+              class="next action-button"
+              value="Next"
+            />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">We only work with professionals</h2>
+            <h3 class="fs-subtitle">
+              We would like to tell us more about yourself and the professional
+              service that you offer.
+            </h3>
+            <label for=""
+              >Tell us more about yourself and your experience</label
+            >
+            <textarea
+              class="fullinput"
+              class="form-control"
+              rows="6"
+              name="profession"
+            ></textarea>
+            <h2 class="fs-title">
+              Provide us with 2 referees whom we can contact
+            </h2>
+            <div class="div">
+              <h3 class="fs-subtitle">Referee 1</h3>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="">Fullname</label>
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref1name"
+                    id="ref1name"
+                    class="ref1name"
+                    placeholder="Full name"
+                  />
+                  <br />
+                  <label for="">Email</label>
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref1email"
+                    id="ref1email"
+                    class="ref1email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <label for="">Title</label>
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref1title"
+                    id="ref1title"
+                    class="ref1title"
+                    placeholder="Title/Desccription"
+                  />
+                  <br />
+                  <label for="">Active phone number</label>
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref1phone"
+                    id="ref1phone"
+                    class="ref1phone"
+                    placeholder="Phone"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 class="fs-subtitle">Referee 2</h3>
+              <div class="row">
+                <div class="col-sm-6">
+                  <label for="">Fullname</label>
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref2name"
+                    id="ref2name"
+                    class="ref2name"
+                    placeholder="Full name"
+                  />
+                  <br />
+                  <label for="">Email</label>
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref2email"
+                    id="ref2email"
+                    class="ref2email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <label for="">Title</label>
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref2title"
+                    id="ref2title"
+                    class="ref2title"
+                    placeholder="Title/Desccription"
+                  />
+                  <br />
+                  <label for="">Active phone number</label>
+                  <input
+                    class="fullinput"
+                    type="text"
+                    name="ref2phone"
+                    id="ref2phone"
+                    class="ref2phone"
+                    placeholder="Phone"
+                  />
+                </div>
+              </div>
+            </div>
+            <input
+              type="button"
+              name="previous"
+              class="previous action-button-previous"
+              value="Previous"
+            />
+            <input
+              type="button"
+              name="next"
+              class="next action-button"
+              value="Next"
+            />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">
+              Finally enter your services, price & availability.
+            </h2>
+            <h3 class="fs-subtitle">
+              We would like you to capture your availability and pricing per
+              visit.
+            </h3>
+            <label>Service</label>
+            <div>
+              <select
+                class="fullinput"
+                class="custom-select my-1 mr-sm-2"
+                id="inlineFormCustomSelectPref"
+                name="service"
+              >
+                <option selected>Service</option>
+                <option value="Personal Support Assistance">
+                  Personal Support Assistance
+                </option>
+                <option value="Ugandan Sign Language Interpreter">
+                  Ugandan Sign Language Interpreter
+                </option>
+                <option value="International Sign Language Interpreter">
+                  International Sign Language Interpreter
+                </option>
+                <option value="Captioning">Captioning</option>
+                <option value="Mobility Guide">Mobility Guide</option>
+                <option value="Tactile Sign Language Interpreter">
+                  Tactile Sign Language Interpreter
+                </option>
+              </select>
+              {% comment %}
+              <div>
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Personal Support Assistance"
+                  name="service"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Personal Support Assistance
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Ugandan Sign Language Interpreter"
+                  name="service"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Ugandan Sign Language Interpreter
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="International Sign Language Interpreter"
+                  name="service"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  International Sign Language Interpreter
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Captioning"
+                  name="service"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Captioning
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Mobility Guide"
+                  name="service"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Mobility Guide
+                </label>
+                <br />
+                <input
+                  class="form-check-input form-check-inline"
+                  type="checkbox"
+                  value="Tactile Sign Language Interpreter"
+                  name="service"
+                  id="defaultCheck1"
+                />
+                <label class="form-check-label" for="defaultCheck1">
+                  Tactile Sign Language Interpreter
+                </label>
+              </div>
+              {% endcomment %}
+            </div>
+            <br />
+            <label>Enter your service availability</label>
+            <br />
+            Days
+            <br />
+            <br />
+            <div>
+              <div>
+                <input
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
+                  type="checkbox"
+                  value="Sunday"
+                  name="availability"
+                  id="sunday"
+                />
+                <label class="form-check-label" for="sunday"> Sunday </label>
+                <br />
+                <input
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
+                  type="checkbox"
+                  value="Monday"
+                  name="availability"
+                  id="monday"
+                />
+                <label class="form-check-label" for="monday"> Monday </label>
+                <br />
+                <input
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
+                  type="checkbox"
+                  value="Tuesday"
+                  name="availability"
+                  id="tuesday"
+                />
+                <label class="form-check-label" for="tuesday"> Tuesday </label>
+                <br />
+                <input
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
+                  type="checkbox"
+                  value="Wednesday"
+                  name="availability"
+                  id="wednesday"
+                />
+                <label class="form-check-label" for="wednesday">
+                  Wednesday
+                </label>
+                <br />
+                <input
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
+                  type="checkbox"
+                  value="Thursday"
+                  name="availability"
+                  id="thursday"
+                />
+                <label class="form-check-label" for="thursday">
+                  Thursday
+                </label>
+                <br />
+                <input
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
+                  type="checkbox"
+                  value="Friday"
+                  name="availability"
+                  id="friday"
+                />
+                <label class="form-check-label" for="friday"> Friday </label>
+                <br />
+                <input
+                  {%
+                  comment
+                  %}
+                  class="form-check-input form-check-inline"
+                  {%
+                  endcomment
+                  %}
+                  type="checkbox"
+                  value="Friday"
+                  name="availability"
+                  id="saturday"
+                />
+                <label class="form-check-label" for="saturday">
+                  Saturday
+                </label>
+                <br />
+              </div>
+            </div>
+            <br />
+            <input type="hidden" id="status" name="status" value="Pending" />
+            <div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="starttime">Start Time</label>
+                  <input
+                    class="fullinput"
+                    type="time"
+                    id="starttime"
+                    name="starttime"
+                    value="starttime"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="endtime">End time</label>
+                  <input
+                    class="fullinput"
+                    type="time"
+                    id="endtime"
+                    name="endtime"
+                    value="endtime"
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="pricevisit">Price per hour</label>
+                    <input
+                      class="fullinput"
+                      type="text"
+                      name="pricevisit"
+                      id="pricevisit"
+                      class="price"
+                      placeholder="Price per hour"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  name="terms"
+                  type="checkbox"
+                  value="Agree to T&C"
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  I agree to the terms and conditions set by Dasuns.
+                </label>
+              </div>
+            </div>
+
+            <input
+              type="button"
+              name="previous"
+              class="previous action-button-previous"
+              value="Previous"
+            />
+            <input
+              type="submit"
+              name="submit"
+              id="submit"
+              class="next action-button"
+              value="Submit"
+            />
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <footer>{% include 'profiles/footer.html' %}</footer>
+    <script>
+      //jQuery time
+      var current_fs, next_fs, previous_fs; //fieldsets
+      var left, opacity, scale; //fieldset properties which we will animate
+      var animating; //flag to prevent quick multi-click glitches
+
+      $(".next").click(function () {
+        if (animating) return false;
+        animating = true;
+
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+
+        // myFunction();
+
+        //activate next step on progressbar using the index of next_fs
+        $("#progressbar li")
+          .eq($("fieldset").index(next_fs))
+          .addClass("active");
+
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate(
+          { opacity: 0 },
+          {
+            step: function (now, mx) {
+              //as the opacity of current_fs reduces to 0 - stored in "now"
+              //1. scale current_fs down to 80%
+              scale = 1 - (1 - now) * 0.2;
+              //2. bring next_fs from the right(50%)
+              left = now * 50 + "%";
+              //3. increase opacity of next_fs to 1 as it moves in
+              opacity = 1 - now;
+              current_fs.css({
+                transform: "scale(" + scale + ")",
+                position: "absolute",
+              });
+              next_fs.css({ left: left, opacity: opacity });
+            },
+            duration: 800,
+            complete: function () {
+              current_fs.hide();
+              animating = false;
+            },
+            //this comes from the custom easing plugin
+            easing: "easeInOutBack",
+          }
+        );
+      });
+
+      $(".previous").click(function () {
+        if (animating) return false;
+        animating = true;
+
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+
+        //de-activate current step on progressbar
+        $("#progressbar li")
+          .eq($("fieldset").index(current_fs))
+          .removeClass("active");
+
+        //show the previous fieldset
+        previous_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate(
+          { opacity: 0 },
+          {
+            step: function (now, mx) {
+              //as the opacity of current_fs reduces to 0 - stored in "now"
+              //1. scale previous_fs from 80% to 100%
+              scale = 0.8 + (1 - now) * 0.2;
+              //2. take current_fs to the right(50%) - from 0%
+              left = (1 - now) * 50 + "%";
+              //3. increase opacity of previous_fs to 1 as it moves in
+              opacity = 1 - now;
+              current_fs.css({ left: left });
+              previous_fs.css({
+                transform: "scale(" + scale + ")",
+                opacity: opacity,
+              });
+            },
+            duration: 800,
+            complete: function () {
+              current_fs.hide();
+              animating = false;
+            },
+            //this comes from the custom easing plugin
+            easing: "easeInOutBack",
+          }
+        );
+      });
+      form.find(".next").click(function () {
+        if (
+          "validations" in args &&
+          typeof args.validations === "object" &&
+          !$.isArray(args.validations)
+        ) {
+          if (
+            !("noValidate" in args) ||
+            (typeof args.noValidate === "boolean" && !args.noValidate)
+          ) {
+            form.validate(args.validations);
+            if (form.valid() == true) {
+              form.navigateTo(curIndex() + 1);
+              return true;
+            }
+            return false;
+          }
+        }
+        form.navigateTo(curIndex() + 1);
+      });
+      form.find(".submit").on("click", function (e) {
+        if (
+          typeof args.beforeSubmit !== "undefined" &&
+          typeof args.beforeSubmit !== "function"
+        )
+          args.beforeSubmit(form, this);
+        /*check if args.submit is set false if not then form.submit is not gonna run, if not set then will run by default*/
+        if (
+          typeof args.submit === "undefined" ||
+          (typeof args.submit === "boolean" && args.submit)
+        ) {
+          form.submit();
+        }
+        return form;
+      });
+    </script>
+    <script>
+
+const email = document.querySelector('#email');
+const submit=document.querySelector('#submit');
+
+next1.addEventListener('click',()=>{
+    if(fullname.value === ''){
+        // email.setCustomValidity('Please enter correct email');
+        return false;
+    }else{
+        // email.setCustomValidity('');
+        return true;
+    }
+})
+//       const submit = document.getElementById("submit");
+// const fullname = document.getElementById("fullname");
+
+// submit.addEventListener("click", validate);
+
+// function validate(e) {
+//   e.preventDefault();
+
+//   if (fullname.value === '') {
+//     fullname.setCustomValidity
+//           ('Entering an fullname-id is necessary!');
+// // } else if (fullname.validity.typeMismatch) {
+// //     fullname.setCustomValidity
+// //           ('Please enter an fullname address which is valid!');
+// //
+//  }
+//  else {
+//     fullname.setCustomValidity('');
+// }
+
+// return true;}
+    </script>
+  </body>
+</html>
