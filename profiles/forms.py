@@ -123,7 +123,7 @@ class ServiceproviderForm(ModelForm):
 			'notmidman':forms.TextInput(attrs={'class':'form-control'}),
 			'skillset':forms.TextInput(attrs={'class':'form-control'}),
 			'internet':forms.TextInput(attrs={'class':'form-control'}),
-		# 	'qualification':forms.File(attrs={'class':'form-control'}),
+			'qualification':forms.FileField(),
 			'portifolio':forms.TextInput(attrs={'class':'form-control'}),
 			'profession':forms.TextInput(attrs={'class':'form-control'}),
 			'ref1name':forms.TextInput(attrs={'class':'form-control'}),
