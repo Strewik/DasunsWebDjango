@@ -55,9 +55,10 @@ def main(request):
                     elif msg == 'email':
                         messages.error(request, f"Declared email '{email}' is not valid")
                     if msg == 'password2' and password1 == password2:
-                        messages.error(request, f"Selected password: '{password1}' is not strong enough,it should have atleast 8 aphanumeric characters and not similar to your username")
+                        messages.error(request, "Selected password is not strong enough,it should have atleast 8 aphanumeric characters and not similar to your username")
                     elif msg == 'password2' and password1 != password2:
-                        messages.error(request, f"Password: '{password1}' and Confirmation Password: '{password2}' do not match")
+                        messages.error(request, f"Password and Confirmation Password do not match")
+                messages.error(request, 'Failed to create an account')
             loginform = AuthenticationForm(data=request.POST)
         elif 'loginbtn' in request.POST:
             loginform = AuthenticationForm(data=request.POST)

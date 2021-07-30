@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import *
 from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput
+from django.core import validators
+from django.forms import ValidationError
+
+def check_size(value):
+	if len(value) < 3:
+		raise forms.ValidationError(" Username required,  3 to 150 characters. Letters, digits and @/./+/-/_ only.")
 
 
 GENDER = (
@@ -12,23 +18,32 @@ GENDER = (
 ('female', 'female'),
 )
 class CreateUserForm(UserCreationForm):
-	username = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'User Name e.g kente', 'class': 'form-control'}))
-	firstname = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'}))
-	lastname = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}))
-	gender = forms.ChoiceField(choices=GENDER, widget=forms.Select(attrs={'class': 'form-control'}))
-	phone = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'form-control'}))
-	email = forms.EmailField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Email', 'class': 'form-control'}))
-	password1 = forms.CharField(max_length=254, widget=forms.PasswordInput(attrs={'placeholder': 'Create Password', 'class': 'form-control'}))
-	password2 = forms.CharField(max_length=254, widget=forms.PasswordInput(attrs={'placeholder': 'Confrim Password', 'class': 'form-control'}))
+	username = forms.CharField(max_length=50,  validators= [check_size,], widget=forms.TextInput(attrs={'id':'username', 'name':'username', 'placeholder': 'User Name e.g kente', 'class': 'form-control'}))
+	firstname = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'id':'firstname','name':'firstname','placeholder': 'First Name', 'class': 'form-control'}))
+	lastname = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'id':'lastname','placeholder': 'Last Name', 'class': 'form-control'}))
+	gender = forms.ChoiceField(choices=GENDER, widget=forms.Select(attrs={'id':'gender','class': 'form-control'}))
+	phone = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'id':'phone','placeholder': 'Phone Number', 'class': 'form-control'}))
+	email = forms.EmailField(max_length=50, widget=forms.TextInput(attrs={'id':'email','placeholder': 'Email', 'class': 'form-control'}))
+	password1 = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={'id':'password1','placeholder': 'Create Password', 'class': 'form-control'}))
+	password2 = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={'id':'password2','placeholder': 'Confrim Password', 'class': 'form-control'}))
 	
 	def clean_email(self):
 		if User.objects.filter(email=self.cleaned_data['email']).exists():
-			raise forms.ValidationError("the given email is already registered")
+			raise forms.ValidationError("The given email is already registered")
 		return self.cleaned_data['email']
+	
+		email = self.cleaned_data['email']
+
+		if not email:
+			raise ValidationError('Email is required')
+		return email
+	
+
+
 	class Meta:
 		model = User
 		fields = ("username", "firstname", "lastname", "gender", "phone", "email", "password1", "password2")
-		
+
 	def save(self, commit=True):
 		user = super(CreateUserForm, self).save(commit=False)
 		user.firstname = self.cleaned_data['firstname']

@@ -55,6 +55,9 @@
                   type="button"
                   class="close-button offset-6"
                   data-dismiss="modal"
+                                          
+                        {% comment %} data-backdrop="static" 
+                        data-keyboard="false" {% endcomment %}
                 >
                   &times;
                 </button>
@@ -94,9 +97,9 @@
                     id="pills-home"
                     role="tabpanel"
                     aria-labelledby="pills-home-tab"
-                  >
+                   >
                     <div class="form px-4">
-                      <form name="loginform" action="" method="POST">
+                      <form name="loginform" action="" method="POST" onsubmit="return loginValid();">
                         {% csrf_token %}
                         <h4 id="form-title">Login</h4>
                         <input
@@ -104,17 +107,22 @@
                           name="username"
                           class="form-control"
                           placeholder="User Name"
+                          id="username"
                         />
+                        <p id="usernameErr"></p>
                         <input
                           type="password"
                           name="password"
                           class="form-control"
                           placeholder="Password"
+                          id="password"
                         />
+                        <p id="passwordErr"></p>
                         <button
                           name="loginbtn"
                           type="submit"
                           class="btn btn-success btn-block"
+                          {% comment %} onClick="myFunction()" {% endcomment %}
                         >
                           Login
                         </button>
@@ -134,30 +142,47 @@
                     aria-labelledby="pills-profile-tab"
                   >
                     <div class="form px-4">
-                      <form name="registerform" action="" method="POST">
+                      <form name="registerform" action="" method="POST" onsubmit="return signupValid();">
                         {% csrf_token %}
                         <h4 id="form-title">Sign Up</h4>
-                        {% csrf_token %} {{registerform.username}}
-                        {{registerform.firstname}} {{registerform.lastname}}
-                        {{registerform.gender}} {{registerform.phone}}
-                        {{registerform.email}} {{registerform.password1}}
+                        {% csrf_token %} 
+                        {{registerform.username}}
+                        {% for error in registerform.username.errors %}
+                        <p class='err' id="unErr">{{error}}</p>
+                        {% endfor %}
+                        <p id="unErr"></p>
+                        {{registerform.firstname}}
+                        <p id="fnErr"></p>
+                         {{registerform.lastname}}
+                         <p id="lnErr"></p>
+                        {{registerform.gender}} 
+                        <p id="gErr"></p>
+                        {{registerform.phone}}
+                        <p id="pErr"></p>
+                        {{registerform.email}} 
+                        <p id="emErr"></p>
+                        {{registerform.password1}}
+                        <p id="pass1Err"></p>
                         {{registerform.password2}}
+                        <p id="pass2Err"></p>
                         <div class="custom-control custom-checkbox">
                           <label>
                             <input
                               type="checkbox"
                               class="checkbox"
                               name="terms"
-                              required
+                              id="terms"
                             />
                             <small class="terms-word"
                               >I agree to the terms & conditions set by
                               Dasuns</small
                             >
                           </label>
+                           <p id="termsErr"></p>
                         </div>
                         <button
                           name="registerbtn"
+                          type="submit"
                           class="btn btn-success btn-block"
                         >
                           Signup
@@ -602,10 +627,26 @@
     </div>
     <footer>{% include 'profiles/footer.html' %}</footer>
     <script src="{% static '/js/bootstrap/js/bootstrap.min.js' %%}"></script>
+    <script src="{% static '/js/signup-login.js' %%}"></script>
     <script>
       var form_fields = document.getElementsByTagName("input");
       form_fields[1].placeholder = "User Name";
       form_fields[2].placeholder = "Password";
     </script>
+    <script>
+    {% comment %} function myFunction() {
+    $("form").on("submit", function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: "yoururl",
+            type: "POST",
+            data: yourData,
+            success: function (result) {
+                console.log(result)
+            }
+        });
+    })
+} {% endcomment %}
+</script>
   </body>
 </html>

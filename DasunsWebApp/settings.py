@@ -113,20 +113,20 @@ DATABASES = {
         # 'USER': os.getenv('DB_USERNAME'),
         # 'PASSWORD': os.getenv('DB_PASSWORD'),   
     # Connection to Remote Database : PostgresQL
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': os.getenv('DB_NAME'),
-        # 'HOST': os.getenv('DB_HOST_NAME'),
-        # 'PORT': os.getenv('DB_APP_PORT'),
-        # 'USER': os.getenv('DB_USERNAME'),
-        # 'PASSWORD': os.getenv('DB_PASSWORD'),
-
-    # Connection to Remote / cloud Database : PostgresQL
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('AWS_PGDB_INITIAL_DATABASE_NAME'),
-        'HOST': os.getenv('AWS_PGDB_ENDPOINT'),
-        'PORT': os.getenv('AWS_PGDB_PORT'),
-        'USER': os.getenv('AWS_PGDB_MASTERUSERNAME'),
-        'PASSWORD': os.getenv('AWS_PGDB_MASTERPASSWORD'),
+        'NAME': os.getenv('DB_NAME'),
+        'HOST': os.getenv('DB_HOST_NAME'),
+        'PORT': os.getenv('DB_APP_PORT'),
+        'USER': os.getenv('DB_USERNAME'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+
+    # # Connection to Remote / cloud Database : PostgresQL
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': os.getenv('AWS_PGDB_INITIAL_DATABASE_NAME'),
+    #     'HOST': os.getenv('AWS_PGDB_ENDPOINT'),
+    #     'PORT': os.getenv('AWS_PGDB_PORT'),
+    #     'USER': os.getenv('AWS_PGDB_MASTERUSERNAME'),
+    #     'PASSWORD': os.getenv('AWS_PGDB_MASTERPASSWORD'),
     }
 }
 
