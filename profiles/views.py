@@ -25,7 +25,8 @@ from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.core.files.storage import FileSystemStorage
 from datetime import date, time, datetime
-
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 
 def main(request):
     registerform = CreateUserForm()
@@ -580,3 +581,17 @@ def spList(request):
     serviceproviders = Serviceprovider.objects.all()
     context = {'serviceproviders': serviceproviders}
     return render(request, 'profiles/splist/allServiceProviders.html', context)
+
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
+def payment(request):
+    serviceproviders = Serviceprovider.objects.all()
+    # context = {'serviceproviders': serviceproviders}
+    return render(request, 'profiles/splist/payment.html', {})
+
+@require_POST
+@csrf_exempt
+def webhook(request):
+    return HttpResponse(status=200)
+
