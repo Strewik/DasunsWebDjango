@@ -271,7 +271,8 @@ def createBooking(request, pk):
             serviceuser = bookingform.cleaned_data.get('serviceuser')
             serviceprovider = bookingform.cleaned_data.get('serviceprovider')
             bookingform.save()
-            return redirect(reverse ('profiles:bookingsuccess', kwargs={"pk": serviceprovider.id}))
+            return render(request, 'profiles/splist/payment.html', {})
+            # return redirect(reverse ('profiles:bookingsuccess', kwargs={"pk": serviceprovider.id}))
 
 
     context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceuser':serviceuser}
@@ -589,6 +590,11 @@ def payment(request):
     serviceproviders = Serviceprovider.objects.all()
     # context = {'serviceproviders': serviceproviders}
     return render(request, 'profiles/splist/payment.html', {})
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
+def success(request):
+    return render(request, 'profiles/splist/sweetAlertSuccess.html')
 
 @require_POST
 @csrf_exempt
