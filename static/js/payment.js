@@ -8,7 +8,7 @@ const API_publicKey = "FLWPUBK_TEST-55b64116182b240760d2f6aa82808270-X";
     var x = getpaidSetup({
       PBFPubKey: API_publicKey,
       // customer_phone: "0751319201",
-      // pay_button_text: "Dasunspay",
+      pay_button_text: "Dasunspay",
       txref: "RX1",
       amount,
       country,
@@ -28,9 +28,9 @@ const API_publicKey = "FLWPUBK_TEST-55b64116182b240760d2f6aa82808270-X";
           response.tx.chargeResponseCode == "00" ||
           response.tx.chargeResponseCode == "0"
         ) {
-        //   window.location = "https://www.flutterwave.com/";
-		      // window.location = "https://dasuns.org/splist/";
-          window.location = "http://127.0.0.1:8000/booking/1";
+     
+          window.location = "http://127.0.0.1:8000/splist/bksuccess";
+    
         } else {
           // redirect to a failure page.
         }
