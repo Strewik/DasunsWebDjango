@@ -38,31 +38,31 @@
             </tr>
           </thead>
           <tbody>
-           {% for serviceprovider in serviceproviders %}
-       {% if serviceprovider.service == "Tactile Sign Language Interpreter" %}  
-            <tr>
-              <td>{{serviceprovider.fullname}}</td>
-              <td>{{serviceprovider.gender}}</td>
-              <td>{{serviceprovider.service}}</td>
-              <td>{{serviceprovider.phyadd}}</td>
-              <td>{{serviceprovider.pricevisit}}</td>
+            {% for serviceprovider in serviceproviders %}
+              {% if serviceprovider.status == "Active" and serviceprovider.service == "Tactile Sign Language Interpreter" %}  
+              <tr>
+                <td>{{serviceprovider.fullname}}</td>
+                <td>{{serviceprovider.gender}}</td>
+                <td>{{serviceprovider.service}}</td>
+                <td>{{serviceprovider.phyadd}}</td>
+                <td>{{serviceprovider.pricevisit}}</td>
 
-              <td>
-                     <a
-                class="btn btn-success"
-                href="{% url 'profiles:create_booking' serviceprovider.id %}"
-                >Book Now</a>
-              </td>
-            </tr>
-            {% else %}
-            {% comment %} <span style="display: flex; justify-content: center" >
-                    There are no Tactile sign language interpreters now, check again
-                    later
-                  </span> {% endcomment %}
-                  <div></div>
+                <td>
+                      <a
+                  class="btn btn-success"
+                  href="{% url 'profiles:create_booking' serviceprovider.id %}"
+                  >Book Now</a>
+                </td>
+              </tr>
+              {% else %}
+              {% comment %} <span style="display: flex; justify-content: center" >
+                      There are no Tactile sign language interpreters now, check again
+                      later
+                    </span> {% endcomment %}
+                    <div></div>
 
-             {% endif %}
-             {% endfor %}
+              {% endif %}
+            {% endfor %}
           </tbody>
         </table>
       </div>
