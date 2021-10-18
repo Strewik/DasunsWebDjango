@@ -25,7 +25,8 @@ from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.core.files.storage import FileSystemStorage
 from datetime import date, time, datetime
-
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 
 def main(request):
     registerform = CreateUserForm()
@@ -55,9 +56,10 @@ def main(request):
                     elif msg == 'email':
                         messages.error(request, f"Declared email '{email}' is not valid")
                     if msg == 'password2' and password1 == password2:
-                        messages.error(request, f"Selected password: '{password1}' is not strong enough,it should have atleast 8 aphanumeric characters and not similar to your username")
+                        messages.error(request, "Selected password is not strong enough,it should have atleast 8 aphanumeric characters and not similar to your username")
                     elif msg == 'password2' and password1 != password2:
-                        messages.error(request, f"Password: '{password1}' and Confirmation Password: '{password2}' do not match")
+                        messages.error(request, f"Password and Confirmation Password do not match")
+                messages.error(request, 'Failed to create an account')
             loginform = AuthenticationForm(data=request.POST)
         elif 'loginbtn' in request.POST:
             loginform = AuthenticationForm(data=request.POST)
@@ -269,7 +271,8 @@ def createBooking(request, pk):
             serviceuser = bookingform.cleaned_data.get('serviceuser')
             serviceprovider = bookingform.cleaned_data.get('serviceprovider')
             bookingform.save()
-            return redirect(reverse ('profiles:bookingsuccess', kwargs={"pk": serviceprovider.id}))
+            return render(request, 'profiles/splist/payment.html', {})
+            # return redirect(reverse ('profiles:bookingsuccess', kwargs={"pk": serviceprovider.id}))
 
 
     context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceuser':serviceuser}
@@ -579,3 +582,22 @@ def spList(request):
     serviceproviders = Serviceprovider.objects.all()
     context = {'serviceproviders': serviceproviders}
     return render(request, 'profiles/splist/allServiceProviders.html', context)
+
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
+def payment(request):
+    serviceproviders = Serviceprovider.objects.all()
+    # context = {'serviceproviders': serviceproviders}
+    return render(request, 'profiles/splist/payment.html', {})
+
+@login_required(login_url='profiles:homepage')
+@allowed_users(allowed_roles=['serviceuser', 'admin'])
+def success(request):
+    return render(request, 'profiles/splist/sweetAlertSuccess.html')
+
+@require_POST
+@csrf_exempt
+def webhook(request):
+    return HttpResponse(status=200)
+

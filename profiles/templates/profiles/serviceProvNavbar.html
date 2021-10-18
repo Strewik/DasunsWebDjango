@@ -42,7 +42,11 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Welcome, {{user.username}}
+              {% if user.serviceuser%}
+              Welcome, {{user.serviceuser.firstname}} {{user.serviceuser.lastname}}
+              {% elif user.serviceprovider %}
+              Welcome, {{user.serviceprovider.fullname}}
+              {% endif %}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% if request.user.serviceprovider %}

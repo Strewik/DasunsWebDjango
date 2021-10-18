@@ -46,6 +46,9 @@ urlpatterns = [
     path('spcanceledbooking/<str:pk>', views.bookingcanceled_sp, name="bookingcanceledbysp"),
     path('sucanceledbooking/<str:pk>', views.bookingcanceled_su, name="bookingcanceledbysu"),
     path('bookingdetails/<str:pk>', views.bookingdetails, name="bookingdetails"),
+    path('payment/', views.payment, name="payment"),
+    path('splist/bksuccess/', views.success, name="success"),
+    # path('webhook/', views.webhook, name="webhook"),
 
 ]
 
