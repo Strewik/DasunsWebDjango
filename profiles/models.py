@@ -49,7 +49,7 @@ class Serviceprovider(models.Model):
     internet = models.CharField(max_length=200)
     qualification = models.FileField(null=True, blank=True)
     portifolio = models.CharField(max_length=200, blank=True)
-    profession = models.CharField(max_length=200)
+    profession = models.CharField(max_length=10000)
     ref1name = models.CharField(max_length=200)
     ref1title = models.CharField(max_length=200)
     ref1email = models.EmailField(max_length=200)
