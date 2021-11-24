@@ -271,8 +271,8 @@ def createBooking(request, pk):
             serviceuser = bookingform.cleaned_data.get('serviceuser')
             serviceprovider = bookingform.cleaned_data.get('serviceprovider')
             bookingform.save()
-            return render(request, 'profiles/splist/payment.html', {})
-            # return redirect(reverse ('profiles:bookingsuccess', kwargs={"pk": serviceprovider.id}))
+            # return render(request, 'profiles/splist/payment.html', {})
+            return redirect(reverse ('profiles:bookingsuccess', kwargs={"pk": serviceprovider.id}))
 
 
     context = {'bookingform': bookingform, 'serviceprovider':serviceprovider, 'serviceuser':serviceuser}
